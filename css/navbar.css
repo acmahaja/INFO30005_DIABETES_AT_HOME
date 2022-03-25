@@ -1,9 +1,18 @@
+
 .navbar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+}
+
+.navbar ul {
+  list-style-type: none;
+      display: flex;
+    flex-direction: row;
+    justify-content: center;
+
 }
 
 
@@ -26,3 +35,4 @@
     text-decoration: 3px underline;
     text-underline-offset: .5em;
 }
+
