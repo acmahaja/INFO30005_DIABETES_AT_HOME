@@ -6,3 +6,23 @@
     width: 100%;
 }
 
+
+.navbar li {
+    padding: 0em 1em;
+}
+
+.navbar a {
+  text-decoration: none;
+  font-family: "Raleway", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 25px;
+  line-height: 2em;
+  color: #6c63ff;
+}
+
+.navbar a.selected {
+    font-weight: 500;
+    text-decoration: 3px underline;
+    text-underline-offset: .5em;
+}
