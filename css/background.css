@@ -2,16 +2,14 @@ html {
   margin: 0em;
   padding: 0em;
   background-color: #f6f7fb;
+  overflow-x: hidden;
+  width: 100vw;
 }
 
 body {
   margin: 0em;
   padding: 0em;
-}
-
-.section {
-  width: 100vw;
-  height: 100vh;
+  overflow-x: hidden;
 }
 
 .blur {
@@ -56,12 +54,11 @@ body {
 }
 
 .blur-5 {
-position: absolute;
-width: 64.7856rem;
-height: 75rem;
-left: 47.75rem;
-top: 271.9112rem;
+  position: absolute;
+  width: 64.7856rem;
+  height: 75rem;
+  left: 47.75rem;
+  top: 271.9112rem;
 
-transform: rotate(-46.72deg);
+  transform: rotate(-46.72deg);
 }
-
