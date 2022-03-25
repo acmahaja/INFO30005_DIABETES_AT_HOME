@@ -1,0 +1,67 @@
+html {
+  margin: 0em;
+  padding: 0em;
+  background-color: #f6f7fb;
+}
+
+body {
+  margin: 0em;
+  padding: 0em;
+}
+
+.section {
+  width: 100vw;
+  height: 100vh;
+}
+
+.blur {
+  background: #f5e6ff;
+  filter: blur(100px);
+  border-radius: 50%;
+  z-index: -100;
+}
+
+.blur-1 {
+  position: absolute;
+  width: 55.125rem;
+  height: 54.25rem;
+  left: 78.5625rem;
+  top: -19.125rem;
+}
+
+.blur-2 {
+  position: absolute;
+  width: 71rem;
+  height: 54.25rem;
+  left: -24.5625rem;
+  top: 30.625rem;
+}
+
+.blur-3 {
+  position: absolute;
+  width: 55.125rem;
+  height: 75rem;
+  left: 88.5625rem;
+  top: 76.4375rem;
+}
+
+.blur-4 {
+  position: absolute;
+  width: 64.7856rem;
+  height: 75rem;
+  left: -37.9375rem;
+  top: 193.2862rem;
+
+  transform: rotate(-46.72deg);
+}
+
+.blur-5 {
+position: absolute;
+width: 64.7856rem;
+height: 75rem;
+left: 47.75rem;
+top: 271.9112rem;
+
+transform: rotate(-46.72deg);
+}
+
