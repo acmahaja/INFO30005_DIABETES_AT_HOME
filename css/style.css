@@ -6,6 +6,7 @@ html {
   background-color: #f6f7fb;
   overflow-x: hidden;
   width: 100vw;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -20,6 +21,8 @@ body {
   width: calc(100vw - 6em);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .section ul {
@@ -30,22 +33,9 @@ body {
 
 }
 
-.section li {
-    padding: 0em 1em;
-}
-
-.section a {
-  text-decoration: none;
-  font-family: "Raleway", sans-serif;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 25px;
-  line-height: 2em;
-  color: #6c63ff;
-}
-
-a.selected {
-    font-weight: 500;
-    text-decoration: 3px underline;
-    text-underline-offset: .5em;
+.double-arrow{
+    background-image: url('../images/Double\ Arrow.svg');
+    background-repeat: no-repeat;
+    height: 5em;
+    width: 5em;
 }
