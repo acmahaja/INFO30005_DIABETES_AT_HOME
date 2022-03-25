@@ -18,6 +18,8 @@ body {
   padding: 4em;
   height: calc(100vh - 8em);
   width: calc(100vw - 8em);
+  display: flex;
+  flex-direction: column;
 }
 
 .section ul {
