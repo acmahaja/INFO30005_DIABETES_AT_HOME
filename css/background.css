@@ -1,9 +1,8 @@
-
 .blur {
-  background: #f5e6ff;
-  filter: blur(100px);
-  border-radius: 50%;
-  z-index: -100;
+  background: #e8cff8;
+  filter: blur(500px);
+  border-radius: 40%;
+  z-index: -1;
 }
 
 .blur-1 {
@@ -35,7 +34,7 @@
   width: 64.7856rem;
   height: 75rem;
   left: -37.9375rem;
-  top: 193.2862rem;
+  top: 155.2862rem;
 
   transform: rotate(-46.72deg);
 }
@@ -48,4 +47,13 @@
   top: 271.9112rem;
 
   transform: rotate(-46.72deg);
+}
+
+.blur-6 {
+  position: absolute;
+  width: 39.6138rem;
+  height: 45.8594rem;
+  left: -18.0625rem;
+  top: 384.3594rem;
+  transform: rotate(-86.67deg);
 }

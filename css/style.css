@@ -23,19 +23,29 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  overflow: visible;
 }
+
+.section .next-section {
+  width: 100%;
+  height: 3em;
+}
+
 
 .double-arrow {
   background-image: url("../images/Double\ Arrow.svg");
   background-repeat: no-repeat;
-  height: 5em;
-  width: 5em;
+  background-size: cover;
+  height: 2.9em;
+  width: 2.5em;
 }
+
 
 .section .content {
   width: 100%;
   height: calc(100vh - 5em);
-  padding: 3em;
+  padding: 2.5em;
+  overflow: visible;
 }
 
 .content {
@@ -61,6 +71,8 @@ body {
   line-height: 66px;
   display: flex;
   align-items: center;
+  color: #4c4c4c;
+  margin-bottom: 1em;
 }
 
 .content .text .information {
@@ -75,7 +87,7 @@ body {
 
 .content .text .link {
   margin-bottom: 2.5em;
-  border-bottom: 3px solid #AE20C5;
+  border-bottom: 3px solid #ae20c5;
   width: fit-content;
   padding-bottom: 0.25em;
   display: flex;
@@ -83,7 +95,7 @@ body {
   align-items: center;
   justify-self: center;
 
-  color: #AE20C5;
+  color: #ae20c5;
   font-family: "Raleway";
   font-style: normal;
   font-weight: 500;
@@ -91,8 +103,6 @@ body {
   line-height: 36px;
   text-decoration: none;
 }
-
-
 
 .content .text .link img {
   height: 1.5em;
