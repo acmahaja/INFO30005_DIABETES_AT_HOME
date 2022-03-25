@@ -56,7 +56,7 @@ body {
 
 .content .text {
   height: 41.5em;
-  width: 50%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -84,6 +84,10 @@ body {
 
   color: #8d8e94;
 }
+.content .text .information.small {
+  font-size: 20px;
+}
+
 
 .content .text .link {
   margin-bottom: 2.5em;
@@ -103,6 +107,7 @@ body {
   line-height: 36px;
   text-decoration: none;
 }
+
 
 .content .text .link img {
   height: 1.5em;
