@@ -1,0 +1,17 @@
+
+
+#welcome img.support {
+  height: 30em;
+}
+
+#welcome h1 {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 3em;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 60%;
+  color: #4c4c4c;
+}
