@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-
+const clincian = require("./clincian")
+const {Schema} = mongoose;
 
 const patientSchema = new mongoose.Schema({
     username: {
@@ -31,9 +32,12 @@ const patientSchema = new mongoose.Schema({
     },
     bio : {
         type: String,
+    },
+    assigned_clincian : {
+        type: Schema.Types.ObjectID,
+        ref: 'Clincian'
     }
-
 })
 
 
-module.exports = patientSchema;
+module.exports = mongoose.model('Patient', patientSchema);

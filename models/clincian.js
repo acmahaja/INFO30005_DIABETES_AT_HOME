@@ -14,7 +14,7 @@ username: {
     }, 
     lastname : {
         type: String,
-        required: [true, "Last name can't be blank"]
+   required: [true, "Last name can't be blank"]
     },
     dob: {
         type: Date,
@@ -34,6 +34,6 @@ username: {
 });
 
 
-module.exports = clincianSchema;
+module.exports = mongoose.model('Clincian', clincianSchema);
 
 
