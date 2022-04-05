@@ -1,0 +1,23 @@
+{
+  "name": "info30005_diabetes_at_home",
+  "version": "1.0.0",
+  "description": "Diabetes at Home application to help patients and clinicians manage diabetes",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ACmahaja/INFO30005_DIABETES_AT_HOME.git"
+  },
+  "author": "acmahaja",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ACmahaja/INFO30005_DIABETES_AT_HOME/issues"
+  },
+  "homepage": "https://github.com/ACmahaja/INFO30005_DIABETES_AT_HOME#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.3"
+  }
+}
