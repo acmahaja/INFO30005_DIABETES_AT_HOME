@@ -25,6 +25,7 @@
     "express-handlebars": "^6.0.3",
     "express-mongo-sanitize": "^2.2.0",
     "helmet": "^5.0.2",
+    "mongoose": "^6.2.10",
     "morgan": "^1.10.0",
     "xss-clean": "^0.1.1"
   }
