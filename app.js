@@ -22,7 +22,7 @@ app.set('view engine', 'hbs');
 app.use(helmet());
 
 // Log requests
-if (process.env.NODE_ENV == 'development') {
+if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
