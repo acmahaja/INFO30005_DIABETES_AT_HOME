@@ -37,7 +37,7 @@ app.use(mongoSanitize());
 app.use(xss());
 
 // ROUTES
-app.get('/clincian', (req, res) => {
+app.get('/clinician', (req, res) => {
   res.send('Clinician Page');
 });
 
@@ -49,6 +49,4 @@ app.get('/', (req, res) => {
   res.send('Welcome to Diabetes at Home');
 });
 
-app.listen(3000, () => {
-  console.log('Listening on port 3000');
-});
+module.exports = app;
