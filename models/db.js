@@ -1,6 +1,7 @@
 require('dotenv').config()    // for database login details
 const mongoose = require("mongoose")
 
+//THIS USES MY TESTING LOGIN INFO ON ATLAS
 if (process.env.PORT) {  // are we running on Heroku?
   // login details retrieved from environment variables
   connectionString = "mongodb+srv://grosa:bananabanana@cluster0.ow6of.mongodb.net/Diabetes?retryWrites=true&w=majority"
@@ -9,14 +10,6 @@ if (process.env.PORT) {  // are we running on Heroku?
   dbAddress = "mongodb+srv://grosa:bananabanana@cluster0.ow6of.mongodb.net/Diabetes?retryWrites=true&w=majority"
 }
 
-// mongoose.connect( dbAddress, {
-//   useNewUrlParser: true,
-//   useCreateIndex: true,
-//   useUnifiedTopology: true,
-//   useFindAndModify: false,
-//   dbName: "FoodBuddy"
-// })
-//const mongoAtlasUri = "mongodb+srv://grosa:bananabanana@cluster0.ow6of.mongodb.net/FoodBuddy?retryWrites=true&w=majority"
 try {
   // Connect to the MongoDB cluster
    mongoose.connect(
@@ -30,7 +23,7 @@ try {
   );
 
 } catch (e) {
-  console.log("aaa");
+  console.log(e);
 }
 
 const db = mongoose.connection
