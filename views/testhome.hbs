@@ -1,0 +1,95 @@
+<html><head>
+		<meta charset="UTF-8">
+		<title></title>
+		{{!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js" charset="utf-8"></script> --}}
+		{{!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script> --}}
+		{{!-- <script src="http://livejs.com/live.js"></script> --}}
+		
+		<script type="text/javascript" src="/js/app.js"></script>
+		<link rel="stylesheet" href="/css/app.css">
+        <style>
+            .flex-container {
+            display: flex;
+            }
+
+            .row  {
+            background-color: dodgerblue;
+            margin: 10px;
+            padding: 20px;
+            font-size: 30px;
+            }
+        </style>
+	</head>
+	<!--______________________________________________________BEGIN APP-->
+	<body>
+		<div>
+			<h1>Homepage</h1>
+			{{!-- <p>{{#each userInput}}</p>
+                <div class="todo">
+                    <form method="post" action="/">
+                        <input id="todo-field" type="text" name="task">
+                        <input type="submit">
+                    </form>
+                    <p><a>{{this.</a></p>
+                        {{!-- <p><a href="edit/{{this.id}}/">{{this.task}}</a></p> --}}
+                        {{!-- <p><a href="delete/{{this._id}}">delete</a></p> --}}
+                {{!-- </div>
+                {{/each}} --}} 
+                <div class="flex-container" style="flex", align-items="center" justify-content="center">
+                    <div class="row" width="auto" border="1px solid blue">
+                        <div class="flex-item">
+                        {{#if patientsettings.requires_glucose}}
+                        <div class="flex-item" style="color:green">
+                            <tr><td >glucose</td><td>&#10003</td></tr>
+                        </div>
+                        {{else}}
+                        <div class="flex-item" style="color:red">
+                            <tr><td>glucose</td><td>&#10008</td></tr>
+                        </div>
+                        {{/if}}
+                        </div>  
+                    </div>
+                    <div class="row" width="auto" border="1px solid blue">
+                        <div class="flex-item">
+                        {{#if patientsettings.requires_insulin}}
+                        <div class="flex-item" style="color:green">
+                            <tr><td >insulin</td><td>&#10003</td></tr>
+                        </div>
+                        {{else}}
+                        <div class="flex-item" style="color:red">
+                            <tr><td>insulin</td><td>&#10008</td></tr>
+                        </div>
+                        {{/if}}
+                        </div>
+                    </div>
+                    <div class="row" width="auto" border="1px solid blue">
+                        <div class="flex-item">
+                        {{#if patientsettings.requires_steps}}
+                        <div class="flex-item" style="color:green">
+                            <tr><td >steps</td><td>&#10003</td></tr>
+                        </div>
+                        {{else}}
+                        <div class="flex-item" style="color:red">
+                            <tr><td>steps</td><td>&#10008</td></tr>
+                        </div>
+                        {{/if}}
+                        </div>
+                    </div>
+                    <div class="row" width="auto" border="1px solid blue">
+                        {{#if patientsettings.requires_weight}}
+                        <div class="flex-item" style="color:green">
+                            <tr><td >weight</td><td>&#10003</td></tr>
+                        </div>
+                        {{else}}
+                        <div class="flex-item" style="color:red">
+                            <tr><td>weight</td><td>&#10008</td></tr>
+                        </div>
+                        {{/if}}
+                        </div>
+                    </div>
+                </div>
+			<p></p>
+		</div>
+	
+	
+</body><!--______________________________________________________END APP--></html>

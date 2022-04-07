@@ -18,6 +18,11 @@
   "homepage": "https://github.com/ACmahaja/INFO30005_DIABETES_AT_HOME#readme",
   "dependencies": {
     "express": "^4.17.3",
-    "express-handlebars": "^6.0.3"
+    "express-handlebars": "^6.0.4",
+    "express-validator": "^6.14.0",
+    "mongoose": "^6.2.10"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0"
   }
 }
