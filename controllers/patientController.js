@@ -23,7 +23,7 @@ const getPatientMetricSettings = async (req, res) => {
         console.log(this_patient)
         const patientsettings = await PatientSettings.findOne({for_patient: this_patient._id}, {}).lean()
         console.log(patientsettings)
-        res.render('testhome', {"patientsettings": patientsettings})
+        res.render('testhome', {"patientsettings": patientsettings, "patient": this_patient})
     } catch (err) {
         console.log(err)
     }
