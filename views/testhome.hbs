@@ -41,7 +41,24 @@
                         <div class="flex-item">
                         {{#if patientsettings.requires_glucose}}
                         <div class="flex-item" style="color:green">
-                            <tr><td >glucose</td><td>&#10003</td></tr>
+                            <tr><td >glucose</td><td>&#10003</td><td></tr>
+                            {{#if entry.glucose}}
+                                <form method="post" action="/patient/data/update">
+                                    <p style="color:black"> Update data </p>
+                                    <input id="data-field" type="number" name="data_value">
+                                    <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
+                                    <input id="data-field" type="hidden" name="health_type" value={{entrytype.glucose}}>
+                                    <input type="submit">
+                                </form>
+                            {{else}}
+                                <form method="post" action="/patient/data/add">
+                                    <p style="color:black"> Add data </p>
+                                    <input id="data-field" type="number" name="data_value">
+                                    <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
+                                    <input id="data-field" type="hidden" name="health_type" value={{entrytype.glucose}}>
+                                    <input type="submit">
+                                </form>
+                            {{/if}}
                         </div>
                         {{else}}
                         <div class="flex-item" style="color:red">
@@ -55,6 +72,23 @@
                         {{#if patientsettings.requires_insulin}}
                         <div class="flex-item" style="color:green">
                             <tr><td >insulin</td><td>&#10003</td></tr>
+                            {{#if entry.insulin}}
+                                <form method="post" action="/patient/data/update">
+                                    <p style="color:black"> Update data </p>
+                                    <input id="data-field" type="number" name="data_value">
+                                    <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
+                                    <input id="data-field" type="hidden" name="health_type" value={{entrytype.insulin}}>
+                                    <input type="submit">
+                                </form>
+                            {{else}}
+                                <form method="post" action="/patient/data/add">
+                                    <p style="color:black"> Add data </p>
+                                    <input id="data-field" type="number" name="data_value">
+                                    <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
+                                    <input id="data-field" type="hidden" name="health_type" value={{entrytype.insulin}}>
+                                    <input type="submit">
+                                </form>
+                            {{/if}}
                         </div>
                         {{else}}
                         <div class="flex-item" style="color:red">
@@ -68,6 +102,23 @@
                         {{#if patientsettings.requires_steps}}
                         <div class="flex-item" style="color:green">
                             <tr><td >steps</td><td>&#10003</td></tr>
+                            {{#if entry.steps}}
+                            <form method="post" action="/patient/data/update">
+                                <p style="color:black"> Update data </p>
+                                <input id="data-field" type="number" name="data_value">
+                                <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
+                                <input id="data-field" type="hidden" name="health_type" value={{entrytype.steps}}>
+                                <input type="submit">
+                            </form>
+                            {{else}}
+                             <form method="post" action="/patient/data/add">
+                                <p style="color:black"> Add data </p>
+                                <input id="data-field" type="number" name="data_value">
+                                <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
+                                <input id="data-field" type="hidden" name="health_type" value={{entrytype.steps}}>
+                                <input type="submit">
+                            </form>
+                            {{/if}}
                         </div>
                         {{else}}
                         <div class="flex-item" style="color:red">
@@ -80,6 +131,23 @@
                         {{#if patientsettings.requires_weight}}
                         <div class="flex-item" style="color:green">
                             <tr><td >weight</td><td>&#10003</td></tr>
+                            {{#if entry.weight}}
+                                <form method="post" action="/patient/data/update">
+                                    <p style="color:black"> Update data </p>
+                                    <input id="data-field" type="number" name="data_value">
+                                    <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
+                                    <input id="data-field" type="hidden" name="health_type" value={{entrytype.weight}}>
+                                    <input type="submit">
+                                </form>
+                            {{else}}
+                                <form method="post" action="/patient/data/add">
+                                    <p style="color:black"> Add data </p>
+                                    <input id="data-field" type="number" name="data_value">
+                                    <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
+                                    <input id="data-field" type="hidden" name="health_type" value={{entrytype.weight}}>
+                                    <input type="submit">
+                                </form>
+                            {{/if}}
                         </div>
                         {{else}}
                         <div class="flex-item" style="color:red">
