@@ -1,0 +1,64 @@
+.navbar ul.login-links {
+    justify-content: right;
+}
+
+.login-image {
+    width: 689px;
+    height: 600px;
+    padding-bottom: 20px;
+}
+
+.login-box {
+    width: 1055px;
+    height: 232px;
+    border-radius: 32px;
+    flex-shrink: 0;
+    display: grid;
+    align-content: center;
+    row-gap: 40px;
+}
+
+#patient-login-box {
+    background-color: #8A82FF;
+}
+
+#clinician-login-box {
+    background-color: #5F3A9B;
+}
+
+.login-box .input-area {
+    justify-content: center;
+    display: flex;
+    align-content: center;
+    padding-left: 35px;
+}
+
+.login-box .input {
+    flex-direction: column;
+}
+
+.login-box label {
+    color: white;
+    font-size: 22px;
+}
+
+.login-box .input-box {
+    background: white;
+    border-radius: 12px;
+    border: 0px;
+    width: 483px;
+    height: 53px;
+}
+
+.login-box .login-button {
+    background-color: #20C5C2;
+    border-radius: 26px;
+    border: 0px;
+    color: white;
+    margin-left: auto;
+    display: block;
+    margin-right: auto;
+    width: 176px;
+    height: 40px;
+    font-size: 22px;
+}
