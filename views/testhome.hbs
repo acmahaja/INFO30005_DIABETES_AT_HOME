@@ -66,9 +66,10 @@
 
                         {{#if patientsettings.requires_glucose}}                    
                         <div class="row" width="auto" border="1px solid blue">
-                        <div class="flex-item" style="color:green">
-                            <tr><td >glucose</td><td>&#10003</td><td></tr>
+
                             {{#if entry.glucose}}
+                            <div class="flex-item" style="color:green">
+                            <tr><td >glucose</td><td> &#10003</td><td></tr>
                                 <div style="color:black">
                                     <tr><td> {{entry.glucose.value}} nmo/L</td></tr>
                                 </div>
@@ -80,6 +81,8 @@
                                     <input type="submit">
                                 </form> --}}
                             {{else}}
+                                <div class="flex-item" style="color:red">
+                                <tr><td >glucose</td><td> &#10006</td></tr>
                                 <div style="color:black">
                                     <tr><td> No daily record </td></tr>
                                 </div>
@@ -102,9 +105,10 @@
 
                         {{#if patientsettings.requires_insulin}}
                         <div class="row" width="auto" border="1px solid blue">
-                        <div class="flex-item" style="color:green">
-                            <tr><td >insulin</td><td>&#10003</td></tr>
+
                             {{#if entry.insulin}}
+                            <div class="flex-item" style="color:green">
+                            <tr><td >insulin</td><td> &#10003</td></tr>
                                 <div style="color:black">
                                     <tr><td> {{entry.insulin.value}} shots</td></tr>
                                 </div>
@@ -115,7 +119,9 @@
                                     <input id="data-field" type="hidden" name="health_type" value={{entrytypes.insulin}}>
                                     <input type="submit">
                                 </form> --}}
-                            {{else}}                               
+                            {{else}}    
+                                <div class="flex-item" style="color:red">
+                                <tr><td >insulin</td><td> &#10006</td></tr>                           
                                 <div style="color:black">
                                     <tr><td> No daily record </td></tr>
                                 </div>
@@ -138,9 +144,10 @@
 
                         {{#if patientsettings.requires_steps}}
                         <div class="row" width="auto" border="1px solid blue">
-                        <div class="flex-item" style="color:green">
-                            <tr><td >steps</td><td>&#10003</td></tr>
+
                             {{#if entry.steps}}
+                            <div class="flex-item" style="color:green">
+                            <tr><td >steps</td><td> &#10003</td></tr>                            
                                 <div style="color:black">
                                     <tr><td> {{entry.steps.value}} steps</td></tr>
                                 </div>
@@ -152,6 +159,8 @@
                                 <input type="submit">
                             </form> --}}
                             {{else}}
+                                <div class="flex-item" style="color:red">
+                                <tr><td >steps</td><td> &#10006</td></tr>
                                 <div style="color:black">
                                     <tr><td> No daily record </td></tr>
                                 </div>
@@ -174,9 +183,10 @@
                     
                         {{#if patientsettings.requires_weight}}
                         <div class="row" width="auto" border="1px solid blue">
+                        {{#if entry.weight}}
                         <div class="flex-item" style="color:green">
-                            <tr><td >weight</td><td>&#10003</td></tr>
-                            {{#if entry.weight}}
+                            <tr><td >weight</td><td> &#10003</td></tr>
+
                                 <div style="color:black">
                                     <tr><td> {{entry.weight.value}} kg</td></tr>
                                 </div>
@@ -188,6 +198,8 @@
                                     <input type="submit">
                                 </form> --}}
                             {{else}}
+                                <div class="flex-item" style="color:red">
+                                <tr><td >weight</td><td> &#10006</td></tr>
                                  <div style="color:black">
                                     <tr><td> No daily record </td></tr>
                                 </div>
@@ -212,18 +224,18 @@
                 <table>
                 <tr>
                     <th>Date</th>
-                    <th>Glucose</th>
-                    <th>Insulin</th>
-                    <th>Weight</th>
-                    <th>Steps</th>
+                    <th><a href="/patient/glucosedata">Glucose</a></th>
+                    <th><a href="/patient/insulindata">Insulin</a></th>
+                    <th><a href="/patient/weightdata">Weight</a></th>
+                    <th><a href="/patient/stepsdata">Steps</a></th>
                 </tr>
                 {{#each historicaldata}}
                     <tr> 
                         <td>{{this.date}} </td>
-                        <td><a href="/patient/glucose">{{this.blood_glucose}}  </a>  </td>
-                        <td><a href="/patient/insulin">{{this.insulin}} </a>   </td>
-                        <td><a href="/patient/weight">{{this.weight}} </a>    </td>
-                        <td><a href="/patient/steps">{{this.steps}} </a>   </td>
+                        <td>{{this.blood_glucose.value}}  </td>
+                        <td>{{this.insulin.value}} </td>
+                        <td>{{this.weight.value}} </td>
+                        <td>{{this.steps.value}} </td>
                     </tr>
                 {{/each}}
                 </table>

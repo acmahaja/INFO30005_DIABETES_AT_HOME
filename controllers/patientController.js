@@ -67,6 +67,74 @@ const getDailyHealthData = async (patientId) => {
     }
     return entries
 }
+
+
+const getHistoricalData = async (thisPatientId, nDays, metricType = "all") => {
+    var now = new Date();
+    var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());  
+    const NUMBER_OF_DAYS = nDays  //set number of days in historical data
+    PastNDays = new Date()
+    PastNDays.setDate(startOfToday.getDate() - NUMBER_OF_DAYS)
+    var historical_data;
+    if (metricType == GLUCOSE_ENUM_TYPE){
+        historical_data = await HealthDataEntry.find({
+            for_patient: thisPatientId,
+            health_type: GLUCOSE_ENUM_TYPE,
+            updated: {$gte: PastNDays}
+        }).lean()
+    }
+    else if (metricType == INSULIN_ENUM_TYPE) {
+        historical_data = await HealthDataEntry.find({
+            for_patient: thisPatientId,
+            health_type: INSULIN_ENUM_TYPE,
+            updated: {$gte: PastNDays}
+        }).lean()
+    }
+    else if (metricType == STEPS_ENUM_TYPE) {
+        historical_data = await HealthDataEntry.find({
+            for_patient: thisPatientId,
+            health_type: STEPS_ENUM_TYPE,
+            updated: {$gte: PastNDays}
+        }).lean()
+    }
+    else if (metricType == WEIGHT_ENUM_TYPE) {
+        historical_data = await HealthDataEntry.find({
+            for_patient: thisPatientId,
+            health_type: WEIGHT_ENUM_TYPE,
+            updated: {$gte: PastNDays}
+        }).lean()
+    }
+    else {
+        historical_data = await HealthDataEntry.find({
+            for_patient: thisPatientId,
+            updated: {$gte: PastNDays}
+        }).lean()
+    }
+    console.log(historical_data)
+    
+    healthEntryTS = {}
+    for (var i=0; i<NUMBER_OF_DAYS; i++){
+        d = new Date()
+        d.setDate(startOfToday.getDate() - i)
+        healthEntryTS[d.toDateString()] = {index: i, date: d.toDateString()}
+        console.log(d.toDateString())
+    }
+    for (const e of historical_data){
+        console.log(e.updated)
+        console.log(e.health_type)
+        console.log(e.value)
+        d = e.updated.toDateString()
+        if (d in healthEntryTS)
+            healthEntryTS[d][e.health_type] = {value: e.value, comment: e.comment}
+            // healthEntryTS[d][e.health_type] = e.value
+    }
+    // console.log(JSON.stringify(healthEntryTS))
+    // console.log(Object.entries(healthEntryTS))
+    //healthEntryArray = Object.entries(healthEntryTS)
+    healthEntryArray = Object.values(healthEntryTS)
+    return healthEntryArray
+}
+
 //handle requiest to get patient settings
 const getPatientMetricSettings = async (req, res) => {
 
@@ -110,35 +178,33 @@ const getPatientMetricSettings = async (req, res) => {
 
         entries = await getDailyHealthData(this_patient._id)
 
-        // GET HISTORICAL DATA
+        // // GET HISTORICAL DATA
         const NUMBER_OF_DAYS = 10  //set number of days in historical data
-        PastTenDays = new Date()
-        PastTenDays.setDate(startOfToday.getDate() - NUMBER_OF_DAYS)
-        const historical_data = await HealthDataEntry.find({
-            for_patient: this_patient._id,
-            updated: {$gte: PastTenDays}
-        }).lean()
-        console.log(historical_data)
+        // PastTenDays = new Date()
+        // PastTenDays.setDate(startOfToday.getDate() - NUMBER_OF_DAYS)
+        // const historical_data = await HealthDataEntry.find({
+        //     for_patient: this_patient._id,
+        //     updated: {$gte: PastTenDays}
+        // }).lean()
+        // console.log(historical_data)
         
-        healthEntryTS = {}
-        for (var i=0; i<NUMBER_OF_DAYS; i++){
-            d = new Date()
-            d.setDate(startOfToday.getDate() - i)
-            healthEntryTS[d.toDateString()] = {index: i, date: d.toDateString()}
-            console.log(d.toDateString())
-        }
-        for (const e of historical_data){
-            console.log(e.updated)
-            console.log(e.health_type)
-            console.log(e.value)
-            d = e.updated.toDateString()
-            if (d in healthEntryTS)
-                healthEntryTS[d][e.health_type] = e.value
-        }
-        // console.log(JSON.stringify(healthEntryTS))
-        // console.log(Object.entries(healthEntryTS))
-        //healthEntryArray = Object.entries(healthEntryTS)
-        healthEntryArray = Object.values(healthEntryTS)
+        // healthEntryTS = {}
+        // for (var i=0; i<NUMBER_OF_DAYS; i++){
+        //     d = new Date()
+        //     d.setDate(startOfToday.getDate() - i)
+        //     healthEntryTS[d.toDateString()] = {index: i, date: d.toDateString()}
+        //     console.log(d.toDateString())
+        // }
+        // for (const e of historical_data){
+        //     console.log(e.updated)
+        //     console.log(e.health_type)
+        //     console.log(e.value)
+        //     d = e.updated.toDateString()
+        //     if (d in healthEntryTS)
+        //         healthEntryTS[d][e.health_type] = e.value
+        // }
+        // healthEntryArray = Object.values(healthEntryTS)
+        healthEntryArray = await getHistoricalData(this_patient._id, NUMBER_OF_DAYS)
         console.log(healthEntryArray)
         //console.log(glucoseData)
         // var glucoseEntry = (glucoseData) ? true : false
@@ -166,6 +232,50 @@ const getPatientMetricSettings = async (req, res) => {
     } catch (err) {
         console.log(err)
     }
+}
+
+const getGlucoseDataPage = async (req, res) => {
+    const METRIC_TYPE = GLUCOSE_ENUM_TYPE
+    const this_patient = await Patient.findOne({firstname: PATIENT_NAME}, {}).lean()
+    const NUMBER_OF_DAYS = 16
+    healthEntryArray = await getHistoricalData(this_patient._id, NUMBER_OF_DAYS, METRIC_TYPE)
+    res.render('glucosedata', {
+        entrytypes: entryTypes,
+        "historicaldata": healthEntryArray
+    })
+}
+
+const getInsulinDataPage = async (req, res) => {
+    METRIC_TYPE = INSULIN_ENUM_TYPE
+    const this_patient = await Patient.findOne({firstname: PATIENT_NAME}, {}).lean()
+    const NUMBER_OF_DAYS = 16
+    healthEntryArray = await getHistoricalData(this_patient._id, NUMBER_OF_DAYS, METRIC_TYPE)
+    res.render('insulindata', {
+        entrytypes: entryTypes,
+        "historicaldata": healthEntryArray
+    })
+}
+
+const getStepsDataPage = async (req, res) => {
+    METRIC_TYPE = STEPS_ENUM_TYPE
+    const this_patient = await Patient.findOne({firstname: PATIENT_NAME}, {}).lean()
+    const NUMBER_OF_DAYS = 16
+    healthEntryArray = await getHistoricalData(this_patient._id, NUMBER_OF_DAYS, METRIC_TYPE)
+    res.render('stepsdata', {
+        entrytypes: entryTypes,
+        "historicaldata": healthEntryArray
+    })
+}
+
+const getWeightDataPage = async (req, res) => {
+    METRIC_TYPE = WEIGHT_ENUM_TYPE
+    const this_patient = await Patient.findOne({firstname: PATIENT_NAME}, {}).lean()
+    const NUMBER_OF_DAYS = 16
+    healthEntryArray = await getHistoricalData(this_patient._id, NUMBER_OF_DAYS, METRIC_TYPE)
+    res.render('weightdata', {
+        entrytypes: entryTypes,
+        "historicaldata": healthEntryArray
+    })
 }
 
 const getDataEntryPage = async (req, res) => {
@@ -246,6 +356,7 @@ const postAddHealthData = async (req, res) => {
     var health_type = req.body["health_type"]
     var value = req.body["data_input"]
     var comment = req.body["text_input"]
+
     const newHealthData = new HealthDataEntry({
         to_patient: this_user,
         health_type: health_type,
@@ -254,18 +365,23 @@ const postAddHealthData = async (req, res) => {
         created: Date.now(),
         updated: Date.now()
     })
-    console.log(this_user, health_type, value, text_input, Date.now())
+    console.log(this_user, health_type, value, comment, Date.now())
     await newHealthData.save()
         .then( (res) => { console.log(res) })
         .catch((err) => { console.log(err) })
     newEntry = await HealthDataEntry.findOne({this_patient:this_user, health_type:health_type}, {}, {sort: {created: -1}}).lean()
     // res.render('testpost', {"newentry": JSON.stringify(newEntry)}) //req.body["glucose_info"]
-    res.redirect('back')
+    // res.redirect('back')
+    res.redirect('/patient/dataentry')
 }
 
 module.exports = {
     getPatientMetricSettings,
     getDataEntryPage,
+    getGlucoseDataPage,
+    getInsulinDataPage,
+    getStepsDataPage,
+    getWeightDataPage,
     postAddDataPage,
     postUpdateDataPage,
     postAddHealthData,

@@ -1,0 +1,66 @@
+<html><head>
+    <meta charset="UTF-8">
+    <title></title>
+    {{!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js" charset="utf-8"></script> --}}
+    {{!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script> --}}
+    {{!-- <script src="http://livejs.com/live.js"></script> --}}
+    
+    <script type="text/javascript" src="/js/app.js"></script>
+    <link rel="stylesheet" href="/css/app.css">
+    <style>
+        .flex-container {
+        display: flex;
+        }
+        .flex-container-column{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .row  {
+        background-color: dodgerblue;
+        margin: 10px;
+        padding: 20px;
+        font-size: 30px;
+        }
+        .column {
+            background-color: dodgerblue;
+            margin: 10px;
+            padding: 20px;
+            font-size: 30px; 
+        }
+        table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 50%;
+        }
+
+        td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        }
+
+        tr:nth-child(even) {
+        background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-container-column" style="flex" flex-direction="column" align-items="center" justify-content="center">
+        <table>
+        <tr>
+            <th>Date</th>
+            <th>Value</th>
+            <th>Comment</th>
+        </tr>
+        {{#each historicaldata}}
+            <tr> 
+                <td>{{this.date}} </td>
+                <td><a>{{this.steps.value}}  </a>  </td>
+                <td><a>{{this.steps.comment}} </a>   </td>
+            </tr>
+        {{/each}}
+        </table>
+    </div>
+</body>

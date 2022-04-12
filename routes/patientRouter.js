@@ -9,6 +9,13 @@ const patientController = require('../controllers/patientController')
 
 patientRouter.get('/homepage', patientController.getPatientMetricSettings)
 patientRouter.get('/dataentry', patientController.getDataEntryPage)
+
+patientRouter.get('/glucosedata', patientController.getGlucoseDataPage)
+patientRouter.get('/insulindata', patientController.getInsulinDataPage)
+patientRouter.get('/stepsdata', patientController.getStepsDataPage)
+patientRouter.get('/weightdata', patientController.getWeightDataPage)
+
+
 patientRouter.post('/dataentry/add', patientController.postAddDataPage)
 patientRouter.post('/dataentry/update', patientController.postUpdateDataPage)
 patientRouter.post('/dataentry/add/save', patientController.postAddHealthData)
