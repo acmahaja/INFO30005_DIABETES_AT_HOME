@@ -11,12 +11,37 @@
             .flex-container {
             display: flex;
             }
+            .flex-container-column{
+                display: flex;
+                flex-direction: column;
+            }
 
             .row  {
             background-color: dodgerblue;
             margin: 10px;
             padding: 20px;
             font-size: 30px;
+            }
+            .column {
+                background-color: dodgerblue;
+                margin: 10px;
+                padding: 20px;
+                font-size: 30px; 
+            }
+            table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+            }
+
+            td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            }
+
+            tr:nth-child(even) {
+            background-color: #dddddd;
             }
         </style>
 	</head>
@@ -157,7 +182,27 @@
                         </div>
                     </div>
                 </div>
-			<p></p>
+
+		    <div class="flex-container-column" style="flex" flex-direction="column" align-items="center" justify-content="center">
+                <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Glucose</th>
+                    <th>Insulin</th>
+                    <th>Weight</th>
+                    <th>Steps</th>
+                </tr>
+                {{#each historicaldata}}
+                    <tr> 
+                        <td>{{this.date}} </td>
+                        <td><a href="/patient/glucose">{{this.blood_glucose}}  </a>  </td>
+                        <td><a href="/patient/insulin">{{this.insulin}} </a>   </td>
+                        <td><a href="/patient/weight">{{this.weight}} </a>    </td>
+                        <td><a href="/patient/steps">{{this.steps}} </a>   </td>
+                    </tr>
+                {{/each}}
+                </table>
+            </div>
 		</div>
 	
 	

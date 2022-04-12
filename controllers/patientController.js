@@ -51,11 +51,43 @@ const getPatientMetricSettings = async (req, res) => {
             created: {$gte: startOfToday}
         }).lean()
 
+        // GET HISTORICAL DATA
+        const NUMBER_OF_DAYS = 10  //set number of days in historical data
+        PastTenDays = new Date()
+        PastTenDays.setDate(startOfToday.getDate() - NUMBER_OF_DAYS)
+        const historical_data = await HealthDataEntry.find({
+            for_patient: this_patient._id,
+            updated: {$gte: PastTenDays}
+        }).lean()
+        console.log(historical_data)
+        
+        healthEntryTS = {}
+        for (var i=0; i<NUMBER_OF_DAYS; i++){
+            d = new Date()
+            d.setDate(startOfToday.getDate() - i)
+            healthEntryTS[d.toDateString()] = {index: i, date: d.toDateString()}
+            console.log(d.toDateString())
+        }
+        for (const e of historical_data){
+            console.log(e.updated)
+            console.log(e.health_type)
+            console.log(e.value)
+            d = e.updated.toDateString()
+            if (d in healthEntryTS)
+                healthEntryTS[d][e.health_type] = e.value
+        }
+        // console.log(JSON.stringify(healthEntryTS))
+        // console.log(Object.entries(healthEntryTS))
+        //healthEntryArray = Object.entries(healthEntryTS)
+        healthEntryArray = Object.values(healthEntryTS)
+        console.log(healthEntryArray)
         //console.log(glucoseData)
         // var glucoseEntry = (glucoseData) ? true : false
         // var insulinEntry = (insulinData) ? true : false
         // var stepsEntry = (stepsData) ? true : false
         // var weightEntry = (weightData) ? true : false
+        
+        //get entries to know if Add or Update each daily data entry
         entries = {
             glucose: (glucoseData) ? true : false,
             insulin: (insulinData) ? true : false,
@@ -70,12 +102,12 @@ const getPatientMetricSettings = async (req, res) => {
         }
         console.log(entries)
 
-
         res.render('testhome', {
             "patientsettings": patientsettings, 
             "patient": this_patient, 
             "entry": entries,
-            "entrytype": entryTypes
+            "entrytype": entryTypes,
+            "historicaldata": healthEntryArray
         })
     } catch (err) {
         console.log(err)
