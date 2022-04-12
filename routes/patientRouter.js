@@ -8,10 +8,13 @@ const patientRouter = express.Router()
 const patientController = require('../controllers/patientController')
 
 patientRouter.get('/homepage', patientController.getPatientMetricSettings)
+patientRouter.get('/dataentry', patientController.getDataEntryPage)
+patientRouter.post('/dataentry/add', patientController.postAddDataPage)
+patientRouter.post('/dataentry/update', patientController.postUpdateDataPage)
+patientRouter.post('/dataentry/add/save', patientController.postAddHealthData)
+patientRouter.post('/dataentry/update/save', patientController.postUpdateHealthData)
 
-patientRouter.post('/data/add', patientController.postAddHealthData)
-
-patientRouter.post('/data/update', patientController.postUpdateHealthData)
+patientRouter.post('/dataentry/update', patientController.postUpdateHealthData)
 
 //temp pages
 patientRouter.get('/glucose', (req, res) => {res.send("<h1>Glucose data page<h1> <a href='/patient/homepage'> Go back to homepage </a>")})
@@ -20,8 +23,6 @@ patientRouter.get('/weight', (req, res) => {res.send("<h1>Weight data page<h1> <
 patientRouter.get('/steps', (req, res) => {res.send("<h1>Steps data page<h1> <a href='/patient/homepage'> Go back to homepage </a>")})
 
 
-//not sure if this does anything useful idk
-patientRouter.get('/disconnect', (req, res) => {mongoose.disconnect(); res.send("disconnected mongodb")})
 
 
 // export the router

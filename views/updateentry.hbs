@@ -1,0 +1,78 @@
+<html><head>
+		<meta charset="UTF-8">
+		<title></title>
+		{{!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js" charset="utf-8"></script> --}}
+		{{!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script> --}}
+		{{!-- <script src="http://livejs.com/live.js"></script> --}}
+		
+		<script type="text/javascript" src="/js/app.js"></script>
+		<link rel="stylesheet" href="/css/app.css">
+        <style>
+            .flex-container {
+            display: flex;
+            }
+            .flex-container-column{
+                display: flex;
+                flex-direction: column;
+            }
+
+            .row  {
+            background-color: dodgerblue;
+            margin: 10px;
+            padding: 20px;
+            font-size: 30px;
+            }
+            .column {
+                background-color: dodgerblue;
+                margin: 10px;
+                padding: 20px;
+                font-size: 30px; 
+            }
+            table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+            }
+
+            td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            }
+
+            tr:nth-child(even) {
+            background-color: #dddddd;
+            }
+        </style>
+	</head>
+<body>
+		<div>
+			<h1>Update Data</h1>
+            {{!-- <h2>Patient: {{patient.firstname}} {{patient.lastname}}</h2> --}}
+            <div class="flex-container" style="flex", align-items="center" justify-content="center">
+                    <div class="row" width="auto" border="1px solid blue">
+                        <div class="flex-item">
+                            <tr><td >Update Data </td>
+                            </tr>
+                                <form method="post" action="/patient/dataentry/update/save">
+                                    <div>
+                                        <input id="data-field" type="number" name="data_input">
+                                        {{#ifEquals entrytype "blood_glucose" }}
+                                            <td> nmo/L</td>
+                                        {{else ifEquals entrytype "insulin"}}
+                                            <td> shots/td>
+                                        {{else ifEquals entrytype "steps"}}
+                                            <td> steps</td>
+                                        {{else ifEquals entrytype "weight"}}
+                                            <td> kg</td>
+                                        {{/ifEquals}}
+                                    </div>
+                                    <div>
+                                        <textarea rows="4" cols="26" name="text_input"></textarea>
+                                    </div>
+                                    <input id="data-field" type="hidden" name="user_id" value={{patientid}}>
+                                    <input id="data-field" type="hidden" name="health_type" value={{entrytype}}>
+                                    <input type="Submit" value="Update Data">
+                                </form>
+                        </div>
+                    </div>

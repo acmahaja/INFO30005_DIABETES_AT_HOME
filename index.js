@@ -2,6 +2,14 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
+var hbs = exphbs.create({})
+
+hbs.handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+	// console.log(arg1)
+	// console.log(arg2)
+    return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
+
 
 const patientRouter = require("./routes/patientRouter")
 

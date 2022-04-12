@@ -16,6 +16,10 @@ const healthDataSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    comment: {
+        type: String,
+        required: false
+    },
     created: {
         type: Date,
         required: true

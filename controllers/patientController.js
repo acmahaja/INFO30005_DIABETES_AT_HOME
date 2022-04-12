@@ -15,41 +15,100 @@ const GLUCOSE_ENUM_TYPE = 'blood_glucose'
 const WEIGHT_ENUM_TYPE = 'weight'
 const INSULIN_ENUM_TYPE = 'insulin'
 const STEPS_ENUM_TYPE = 'steps'
+const entryTypes = {
+    glucose: GLUCOSE_ENUM_TYPE,
+    insulin: INSULIN_ENUM_TYPE,
+    steps: STEPS_ENUM_TYPE,
+    weight: WEIGHT_ENUM_TYPE
+}
+
+const PATIENT_NAME = "alejandro"
 
 
+
+
+const getDailyHealthData = async (patientId) => {
+    var now = new Date();
+    var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());   
+
+    var glucoseData = await HealthDataEntry.findOne({
+        for_patient: patientId,
+        health_type: GLUCOSE_ENUM_TYPE,
+        created: {$gte: startOfToday}
+    }).lean()
+    var insulinData = await HealthDataEntry.findOne({
+        for_patient: patientId,
+        health_type: INSULIN_ENUM_TYPE,
+        created: {$gte: startOfToday}
+    }).lean()
+    var stepsData = await HealthDataEntry.findOne({
+        for_patient: patientId,
+        health_type: STEPS_ENUM_TYPE,
+        created: {$gte: startOfToday}
+    }).lean()
+    var weightData = await HealthDataEntry.findOne({
+        for_patient: patientId,
+        health_type:  WEIGHT_ENUM_TYPE,
+        created: {$gte: startOfToday}
+    }).lean()
+
+    // entries = {
+    //     glucose: (glucoseData) ? true : false,
+    //     insulin: (insulinData) ? true : false,
+    //     steps: (stepsData) ? true : false,
+    //     weight: (weightData) ? true : false
+    // }
+
+    entries = {
+        glucose: glucoseData,
+        insulin: insulinData,
+        steps: stepsData,
+        weight: weightData
+    }
+    return entries
+}
 //handle requiest to get patient settings
 const getPatientMetricSettings = async (req, res) => {
 
     try {
               //const patientsettings = await PatientSettings.find().populate("for_patient").findOne({}, {}).lean()
 
-        const this_patient = await Patient.findOne({firstname: "alejandro"}, {}).lean()
+        const this_patient = await Patient.findOne({firstname: PATIENT_NAME}, {}).lean()
         console.log(this_patient)
         const patientsettings = await PatientSettings.findOne({for_patient: this_patient._id}, {}).lean()
         console.log(patientsettings)
 
         var now = new Date();
         var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());   
-        var glucoseData = await HealthDataEntry.findOne({
-            for_patient: this_patient._id,
-            health_type: GLUCOSE_ENUM_TYPE,
-            created: {$gte: startOfToday}
-        }).lean()
-        var insulinData = await HealthDataEntry.findOne({
-            for_patient: this_patient._id,
-            health_type: INSULIN_ENUM_TYPE,
-            created: {$gte: startOfToday}
-        }).lean()
-        var stepsData = await HealthDataEntry.findOne({
-            for_patient: this_patient._id,
-            health_type: STEPS_ENUM_TYPE,
-            created: {$gte: startOfToday}
-        }).lean()
-        var weightData = await HealthDataEntry.findOne({
-            for_patient: this_patient._id,
-            health_type:  WEIGHT_ENUM_TYPE,
-            created: {$gte: startOfToday}
-        }).lean()
+        // var glucoseData = await HealthDataEntry.findOne({
+        //     for_patient: this_patient._id,
+        //     health_type: GLUCOSE_ENUM_TYPE,
+        //     created: {$gte: startOfToday}
+        // }).lean()
+        // var insulinData = await HealthDataEntry.findOne({
+        //     for_patient: this_patient._id,
+        //     health_type: INSULIN_ENUM_TYPE,
+        //     created: {$gte: startOfToday}
+        // }).lean()
+        // var stepsData = await HealthDataEntry.findOne({
+        //     for_patient: this_patient._id,
+        //     health_type: STEPS_ENUM_TYPE,
+        //     created: {$gte: startOfToday}
+        // }).lean()
+        // var weightData = await HealthDataEntry.findOne({
+        //     for_patient: this_patient._id,
+        //     health_type:  WEIGHT_ENUM_TYPE,
+        //     created: {$gte: startOfToday}
+        // }).lean()
+
+        // entries = {
+        //     glucose: (glucoseData) ? true : false,
+        //     insulin: (insulinData) ? true : false,
+        //     steps: (stepsData) ? true : false,
+        //     weight: (weightData) ? true : false
+        // }
+
+        entries = await getDailyHealthData(this_patient._id)
 
         // GET HISTORICAL DATA
         const NUMBER_OF_DAYS = 10  //set number of days in historical data
@@ -88,25 +147,20 @@ const getPatientMetricSettings = async (req, res) => {
         // var weightEntry = (weightData) ? true : false
         
         //get entries to know if Add or Update each daily data entry
-        entries = {
-            glucose: (glucoseData) ? true : false,
-            insulin: (insulinData) ? true : false,
-            steps: (stepsData) ? true : false,
-            weight: (weightData) ? true : false
-        }
-        entryTypes = {
-            glucose: GLUCOSE_ENUM_TYPE,
-            insulin: INSULIN_ENUM_TYPE,
-            steps: STEPS_ENUM_TYPE,
-            weight: WEIGHT_ENUM_TYPE
-        }
+
+        // entryTypes = {
+        //     glucose: GLUCOSE_ENUM_TYPE,
+        //     insulin: INSULIN_ENUM_TYPE,
+        //     steps: STEPS_ENUM_TYPE,
+        //     weight: WEIGHT_ENUM_TYPE
+        // }
         console.log(entries)
 
         res.render('testhome', {
             "patientsettings": patientsettings, 
             "patient": this_patient, 
             "entry": entries,
-            "entrytype": entryTypes,
+            "entrytypes": entryTypes,
             "historicaldata": healthEntryArray
         })
     } catch (err) {
@@ -114,12 +168,49 @@ const getPatientMetricSettings = async (req, res) => {
     }
 }
 
+const getDataEntryPage = async (req, res) => {
+    const this_patient = await Patient.findOne({firstname: PATIENT_NAME}, {}).lean()
+    const patientsettings = await PatientSettings.findOne({for_patient: this_patient._id}, {}).lean()
+    entries = await getDailyHealthData(this_patient._id)
+    console.log(entries)
+    res.render('dataentry', {
+        "patient": this_patient,
+        "patientsettings": patientsettings,
+        "entry": entries,
+        "entrytypes": entryTypes
+    })
+}
+
+const postAddDataPage = async (req, res) => {
+    var this_patient = req.body["user_id"]
+    var health_type = req.body["health_type"]
+    console.log(health_type)
+    console.log(this_patient)
+    res.render('addentry', {
+        "patientid": this_patient,
+        "entrytype": health_type,
+        "entrytypes": entryTypes
+    })
+}
+
+const postUpdateDataPage = async (req, res) => {
+    var this_patient = req.body["user_id"]
+    var health_type = req.body["health_type"]
+    console.log(health_type)
+    console.log(this_patient)
+    res.render('updateentry', {
+        "patientid": this_patient,
+        "entrytype": health_type,
+
+    })
+}
 
 
 const postUpdateHealthData = async (req, res) => {
     var this_user = req.body["user_id"]
     var health_type = req.body["health_type"]
-    var value = req.body["data_value"]
+    var value = req.body["data_input"]
+    var comment = req.body["text_input"]
 
 
     var filter = { 
@@ -128,6 +219,7 @@ const postUpdateHealthData = async (req, res) => {
     }
     var update = {
         value: value,
+        comment: comment,
         updated: Date.now()
     }
     var options = { sort : {created : -1} }
@@ -139,33 +231,44 @@ const postUpdateHealthData = async (req, res) => {
         .catch((err) => { console.log(err) })
 
     updatedEntry = await HealthDataEntry.findOne(filter, {}, options).lean()
-    res.render('testpost', {
-        "newentry": JSON.stringify(updatedEntry),
-        "preventry": JSON.stringify(prevEntry)
-    }) 
+    //res.redirect('back')
+    res.redirect('/patient/dataentry')
+    // res.render('testpost', {
+    //      "newentry": JSON.stringify(updatedEntry),
+    //      "preventry": JSON.stringify(prevEntry)
+    // }) 
 }
+
+// const postDataEntry = async
 
 const postAddHealthData = async (req, res) => {
     var this_user = req.body["user_id"]
     var health_type = req.body["health_type"]
-    var value = req.body["data_value"]
+    var value = req.body["data_input"]
+    var comment = req.body["text_input"]
     const newHealthData = new HealthDataEntry({
         to_patient: this_user,
         health_type: health_type,
         value: value,
+        comment: comment,
         created: Date.now(),
         updated: Date.now()
     })
-    console.log(this_user, health_type, value, Date.now())
+    console.log(this_user, health_type, value, text_input, Date.now())
     await newHealthData.save()
         .then( (res) => { console.log(res) })
         .catch((err) => { console.log(err) })
     newEntry = await HealthDataEntry.findOne({this_patient:this_user, health_type:health_type}, {}, {sort: {created: -1}}).lean()
-    res.render('testpost', {"newentry": JSON.stringify(newEntry)}) //req.body["glucose_info"]
+    // res.render('testpost', {"newentry": JSON.stringify(newEntry)}) //req.body["glucose_info"]
+    res.redirect('back')
 }
 
 module.exports = {
     getPatientMetricSettings,
+    getDataEntryPage,
+    postAddDataPage,
+    postUpdateDataPage,
+    postAddHealthData,
     postAddHealthData,
     postUpdateHealthData
 }

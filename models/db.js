@@ -30,6 +30,7 @@ const db = mongoose.connection
 
 db.on("error", err => {
   console.log("db errorrr")
+  mongoose.disconnect()
   console.error(err);
   process.exit(1)
 })
