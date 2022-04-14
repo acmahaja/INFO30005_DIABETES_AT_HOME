@@ -1,21 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    width: 90%;
+    display: block;
+    margin: 60px auto;
+}
+
 .navbar ul.login-links {
     justify-content: right;
 }
 
+.navbar .hamburger-menu {
+    display: none
+}
+
 .login-image {
     width: 689px;
-    height: 600px;
     padding-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .login-box {
     width: 1055px;
-    height: 232px;
     border-radius: 32px;
-    flex-shrink: 0;
-    display: grid;
-    align-content: center;
-    row-gap: 40px;
+    padding: 20px 0 20px 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #patient-login-box {
@@ -31,10 +47,12 @@
     display: flex;
     align-content: center;
     padding-left: 35px;
+    padding-bottom: 30px;
 }
 
 .login-box .input {
-    flex-direction: column;
+    width: 70%;
+    display: grid;
 }
 
 .login-box label {
@@ -46,7 +64,7 @@
     background: white;
     border-radius: 12px;
     border: 0px;
-    width: 483px;
+    width: 90%;
     height: 53px;
 }
 
@@ -61,4 +79,55 @@
     width: 176px;
     height: 40px;
     font-size: 22px;
+}
+
+@media only screen and (max-width: 420px) {
+    .wrapper {
+        margin: 30px auto;
+    }
+    .navbar .logo {
+        display: none;
+    }
+    .navbar .links {
+        display: none;
+    }
+    .navbar .hamburger-menu {
+        display: block
+    }
+    .login-image {
+        width: 100%;
+    }
+    .login-box {
+        width: 90%;
+        border-radius: 24px;
+    }
+    .login-box .input-area {
+        display: block;
+        padding-left: 20px;
+    }
+    .login-box .input-area>*:first-child {
+        margin-bottom: 10px;
+    }
+    .login-box .input {
+        width: 90%;
+    }
+    .login-box .input-box {
+        height: 40px;
+        width: 105%;
+    }
+    .input label {
+        color: #CCE1E0;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .navbar .links .login-links {
+        display: none;
+    }
+    .login-image {
+        width: 45%;
+    }
+    .login-box {
+        width: 85%;
+    }
 }
