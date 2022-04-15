@@ -5,19 +5,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Diabetes</title>
+    <title>Login</title>
     <link rel="stylesheet" href="./public/css/style.css" />
-    <link rel="stylesheet" href="./public/css/diabetes.css" />
     <link rel="stylesheet" href="./public/css/background.css" />
     <link rel="stylesheet" href="./public/css/navbar.css" />
     <link rel="stylesheet" href="./public/css/login.css" />
     <link rel="icon" type="image/x-icon" href="./public/images/favicon.png" />
 </head>
 
+
 <body>
     <div class="blur blur-1"></div>
 
-    <div class="section" id="diabetes-welcome">
+    <div class="wrapper">
         <div class="navbar">
             <div class="logo">
                 <img src="./public/images/icon.svg" alt="" />
@@ -29,11 +29,15 @@
                     <li><a class="selected" href="#">Login</a></li>
                 </ul>
                 <ul class="login-links" ogin-links>
-                    <li><a class="selected" href="#">Clinician</a></li>
-                    <li><a href="#">Patient</a></li>
+                    <li><a href="#">Clinician</a></li>
+                    <li><a class="selected" href="#">Patient</a></li>
                 </ul>
             </div>
+            <div class="hamburger-menu">
+                <img src="./public/images/login/hamburger_menu.svg" alt="" />
+            </div>
         </div>
+
         <img class="login-image" src="./public/images/login/clinician_login_background.svg" alt="" style="max-width:100%;height:auto;" />
         <div class="login-box" id="clinician-login-box">
             <div class="input-area">
@@ -48,6 +52,7 @@
             </div>
             <button class="login-button">Login</button>
         </div>
+    </div>
 </body>
 
 </html>
