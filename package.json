@@ -27,5 +27,4 @@
     "prettier": "^2.6.2"
   },
   "prettier": "prettier --single-quote --no-semi --tab-width 4 --write **/*.js *.js"
-
 }
