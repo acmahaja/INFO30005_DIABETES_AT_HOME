@@ -7,6 +7,10 @@ const patientSchema = new mongoose.Schema({
         type: String,
         required: [true, "Username can't be blank"]
     }, 
+    password: {
+        type: String,
+        required: [true, "Password can't be blank"]
+    },
     firstname : {
         type: String,
         required: [true, "First name can't be blank"]
