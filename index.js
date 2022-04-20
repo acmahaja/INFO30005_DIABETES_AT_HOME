@@ -9,6 +9,9 @@ const exphbs = require("express-handlebars");
 const session = require("express-session")
 
 const mongoose = require("mongoose");
+
+const {auth} = require("./utils/authorization")
+
 require('dotenv').config()
 
 console.warn("Dev Environment: " + process.env.NODE_ENV);
@@ -41,6 +44,8 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
 
+
+
 app.use(express.urlencoded({ extended: false }))
 app.use(session({
   resave: false, // don't save session if unmodified
@@ -62,7 +67,7 @@ app.get('/', (req,res)=>{
 	res.send("Welcome to Diabetes at Home");
 })
 
-app.listen(process.env.PORT ||3000, ()=>{
+app.listen(process.env.PORT || 3000, ()=>{
 	console.log("Listening on port 3000");
 })
 

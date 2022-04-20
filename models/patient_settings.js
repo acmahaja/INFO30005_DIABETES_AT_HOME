@@ -19,7 +19,6 @@ const patientSettingsSchema = new mongoose.Schema({
         type: Boolean,
         required : [true, "Weight option can't be blank"]
     },
-    
     requires_insulin : {
         type: Boolean,
         required : [true, "Insulin option can't be blank"]
