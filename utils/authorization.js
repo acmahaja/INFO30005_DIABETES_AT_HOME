@@ -14,12 +14,10 @@ const db = mongoose.connection.on('error', err => {
 	process.exit(1)
 })
 
-db.once('open', async () => {
- 	console.log(`Mongo connected to port ${db.host}:${db.port}`)
-})
 
 async function basic_authorization(username, password){
     const result = await PatientSchema.findOne({username: username})
+
     return result === null ? false : result.username === username && result.password === password
 }
 

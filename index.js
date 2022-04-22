@@ -6,6 +6,7 @@ const path = require("path")
 const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
 
+var cookieParser = require('cookie-parser');
 const session = require("express-session")
 
 const mongoose = require("mongoose");
@@ -23,17 +24,12 @@ mongoose.connect(
 		useUnifiedTopology: true,
 		dbName: 'demo'
 	}
-)
+).then(()=> console.log(`Mongo connected to port ${db.host}:${db.port}`))
 
 const db = mongoose.connection.on('error', err => {
 	console.error(err)
 	process.exit(1)
 })
-
-db.once('open', async () => {
- 	console.log(`Mongo connected to port ${db.host}:${db.port}`)
-})
-
 
 app.engine('hbs', exphbs.engine({
 	defaultlayout: 'main',
@@ -43,10 +39,9 @@ app.engine('hbs', exphbs.engine({
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
-
-
-
 app.use(express.urlencoded({ extended: false }))
+
+app.use(cookieParser());
 app.use(session({
   resave: false, // don't save session if unmodified
   saveUninitialized: false, // don't create session until something stored
@@ -55,6 +50,31 @@ app.use(session({
 
 app.use(bodyParser.urlencoded({extended:true}));
 
+
+app.post('/logout', async (req, res)=> {
+	req.session.destroy()
+	res.redirect("/")
+})
+
+
+app.post('/login', async (req, res)=> {
+	if(req.session.loggedIn === true){
+		res.redirect("/")
+	}
+	const {username, password} = req.body
+	const has_user = await auth.basic_authorization(username, password);
+	if(has_user){
+		req.session.loggedIn = true;
+		req.session.username = username;
+		res.redirect("/")
+
+	} else {
+		req.session.destroy()
+		res.redirect("/diabetes")
+	}
+})
+
+
 app.get('/clincian', (req,res)=>{
 	res.send("Clinician Page");
 })
@@ -62,6 +82,11 @@ app.get('/clincian', (req,res)=>{
 app.get('/patient', (req,res)=> {
 	res.send("Patient Page");
 })
+
+app.get('/diabetes', (req,res)=>{
+	res.send("About Diabetes");
+})
+
 
 app.get('/', (req,res)=>{
 	res.send("Welcome to Diabetes at Home");
