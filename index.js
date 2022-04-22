@@ -52,18 +52,20 @@ app.use(session({
 }));
 
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static('public'))
 
 const clincianRouter = require("./routes/clinician/clincianRouter")
+
 
 app.use('/clinician', clincianRouter)
 
 app.get('/diabetes', (req,res)=>{
-	res.send("About Diabetes");
+	res.render("diabetes.hbs");
 })
 
 
 app.get('/', (req,res)=>{
-	res.send("Welcome to Diabetes at Home");
+	res.render("about.hbs");
 })
 
 app.listen(process.env.PORT || 3000, ()=>{
