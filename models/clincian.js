@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const {Schema} = mongoose;
 
-const clincianSchema = new mongoose.Schema({
+const ClincianSchema = new Schema({
   username: {
     type: String,
     required: [true, "Username can't be blank"],
@@ -38,4 +39,4 @@ const clincianSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Clincian", clincianSchema);
+module.exports = mongoose.model("Clincian", ClincianSchema);
