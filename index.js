@@ -21,7 +21,7 @@ mongoose.connect(
 	{
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
-		dbName: 'demo'
+		dbName: 'diabetes-at-home'
 	}
 ).then(()=> console.log(`Mongo connected to port ${db.host}:${db.port}`))
 
@@ -54,10 +54,10 @@ app.use(session({
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'))
 
-const clincianRouter = require("./routes/clinician/clincianRouter")
+const clinicianRouter = require("./routes/clinician/clinicianRouter")
 
 
-app.use('/clinician', clincianRouter)
+app.use('/clinician', clinicianRouter)
 
 app.get('/diabetes', (req,res)=>{
 	res.render("diabetes.hbs");

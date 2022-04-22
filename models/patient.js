@@ -39,8 +39,7 @@ const PatientSchema = new mongoose.Schema({
     assigned_clincian : {
         type: Schema.Types.ObjectID,
         ref: 'Clincian',
-    }
-});
+    }});
 
 
 module.exports = mongoose.model('Patient', PatientSchema);
