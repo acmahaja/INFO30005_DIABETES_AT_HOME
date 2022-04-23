@@ -5,3 +5,34 @@
 <body>
   {{> sidebarClinician firstname="Anjaney" lastname="Mahajan" profile-img="https://this-person-does-not-exist.com/img/avatar-e2ba3bde87eee2ff3addbb339508a07d.jpg"}}
   <main>
+    <header>
+      <h1>Patient Trends</h1>
+      <div class="day"> <div id="week_day"></div> <div id="date"></div> </div>
+    </header>
+    <section>
+      <div class="search-bar">
+        <img src="../icons/search.svg" alt="" class="icon">
+        <input type="text" id="search-box" placeholder="Search Bar">
+      </div>
+      <div class="patients"></div>
+    </section>
+
+
+
+
+
+
+<script>
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  date =  new Date();
+  week_day = days[date.getDay()];
+  day = date.getDate();
+  month = months[date.getMonth()];
+  year = date.getYear();
+
+  document.getElementById("week_day").innerHTML = week_day + ",";
+  document.getElementById("date").innerHTML = day + " " + month + " " + year;
+
+
+</script>

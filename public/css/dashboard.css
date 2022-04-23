@@ -3,6 +3,9 @@
 }
 
 
+body{
+    background-color: #F6F7FB;
+}
 .clinician-sidebar {
     background: #5F3A9B;
 }
@@ -19,13 +22,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    margin: 1em 0em 1em 0em;
+    margin: 1em 0em .5em 0em;
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 400;
     color: white;
-    font-size: 1.25em;
-    line-height: .5em;
+    font-size: 1.5em;
+    line-height: 1em;
 }
 
 #sidebar .profile * {
@@ -49,7 +52,7 @@
 
 #sidebar .links li {
     list-style: none;
-    padding: 0em 1.25em 0em 1.25em;
+    padding: .25em 1.25em .25em 1.5em;
     margin: 0;
     display: flex;
     flex-direction: row;
@@ -78,5 +81,88 @@
 main {
     width: calc(100vw - var(--dashboard-width));
     height: 100%;
+    padding: 2em 3em;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
+header {
+    width: 100%;
+    height: fit-content;
+    font-family: 'Raleway';
+    font-style: normal;
+}
+
+header * {
+    width: fit-content;
+    height: fit-content;
+    line-height: 2em;
+}
+
+header h1 {
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 40px;
+    margin: .25em 0em .25em 0em;
+}
+
+.day {
+    display: flex;
+    flex-direction: row;
+    margin: 1em 0em .25em 0em;
+
+}
+#week_day { 
+    color: #665FC7;
+    margin-right: .25em;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+}
+
+#date { 
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    
+    color: #8D8E94;
+}
+
+.search-bar {
+    height: 3.25em;
+    margin: 1.5em 0em .5em 0em;
+    width: 100%;
+    background-color: white;
+    border-radius: 3em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.search-bar img {
+    color: #8D8E94;
+    height: 2em;
+    width: 2em;
+    margin-left: 1.25em;
+    margin-right: 1.25em;
+}
+
+.search-bar #search-box {
+    height: 90%;
+    width: 93%;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 29px;
+    color: #8D8E94;
+    border: none;
+}
+
+section {
+    width: 100%;
+    height: calc(100%-2em);
+}
