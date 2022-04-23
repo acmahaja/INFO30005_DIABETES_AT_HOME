@@ -39,6 +39,7 @@ const ClincianSchema = new Schema({
   },
   image: {
     type: String,
+    default: "/images/default.png"
   }
 });
 
