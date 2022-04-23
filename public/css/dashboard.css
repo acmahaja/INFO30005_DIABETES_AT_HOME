@@ -164,5 +164,12 @@ header h1 {
 
 section {
     width: 100%;
-    height: calc(100%-2em);
+    height: calc(100% - 7.5em);
+}
+
+.patients {
+    width: 100%;
+    height: calc(100% - 6em);
+    margin-top: 2em;
+    background-color: #442773;
 }
