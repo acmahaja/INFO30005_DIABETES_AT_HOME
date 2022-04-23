@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Raleway";
+}
+
+body {
+    background-color: #E5E5E5;
+}
+
+.wrapper {
+    margin: 45px 0 0 335px
+}
+
+.sidebar {
+    height: 100%;
+    width: 280px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding-top: 40px;
+    background-color: #5f3a9b;
+}
+
+.sidebar .nav-link {
+    display: flex;
+    height: 60px;
+}
+
+.sidebar .nav-link p {
+    font-size: 18px;
+    color: white;
+    margin: auto 0 auto 20px;
+}
+
+.sidebar .nav-link img {
+    max-width: 18px;
+    margin-left: 24px;
+}
+
+img.clinician-photo {
+    border: 5px solid #313162;
+    width: 100px;
+}
+
+.clinician-profile {
+    margin: 0 0 24px 70px;
+}
+
+p.clinician-name {
+    font-size: 24px;
+    color: white
+}
+
+.title {
+    font-size: 34px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.subheading {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #8D8E94;
+}
+
+.searchbar {
+    height: 52px;
+    width: 1571px;
+    margin-bottom: 20px;
+}
+
+.searchbar input {
+    width: 100%;
+    border-radius: 17px;
+    border-width: 5px;
+    margin-bottom: 22px;
+    font-size: 25;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
+    padding: 9px 4px 9px 40px;
+}
+
+.data-box {
+    width: 1431px;
+    height: 829px;
+    background: #5f3a9b;
+    background-image: linear-gradient(45deg, #5F3A9B, #44207E);
+    border-radius: 17px;
+    display: grid;
+    grid-auto-rows: 57px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    padding: 25px 70px 25px 70px;
+    overflow-y: scroll;
+}
+
+.data-box * {
+    font-size: 24px;
+    color: white;
+    justify-self: center;
+    align-self: center;
+    row-gap: 3px;
+}
+
+.data-box :nth-child(1) {
+    grid-column: 2;
+}
+
+.data-box .user-profile {
+    display: flex
+}
+
+.data-box .user-profile .user-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px
+}
+
+hr {
+    grid-column: 1 / -1;
+    width: 100%;
+    background-color: #5F3A9B;
+    height: 5px;
+    border: none;
+}
