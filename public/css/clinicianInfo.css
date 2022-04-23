@@ -1,5 +1,5 @@
 * {
-    font-family: "Raleway";
+    font-family: Raleway
 }
 
 .clinician-info {
@@ -10,86 +10,86 @@
     width: 828px;
     border-radius: 30px;
     padding: 24px 32px 23px 32px;
-    background-color: #5F3A9B;
+    background-color: #5f3a9b;
     justify-content: center;
-    margin: auto;
+    margin: auto
 }
 
 .clinician-info div input {
     width: 100%;
     border: none;
     border-radius: 10px;
-    height: 42px;
+    height: 42px
 }
 
 .clinician-photo {
-    grid-row: 1 / 4;
+    grid-row: 1/4;
     grid-column: 4;
     display: grid;
-    align-content: center;
+    align-content: center
 }
 
 .clinician-photo img {
     height: 183px;
-    width: 183px;
+    width: 183px
 }
 
 .small {
-    display: grid;
+    display: grid
 }
 
 .large {
-    grid-column: 1 / 4;
-    display: grid;
+    grid-column: 1/4;
+    display: grid
 }
 
 .bio {
-    grid-column: 1 / 5;
-    grid-row: 6 / 8;
-    display: grid;
+    grid-column: 1/5;
+    grid-row: 6/8;
+    display: grid
 }
 
 .bio textarea {
-    height: 119px !important;
-    border-radius: 10px;
+    height: 119px!important;
+    border-radius: 10px
 }
 
 .password {
-    grid-column: 1/5;
+    grid-column: 1/5
 }
 
 label {
     align-self: center;
-    color: white;
-    font-family: "Raleway";
-    font-size: 15px;
+    color: #fff;
+    font-family: Raleway;
+    font-size: 15px
 }
 
 .update-avatar {
-    background-color: #20C5C2;
+    background-color: #20c5c2;
     border: none;
     border-radius: 26px;
     height: 38px;
     width: 173px;
-    color: white;
+    color: #fff;
     font-size: 23px;
     align-self: center;
-    justify-self: center;
+    justify-self: center
 }
 
 .update-button-wrapper {
     grid-column: 1/5;
     display: grid;
     align-content: center;
-    justify-content: center;
+    justify-content: center
 }
 
 .update-button {
-    background-color: #20C5C2;
+    background-color: #20c5c2;
     border: none;
     border-radius: 26px;
     height: 40px;
     width: 176px;
-    color: white;
-    font-size: 23px;
+    color: #fff;
+    font-size: 23px
 }
