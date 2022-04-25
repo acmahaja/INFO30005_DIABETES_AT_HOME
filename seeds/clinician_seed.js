@@ -22,6 +22,7 @@ const db = mongoose.connection.on('error', err => {
 
 const deleteClinician = async () => {
     const entries = await ClincianSchema.find({})
+
     entries.forEach(
         async (entry) => await ClincianSchema.findByIdAndRemove(entry.id)
         )
