@@ -19,4 +19,10 @@ async function get_clinician_id(username){
     return result;
 }
 
-module.exports = {get_patient_list, get_clinician_id}
+
+
+function generate_random_date(start, end) {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}
+
+module.exports = {get_patient_list, get_clinician_id, generate_random_date}

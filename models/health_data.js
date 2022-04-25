@@ -3,7 +3,7 @@ const patient = require("./patient")
 const {Schema} = mongoose;
 
 const healthDataSchema = new mongoose.Schema({
-   to_patient : {
+    patient_id : {
         type: Schema.Types.ObjectID,
         ref: 'Patient'
     },
@@ -18,11 +18,11 @@ const healthDataSchema = new mongoose.Schema({
     },
     created: {
         type: Date,
-        required: true
+        // required: true
     },
     updated: {
         type: Date,
-        required: true
+        // required: true
     }
 })
 
