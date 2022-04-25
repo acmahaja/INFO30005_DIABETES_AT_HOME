@@ -1,5 +1,5 @@
 :root {
-    --dashboard-width: 13.5vw;
+    --dashboard-width: 15vw;
 }
 
 
@@ -66,7 +66,7 @@ body{
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 400;
-    font-size: 1.15em;
+    font-size: 1em;
     line-height: 2.5em;
 }
 
@@ -85,7 +85,7 @@ body{
 main {
     width: calc(100vw - var(--dashboard-width));
     height: 100%;
-    padding: 2em 3em;
+    padding: 0.5em 2em;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -106,9 +106,9 @@ header * {
 
 header h1 {
     font-weight: 700;
-    font-size: 34px;
-    line-height: 40px;
-    margin: .25em 0em .25em 0em;
+    font-size: 1.5em;
+    line-height: 1em;
+    color: #4C4C4C;
 }
 
 .day {
@@ -138,7 +138,7 @@ header h1 {
 }
 
 .search-bar {
-    height: 3.25em;
+    height: 2.25em;
     margin: 1.5em 0em .5em 0em;
     width: 100%;
     background-color: white;
@@ -150,8 +150,8 @@ header h1 {
 
 .search-bar img {
     color: #8D8E94;
-    height: 2em;
-    width: 2em;
+    height: 1.5em;
+    width: 1.5em;
     margin-left: 1.25em;
     margin-right: 1.25em;
 }
@@ -160,8 +160,8 @@ header h1 {
     height: 90%;
     width: 93%;
     font-weight: 500;
-    font-size: 25px;
-    line-height: 29px;
+    font-size: 1.25em;
+    line-height: 1.5em;
     color: #8D8E94;
     border: none;
 }
@@ -183,23 +183,22 @@ section {
     margin-top: 2em;
     background-color: #442773ff;
     border-radius: 1em;
-    padding: 1em 4.5em 1em 4.5em;
+    padding: .5em 2em .25em 2em;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    
 }
 
 .patient {
     width: 100%;
-    height: 3.5em;
+    height: 2.75em;
     color: white;
     font-style: normal;
     font-weight: 400;
-    font-size: 1.5em;
-    line-height: 1.75em;
+    font-size: 1.15em;
+    line-height: 1em;
     text-transform:capitalize;   
-    border-bottom: solid 5px #5f3a9b;
+    border-bottom: solid 2px #5f3a9b;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -231,7 +230,7 @@ section {
     height: 2em;
     width: 2em;
     border-radius: 50%;
-    border: 4px solid grey;
+    border: 2px solid grey;
     object-fit: cover;
     margin-right: 1em;
 }
@@ -243,5 +242,5 @@ section {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-size: 1.15em;
+    font-size: 1em;
 }
