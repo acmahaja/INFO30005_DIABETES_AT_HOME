@@ -28,6 +28,7 @@ const deletePatients = async () => {
 }
 
 const createPat = async () => {
+    const findChris = await ClinicianSchema.findOne({"username": "chrispatt"})
     const entry = await PatientSchema({
         "username": "patstuart",
         "password": "password",
@@ -37,10 +38,10 @@ const createPat = async () => {
         "dob": '2000-03-28',
         "email": "pat.stuart@email.com",
         "date_joined": '2021-11-11',
-        "assigned_clinician": '626396cf0af5a9695cca376d'
+        "assigned_clincian": findChris._id
     })
     try {
-      await entry.save().then(()=>console.log("saved pat"))
+      await entry.save().then(()=>console.log("saved pat \n"))
     } catch (error) {
         console.log("Something Broke");
     }
@@ -52,7 +53,7 @@ const generateClinician = async () => {
         .then(async (allClinicians)=> {
 
 
-    for (let int = 0; int < 5000; int++) {
+    for (let int = 0; int < 500; int++) {
         const firstnameIndex = Math.floor(Math.random()*first_names.length)
         const lastnameIndex = Math.floor(Math.random() *last_names.length)      
         if(PatientSchema.find({"username": first_names[firstnameIndex].toLowerCase() + "" + last_names[lastnameIndex].toLowerCase()}) ==null)
@@ -66,7 +67,7 @@ const generateClinician = async () => {
            "dob": (1980 + Math.floor(Math.random() * 42)) + "-" + Math.floor(Math.random() * 12) + "-" + Math.floor(Math.random() * 28),
            "email": first_names[firstnameIndex].toLowerCase() + "." + last_names[lastnameIndex].toLowerCase() + "@email.com",
            "date_joined": '2021-04-11',
-           "assigned_clinician": allClinicians[Math.floor(Math.random()*allClinicians.length)].id
+           "assigned_clincian": allClinicians[Math.floor(Math.random()*allClinicians.length)]._id
        })
         try {
            await entry.save()
