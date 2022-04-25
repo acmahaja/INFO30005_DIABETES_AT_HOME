@@ -47,7 +47,7 @@ const createChris = async () => {
 }
 
 const generateClinician = async () => {
-    for (let int = 0; int < 500; int++) {
+    for (let int = 0; int < 50; int++) {
         const firstnameIndex = Math.floor(Math.random()*first_names.length)
         const lastnameIndex = Math.floor(Math.random() *last_names.length)       
         if(ClincianSchema.find({"username": first_names[firstnameIndex].toLowerCase() + "" + last_names[lastnameIndex].toLowerCase()}) ==null)

@@ -6,10 +6,7 @@ const clinicianController = require('../../controller/clinicianController')
 const {isLoggedIn} = require('../../controller/clinicianController')
 
 
-clinicianRouter.get('/dashboard',isLoggedIn, (req,res)=> {
-    res.render('clincian/dashboard.hbs')
-})
-
+clinicianRouter.get('/dashboard'/*, isLoggedIn*/, clinicianController.loadDashboard)
 
 clinicianRouter.post('/logout', clinicianController.clincianLogout)
 

@@ -78,6 +78,10 @@ body{
     background: #54259F;
 }
 
+#sidebar .profile .name {
+    text-transform: capitalize;
+}
+
 main {
     width: calc(100vw - var(--dashboard-width));
     height: 100%;
@@ -138,7 +142,7 @@ header h1 {
     margin: 1.5em 0em .5em 0em;
     width: 100%;
     background-color: white;
-    border-radius: 3em;
+    border-radius: 1em;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -167,9 +171,77 @@ section {
     height: calc(100% - 7.5em);
 }
 
+.unit-icon {
+    width: 2em;
+    height: 2em;
+}
+
 .patients {
     width: 100%;
+    overflow-y:scroll;
     height: calc(100% - 6em);
     margin-top: 2em;
-    background-color: #442773;
+    background-color: #442773ff;
+    border-radius: 1em;
+    padding: 1em 4.5em 1em 4.5em;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    
+}
+
+.patient {
+    width: 100%;
+    height: 3.5em;
+    color: white;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.5em;
+    line-height: 1.75em;
+    text-transform:capitalize;   
+    border-bottom: solid 5px #5f3a9b;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.patient * {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.patient-name {
+    height: 100%;
+    width: 40%;
+    padding: 0em 0em 0em 1.5em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.patient-name a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.15em;
+}
+
+.patient-pic {
+    height: 2em;
+    width: 2em;
+    border-radius: 50%;
+    border: 4px solid grey;
+    object-fit: cover;
+    margin-right: 1em;
+}
+
+.patient-data {
+    height: 100%;
+    width: 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.15em;
 }

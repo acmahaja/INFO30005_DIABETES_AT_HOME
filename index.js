@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const express = require("express");
 const app = express();
 
@@ -24,10 +25,6 @@ mongoose.connect(
 		dbName: 'diabetes-at-home'
 	}
 ).then(()=> console.log(`Mongo connected to port ${db.host}:${db.port}`))
-
-
-
-
 
 const db = mongoose.connection.on('error', err => {
 	console.error(err)
@@ -71,4 +68,29 @@ app.get('/', (req,res)=>{
 app.listen(process.env.PORT || 3000, ()=>{
 	console.log("Listening on port 3000");
 })
+=======
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 
+dotenv.config({ path: './config.env' });
+const app = require('./app');
+
+const username = process.env.DB_USERNAME;
+const password = process.env.DB_PASSWORD;
+const DB = process.env.DB.replace(
+  '<USERNAME>:<PASSWORD>',
+  `${username}:${password}`
+);
+
+// Connect to Database
+mongoose
+  .connect(DB)
+  .then(() => console.log('MongoDB Connected 🔸 '))
+  .catch(() => console.log('Database connection failed 🟥 '));
+>>>>>>> bf1cf103eb3af2376a1346b5809d6a4ca2d1dbfc
+
+// Create server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`App running on port ${PORT}...`);
+});
