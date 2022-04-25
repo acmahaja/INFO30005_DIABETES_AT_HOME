@@ -4,6 +4,9 @@
   "description": "Diabetes at Home application to help patients and clinicians manage diabetes",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon index.js",
+    "start:prod": "NODE_ENV=production nodemon index.js",
+    "debug": "sudo ndb index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +21,7 @@
   },
   "homepage": "https://github.com/ACmahaja/INFO30005_DIABETES_AT_HOME#readme",
   "dependencies": {
+<<<<<<< HEAD
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
@@ -30,4 +34,30 @@
     "prettier": "^2.6.2"
   },
   "prettier": "prettier --single-quote --no-semi --tab-width 4 --write **/*.js *.js"
+=======
+    "body-parser": "^1.20.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.3",
+    "express-mongo-sanitize": "^2.2.0",
+    "helmet": "^5.0.2",
+    "mongoose": "^6.2.10",
+    "morgan": "^1.10.0",
+    "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.12.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "ndb": "^1.1.5",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.6.2"
+  }
+>>>>>>> bf1cf103eb3af2376a1346b5809d6a4ca2d1dbfc
 }
