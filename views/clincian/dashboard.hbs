@@ -1,9 +1,10 @@
 <title>Clinician Dashboard</title>
-<link rel="stylesheet" href="../css/dashboard.css" />
+<link rel="stylesheet" href="../css/clinican_dashboard.css" />
 
 
 <body>
-  {{> sidebarClinician firstname="Anjaney" lastname="Mahajan" profile-img="https://this-person-does-not-exist.com/img/avatar-e2ba3bde87eee2ff3addbb339508a07d.jpg"}}
+  {{> sidebarClinician this }}
+
   <main>
     <header>
       <h1>Patient Trends</h1>
@@ -14,22 +15,44 @@
         <img src="../icons/search.svg" alt="" class="icon">
         <input type="text" id="search-box" placeholder="Search Bar">
       </div>
-      <table class="patients">
-        <tr>
-          <th>Name</th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
+      <div class="patients">
+      <div class="patient">
+        <div class="patient-name"></div>
+        <div class="patient-data"><img src="../icons/blood-glucose.svg" alt="" class="unit-icon"></div>
+        <div class="patient-data"><img src="../icons/weight.svg" alt="" class="unit-icon"></div>
+        <div class="patient-data"><img src="../icons/insulin.svg" alt="" class="unit-icon"></div>
+        <div class="patient-data"><img src="../icons/steps.svg" alt="" class="unit-icon"></div>
       </div>
+      {{#each patients as | patient_list |}}
+        {{#each patient_list as | patient |}}
+          {{#with patient}}
+              <div class="patient">
+                  <div class="patient-name">
+                    <img src="https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg" alt="patient-pic" class="patient-pic">
+                    {{#each patient }}
+                        <a href="/clinician/trends/{{_id}}">
+                          {{firstname}} {{lastname}}
+                        </a>
+                    {{/each}}
+                  </div>
+                  <div class="patient-data">
+                    7.8 nmo/L
+                  </div>
+                  <div class="patient-data">
+                    75 kg
+                  </div>
+                  <div class="patient-data">
+                    3 doses
+                  </div>
+                  <div class="patient-data">
+                    3000 steps
+                  </div>
+              </div>
+          {{/with}}
+        {{/each}}
+      {{/each}}
+      </div>
+
     </section>
 
 
@@ -49,5 +72,6 @@
   document.getElementById("week_day").innerHTML = week_day + ",";
   document.getElementById("date").innerHTML = day + " " + month + " " + year;
 
+  document.getElementsByClassName("name")
 
 </script>

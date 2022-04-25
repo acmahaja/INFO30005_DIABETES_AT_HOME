@@ -25,10 +25,6 @@ mongoose.connect(
 	}
 ).then(()=> console.log(`Mongo connected to port ${db.host}:${db.port}`))
 
-
-
-
-
 const db = mongoose.connection.on('error', err => {
 	console.error(err)
 	process.exit(1)
