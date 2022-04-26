@@ -22,10 +22,12 @@
   "homepage": "https://github.com/ACmahaja/INFO30005_DIABETES_AT_HOME#readme",
   "dependencies": {
     "body-parser": "^1.20.0",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-handlebars": "^6.0.3",
     "express-mongo-sanitize": "^2.2.0",
+    "express-session": "^1.17.2",
     "helmet": "^5.0.2",
     "mongoose": "^6.2.10",
     "morgan": "^1.10.0",
