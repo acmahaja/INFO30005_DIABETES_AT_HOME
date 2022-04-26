@@ -1,3 +1,6 @@
 node_modules/
 *.env
 package-lock.json
+app.yaml
+env_variables.yaml
+.gcloudignore
