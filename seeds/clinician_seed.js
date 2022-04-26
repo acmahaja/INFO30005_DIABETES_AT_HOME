@@ -8,13 +8,13 @@ console.warn("Dev Environment: " + process.env.NODE_ENV);
 
 mongoose
   .connect(
-    process.env.NODE_ENV === 'production'
+    process.env.NODE_ENV === "production"
       ? process.env.MONGO_URL
-      : 'mongodb+srv://admin:healthy@cluster0.fz5ya.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+      : "mongodb://localhost:27017/diabetes-at-home",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      dbName: 'diabetes-at-home'
+      dbName: "diabetes-at-home",
     }
   )
   .then(() => console.log(`Mongo connected to port ${db.host}:${db.port}`));
@@ -45,7 +45,7 @@ const createChris = async () => {
         "date_joined": '2021-04-11'
     })
     try {
-      await entry.save().then(()=>console.log("saved chris"))
+      await entry.save()
     } catch (error) {
         console.log("Something Broke");
     }
@@ -77,6 +77,6 @@ const generateClinician = async () => {
 
 
 deleteClinician()
-    .then(()=> {createChris()})
-    .then(() => { generateClinician()})
+    .then(()=> {createChris().then(() => console.log("saved chris"));})
+//    .then(() => { generateClinician()})
 

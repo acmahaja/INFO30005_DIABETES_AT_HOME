@@ -48,7 +48,6 @@ const createPat = async () => {
 }
 
 const generateClinician = async () => {
-
     await ClinicianSchema.find({})
         .then(async (allClinicians)=> {
 
@@ -82,5 +81,5 @@ const generateClinician = async () => {
 
 deletePatients()
     .then(()=> {createPat()})
-    .then(() => { generateClinician()})
+//    .then(() => { generateClinician()})
 
