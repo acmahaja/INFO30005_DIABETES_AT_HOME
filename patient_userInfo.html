@@ -5,58 +5,55 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>UserInfo</title>
     <link rel="stylesheet" href="./public/css/style.css" />
-    <link rel="stylesheet" href="./public/css/patient_personal_info.css" />
+    <link rel="stylesheet" href="./public/css/patient_userInfo.css" />
     <link rel="icon" type="image/x-icon" href="./public/images/favicon.png" />
 </head>
 
 
 <body>
-    <div class="blur blur-1"></div>
+    <div class="navigator">
+        <img class="hamburgerIcon" src="./public/images/userInfo/hamburgerIcon.jpg" alt="" />
+        <p> User Info </p>
+        <img src="./public/images/userInfo/profile.jpg" alt="" />
+    </div>
 
+    <div>
+        <img class="profilePhoto" src="./public/images/userInfo/profile.jpg" alt="" />
+    </div>
+
+    <!-- User Information container box -->
     <div class="wrapper">
-        <!-- <div class="navbar">
-            <div class="logo">
-                <img src="./public/images/icon.svg" alt="" />
-            </div> -->
-            <!-- <div class="links">
-                <ul>
-                    <li><a href="/public/about.html">About</a></li>
-                    <li><a href="/public/diabetes.html">Diabetes</a></li>
-                    <li><a class="selected" href="#">Login</a></li>
-                </ul>
-                <ul class="login-links" ogin-links>
-                    <li><a class="selected" href="#">Clinician</a></li>
-                    <li><a href="#">Patient</a></li>
-                </ul>
-            </div> -->
-            <!-- <div class="hamburger-menu">
-                <img src="./public/images/login/hamburger_menu.svg" alt="" />
-            </div>
-        </div> -->
-
-        <!-- <img class="login-image" src="./public/images/login/patient_login_background.svg" alt="" style="max-width:100%;height:auto;" /> -->
-        <div class="patient-userinfo-box" id="patient-userinfo-box">
-            <div class="display-area">
-                <div class="personal_info">
-                    <label class="text">First Name:</label>
-                    <!-- <input class="input-box" type="text" id="username" name="username"> TODO: use output element?-->
-                </div>
-                <div class="personal_info">
-                    <label class="text">Middle Name:</label>
-                    <!-- <input class="input-box" type="text" id="username" name="username"> TODO: use output element?-->
-                </div>
-                <div class="personal_info">
-                    <label class="text">Last Name:</label>
-                    <!-- <input class="input-box" type="text" id="username" name="username"> TODO: use output element?-->
-                </div>
-                <!-- <div class="input">
-                    <label class="text">Password</label>
-                    <input class="input-box" type="text" id="password" name="password">
-                </div> -->
-            </div>
-            <!-- <button class="login-button">Login</button> -->
+        <div class="userInfo">
+            <p> Full Name: </p>
+            <!-- TODO: find a way to display the store data -->
+            <textarea id="fn" name="fn" rows="2" cols="25"> </textarea>
+        </div>
+        <div class="userInfo">
+            <p> Screen Name: </p>
+            <!-- TODO: find a way to display the store data -->
+            <textarea id="fn" name="fn" rows="2" cols="25"> </textarea>
+        </div>
+        <div class="userInfo">
+            <p> Date of Birth: </p>
+            <!-- TODO: find a way to display the store data -->
+            <textarea id="fn" name="fn" rows="2" cols="25"> </textarea>
+        </div>
+        <div class="userInfo">
+            <p> Email: </p>
+            <!-- TODO: find a way to display the store data -->
+            <textarea id="fn" name="fn" rows="2" cols="25"> </textarea>
+        </div>
+        <div class="userInfo">
+            <p> Password: </p>
+            <!-- TODO: find a way to display the store data -->
+            <textarea id="fn" name="fn" rows="2" cols="25"> </textarea>
+        </div>
+        <div class="userInfo">
+            <p> Clinician Name: </p>
+            <!-- TODO: find a way to display the store data -->
+            <textarea id="fn" name="fn" rows="2" cols="25"> </textarea>
         </div>
     </div>
 </body>

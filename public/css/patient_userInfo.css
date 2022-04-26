@@ -1,0 +1,41 @@
+.hamburgerIcon img{
+    display: block;
+    margin-top: 60px;
+    margin-left: 31px;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+
+}
+.navigator p{
+    font-size: 20px;
+    font-family: Raleway;
+    font-weight: 500;
+}
+.navigator img{
+    width: 51px;
+    height: 51px;
+    object-fit: contain;
+}
+.navigator{
+    margin-left: 
+    display: flex;
+    flex-direction: row;
+}
+.profilePhoto{
+    display: block;
+    margin-top: 130px;
+    margin-left: 115px;
+}
+.wrapper{
+    width: 329px;
+    padding-top: : 318px;
+    padding-left: 24px;
+    background-color:  #8A82FF;
+    border-radius: 30px;
+    display: block;
+    margin: 318px 24px auto;
+}
+.wrapper p{
+    color: #FFFFFF;
+}
