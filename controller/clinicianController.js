@@ -4,17 +4,22 @@ const { get_patient_list, get_clinician_id } = require("../utils/utils")
 
 
 const isLoggedIn = (req,res,next)=>{
-	if(req.session.loggedIn && req.session.username != null && req.session.isClinician){
+	if(true || req.session.loggedIn && req.session.username != null && req.session.isClinician){
 		next();
 	} else {
 		res.redirect('login');
 	}
 }
 
+const loadGlucosePage = async (req,res) => {
+	const get_clinician = await get_clinician_id(req.session.username);
+	console.log(get_clinician);
+	res.render('clincian/glucose.hbs', { clinician: get_clinician.toJSON() });
+}
+
 const loadDashboard = async (req,res)=> {
 	const get_clinician = await get_clinician_id(req.session.username);
 	const patient_list = await get_patient_list(get_clinician)
-	console.log(patient_list);
     res.render('clincian/dashboard.hbs', {clinician: get_clinician.toJSON(), patients: {patient_list}})
 }
 
@@ -43,8 +48,9 @@ const clincianLogout = (req,res) => {
 }
 
 module.exports = {
-    clincianLogin,
-    clincianLogout,
-	isLoggedIn,
-	loadDashboard
-}
+  clincianLogin,
+  clincianLogout,
+  isLoggedIn,
+  loadDashboard,
+  loadGlucosePage
+};

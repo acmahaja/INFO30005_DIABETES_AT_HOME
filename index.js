@@ -41,11 +41,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: false }))
 
 app.use(cookieParser());
-app.use(session({
-  resave: false, // don't save session if unmodified
-  saveUninitialized: false, // don't create session until something stored
-  secret: process.env.SESSION_SECRET
-}));
+app.use(
+  session({
+    resave: false, // don't save session if unmodified
+    saveUninitialized: false, // don't create session until something stored
+    secret: process.env.SESSION_SECRET,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 }
+  })
+);
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'))

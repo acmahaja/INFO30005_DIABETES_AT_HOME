@@ -6,7 +6,9 @@ const clinicianController = require('../../controller/clinicianController')
 const {isLoggedIn} = require('../../controller/clinicianController')
 
 
-clinicianRouter.get('/dashboard'/*, isLoggedIn*/, clinicianController.loadDashboard)
+clinicianRouter.get('/trends/:patientID', isLoggedIn, clinicianController.loadGlucosePage)
+
+clinicianRouter.get('/dashboard', isLoggedIn, clinicianController.loadDashboard)
 
 clinicianRouter.post('/logout', clinicianController.clincianLogout)
 
