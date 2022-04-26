@@ -1,20 +1,41 @@
 <title>Patient Trends Glucose</title>
-<link rel="stylesheet" href="/css/clinican_dashboard.css" />
 <link rel='stylesheet' href='/css/clinican_sidebar.css' />
+<link rel="stylesheet" href="/css/clinican_dashboard.css" />
+<link rel="stylesheet" href="/css/clinican_patient_data.css" />
 
 
 <body>
   {{> sidebarClinician this }}
   <main>
     <header>
-      <div>
-        <- Back
+      <div class="return">
+        <img src="/icons/back-icon.svg" alt=""> Back
       </div>
       <h1>Patient Data</h1>
       <div class="day"> <div id="week_day"></div> <div id="date"></div> </div>
     </header>
 
-    <section>
+    <section class="content">
+      <div class="nav patient-options">
+        <div class="tabs">
+          <div class="tab selected">Data</div>
+          <div class="tab">Messages</div>
+          <div class="tab">Notes</div>
+          <div class="tab">Info</div>
+        </div>
+        <div class="content"></div>
+      </div>
+
+      <div class="nav">
+        <div class="tabs">
+          <div class="tab selected">Glucose</div>
+          <div class="tab">Insulin</div>
+          <div class="tab">Weight</div>
+          <div class="tab">Steps</div>
+        </div>
+        <div class="content"></div>
+      </div>
+
     </section>
 
 
@@ -26,7 +47,7 @@
   const week_day = days[date.getDay()];
   const day = date.getDate();
   const month = months[date.getMonth()];
-  const year = date.getYear();
+  const year = date.getFullYear();
 
   document.getElementById("week_day").innerHTML = week_day + ",";
   document.getElementById("date").innerHTML = day + " " + month + " " + year;
