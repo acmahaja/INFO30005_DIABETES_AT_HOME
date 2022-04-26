@@ -6,9 +6,34 @@
 <body>
   {{> sidebarClinician this }}
   <main>
+    <header>
+      <div>
+        <- Back
+      </div>
+      <h1>Patient Data</h1>
+      <div class="day"> <div id="week_day"></div> <div id="date"></div> </div>
+    </header>
 
     <section>
     </section>
+
+
+
+<script>
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  const date =  new Date();
+  const week_day = days[date.getDay()];
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getYear();
+
+  document.getElementById("week_day").innerHTML = week_day + ",";
+  document.getElementById("date").innerHTML = day + " " + month + " " + year;
+
+  document.getElementsByClassName("name")
+
+</script>
 
 
 

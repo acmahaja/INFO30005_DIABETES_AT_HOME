@@ -6,14 +6,18 @@ const { findById } = require("../models/clincian");
 
 console.warn("Dev Environment: " + process.env.NODE_ENV);
 
-mongoose.connect(
-    process.env.NODE_ENV === 'production' ? process.env.MONGO_URL : 'mongodb://localhost:27017/diabetes-at-home',
+mongoose
+  .connect(
+    process.env.NODE_ENV === 'production'
+      ? process.env.MONGO_URL
+      : 'mongodb+srv://admin:healthy@cluster0.fz5ya.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
     {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        dbName: 'diabetes-at-home'
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      dbName: 'diabetes-at-home'
     }
-).then(() => console.log(`Mongo connected to port ${db.host}:${db.port}`))
+  )
+  .then(() => console.log(`Mongo connected to port ${db.host}:${db.port}`));
 
 const db = mongoose.connection.on('error', err => {
     console.error(err)
