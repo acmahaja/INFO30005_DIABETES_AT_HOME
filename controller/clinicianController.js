@@ -26,7 +26,6 @@ const loadDashboard = async (req,res)=> {
 	req.session.username = "chrispatt"
 	let get_clinician = await get_clinician_id(req.session.username);
 	let patient_list = await get_patient_list(get_clinician);
-	var patient_data = [];
 	
 	for (let i = 0; i < patient_list.length; i++) {
 		var patient = patient_list[i];
@@ -64,7 +63,6 @@ const clincianLogin = async (req,res) => {
 }
 
 const clincianLogout = (req,res) => {
-	console.log("logging out person");
     req.session.destroy()
 	res.redirect("/clinician/login")
 }
