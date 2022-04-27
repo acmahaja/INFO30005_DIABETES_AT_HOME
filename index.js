@@ -66,8 +66,10 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'))
 
 const clinicianRouter = require("./routes/clinician/clinicianRouter")
+const patientRouter = require("./routes/patient/patientRouter");
 
 
+app.use("/patient", patientRouter);
 app.use('/clinician', clinicianRouter)
 
 app.get('/diabetes', (req,res)=>{
