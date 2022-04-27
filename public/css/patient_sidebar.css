@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Raleway";
+}
+
+header {
+    height: 5.5vh;
+}
+
+.sidebar-icon {
+    display: none;
+}
+
+.patient-sidebar {
+    height: 100vh;
+    width: 17.2rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding-top: 6vh;
+    background-color: #8A82FF;
+    z-index: 2;
+}
+
+.patient-profile {
+    margin: 0 0 24px;
+}
+
+.patient-profile a {
+    text-decoration: none;
+}
+
+p.patient-name {
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+}
+
+p.patient-name:hover {
+    cursor: pointer;
+}
+
+.patient-sidebar .nav-link {
+    display: flex;
+    height: 60px
+}
+
+.patient-sidebar .nav-link:hover {
+    background-color: #665FC7;
+}
+
+.patient-sidebar .nav-link:focus {
+    background-color: #665fc781;
+}
+
+.patient-sidebar .nav-link p {
+    font-size: 18px;
+    color: #fff;
+    margin: auto 0 auto 20px
+}
+
+
+.patient-sidebar .nav-link img {
+    max-width: 18px;
+    margin-left: 24px
+}
+
+img.patient-photo {
+    border: 5px solid #313162;
+    max-width: 100px;
+    margin-left: 28%;
+    display: block;
+    border-radius: 4px;
+    width: auto;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* img.patient-photo:hover{
+    cursor: pointer;
+} */
+
+
+@media screen and (max-width: 640px) {
+
+    .sidebar-icon {
+        z-index: 3;
+        position: fixed;
+        top: 0vh;
+        height: 45px;
+        margin: 15px;
+    }
+
+    /* .patient-sidebar {
+        display: none;
+    } */
+
+    .sidebar-icon-div {
+        position: relative;
+        top: 0;
+    }
+
+    #sidebar-icon-color {
+        display: block;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+    }
+
+    #sidebar-icon-white {
+        display: none;
+        cursor: pointer;
+    }
+
+    #sidebar-overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 17.2rem;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0);
+        z-index: 1.5;
+        cursor: pointer;
+        align-items: center;
+    }
+
+}
+
+@media screen and (min-width: 640px) {
+
+
+    /* .sidebar-icon-div {
+        display: none;
+    } */
+
+    /* #sidebar {
+         display: block;
+     } */
+
+}

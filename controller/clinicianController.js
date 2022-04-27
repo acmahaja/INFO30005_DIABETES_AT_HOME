@@ -13,7 +13,7 @@ const isLoggedIn = (req,res,next)=>{
 	if(req.session.loggedIn && req.session.username != null && req.session.isClinician){
 		next();
 	} else {
-		res.redirect('login');
+		res.redirect("/clincian/login");
 	}
 }
 

@@ -1,0 +1,135 @@
+{{! <link rel="stylesheet" href="/css/patientSidebar.css" />
+ <link rel="stylesheet" href="/css/style.css" /> }}
+
+<style>
+  #sidebar { display: block; } .sidebar-icon-div { display: none; }
+</style>
+
+<style id="sidebar-style">
+  @media screen and (max-width: 640px) { #sidebar { display: none; }
+  .sidebar-icon-div { display: block; } #sidebar-icon-color { display: block; }
+  #sidebar-icon-white { display: none; } }
+</style>
+
+<div class="sidebar-icon-div">
+  <img
+    id="sidebar-icon-color"
+    class="sidebar-icon"
+    src="/images/sidebar/sidebar-icon-color.png"
+    alt=""
+    onclick="sidebarOn()"
+  />
+  <img
+    id="sidebar-icon-white"
+    class="sidebar-icon"
+    src="/images/sidebar/sidebar-icon-white.png"
+    alt=""
+    onclick="sidebarOff()"
+  />
+</div>
+
+<div id="sidebar" class="patient-sidebar">
+  <div id="sidebar-overlay" onclick="sidebarOff()"></div>
+  <div class="patient-profile">
+    {{! <a href="/patient/info"> }}
+    <img
+      class="patient-photo"
+      src="https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg"
+      alt="profile-pic"
+    />
+    {{! </a> }}
+    <a href="/patient/info"><p class="patient-name">{{firstname}}
+        {{lastname}}</p></a>
+  </div>
+  <div
+    class="nav-link"
+    onclick="location.href='/patient/homepage';"
+    style="cursor: pointer;"
+  >
+    <img src="/images/sidebar/home_black.svg" alt="" />
+    <p>Home</p>
+  </div>
+  <div
+    class="nav-link"
+    onclick="location.href='/patient/dataentry';"
+    style="cursor: pointer;"
+  >
+    <img src="/images/sidebar/add_black.svg" alt="" />
+    <p>New Entry</p>
+  </div>
+  <div
+    class="nav-link"
+    onclick="location.href='/patient/glucose';"
+    style="cursor: pointer;"
+  >
+    <img src="/images/sidebar/home_black.svg" alt="" />
+    <p>Blood Glucose</p>
+  </div>
+  <div
+    class="nav-link"
+    onclick="location.href='/patient/insulin';"
+    style="cursor: pointer;"
+  >
+    <img src="/images/sidebar/home_black.svg" alt="" />
+    <p>Insulin Dose</p>
+  </div>
+  <div
+    class="nav-link"
+    onclick="location.href='/patient/weight';"
+    style="cursor: pointer;"
+  >
+    <img src="/images/sidebar/home_black.svg" alt="" />
+    <p>Weight</p>
+  </div>
+  <div
+    class="nav-link"
+    onclick="location.href='/patient/steps';"
+    style="cursor: pointer;"
+  >
+    <img src="/images/sidebar/home_black.svg" alt="" />
+    <p>Steps</p>
+  </div>
+  <div
+    class="nav-link"
+    onclick="location.href='/patient/awards';"
+    style="cursor: pointer;"
+  >
+    <img src="/images/sidebar/home_black.svg" alt="" />
+    <p>Awards</p>
+  </div>
+  <div
+    class="nav-link"
+    onclick="location.href='/patient/logout';"
+    style="cursor: pointer;"
+  >
+    <img src="/images/sidebar/home_black.svg" alt="" />
+    <p>Log Out</p>
+  </div>
+</div>
+
+<script>
+
+  function sidebarOn() { //document.getElementById("sidebar").style.display =
+  "block"; //document.getElementById("sidebar-icon-color").style.display =
+  "none"; //document.getElementById("sidebar-icon-white").style.display =
+  "block"; //replace #sidebar display value var sidebarStyle =
+  document.getElementById('sidebar-style'); //set sidebar block
+  sidebarStyle.innerHTML =
+  sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar[\S\s]+display:\s)(\S+)(;[\S\s]+\.sidebar[\S\s]+)/,'$1block$3');
+  //set color icon none //sidebarStyle.innerHTML =
+  sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar-icon-color[\S\s]+display:\s)(\S+)(;[\S\s]+white[\S\s]+)/,'$1none$3');
+  //set white icon block sidebarStyle.innerHTML =
+  sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar-icon-white[\S\s]+display:\s)(\S+)(;[\S\s]+)/,'$1block$3');
+  } function sidebarOff() { //document.getElementById("sidebar").style.display =
+  "none"; //document.getElementById("sidebar-icon-white").style.display =
+  "none"; //document.getElementById("sidebar-icon-color").style.display =
+  "block"; //replace #sidebar display value var sidebarStyle =
+  document.getElementById('sidebar-style'); //set sidebar none
+  sidebarStyle.innerHTML =
+  sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar[\S\s]+display:\s)(\S+)(;[\S\s]+\.sidebar[\S\s]+)/,'$1none$3');
+  //set color icon block //sidebarStyle.innerHTML =
+  sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar-icon-color[\S\s]+display:\s)(\S+)(;[\S\s]+white[\S\s]+)/,'$1block$3');
+  //set white icon none sidebarStyle.innerHTML =
+  sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar-icon-white[\S\s]+display:\s)(\S+)(;[\S\s]+)/,'$1none$3');
+  }
+</script>

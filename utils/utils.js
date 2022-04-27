@@ -3,6 +3,17 @@ const ClincianSchema = require("../models/clincian");
 const patientThresholdsSchema = require("../models/patient_thresholds");
 const HealthDataEntry = require("../models/health_data");
 
+const GLUCOSE_ENUM_TYPE = "blood_glucose";
+const WEIGHT_ENUM_TYPE = "weight";
+const INSULIN_ENUM_TYPE = "insulin";
+const STEPS_ENUM_TYPE = "steps";
+const entryTypes = {
+  glucose: GLUCOSE_ENUM_TYPE,
+  insulin: INSULIN_ENUM_TYPE,
+  steps: STEPS_ENUM_TYPE,
+  weight: WEIGHT_ENUM_TYPE,
+};
+
 async function get_patient_list(clincian) {
   if (clincian == null) {
     result = await PatientSchema.find({}).select(
@@ -114,10 +125,50 @@ async function get_patient_data(patient, start_date) {
     };
 }
 
+const getDailyHealthData = async (patientId) => {
+  var now = new Date();
+  var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  var glucoseData = await HealthDataEntry.findOne({
+    for_patient: patientId,
+    health_type: GLUCOSE_ENUM_TYPE,
+    created: { $gte: startOfToday },
+  }).lean();
+
+  var insulinData = await HealthDataEntry.findOne({
+    for_patient: patientId,
+    health_type: INSULIN_ENUM_TYPE,
+    created: { $gte: startOfToday },
+  }).lean();
+
+  var stepsData = await HealthDataEntry.findOne({
+    for_patient: patientId,
+    health_type: STEPS_ENUM_TYPE,
+    created: { $gte: startOfToday },
+  }).lean();
+
+  var weightData = await HealthDataEntry.findOne({
+    for_patient: patientId,
+    health_type: WEIGHT_ENUM_TYPE,
+    created: { $gte: startOfToday },
+  }).lean();
+
+  entries = {
+    glucose: glucoseData,
+    insulin: insulinData,
+    steps: stepsData,
+    weight: weightData,
+  };
+  
+  return entries;
+};
+
+
 module.exports = {
   get_patient_list,
   get_clinician_id,
   generate_random_date,
   get_threshold,
   get_patient_data,
+  getDailyHealthData,
 };
