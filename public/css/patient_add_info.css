@@ -21,6 +21,7 @@
 }
 
 .title {
+    width: 100%;
     font-size: 34px;
     font-weight: 700;
     margin-bottom: 10px
@@ -39,13 +40,14 @@ body {
 }
 
 .wrapper {
+    width: calc(100vw - 17.5em);
     margin: 0px 0 0 19em;
+    padding: 5em 2em;
 }
 
 .day {
     display: flex;
 }
-
 
 .entry-box {
     flex-wrap: wrap;

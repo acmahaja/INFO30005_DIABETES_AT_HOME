@@ -97,8 +97,13 @@ img.patient-photo {
 
 @media screen and (max-width: 640px) {
 
+    body {
+        display: flex;
+        flex-direction: column
+
+    };
+
     .sidebar-icon {
-        z-index: 3;
         position: fixed;
         top: 0vh;
         height: 45px;
@@ -112,7 +117,14 @@ img.patient-photo {
     .sidebar-icon-div {
         position: relative;
         top: 0;
-        
+        width: 100%;
+        height: 2em;
+        padding: 1em;
+    }
+
+    .sidebar-icon-div img {
+        height: 2em;
+        width: 2em;
     }
 
     #sidebar-icon-color {
@@ -124,7 +136,13 @@ img.patient-photo {
 
     #sidebar-icon-white {
         display: none;
+        z-index: 4;
         cursor: pointer;
+        position: absolute;
+        left: 1em;
+        top: 1em;
+        height: 2em;
+        width: 2em;
     }
 
     #sidebar-overlay {
@@ -135,23 +153,15 @@ img.patient-photo {
         left: 17.2rem;
         right: 0;
         bottom: 0;
-        background-color: rgba(0, 0, 0, 0);
+        background-color: rgba(0, 0, 0, .25);
         z-index: 1.5;
         cursor: pointer;
         align-items: center;
     }
-
+    .wrapper {
+        padding: 0em;
+        width: 100vw;
+        height: 100vh;
+    }
 }
 
-@media screen and (min-width: 640px) {
-
-
-    /* .sidebar-icon-div {
-        display: none;
-    } */
-
-    /* #sidebar {
-         display: block;
-     } */
-
-}

@@ -19,17 +19,19 @@
     alt=""
     onclick="sidebarOn()"
   />
-  <img
+  
+</div>
+
+<div id="sidebar" class="patient-sidebar">
+  <div id="sidebar-overlay" onclick="sidebarOff()">
+  </div>
+      <img
     id="sidebar-icon-white"
     class="sidebar-icon"
     src="/icons/sidebar-icon-white.svg"
     alt=""
     onclick="sidebarOff()"
   />
-</div>
-
-<div id="sidebar" class="patient-sidebar">
-  <div id="sidebar-overlay" onclick="sidebarOff()"></div>
   <div class="patient-profile">
     {{! <a href="/patient/info"> }}
     <img

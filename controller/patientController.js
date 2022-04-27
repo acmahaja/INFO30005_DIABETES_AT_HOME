@@ -56,11 +56,11 @@ const getDataEntryPage = async (req, res) => {
     username: req.session.username,
   });
 
-  console.log(this_patient);
 
   const patientsettings = await PatientSettings.findOne({
     for_patient: this_patient._id,
   });
+
 
   entries = await getDailyHealthData(this_patient._id);
 
