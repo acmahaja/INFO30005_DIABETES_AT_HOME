@@ -37,7 +37,8 @@
                 {{#with thresholds}}
                   <div class="patient-data">
                     {{#with blood_result}}
-                      {{#if patient.patient_data}} 
+                      {{log patient.patient_data}}
+                      {{#if patient.patient_data.glucose}} 
                         {{#if (check_range patient.patient_data.glucose.value min_value max_value)}} 
                           {{patient.patient_data.glucose.value}} nmo/L
                         {{else}}
