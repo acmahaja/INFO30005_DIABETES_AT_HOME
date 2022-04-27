@@ -1,6 +1,5 @@
 const PatientSchema = require("../models/patient")
-const healthDataSchema = require("../models/health_data")
-const {generate_random_date} = require("../utils/utils")
+const patientSettingsSchema = require("../models/patient_settings");
 
 const mongoose = require("mongoose");
 const { all } = require("express/lib/application");
@@ -36,7 +35,6 @@ const createHealthData = async () => {
         }
 
     })
-
 }
 
 const deleteHealth = async () => {

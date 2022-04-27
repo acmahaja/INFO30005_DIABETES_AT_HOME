@@ -1,6 +1,12 @@
 const clincian = require("../models/clincian");
+const patient = require("../models/patient");
 const { clinician_authorization} = require("../utils/authorization")
-const { get_patient_list, get_clinician_id } = require("../utils/utils")
+const {
+  get_patient_list,
+  get_clinician_id,
+  get_threshold,
+  get_patient_data,
+} = require("../utils/utils");
 
 
 const isLoggedIn = (req,res,next)=>{
@@ -13,14 +19,29 @@ const isLoggedIn = (req,res,next)=>{
 
 const loadGlucosePage = async (req,res) => {
 	const get_clinician = await get_clinician_id(req.session.username);
-	console.log(get_clinician);
 	res.render('clincian/glucose.hbs', { clinician: get_clinician.toJSON() });
 }
 
 const loadDashboard = async (req,res)=> {
-	const get_clinician = await get_clinician_id(req.session.username);
-	const patient_list = await get_patient_list(get_clinician)
-    res.render('clincian/dashboard.hbs', {clinician: get_clinician.toJSON(), patients: {patient_list}})
+	req.session.username = "chrispatt"
+	let get_clinician = await get_clinician_id(req.session.username);
+	let patient_list = await get_patient_list(get_clinician);
+	var patient_data = [];
+	
+	for (let i = 0; i < patient_list.length; i++) {
+		var patient = patient_list[i];
+		const result = await get_threshold(patient_list[i].id);
+		var thresholds = result;
+		const patient_data = await get_patient_data(
+			patient_list[i].id,
+			new Date(Date.now())
+		);
+		
+		
+		patient = { ...patient._doc, patient_data, thresholds };	
+	}
+	
+    res.render('clincian/dashboard.hbs', {clinician: get_clinician.toJSON(), patients: {patient_data}});
 }
 
 const clincianLogin = async (req,res) => {

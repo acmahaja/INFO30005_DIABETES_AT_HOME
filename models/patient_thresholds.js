@@ -22,4 +22,4 @@ const patientThresholdsSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("PatientSettings", patientThresholdsSchema);
+module.exports = mongoose.model("PatientThrresholds", patientThresholdsSchema);
