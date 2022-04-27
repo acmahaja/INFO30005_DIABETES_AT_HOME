@@ -15,14 +15,14 @@
   <img
     id="sidebar-icon-color"
     class="sidebar-icon"
-    src="/images/sidebar/sidebar-icon-color.png"
+    src="/icons/sidebar-icon-color.svg"
     alt=""
     onclick="sidebarOn()"
   />
   <img
     id="sidebar-icon-white"
     class="sidebar-icon"
-    src="/images/sidebar/sidebar-icon-white.png"
+    src="/icons/sidebar-icon-white.svg"
     alt=""
     onclick="sidebarOff()"
   />
@@ -46,15 +46,15 @@
     onclick="location.href='/patient/homepage';"
     style="cursor: pointer;"
   >
-    <img src="/images/sidebar/home_black.svg" alt="" />
+    <img src="/icons/home.svg" alt="" />
     <p>Home</p>
   </div>
   <div
-    class="nav-link"
+    class="nav-link nav-link-selected"
     onclick="location.href='/patient/dataentry';"
     style="cursor: pointer;"
   >
-    <img src="/images/sidebar/add_black.svg" alt="" />
+    <img src="/icons/add.svg" alt="" />
     <p>New Entry</p>
   </div>
   <div
@@ -62,7 +62,7 @@
     onclick="location.href='/patient/glucose';"
     style="cursor: pointer;"
   >
-    <img src="/images/sidebar/home_black.svg" alt="" />
+    <img src="/icons/blood.svg" alt="" />
     <p>Blood Glucose</p>
   </div>
   <div
@@ -70,7 +70,7 @@
     onclick="location.href='/patient/insulin';"
     style="cursor: pointer;"
   >
-    <img src="/images/sidebar/home_black.svg" alt="" />
+    <img src="/icons/insulin-icon.svg" alt="" />
     <p>Insulin Dose</p>
   </div>
   <div
@@ -78,7 +78,7 @@
     onclick="location.href='/patient/weight';"
     style="cursor: pointer;"
   >
-    <img src="/images/sidebar/home_black.svg" alt="" />
+    <img src="/icons/weight-icon.svg" alt="" />
     <p>Weight</p>
   </div>
   <div
@@ -86,7 +86,7 @@
     onclick="location.href='/patient/steps';"
     style="cursor: pointer;"
   >
-    <img src="/images/sidebar/home_black.svg" alt="" />
+    <img src="/icons/steps-icon.svg" alt="" />
     <p>Steps</p>
   </div>
   <div
@@ -94,7 +94,7 @@
     onclick="location.href='/patient/awards';"
     style="cursor: pointer;"
   >
-    <img src="/images/sidebar/home_black.svg" alt="" />
+    <img src="/icons/awards.svg" alt="" />
     <p>Awards</p>
   </div>
   <div
@@ -102,34 +102,22 @@
     onclick="location.href='/patient/logout';"
     style="cursor: pointer;"
   >
-    <img src="/images/sidebar/home_black.svg" alt="" />
+    <img src="/icons/logout.svg" alt="" />
     <p>Log Out</p>
   </div>
 </div>
 
 <script>
+  function sidebarOn() {
+            var sidebarStyle = document.getElementById('sidebar-style');
+                        sidebarStyle.innerHTML = sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar[\S\s]+display:\s)(\S+)(;[\S\s]+\.sidebar[\S\s]+)/,'$1block$3');
+            sidebarStyle.innerHTML = sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar-icon-white[\S\s]+display:\s)(\S+)(;[\S\s]+)/,'$1block$3');
 
-  function sidebarOn() { //document.getElementById("sidebar").style.display =
-  "block"; //document.getElementById("sidebar-icon-color").style.display =
-  "none"; //document.getElementById("sidebar-icon-white").style.display =
-  "block"; //replace #sidebar display value var sidebarStyle =
-  document.getElementById('sidebar-style'); //set sidebar block
-  sidebarStyle.innerHTML =
-  sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar[\S\s]+display:\s)(\S+)(;[\S\s]+\.sidebar[\S\s]+)/,'$1block$3');
-  //set color icon none //sidebarStyle.innerHTML =
-  sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar-icon-color[\S\s]+display:\s)(\S+)(;[\S\s]+white[\S\s]+)/,'$1none$3');
-  //set white icon block sidebarStyle.innerHTML =
-  sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar-icon-white[\S\s]+display:\s)(\S+)(;[\S\s]+)/,'$1block$3');
-  } function sidebarOff() { //document.getElementById("sidebar").style.display =
-  "none"; //document.getElementById("sidebar-icon-white").style.display =
-  "none"; //document.getElementById("sidebar-icon-color").style.display =
-  "block"; //replace #sidebar display value var sidebarStyle =
-  document.getElementById('sidebar-style'); //set sidebar none
-  sidebarStyle.innerHTML =
-  sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar[\S\s]+display:\s)(\S+)(;[\S\s]+\.sidebar[\S\s]+)/,'$1none$3');
-  //set color icon block //sidebarStyle.innerHTML =
-  sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar-icon-color[\S\s]+display:\s)(\S+)(;[\S\s]+white[\S\s]+)/,'$1block$3');
-  //set white icon none sidebarStyle.innerHTML =
-  sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar-icon-white[\S\s]+display:\s)(\S+)(;[\S\s]+)/,'$1none$3');
+  }
+
+  function sidebarOff() {
+    var sidebarStyle = document.getElementById('sidebar-style');
+    sidebarStyle.innerHTML = sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar[\S\s]+display:\s)(\S+)(;[\S\s]+\.sidebar[\S\s]+)/,'$1none$3');
+    sidebarStyle.innerHTML = sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar-icon-white[\S\s]+display:\s)(\S+)(;[\S\s]+)/,'$1none$3');
   }
 </script>

@@ -28,8 +28,8 @@
 }
 
 #sidebar .profile img {
-    height: 125px;
-    width: 125px;
+    height: 8em;
+    width: 8em;
     border-radius: 50%;
     border: 9px solid #313162;
     object-fit: cover;

@@ -14,7 +14,7 @@ header {
 
 .patient-sidebar {
     height: 100vh;
-    width: 17.2rem;
+    width: 17.5em;
     position: fixed;
     left: 0;
     top: 0;
@@ -32,9 +32,11 @@ header {
 }
 
 p.patient-name {
-    font-size: 24px;
+    font-size: 1.5em;
     color: #fff;
     text-align: center;
+    text-transform: capitalize;
+    line-height: 1em;
 }
 
 p.patient-name:hover {
@@ -43,38 +45,49 @@ p.patient-name:hover {
 
 .patient-sidebar .nav-link {
     display: flex;
-    height: 60px
+    height: 4em;
+    padding: 0em 1em;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.patient-sidebar .nav-link img {
+    height: 100%;
 }
 
 .patient-sidebar .nav-link:hover {
     background-color: #665FC7;
 }
 
-.patient-sidebar .nav-link:focus {
-    background-color: #665fc781;
+.nav-link-selected  {
+    background-color: #665fc7;
 }
 
+
 .patient-sidebar .nav-link p {
-    font-size: 18px;
+    font-size: 1.25em;
     color: #fff;
-    margin: auto 0 auto 20px
+    margin: auto 0 auto 1em
 }
 
 
 .patient-sidebar .nav-link img {
     max-width: 18px;
-    margin-left: 24px
+    margin-left: 24px;
 }
 
 img.patient-photo {
     border: 5px solid #313162;
-    max-width: 100px;
     margin-left: 28%;
     display: block;
     border-radius: 4px;
-    width: auto;
-    height: auto;
+    width: 8em;
+    height: 8em;
+    border-radius: 50%;
+    object-fit: cover;
     margin-bottom: 10px;
+
 }
 
 /* img.patient-photo:hover{
@@ -99,6 +112,7 @@ img.patient-photo {
     .sidebar-icon-div {
         position: relative;
         top: 0;
+        
     }
 
     #sidebar-icon-color {
