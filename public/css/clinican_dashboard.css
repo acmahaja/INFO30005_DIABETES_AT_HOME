@@ -173,3 +173,26 @@ section {
     align-items: center;
     font-size: 1em;
 }
+
+.danger {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    height: 100%;
+    width: 100%;
+
+}
+
+.danger img {
+    height: 1.25em;
+    width: 1.25em;
+    margin-right: .25em;
+}
+
+.warn img {
+    height: 1.25em;
+    width: 1.25em;
+    margin-right: .25em;
+}

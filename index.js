@@ -5,6 +5,12 @@ const path = require("path")
 
 const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
+const Handlebars = require("handlebars");
+
+const {
+  allowInsecurePrototypeAccess,
+} = require("@handlebars/allow-prototype-access");
+
 
 var cookieParser = require('cookie-parser');
 const session = require("express-session")
@@ -30,10 +36,16 @@ const db = mongoose.connection.on('error', err => {
 	process.exit(1)
 })
 
-app.engine('hbs', exphbs.engine({
-	defaultlayout: 'main',
-	extname: '.hbs'
-}));
+app.engine(
+  "hbs",
+  exphbs.engine({
+    defaultlayout: "main",
+    extname: ".hbs",
+    helpers: require('./utils/handlebars-helpers'),
+
+    handlebars: allowInsecurePrototypeAccess(Handlebars),
+  })
+);
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));

@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/ACmahaja/INFO30005_DIABETES_AT_HOME#readme",
   "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.5",
     "body-parser": "^1.20.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.0",

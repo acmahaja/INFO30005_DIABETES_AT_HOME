@@ -5,7 +5,6 @@
 
 <body>
   {{> sidebarClinician this }}
-
   <main>
     <header>
       <h1>Patient Trends</h1>
@@ -24,33 +23,61 @@
         <div class="patient-data"><img src="../icons/insulin.svg" alt="" class="unit-icon"></div>
         <div class="patient-data"><img src="../icons/steps.svg" alt="" class="unit-icon"></div>
       </div>
-      {{#each patients as | patient_list |}}
-        {{#each patient_list as | patient |}}
+      {{#each patients as | patient |}}
           {{#with patient}}
-              <div class="patient">
-                  <div class="patient-name">
-                    <img src="https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg" alt="patient-pic" class="patient-pic">
-                    {{#each patient }}
-                        <a href="/clinician/trends/{{_id}}">
-                          {{firstname}} {{lastname}}
-                        </a>
-                    {{/each}}
+            <div class="patient">
+                <div class="patient-name">
+                  <img src="https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg" alt="patient-pic" class="patient-pic">
+                      <a href="#"
+                      {{!-- href="/clinician/trends/{{_id}}" --}}
+                      >
+                        {{firstname}} {{lastname}}
+                      </a>
+                </div>
+                {{#with thresholds}}
+                  <div class="patient-data">
+                    {{#with blood_result}}
+                      {{#if patient.patient_data}} 
+                        {{#if (check_range patient.patient_data.glucose.value min_value max_value)}} 
+                          {{patient.patient_data.glucose.value}} nmo/L
+                        {{else}}
+                          <div class="danger">
+                            <img src="/icons/danger.svg">
+                            {{patient.patient_data.glucose.value}} nmo/L
+                          </div>
+                        {{/if}}
+                      {{else}}
+                        <div class="warn">
+                            <img src="/icons/warn.svg">
+                          </div>
+                      {{/if}}
+                    {{/with}}
+
                   </div>
                   <div class="patient-data">
-                    7.8 nmo/L
+                    {{#if weight_result}}
+                      Something should go here
+                    {{else}}
+                      -
+                    {{/if}}
                   </div>
                   <div class="patient-data">
-                    75 kg
+                    {{#if insulin_result}}
+                      Something should go here
+                    {{else}}
+                      -
+                    {{/if}}
                   </div>
                   <div class="patient-data">
-                    3 doses
+                    {{#if steps_result}}
+                      Something should go here
+                    {{else}}
+                      -
+                    {{/if}}
                   </div>
-                  <div class="patient-data">
-                    3000 steps
-                  </div>
-              </div>
+                {{/with}}
+            </div>
           {{/with}}
-        {{/each}}
       {{/each}}
       </div>
 
@@ -73,6 +100,6 @@
   document.getElementById("week_day").innerHTML = week_day + ",";
   document.getElementById("date").innerHTML = day + " " + month + " " + year;
 
-  document.getElementsByClassName("name")
+
 
 </script>

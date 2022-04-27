@@ -36,12 +36,13 @@ const loadDashboard = async (req,res)=> {
 			patient_list[i].id,
 			new Date(Date.now())
 		);
-		
-		
 		patient = { ...patient._doc, patient_data, thresholds };	
 	}
 	
-    res.render('clincian/dashboard.hbs', {clinician: get_clinician.toJSON(), patients: {patient_data}});
+    res.render("clincian/dashboard.hbs", {
+      clinician: get_clinician.toJSON(),
+      patients: {patient} ,
+    });
 }
 
 const clincianLogin = async (req,res) => {
