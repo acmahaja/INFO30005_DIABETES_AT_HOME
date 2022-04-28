@@ -17,6 +17,8 @@ patientRouter.post("/dataentry/update/save",patientController.postUpdateHealthDa
 
 patientRouter.post("/login", patientController.patientLogin);
 
+patientRouter.get("/logout", patientController.patientLogout);
+
 patientRouter.get('/login', (req,res)=> {
     res.render('patient/login.hbs')
 })

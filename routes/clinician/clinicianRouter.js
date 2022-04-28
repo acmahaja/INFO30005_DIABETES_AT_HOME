@@ -14,7 +14,7 @@ clinicianRouter.get(
   clinicianController.loadDashboard
 );
 
-clinicianRouter.post('/logout', clinicianController.clincianLogout)
+clinicianRouter.get('/logout', clinicianController.clincianLogout)
 
 clinicianRouter.post('/login', clinicianController.clincianLogin)
 

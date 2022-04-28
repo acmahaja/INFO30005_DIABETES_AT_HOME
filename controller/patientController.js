@@ -83,7 +83,7 @@ const patientLogin = async (req, res) => {
 
 const patientLogout = (req, res) => {
   req.session.destroy();
-  res.redirect("/clinician/login");
+  res.redirect("/patient/login");
 };
 
 const getDataEntryPage = async (req, res) => {

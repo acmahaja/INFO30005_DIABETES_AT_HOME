@@ -51,7 +51,6 @@ const clincianLogin = async (req,res) => {
 	const {username, password} = req.body;
 	const has_user = await clinician_authorization(username, password);
 	if(has_user){
-		req.session.destroy();
 		req.session.loggedIn = true;
 		req.session.username = username;
         req.session.isClinician = true;
