@@ -9,6 +9,9 @@ const patient = require("../../models/patient");
 
 patientRouter.get("/dataentry", patientController.getDataEntryPage);
 
+
+patientRouter.post("/dataentry/add/save", patientController.postAddHealthData);
+
 patientRouter.post("/login", patientController.patientLogin);
 
 patientRouter.get('/login', (req,res)=> {

@@ -24,8 +24,8 @@
                             <p class="entry-value">{{entry.glucose.value}} nmo/L</p>
                             <div class="entry-comment">
                                 <p>Daily comment:</p>
-                                {{#if entry.glucose.comment}}
-                                    <textarea name="text_input" readonly="true" rows="3">{{entry.glucose.comment}}</textarea>
+                                {{#if entry.glucose.comments}}
+                                    <textarea name="text_input" readonly="true" rows="3">{{entry.glucose.comments}}</textarea>
                                 {{else}}
                                     <textarea name="text_input" readonly="true" rows="3"></textarea>
                                 {{/if}}

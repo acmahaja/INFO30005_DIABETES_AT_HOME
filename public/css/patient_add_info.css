@@ -1,368 +1,362 @@
 * {
-    margin: 0;
-    padding: 0;
-    font-family: "Raleway";
+  margin: 0;
+  padding: 0;
+  font-family: "Raleway";
 }
 
 .day {
-    font-size: 22px;
-    font-family: 'Raleway';
-    font-style: normal;
-    font-size: larger;
-    line-height: 26px;
-    display: flex;
-    align-items: center;
+  font-size: 22px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-size: larger;
+  line-height: 26px;
+  display: flex;
+  align-items: center;
 }
 
 .day #week_day {
-    margin-right: 0.5em;
-    font-weight: bold;
-    color: #665FC7;
+  margin-right: 0.5em;
+  font-weight: bold;
+  color: #665fc7;
 }
 
 .title {
-    width: 100%;
-    font-size: 34px;
-    font-weight: 700;
-    margin-bottom: 10px
+  width: 100%;
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
 .subheading {
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 0px;
-    color: #665FC7
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 0px;
+  color: #665fc7;
 }
 
 body {
-    background-color: #e5e5e5;
-    height: 100vh;
+  background-color: #e5e5e5;
+  height: 100vh;
 }
 
 .wrapper {
-    width: calc(100vw - 17.5em);
-    margin: 0px 0 0 19em;
-    padding: 5em 2em;
+  width: calc(100vw - 17.5em);
+  margin: 0px 0 0 19em;
+  padding: 5em 2em;
 }
 
 .wrapper section {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 90%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 90%;
 }
 
 .day {
-    display: flex;
+  display: flex;
 }
 
 .entry-box {
-    flex-wrap: wrap;
-    flex-direction: row;
-    background-color: blue;
+  flex-wrap: wrap;
+  flex-direction: row;
+  background-color: blue;
 }
 
 .flex-entry-container {
-    width: 100%;
-    height: 100%;
-    padding: 2em 0em;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-wrap: wrap;
-
-
+  width: 100%;
+  height: 100%;
+  padding: 2em 0em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .flex-entry-container .entry-flex-item {
-    width: 50%;
-    height: 50%;
-    margin: 0;
-    border-radius: 1em;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 1.25em 1.25em .25em 1.25em  ;
-    background: linear-gradient(180deg, #867FFB 0%, #6861CA 100%);
-    color: white;
+  width: 50%;
+  height: 50%;
+  margin: 0;
+  border-radius: 1em;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 1.25em 1.25em 0.25em 1.25em;
+  background: linear-gradient(180deg, #867ffb 0%, #6861ca 100%);
+  color: white;
 }
 
-
 .entry-flex-item .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2em;
 }
 
 .entry-flex-item .entry-value {
-    width: 100%;
-    font-size: 3.5em;
-    text-align: right;
+  width: 100%;
+  font-size: 3.5em;
+  text-align: right;
 }
 
-.entry-flex-item .entry-comment{
-    width: 100%;
-    height: 45%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+.entry-flex-item .entry-comment {
+  width: 100%;
+  height: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .entry-comment p {
-    font-size: 1.25em;
-    line-height: .25em;
-    margin:  1em 0em;
+  font-size: 1.45em;
+  line-height: 0.25em;
+  margin: 1em 0em;
 }
 
 .entry-comment textarea {
-    height: 75%;
-    width: 100%;
-    border-radius: 1em;
+  height: 75%;
+  width: 100%;
+  border-radius: 1em;
+  font-size: 1.5em;
+  padding: 1em;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .entry-flex-item .input-entry-button {
-    width: 100%;
-    height: 23%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 23%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .input-entry-button button {
-    background: #20C5C2;
-    border: none;
-    padding: .75em 2em;
-    font-weight: 400;
-    font-size: 1.5em;
-    color: white;
-    border-radius: 5em;
+  background: #20c5c2;
+  border: none;
+  padding: 0.75em 2em;
+  font-weight: 400;
+  font-size: 1.5em;
+  color: white;
+  border-radius: 5em;
 }
 
 #overlay {
-    position: fixed;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 2;
-    cursor: pointer;
-    align-items: center;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  cursor: pointer;
+  align-items: center;
 }
 
-#overlay-input-box{
-    width: 56em;
-    height: 30em;
-    background: linear-gradient(180deg, #867FFB 0%, #6861CA 100%);    border-radius: 1.75em;
-    padding: 2em;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+#overlay-input-box {
+  width: 56em;
+  height: 30em;
+  background: linear-gradient(180deg, #867ffb 0%, #6861ca 100%);
+  border-radius: 1.75em;
+  padding: 2em;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
-
 
 #overlay-input-box .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    color: white;
-    font-weight: 600;
-    font-size: 2.5em;
-    height: 2em;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+  font-weight: 600;
+  font-size: 2.5em;
+  height: 2em;
+  width: 100%;
 }
 
 #overlay-input-box .header img {
-    margin-right: .25em;
+  margin-right: 0.25em;
 }
 
 #overlay-input-box .input-post-form {
-    width: 100%;
-    height: calc(100% - 2em);
+  width: 100%;
+  height: calc(100% - 2em);
 }
 
 #input-post-form #value-field {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    color: white;
-    font-size: 1.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: white;
+  font-size: 1.5em;
 }
 
 #input-post-form #value-field * {
-    width: 100%;
+  width: 100%;
 }
 
 #input-post-form #value-field input {
-    height: 1em;
-    margin: .5em 0em;
-    border-radius: 2em;
-    border: none;
-    font-size: 1.25em;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 1em;
+  height: 1em;
+  margin: 0.5em 0em;
+  border-radius: 2em;
+  border: none;
+  font-size: 1.25em;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 1em;
 }
 
 #input-post-form #textarea-field {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    color: white;
-    font-size: 1.5em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: white;
+  font-size: 1.5em;
 }
 
-#input-post-form #textarea-field textarea{
-    width: 100%;
-    height: 4em;
-    border-radius: 1em;
-    margin: .5em 0em;
-    padding: .5em;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    font-size: 1.25em;
+#input-post-form #textarea-field textarea {
+  width: 100%;
+  height: 4em;
+  border-radius: 1em;
+  margin: 0.5em 0em;
+  padding: 0.5em;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 1.25em;
 }
 
 #input-post-form #overlay-buttons {
-    width: 100%;
-    height: 3.5em;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 3.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 #input-post-form #overlay-buttons input {
-    margin: 0em 1em;
-    padding: 0em;
-    text-decoration: none;
-    border: none;
-    font-size: 1.5em;
-    width: 8em;
-    height: 2.5em;
-    color: white;
-    background: #20C5C2;
-    border-radius: 4em;
+  margin: 0em 1em;
+  padding: 0em;
+  text-decoration: none;
+  border: none;
+  font-size: 1.5em;
+  width: 8em;
+  height: 2.5em;
+  color: white;
+  background: #20c5c2;
+  border-radius: 4em;
 }
 
 #input-post-form #overlay-buttons .cancel {
-    background: #1BABA8;
+  background: #1baba8;
 }
 
 @media screen and (max-width: 640px) {
+  header {
+    display: none;
+  }
 
-    header {
-        display: none;
-    }
+  .wrapper {
+    margin: 0 0 0 1.5em;
+  }
 
-    .wrapper {
-        margin: 0 0 0 1.5em;
-    }
+  .entry-flex-item {
+    padding: 2px;
+    width: 48%;
+    min-width: 10em;
+    height: 8em;
+    /* margin-right: 3%; */
+    /* margin-top: 1.5%; */
+    margin-bottom: 5%;
+    line-height: 100px;
+    color: white;
+    /* font-weight: bold; */
+    font-size: 2em;
+    text-align: center;
+    background: linear-gradient(180deg, #867ffb 0%, #6861ca 100%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 9px;
+  }
 
-    .entry-flex-item {
-        padding: 2px;
-        width: 48%;
-        min-width: 10em;
-        height: 8em;
-        /* margin-right: 3%; */
-        /* margin-top: 1.5%; */
-        margin-bottom: 5%;
-        line-height: 100px;
-        color: white;
-        /* font-weight: bold; */
-        font-size: 2em;
-        text-align: center;
-        background: linear-gradient(180deg, #867FFB 0%, #6861CA 100%);
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 9px;
-    }
+  .entry-flex-item .entry-value {
+    position: relative;
+    top: 0.4rem;
+    right: 3%;
+    font-size: 88%;
+    width: 100%;
+    text-align: right;
+    line-height: 2ex;
+  }
 
+  .entry-flex-item .entry-name {
+    position: relative;
+    top: 4%;
+    font-size: 71%;
+    width: 100%;
+    text-align: left;
+    padding-left: 2em;
+    line-height: 100%;
+    font-weight: bold;
+    margin-bottom: 3vh;
+  }
 
-    .entry-flex-item .entry-value {
-        position: relative;
-        top: 0.4rem;
-        right: 3%;
-        font-size: 88%;
-        width: 100%;
-        text-align: right;
-        line-height: 2ex;
-    }
+  .entry-flex-item .entry-comment {
+    width: 76%;
+    margin-inline: auto;
+    position: relative;
+    top: 0.7rem;
+  }
 
+  .entry-flex-item textarea {
+    resize: none;
+    width: 96%;
+    border-radius: 6px;
+    border: none;
+    padding: 5px;
+  }
 
-    .entry-flex-item .entry-name {
-        position: relative;
-        top: 4%;
-        font-size: 71%;
-        width: 100%;
-        text-align: left;
-        padding-left: 2em;
-        line-height: 100%;
-        font-weight: bold;
-        margin-bottom: 3vh;
-    }
+  #overlay-input-box #value-field {
+    position: relative;
+    top: 1vh;
+    margin: auto;
+    width: 89%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    border-radius: 6px;
+    border: none;
+  }
 
+  #textarea-field {
+    position: relative;
+    top: -4vh;
+  }
 
-    .entry-flex-item .entry-comment {
-        width: 76%;
-        margin-inline: auto;
-        position: relative;
-        top: 0.7rem;
-    }
-
-    .entry-flex-item textarea {
-        resize: none;
-        width: 96%;
-        border-radius: 6px;
-        border: none;
-        padding: 5px;
-    }
-
-    #overlay-input-box #value-field {
-        position: relative;
-        top: 1vh;
-        margin: auto;
-        width: 89%;
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        border-radius: 6px;
-        border: none;
-    }
-
-    #textarea-field {
-        position: relative;
-        top: -4vh;
-    }
-
-    #overlay-input-box #overlay-buttons {
-        display: flex;
-        justify-content: space-evenly;
-        width: 100%;
-        margin: auto;
-        top: -1vh;
-        position: relative;
-    }
-
-
+  #overlay-input-box #overlay-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: auto;
+    top: -1vh;
+    position: relative;
+  }
 }
-
-

@@ -1,6 +1,7 @@
 const ClincianSchema = require("../models/clincian");
 const PatientSchema = require("../models/patient");
 const patientSettingsSchema = require("../models/patient_settings");
+const HealthDataEntry = require("../models/health_data");
 const { patient_authorization } = require("../utils/authorization");
 const { getDailyHealthData } = require("../utils/utils");
 
@@ -14,6 +15,43 @@ const entryTypes = {
   steps: STEPS_ENUM_TYPE,
   weight: WEIGHT_ENUM_TYPE,
 };
+
+
+
+const postAddHealthData = async (req, res) => {
+  var this_user = req.body["user_id"];
+  var health_type = req.body["health_type"];
+  var value = req.body["data_input"];
+  var comment = req.body["text_input"];
+
+  console.log(req.body);
+
+  const newHealthData = new HealthDataEntry({
+    to_patient: this_user,
+    health_type: health_type,
+    value: value,
+    comments: comment,
+    created: Date.now(),
+    updated: Date.now(),
+  });
+
+  console.log(newHealthData);
+
+  await newHealthData
+    .save()
+
+    .catch((err) => {
+      console.log(err);
+    });
+  newEntry = await HealthDataEntry.findOne(
+    { this_patient: this_user, health_type: health_type },
+    {},
+    { sort: { created: -1 } }
+  )
+  res.redirect("/patient/dataentry");
+};
+
+
 
 const isLoggedIn = (req, res, next) => {
   if (
@@ -78,4 +116,5 @@ module.exports = {
   patientLogout,
   isLoggedIn,
   getDataEntryPage,
+  postAddHealthData,
 };
