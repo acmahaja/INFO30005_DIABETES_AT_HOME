@@ -1,4 +1,4 @@
-const PatientSchema = require("../models/patient")
+const PatientSchema = require("../models/patient");
 const patientSettingsSchema = require("../models/patient_settings");
 
 const mongoose = require("mongoose");
@@ -6,62 +6,46 @@ const { all } = require("express/lib/application");
 
 console.warn("Dev Environment: " + process.env.NODE_ENV);
 
-mongoose.connect(
-    process.env.NODE_ENV === 'production' ? process.env.MONGO_URL : 'mongodb://localhost:27017/diabetes-at-home',
+mongoose
+  .connect(
+    "mongodb+srv://admin:healthy@cluster0.fz5ya.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
     {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        dbName: 'diabetes-at-home'
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      dbName: "diabetes-at-home",
     }
-).then(() => console.log(`Mongo connected to port ${db.host}:${db.port}`))
+  )
+  .then(() => console.log(`Mongo connected to port ${db.host}:${db.port}`));
 
-const db = mongoose.connection.on('error', err => {
-    console.error(err)
-    process.exit(1)
-})
+const db = mongoose.connection.on("error", (err) => {
+  console.error(err);
+  process.exit(1);
+});
 
+const createPatPatientSettings = async () => {
+  const patient = await PatientSchema.findOne({
+    username: "patstuart",
+  });
+  const new_data = new patientSettingsSchema({
+    for_patient: patient._id,
+    requires_glucose: true,
+    requires_steps: false,
+    requires_weight: false,
+    requires_insulin: false,
+  });
+  await new_data.save().then(()=> {console.log("saved pats settings");});
+};
 
-const createHealthData = async () => {
-    const all_patients = await PatientSchema.find({});
-    all_patients.forEach(async (patient)=>{
-        for (let i = 0; i < 500; i++) {
-            const new_data = new healthDataSchema({
-                "patient_id": patient._id,
-                "health_type": 'blood_glucose',
-                "value": Math.random()*80+140,
-                "created": generate_random_date(new Date(2012, 0, 1), new Date(Date.now()))
-            });
-            await new_data.save();
-        }
+const deletePatientSettings = async () => {
+  const entries = await patientSettingsSchema.find({});
+  entries.forEach(
+    async (entry) => await patientSettingsSchema.findByIdAndRemove(entry.id)
+  );
+};
 
-    })
-}
-
-const deleteHealth = async () => {
-    const entries = await healthDataSchema.find({})
-//    entries.forEach(
-//        async (entry) => await healthDataSchema.findByIdAndRemove(entry.id)
-//        )
-}
-
-const createPatHealthData = async () => {
-    const findPat = await PatientSchema.findOne({ username: "patstuart" });
-    const entry = await healthDataSchema({
-      patient_id: findPat._id,
-      health_type: "blood_glucose",
-      value: 199,
-      created: Date.now(),
-      comments: "This is a comment",
-    });
-    try {
-        await entry.save().then(() => console.log("saved threshold \n"));
-    } catch (error) {
-        console.log("Something Broke");
-        console.log(error);
-    }
-
-}
-
-deleteHealth().then(()=> {console.log("cleared patient db")})
-    .then(()=> createPatHealthData()).then(()=> {console.log("Added Patt data")})
-    // .then(() => createHealthData().then(()=> {console.log("generated data");}));
+deletePatientSettings()
+  .then(() => {
+    console.log("cleared patient settings db");
+  })
+  .then(() => createPatPatientSettings());
+// .then(() => createHealthData().then(()=> {console.log("generated data");}));

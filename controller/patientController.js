@@ -59,7 +59,7 @@ const isLoggedIn = (req, res, next) => {
   ) {
     next();
   } else {
-    res.redirect("login");
+    res.redirect("/patient/logout");
   }
 };
 
