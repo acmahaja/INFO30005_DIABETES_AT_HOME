@@ -7,6 +7,7 @@ const {isLoggedIn} = require('../../controller/patientController');
 const patient = require("../../models/patient");
 
 
+patientRouter.get("/dashboard", patientController.loadDashboard);
 patientRouter.get("/dataentry", patientController.getDataEntryPage);
 
 

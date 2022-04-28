@@ -51,8 +51,6 @@ const postAddHealthData = async (req, res) => {
   res.redirect("/patient/dataentry");
 };
 
-
-
 const isLoggedIn = (req, res, next) => {
   if (
     req.session.loggedIn &&
@@ -158,6 +156,13 @@ const postUpdateHealthData = async (req, res) => {
   res.redirect("/patient/dataentry");
 };
 
+const loadDashboard = async (req,res)=> {
+  req.session.username = "patstuart";
+  const patient_info = await PatientSchema.findOne({username: req.session.username})
+  res.render("patient/dashboard", {patient: patient_info});
+}
+
+
 module.exports = {
   patientLogin,
   patientLogout,
@@ -165,4 +170,5 @@ module.exports = {
   getDataEntryPage,
   postAddHealthData,
   postUpdateHealthData,
+  loadDashboard
 };

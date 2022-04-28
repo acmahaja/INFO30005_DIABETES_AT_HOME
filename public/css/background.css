@@ -1,6 +1,6 @@
 .blur {
   background: #e8cff8;
-  filter: blur(500px);
+  filter: blur(100px);
   border-radius: 40%;
   z-index: -1;
 }

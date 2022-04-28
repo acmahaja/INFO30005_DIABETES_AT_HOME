@@ -1,0 +1,60 @@
+<title>Patient Dashboard</title>
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/patient_dashboard.css" />
+<link rel="stylesheet" href="/css/patient_sidebar.css" />
+
+
+<body>
+    {{> sidebarPatient firstname=patient.firstname lastname=patient.lastname profile-img="https://assets.website-files.com/5746d4c4a3e009bb4d9ac858/5a2ef695e43cca0001193a33_Profile.jpg"}}
+    <section class="wrapper">
+        <div class="user-data">
+            <p class="title">My Dashboard</p>
+            <p class="subheading"><div class="day"> <div id="week_day"></div> <div id="date"></div> </div></p>
+            <div class="welcome gradient-background">
+                <div class="welcome-message">Welcome {{patient.firstname}}</div>
+                <div class="sub-message">View your data below</div>
+            </div>
+            
+            <div class="trends">
+                <h2 class="subheading">Your Trends</h2>
+            </div>
+            <div class="latest-trends">
+
+            </div>
+        </div>
+        <div class="social-data">
+            <h1 class="title ">Social</h1>
+            <div class="badges">
+                <h2 class="subheading ">Your Badges</h2>
+                <div class="badges-list gradient-background">
+                </div>
+            </div>
+            <div class="engagement">
+                <h2 class="subheading ">Your Engagement</h2>
+                <div class="engagement-list gradient-background">
+                </div>
+            </div>
+            <div class="league">
+                <h2 class="subheading ">Your League</h2>
+                <div class="league-list gradient-background">
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+
+
+<script>
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  date =  new Date();
+  week_day = days[date.getDay()];
+  day = date.getDate();
+  month = months[date.getMonth()];
+  year = date.getFullYear();
+
+  document.getElementById("week_day").innerHTML = week_day + ", ";
+  document.getElementById("date").innerHTML = day + " " + month + " " + year;
+</script>
