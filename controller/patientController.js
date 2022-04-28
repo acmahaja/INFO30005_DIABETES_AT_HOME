@@ -111,10 +111,58 @@ const getDataEntryPage = async (req, res) => {
   });
 };
 
+const postUpdateHealthData = async (req, res) => {
+  var this_user = req.body["user_id"];
+  var health_type = req.body["health_type"];
+  var value = req.body["data_input"];
+  var comment = req.body["text_input"];
+
+  if (value != "" || comment != "") {
+    var filter = {
+      to_patient: this_user,
+      health_type: health_type,
+    };
+
+    if (comment == "") {
+      var update = {
+        value: value,
+        updated: Date.now(),
+      };
+    } else if (value == "") {
+      var update = {
+        comments: comment,
+        updated: Date.now(),
+      };
+    } else {
+      var update = {
+        value: value,
+        comments: comment,
+        updated: Date.now(),
+      };
+    }
+    var options = { sort: { created: -1 } };
+
+    prevEntry = await HealthDataEntry.findOne(filter, {}, options).lean();
+
+    await HealthDataEntry.findOneAndUpdate(filter, update, options)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    updatedEntry = await HealthDataEntry.findOne(filter, {}, options).lean();
+  }
+  //res.redirect('back')
+  res.redirect("/patient/dataentry");
+};
+
 module.exports = {
   patientLogin,
   patientLogout,
   isLoggedIn,
   getDataEntryPage,
   postAddHealthData,
+  postUpdateHealthData,
 };

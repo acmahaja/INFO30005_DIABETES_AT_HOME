@@ -11,6 +11,8 @@ patientRouter.get("/dataentry", patientController.getDataEntryPage);
 
 
 patientRouter.post("/dataentry/add/save", patientController.postAddHealthData);
+patientRouter.post("/dataentry/update/save",patientController.postUpdateHealthData);
+
 
 patientRouter.post("/login", patientController.patientLogin);
 
