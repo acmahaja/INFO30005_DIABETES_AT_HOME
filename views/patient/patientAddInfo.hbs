@@ -11,22 +11,15 @@
     <section class="wrapper">
         <p class="title">New Entry</p>
         <p class="subheading"><div class="day"> <div id="week_day"></div> <div id="date"></div> </div></p>
-
-        
         <section>
-            <div class="flex-entry-container">
-                <div class="entry-box">
-
-                </div>
-            </div>
-            
-            <ul class="flex-entry-container wrap">
-                {{!-- {{log this}} --}}
+            <div class="flex-entry-container wrap">
                 {{!-- GLUCOSE BOX --}}
                 {{#if patientsettings.requires_glucose}}
                     <div class="entry-flex-item">
-                        <img class="entry-img" src="/images/sidebar/home_black.svg" alt="">
-                        <p class="entry-name">Blood Glucose</p>
+                        <div class="header">
+                            <img class="entry-img" src="/icons/blood-glucose.svg" alt="">
+                            <p class="entry-name">Blood Glucose</p>
+                        </div>
                         {{#if entry.glucose}}
                             <p class="entry-value">{{entry.glucose.value}} nmo/L</p>
                             <div class="entry-comment">
@@ -39,114 +32,26 @@
                             </div>
                                     <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
                                     <input id="data-field" type="hidden" name="health_type" value={{entrytypes.glucose}}>
-                                  <button class="input-entry-button" onclick="overlayOn('update', '{{patient._id}}', '{{entrytypes.glucose}}')">Update Entry</button>
+                            <div class="input-entry-button">
+                                <button class="" onclick="overlayOn('update', '{{patient._id}}', '{{entrytypes.glucose}}')">Update Entry</button>
+                            </div>
 
                         {{else}}
-                        <p class="entry-value">---</p>
+                            <p class="entry-value">---</p>
                             <div class="entry-comment">
                                 <p>Daily comment:</p>
                                 <textarea name="text_input" readonly="true" rows="3"></textarea>
                             </div>
                                 <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
                                 <input id="data-field" type="hidden" name="health_type" value={{entrytypes.glucose}}>
-                                <button class="input-entry-button" onclick="overlayOn('add', '{{patient._id}}', '{{entrytypes.glucose}}')">Add Entry</button>
+                                <div class="input-entry-button">
+                                    <button onclick="overlayOn('add', '{{patient._id}}', '{{entrytypes.glucose}}')">Add Entry</button>
+                                </div>
                         {{/if}}
                     </div>
                 {{/if}}
 
-                {{!-- INSULIN BOX --}}
-                {{#if patientsettings.requires_insulin}}
-                    <div class="entry-flex-item">
-                        <img class="entry-img" src="/images/sidebar/home_black.svg" alt="">
-                        <p class="entry-name">Insulin</p>
-                        {{#if entry.insulin}}
-                            <p class="entry-value">{{entry.insulin.value}} doses</p>
-                            <div class="entry-comment">
-                                <p>Daily comment:</p>
-                                {{#if entry.insulin.comment}}
-                                    <textarea name="text_input" readonly="true" rows="3">{{entry.insulin.comment}}</textarea>
-                                {{else}}
-                                    <textarea name="text_input" readonly="true" rows="3"></textarea>
-                                {{/if}}
-                            </div>
-                                <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
-                                <input id="data-field" type="hidden" name="health_type" value={{entrytypes.insulin}}>
-                                <button class="input-entry-button" onclick="overlayOn('update', '{{patient._id}}', '{{entrytypes.insulin}}')">Update Entry</button>
-                        {{else}}
-                        <p class="entry-value">---</p>
-                            <div class="entry-comment">
-                                <p>Daily comment:</p>
-                                <textarea name="text_input" readonly="true" rows="3"></textarea>
-                            </div>
-                                <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
-                                <input id="data-field" type="hidden" name="health_type" value={{entrytypes.insulin}}>
-                                <button class="input-entry-button" onclick="overlayOn('add', '{{patient._id}}', '{{entrytypes.insulin}}')">Add Entry</button>
-                        {{/if}}
-                    </div>
-                {{/if}}
-
-                {{!-- WEIGHT BOX --}}
-                {{#if patientsettings.requires_weight}}
-                    <div class="entry-flex-item">
-                        <img class="entry-img" src="/images/sidebar/home_black.svg" alt="">
-                        <p class="entry-name">Weight</p>
-                        {{#if entry.weight}}
-                            <p class="entry-value">{{entry.weight.value}} kg</p>
-                            <div class="entry-comment">
-                                <p>Daily comment:</p>
-                                {{#if entry.weight.comment}}
-                                    <textarea name="text_input" readonly="true" rows="3">{{entry.weight.comment}}</textarea>
-                                {{else}}
-                                    <textarea name="text_input" readonly="true" rows="3"></textarea>
-                                {{/if}}
-                            </div>
-                                <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
-                                <input id="data-field" type="hidden" name="health_type" value={{entrytypes.weight}}>
-                                <button class="input-entry-button" onclick="overlayOn('update', '{{patient._id}}', '{{entrytypes.weight}}')">Update Entry</button>
-                        {{else}}
-                        <p class="entry-value">---</p>
-                            <div class="entry-comment">
-                                <p>Daily comment:</p>
-                                <textarea name="text_input" readonly="true" rows="3"></textarea>
-                            </div>
-                                <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
-                                <input id="data-field" type="hidden" name="health_type" value={{entrytypes.weight}}>
-                                <button class="input-entry-button" onclick="overlayOn('add', '{{patient._id}}', '{{entrytypes.weight}}')">Add Entry</button>
-                        {{/if}}
-                    </div>
-                {{/if}}
-
-                {{!-- STEPS BOX --}}
-                {{#if patientsettings.requires_steps}}
-                    <div class="entry-flex-item">
-                        <img class="entry-img" src="/images/sidebar/home_black.svg" alt="">
-                        <p class="entry-name">Steps</p>
-                        {{#if entry.steps}}
-                            <p class="entry-value">{{entry.steps.value}} steps</p>
-                            <div class="entry-comment">
-                                <p>Daily comment:</p>
-                                {{#if entry.steps.comment}}
-                                    <textarea name="text_input" readonly="true" rows="3">{{entry.steps.comment}}</textarea>
-                                {{else}}
-                                    <textarea name="text_input" readonly="true" rows="3"></textarea>
-                                {{/if}}
-                            </div>
-                                <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
-                                <input id="data-field" type="hidden" name="health_type" value={{entrytypes.steps}}>
-                                <button class="input-entry-button" onclick="overlayOn('update', '{{patient._id}}', '{{entrytypes.steps}}')">Update Entry</button>
-                        {{else}}
-                        <p class="entry-value">---</p>
-                            <div class="entry-comment">
-                                <p>Daily comment:</p>
-                                <textarea name="text_input" readonly="true" rows="3"></textarea>
-                            </div>
-                                <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
-                                <input id="data-field" type="hidden" name="health_type" value={{entrytypes.steps}}>
-                                <button class="input-entry-button" onclick="overlayOn('add', '{{patient._id}}', '{{entrytypes.steps}}')">Add Entry</button>
-                        {{/if}}
-                    </div>
-                {{/if}}
-            </ul>
+            </div>
         </section>
     </section>
 
