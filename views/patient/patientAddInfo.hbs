@@ -12,9 +12,8 @@
         <p class="title">New Entry</p>
         <p class="subheading"><div class="day"> <div id="week_day"></div> <div id="date"></div> </div></p>
         <section>
-            <div class="flex-entry-container wrap">
-                {{!-- GLUCOSE BOX --}}
-                {{#if patientsettings.requires_glucose}}
+            {{#if patientsettings.requires_glucose}}
+                <div class="flex-entry-container wrap">
                     <div class="entry-flex-item">
                         <div class="header">
                             <img class="entry-img" src="/icons/blood-glucose.svg" alt="">
@@ -48,8 +47,8 @@
                                     <button onclick="overlayOn('add', '{{patient._id}}', '{{entrytypes.glucose}}')">Add Entry</button>
                                 </div>
                         {{/if}}
-                    </div>
-                {{/if}}
+                </div>
+            {{/if}}
 
             </div>
         </section>
