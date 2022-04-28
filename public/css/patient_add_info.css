@@ -99,7 +99,7 @@ body {
 
 .entry-flex-item .entry-value {
     width: 100%;
-    font-size: 4.5em;
+    font-size: 3.5em;
     text-align: right;
 }
 
@@ -145,12 +145,12 @@ body {
     border-radius: 5em;
 }
 
-
-
-
 #overlay {
     position: fixed;
-    display: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
     top: 0;
@@ -163,133 +163,110 @@ body {
     align-items: center;
 }
 
-#overlay-input-box {
-    cursor: auto;
-    margin: auto;
-    height: 22rem;
-    border-radius: 6px;
-    border: none;
+#overlay-input-box{
+    width: 56em;
+    height: 30em;
+    background: linear-gradient(180deg, #867FFB 0%, #6861CA 100%);    border-radius: 1.75em;
+    padding: 2em;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-#overlay-input-box .entry-name {
-    position: relative;
-    top: 0.8em;
-    font-size: 80%;
-    width: 100%;
-    text-align: left;
-    padding-left: 6%;
-    line-height: 100%;
-    font-weight: bold;
-    
-}
 
-#overlay-input-box #value-field {
-    position: relative;
-    top: 7.2vh;
-    margin: auto;
-    width: 89%;
+#overlay-input-box .header {
     display: flex;
-    align-items: center;
     flex-direction: row;
-    border-radius: 6px;
-    border: none;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+    font-weight: 600;
+    font-size: 2.5em;
+    height: 2em;
+    width: 100%;
 }
 
-#value-field-anchor {
-    position: absolute;
-    top: -28%;
-    font-size: 1.2rem;
+#overlay-input-box .header img {
+    margin-right: .25em;
 }
 
-#textarea-field {
-    position: relative;
+#overlay-input-box .input-post-form {
+    width: 100%;
+    height: calc(100% - 2em);
 }
 
-#textarea-anchor {
-    position: absolute;
-    top: -8%;
-    font-size: 1.2rem;
-}
-
-#overlay-input-box textarea {
-    width: 87.5%;
-    position: relative;
-    top: 7.5vh;
-    border-radius: 6px;
-    border: none;
-    border-radius: 6px;
-    border: none;
-    padding-block-start: 5px;
-}
-
-#overlay-input-box #data-input-unit {
-    white-space: pre;
-}
-
-#overlay-input-box #overlay-buttons {
+#input-post-form #value-field {
     display: flex;
-    justify-content: space-evenly;
-    width: 80%;
-    margin: auto;
-    top: 1vh;
-    position: relative;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    color: white;
+    font-size: 1.5em;
 }
 
-#overlay input[type="submit"] {
-    padding: 5px 15px;
-    background: #20C5C2;
-    border: None;
-    cursor: pointer;
-    border-radius: 8px;
-    color: #FFFFFF;
-    font-size: 1.3rem;
-    top: 2rem;
-    position: relative;
-    height: 2.1em;
-    width: 32%;
+#input-post-form #value-field * {
+    width: 100%;
 }
 
-#overlay input[type="submit"]:hover {
-    background: #20c5c2b6
-}
-
-#overlay input[type="button"] {
-    padding: 5px 15px;
-    background: #20C5C2;
-    border: None;
-    cursor: pointer;
-    border-radius: 8px;
-    color: #FFFFFF;
-    font-size: 1.3rem;
-    top: 2rem;
-    position: relative;
-    height: 2.1em;
-    width: 32%;
-}
-
-#overlay input[type="button"]:hover {
-    background: #20c5c2b6
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-    font-size: 1.3rem;
-}
-
-/* Firefox */
-input[type="number"] {
-    -moz-appearance: textfield;
-    font-size: 1.3rem;
-    width: 80%;
-    border-radius: 6px;
+#input-post-form #value-field input {
+    height: 1em;
+    margin: .5em 0em;
+    border-radius: 2em;
     border: none;
-    z-index: 3;
-    padding: 3px;
+    font-size: 1.25em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 1em;
 }
 
+#input-post-form #textarea-field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: white;
+    font-size: 1.5em;
+}
 
+#input-post-form #textarea-field textarea{
+    width: 100%;
+    height: 4em;
+    border-radius: 1em;
+    margin: .5em 0em;
+    padding: .5em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 1.25em;
+}
+
+#input-post-form #overlay-buttons {
+    width: 100%;
+    height: 3.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#input-post-form #overlay-buttons input {
+    margin: 0em 1em;
+    padding: 0em;
+    text-decoration: none;
+    border: none;
+    font-size: 1.5em;
+    width: 8em;
+    height: 2.5em;
+    color: white;
+    background: #20C5C2;
+    border-radius: 4em;
+}
+
+#input-post-form #overlay-buttons .cancel {
+    background: #1BABA8;
+}
 
 @media screen and (max-width: 640px) {
 

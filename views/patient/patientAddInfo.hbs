@@ -55,11 +55,13 @@
         </section>
     </section>
 
-
     {{!-- OVERLAY --}}
     <div id="overlay" onclick="overlayOff()">
         <div class="entry-flex-item", id="overlay-input-box">
-            <p id="overlay-entry-name" class="entry-name">Blood Glucose</p>
+            <div class="header">
+                <img class="entry-img" src="/icons/blood-glucose.svg" alt="">
+                <p class="entry-name">Blood Glucose</p>
+            </div>
             <form id="input-post-form" method="post" action="">
                 <div id="value-field">
                     <a id="value-field-anchor">New Entry:</a>
@@ -68,14 +70,14 @@
                 </div>
                 <div id="textarea-field">
                     <a id="textarea-anchor">Daily Comment:</a>
-                    <textarea rows="4" cols="26" name="text_input"></textarea>
+                    <textarea name="text_input"></textarea>
                 </div>
                 <input id="overlay-operation-info" type="hidden" name="operation" value="">
                 <input id="overlay-data-field-userid" type="hidden" name="user_id">
                 <input id="overlay-data-field-healthtype" type="hidden" name="health_type" >
                 <div id="overlay-buttons">
                     <input id="overlay-submit-button" type="Submit" value="" onclick="checkValueInput()">
-                    <input type="button" value="Cancel" onclick="overlayOff()">
+                    <input type="button" class="cancel" value="Cancel" onclick="overlayOff()">
                 </div>
             </form>
         </div>
@@ -96,12 +98,12 @@
         formElement = document.getElementById("input-post-form");
         if(call == "add") {
             formElement.action = "/patient/dataentry/add/save"
-            document.getElementById("overlay-submit-button").value = "Add"
+            document.getElementById("overlay-submit-button").value = "Add Entry"
             document.getElementById("overlay-operation-info").value = "add"
         }
         else {
             formElement.action = "/patient/dataentry/update/save"
-            document.getElementById("overlay-submit-button").value = "Update"
+            document.getElementById("overlay-submit-button").value = "Update Entry"
             document.getElementById("overlay-operation-info").value = "update"
         }
 
@@ -141,6 +143,7 @@
             alert("Please input a value to record a new data entry!")
         }
     }
+    overlayOff()
 </script>
 
 {{!-- DATE SCRIPT --}}
