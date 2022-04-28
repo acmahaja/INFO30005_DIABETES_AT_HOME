@@ -17,140 +17,156 @@
     </div>
 
     <div class="wrapper">
-        <h1>My Dashboard</h1>
-        <h2 class="date">Sunday, 18 March 2022</h2>
+        <div class="header">
+            <h1>My Dashboard</h1>
+            <h2 class="date">Sunday, 18 March 2022</h2>
+
+            <div class="welcome-banner">
+                <h1>Welcome Pricilla</h1>
+                <p>View your data below</p>
+            </div>
+        </div>
+        <br class="tablet-linebreak">
 
         <section class="trends">
             <h3>Trends</h3>
-            <div class="data-box">
-                <div class="heading">
-                    <p>Blood Glucose</p>
-                    <img src="./public/images/blood-glucose-icon.svg" alt="">
-                </div>
-                <p class="main-data">7.8 nmo/L</p>
-                <div class="side-data">
+            <div class="trends-wrapper">
+                <div class="data-box">
+                    <img class="tick-cross" src="./public/images/Vector.svg" alt="">
+                    <p class="data-type">Blood Glucose</p>
+                    <img class="symbol" src="./public/images/blood-glucose-icon.svg" alt="">
+                    <p class="value">7.8 nmo/L</p>
                     <p class="percent">23%</p>
                     <p class="time">14:46</p>
                 </div>
-            </div>
-            <div class="data-box">
-                <div class="heading">
-                    <p>Blood Glucose</p>
-                    <img src="./public/images/blood-glucose-icon.svg" alt="">
-                </div>
-                <p class="main-data">7.8 nmo/L</p>
-                <div class="side-data">
+
+                <div class="data-box">
+                    <img class="tick-cross" src="./public/images/Vector.svg" alt="">
+                    <p class="data-type">Blood Glucose</p>
+                    <img class="symbol" src="./public/images/blood-glucose-icon.svg" alt="">
+                    <p class="value">7.8 nmo/L</p>
                     <p class="percent">23%</p>
                     <p class="time">14:46</p>
                 </div>
-            </div>
-            <div class="data-box">
-                <div class="heading">
-                    <p>Blood Glucose</p>
-                    <img src="./public/images/blood-glucose-icon.svg" alt="">
-                </div>
-                <p class="main-data">7.8 nmo/L</p>
-                <div class="side-data">
+
+                <div class="data-box">
+                    <img class="tick-cross" src="./public/images/Vector.svg" alt="">
+                    <p class="data-type">Blood Glucose</p>
+                    <img class="symbol" src="./public/images/blood-glucose-icon.svg" alt="">
+                    <p class="value">7.8 nmo/L</p>
                     <p class="percent">23%</p>
                     <p class="time">14:46</p>
                 </div>
-            </div>
-            <div class="data-box">
-                <div class="heading">
-                    <p>Blood Glucose</p>
-                    <img src="./public/images/blood-glucose-icon.svg" alt="">
-                </div>
-                <p class="main-data">7.8 nmo/L</p>
-                <div class="side-data">
+
+                <div class="data-box">
+                    <img class="tick-cross" src="./public/images/Vector.svg" alt="">
+                    <p class="data-type">Blood Glucose</p>
+                    <img class="symbol" src="./public/images/blood-glucose-icon.svg" alt="">
+                    <p class="value">7.8 nmo/L</p>
                     <p class="percent">23%</p>
                     <p class="time">14:46</p>
                 </div>
+
+
             </div>
         </section>
-
         <br>
-
-        <section class="latest-message">
-            <h3>Latest Messages</h3>
-            <div class="message-box">
-                <img src="./public/images/message-icon.png" alt="">
-                <h2>Latest Support Message</h2>
-                <p class="clinician-message">Hi Chloe, Dont forget to take your pills this week and about our appointment on Friday</p>
-                <img src="./public/images/message-doctor-icon.svg" alt="">
-                <p class="date">Tues 15th Mar, 2022</p>
-            </div>
-        </section>
-
-        <br>
-
-        <section class="historical-trends">
-            <h3>Historical Trends</h3>
-            <div class="table">
-                <img class="icon" src="./public/images/blood-glucose-icon.svg" alt="">
-                <img class="icon" src="./public/images/blood-glucose-icon.svg" alt="">
-                <img class="icon" src="./public/images/blood-glucose-icon.svg" alt="">
-                <img class="icon" src="./public/images/blood-glucose-icon.svg" alt="">
-                <hr>
-                <!-- start of 1 record -->
-                <p>15 Marchn 2022</p>
-                <p>7.8 nmo/L</p>
-                <p>75 kg</p>
-                <p>3 dose</p>
-                <p>3000 steps</p>
-                <hr>
-                <!-- end of 1 record -->
-            </div>
-        </section>
-
-        <section class="social">
-            <h1>Social</h1>
-            <br>
-            <section>
-                <h3>Your Badges</h3>
-                <div class="badges">
-                    <div class="badge">
-                        <img src="./public/images/badge1.svg" alt="">
-                        <p>3k King</p>
+        <br class="tablet-linebreak">
+        <div class="msg-htrends">
+            <section class="latest-message">
+                <h3>Latest Messages</h3>
+                <div class="message-box">
+                    <div class="header">
+                        <img src="./public/images/message-icon.png" alt="">
+                        <h2>Latest Support Message</h2>
                     </div>
-                    <div class="badge">
-                        <img src="./public/images/badge2.svg" alt="">
-                        <p>Health Champ</p>
+
+                    <!-- start of 1 message -->
+                    <div class="clinician-message">
+                        <p class="message">Hi Chloe, Dont forget to take your pills this week and about our appointment on Friday</p>
+                        <img src="./public/images/message-doctor-icon.svg" alt="">
+                        <p class="date">Tues 15th Mar, 2022</p>
                     </div>
-                </div>
-            </section>
-            <br>
-            <section>
-                <h3>Your Engagements</h3>
-                <div class="engagements">
-                    <div class="data-box">
-                        <p>My Engagements Score:</p>
-                        <p>85%</p>
-                    </div>
-                    <div class="data-box">
-                        <p>Current Streak:</p>
-                        <p>23 days</p>
-                    </div>
+                    <!-- end of 1 message -->
+
 
                 </div>
             </section>
-            <br>
-            <section>
-                <h3>Your League</h3>
-                <div class="league">
-                    <p class="header">User</p>
-                    <p class="header">Engagement Rate</p>
+
+            <br class="mobile linebreak">
+
+            <section class="historical-trends">
+                <h3>Historical Trends</h3>
+                <div class="table">
+                    <img class="icon" src="./public/images/blood-glucose-icon.svg" alt="">
+                    <img class="icon" src="./public/images/blood-glucose-icon.svg" alt="">
+                    <img class="icon" src="./public/images/blood-glucose-icon.svg" alt="">
+                    <img class="icon" src="./public/images/blood-glucose-icon.svg" alt="">
                     <hr>
-
                     <!-- start of 1 record -->
-                    <img src="./public/images/user-icon.svg" alt="">
-                    <p>Johnny</p>
-                    <p class="engagement-val">99%</p>
+                    <p>15 Marchn 2022</p>
+                    <p>7.8 nmo/L</p>
+                    <p>75 kg</p>
+                    <p>3 dose</p>
+                    <p>3000 steps</p>
                     <hr>
                     <!-- end of 1 record -->
                 </div>
             </section>
+        </div>
+
+        <section class="social">
+            <h1>Social</h1>
+            <div class="social">
+                <br class="mobile-linebreak">
+                <section class="badge-section">
+                    <h3>Your Badges</h3>
+                    <div class="badges">
+                        <div class="badge">
+                            <img src="./public/images/badge1.svg" alt="">
+                            <p>3k King</p>
+                        </div>
+                        <div class="badge">
+                            <img src="./public/images/badge2.svg" alt="">
+                            <p>Health Champ</p>
+                        </div>
+                    </div>
+                </section>
+                <br class="mobile-linebreak">
+                <section class="engagement-section">
+                    <h3>Your Engagements</h3>
+                    <div class="engagements">
+                        <div class="data-box">
+                            <p>My Engagements Score:</p>
+                            <p>85%</p>
+                        </div>
+                        <div class="data-box">
+                            <p>Current Streak:</p>
+                            <p>23 days</p>
+                        </div>
+
+                    </div>
+                </section>
+                <br class="mobile-linebreak">
+                <section class="league-section">
+                    <h3>Your League</h3>
+                    <div class="league">
+                        <p class="header">User</p>
+                        <p class="header">Engagement Rate</p>
+                        <hr>
+
+                        <!-- start of 1 record -->
+                        <img src="./public/images/user-icon.svg" alt="">
+                        <p>Johnny</p>
+                        <p class="engagement-val">99%</p>
+                        <hr>
+                        <!-- end of 1 record -->
+                    </div>
+                </section>
+            </div>
         </section>
     </div>
+    <br>
 </body>
 
 </html>
