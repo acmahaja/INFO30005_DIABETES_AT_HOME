@@ -21,7 +21,7 @@
             </div>
             
             <ul class="flex-entry-container wrap">
-                {{log this}}
+                {{!-- {{log this}} --}}
                 {{!-- GLUCOSE BOX --}}
                 {{#if patientsettings.requires_glucose}}
                     <div class="entry-flex-item">
@@ -231,7 +231,6 @@
     }
 
     function checkValueInput() {
-        console.log()
         if (document.getElementById("overlay-operation-info").value=="add" 
                 && document.getElementById("overlay-number-input").value == ""){
             alert("Please input a value to record a new data entry!")

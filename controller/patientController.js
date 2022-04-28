@@ -1,6 +1,6 @@
 const ClincianSchema = require("../models/clincian");
 const PatientSchema = require("../models/patient");
-const PatientSettings = require("../models/patient_settings");
+const patientSettingsSchema = require("../models/patient_settings");
 const { patient_authorization } = require("../utils/authorization");
 const { getDailyHealthData } = require("../utils/utils");
 
@@ -57,9 +57,10 @@ const getDataEntryPage = async (req, res) => {
   });
 
 
-  const patientsettings = await PatientSettings.findOne({
+  const patientsettings = await patientSettingsSchema.findOne({
     for_patient: this_patient._id,
   });
+  console.log(patientsettings);
 
 
   entries = await getDailyHealthData(this_patient._id);
