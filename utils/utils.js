@@ -64,9 +64,10 @@ async function get_threshold(username) {
 }
 
 async function get_patient_data(patient, start_date) {
+    
     const glucose_result = await HealthDataEntry.find({
       health_type: "blood_glucose",
-      patient_id: patient,
+      patient_id: patient._id,
       created: {
         $gte:
           start_date.getFullYear() +
@@ -105,7 +106,7 @@ async function get_patient_data(patient, start_date) {
 
     const steps_result = await HealthDataEntry.find({
         health_type: "steps",
-        patient_id: patient,
+        patient_id: patient._id,
         created: {
         $gte:
             start_date.getFullYear() +
@@ -115,7 +116,6 @@ async function get_patient_data(patient, start_date) {
             start_date.getDate(),
         },
     }).sort({ created: "desc" });
-
 
     return {
       glucose: glucose_result[0],

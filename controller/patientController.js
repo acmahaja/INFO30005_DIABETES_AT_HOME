@@ -3,7 +3,11 @@ const PatientSchema = require("../models/patient");
 const patientSettingsSchema = require("../models/patient_settings");
 const HealthDataEntry = require("../models/health_data");
 const { patient_authorization } = require("../utils/authorization");
-const { getDailyHealthData } = require("../utils/utils");
+const {
+  getDailyHealthData,
+  get_threshold,
+  get_patient_data,
+} = require("../utils/utils");
 
 const GLUCOSE_ENUM_TYPE = "blood_glucose";
 const WEIGHT_ENUM_TYPE = "weight";
@@ -16,15 +20,12 @@ const entryTypes = {
   weight: WEIGHT_ENUM_TYPE,
 };
 
-
-
 const postAddHealthData = async (req, res) => {
   var this_user = req.body["user_id"];
   var health_type = req.body["health_type"];
   var value = req.body["data_input"];
   var comment = req.body["text_input"];
 
-  console.log(req.body);
 
   const newHealthData = new HealthDataEntry({
     to_patient: this_user,
@@ -35,7 +36,6 @@ const postAddHealthData = async (req, res) => {
     updated: Date.now(),
   });
 
-  console.log(newHealthData);
 
   await newHealthData
     .save()
@@ -47,7 +47,7 @@ const postAddHealthData = async (req, res) => {
     { this_patient: this_user, health_type: health_type },
     {},
     { sort: { created: -1 } }
-  )
+  );
   res.redirect("/patient/dataentry");
 };
 
@@ -69,7 +69,6 @@ const patientLogin = async (req, res) => {
   }
   const { username, password } = req.body;
   const has_user = await patient_authorization(username, password);
-
   if (has_user) {
     req.session.loggedIn = true;
     req.session.username = username;
@@ -92,12 +91,9 @@ const getDataEntryPage = async (req, res) => {
     username: req.session.username,
   });
 
-
   const patientsettings = await patientSettingsSchema.findOne({
     for_patient: this_patient._id,
   });
-  console.log(patientsettings);
-
 
   entries = await getDailyHealthData(this_patient._id);
 
@@ -110,7 +106,7 @@ const getDataEntryPage = async (req, res) => {
 };
 
 const postUpdateHealthData = async (req, res) => {
-  var this_user = req.body["user_id"];
+  var this_user = req.session;
   var health_type = req.body["health_type"];
   var value = req.body["data_input"];
   var comment = req.body["text_input"];
@@ -156,12 +152,18 @@ const postUpdateHealthData = async (req, res) => {
   res.redirect("/patient/dataentry");
 };
 
-const loadDashboard = async (req,res)=> {
+const loadDashboard = async (req, res) => {
   req.session.username = "patstuart";
-  const patient_info = await PatientSchema.findOne({username: req.session.username})
-  res.render("patient/dashboard", {patient: patient_info});
-}
+  var patient = await PatientSchema.findOne({ username: req.session.username });
+  var patient_threshold = await get_threshold(patient.id);
+  var patient_data = await get_patient_data(patient.id, new Date(Date.now()));
 
+  patient_data = { ...patient._doc, patient_threshold, patient_data };
+  // console.log(patient_data);
+  res.render("patient/dashboard", {
+    patient: patient_data,
+  });
+};
 
 module.exports = {
   patientLogin,
@@ -170,5 +172,5 @@ module.exports = {
   getDataEntryPage,
   postAddHealthData,
   postUpdateHealthData,
-  loadDashboard
+  loadDashboard,
 };

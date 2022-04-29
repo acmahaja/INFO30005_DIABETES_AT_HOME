@@ -101,6 +101,81 @@ body {
 
 }
 
+
+.social-data h2 {
+  color: rgba(76, 76, 76, 0.9);
+}
+
+.trends {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items:flex-start;
+}
+
+.trends-data {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between; 
+  margin: 1em 0em;
+}
+
+.trend {
+  width: 23%;
+  height: 12em;
+  border-radius: 1em;
+  padding: 1em;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.trend .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5em;
+  color: white;
+  font-weight: 500;
+  height: 1.5em;
+}
+
+.trend .header img {
+  height: 1.5em;
+}
+
+.trend .data {
+  height: calc(100% - 1.5em);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  color: white;
+  font-weight: 500;
+}
+
+.trend .data img {
+  height: 2.5em;
+  width: auto;
+}
+
+.trend .data .danger {
+  color: red;
+  font-weight: 600;
+}
+
+.trend .data .danger img {
+  height: 2em;
+  width: auto;
+}
+
 .social-data .badges,.engagement,.league{
   width: 100%;
   min-height: 5em;
@@ -108,11 +183,6 @@ body {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-
-.social-data h2 {
-  color: rgba(76, 76, 76, 0.9);
-}
-
 
 
 .badges .badges-list { 
@@ -161,6 +231,21 @@ body {
   .user-data {
     width: 100vw;
     height: fit-content;
+  }
+
+  .trend {
+    width: 50%;
+    height: 8.5em;
+    border-radius: 1em;
+    padding: 1em;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .trend .data img {
+    width: 100%;
+    height: auto;
   }
 
   .social-data {

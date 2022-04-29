@@ -10,6 +10,11 @@ const {
 
 
 const isLoggedIn = (req,res,next)=>{
+	console.log(
+    req.session.loggedIn &&
+      req.session.username != null &&
+      req.session.isClinician
+  );
 	if(req.session.loggedIn && req.session.username != null && req.session.isClinician){
 		next();
 	} else {
@@ -24,7 +29,6 @@ const loadGlucosePage = async (req,res) => {
 }
 
 const loadDashboard = async (req,res)=> {
-	req.session.username = "chrispatt"
 	let get_clinician = await get_clinician_id(req.session.username);
 	let patient_list = await get_patient_list(get_clinician);
 	

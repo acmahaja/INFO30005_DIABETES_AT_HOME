@@ -6,6 +6,7 @@
 
 <body>
     {{> sidebarPatient firstname=patient.firstname lastname=patient.lastname profile-img="https://assets.website-files.com/5746d4c4a3e009bb4d9ac858/5a2ef695e43cca0001193a33_Profile.jpg"}}
+    
     <section class="wrapper">
         <div class="user-data">
             <p class="title">My Dashboard</p>
@@ -17,6 +18,32 @@
             
             <div class="trends">
                 <h2 class="subheading">Your Trends</h2>
+                <div class="trends-data">
+                    {{#if patient.patient_threshold.blood_result}}
+                        <div class="trend gradient-background">
+                            <div class="header">
+                                <p class="entry-name">Blood Glucose</p>
+                                <img class="entry-img" src="/icons/blood-glucose.svg" alt="">
+                            </div>
+                            <div class="data">
+                                {{#if patient.patient_data.glucose}}
+                                    {{#if (check_range patient.patient_data.glucose.value patient.patient_threshold.blood_result.min_value patient.patient_threshold.blood_result.max_value)}} 
+                                        {{patient.patient_data.glucose.value}} nmo/L
+                                    {{else}}
+                                        <div class="danger">
+                                            <img src="/icons/danger.svg">
+                                            {{patient.patient_data.glucose.value}} nmo/L
+                                        </div>
+                                    {{/if}}
+                                {{else}}
+                                    <div class="warn">
+                                        <img src="/icons/warn.svg">
+                                    </div>
+                                {{/if}}
+                            </div>
+                        </div>
+                    {{/if }}
+                </div>
             </div>
             <div class="latest-trends">
 
