@@ -80,3 +80,7 @@ deleteClinician()
     .then(()=> {createChris().then(() => console.log("saved chris"));})
 //    .then(() => { generateClinician()})
 
+module.exports = {
+    deleteClinician,
+    createChris
+}

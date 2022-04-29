@@ -67,3 +67,9 @@ const createPatHealthData = async () => {
 deleteHealth().then(()=> {console.log("cleared patient db")})
     .then(()=> createPatHealthData()).then(()=> {console.log("Added Patt data")})
     // .then(() => createHealthData().then(()=> {console.log("generated data");}));
+
+
+module.exports = {
+    deleteHealth,
+    createPatHealthData,
+};

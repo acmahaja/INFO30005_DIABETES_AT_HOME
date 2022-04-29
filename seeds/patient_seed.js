@@ -83,3 +83,7 @@ deletePatients()
     .then(()=> {createPat()})
 //    .then(() => { generateClinician()})
 
+module.exports = {
+  deletePatients,
+  createPat,
+};

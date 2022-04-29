@@ -50,3 +50,9 @@ const createPatThresholds = async () => {
 deleteThresholds().then(() => {
   createPatThresholds();
 });
+
+
+module.exports = {
+  deleteThresholds,
+  createPatThresholds,
+};

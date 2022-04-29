@@ -49,3 +49,8 @@ deletePatientSettings()
   })
   .then(() => createPatPatientSettings());
 // .then(() => createHealthData().then(()=> {console.log("generated data");}));
+
+module.exports = {
+  deletePatientSettings,
+  createPatPatientSettings,
+};
