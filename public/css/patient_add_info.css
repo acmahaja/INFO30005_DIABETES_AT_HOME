@@ -67,15 +67,15 @@ body {
   height: 100%;
   padding: 2em 0em;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
 }
 
 .flex-entry-container .entry-flex-item {
-  width: 100%;
-  height: 25%;
+  width: 45%;
+  height: 50%;
   margin: 0;
   border-radius: 1em;
   -moz-box-sizing: border-box;
@@ -289,6 +289,7 @@ body {
   }
 
   .flex-entry-container .entry-flex-item {
+    width: 100%;
     padding: 0.5em;
     height: fit-content;
   }
