@@ -254,11 +254,11 @@ body {
 }
 
 #input-post-form #overlay-buttons input {
-  margin: 0em 1em;
+  /* margin: 0em 1em; */
   padding: 0em;
   text-decoration: none;
   border: none;
-  font-size: 1.5em;
+  /* font-size: 1.5em; */
   width: 8em;
   height: 2.5em;
   color: white;
@@ -394,6 +394,11 @@ body {
     flex-direction: column;
   }
 
+  #overlay .entry-flex-item {
+    padding: .5em;
+    border-radius: .5em;
+  }
+
   #overlay-input-box .header {
     height: fit-content;
     font-size: 1.75em;
@@ -463,9 +468,9 @@ body {
     padding: 0em;
   }
   #overlay-input-box #overlay-buttons input {
-    font-size: 1em;
+    
     width: fit-content;
-    padding: 0 1em;
-    font-size: .9em;
+    padding: 0 .95em;
+    font-size: .75em;
   }
 }
