@@ -74,8 +74,8 @@ body {
 }
 
 .flex-entry-container .entry-flex-item {
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: 25%;
   margin: 0;
   border-radius: 1em;
   -moz-box-sizing: border-box;
@@ -276,27 +276,58 @@ body {
   }
 
   .wrapper {
-    margin: 0 0 0 1.5em;
+    margin: 0 0 0 0em;
+    padding: 1em;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
   }
 
+  .flex-entry-container{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .flex-entry-container .entry-flex-item {
+    padding: .5em;
+  height: fit-content;}
+
   .entry-flex-item {
-    padding: 2px;
     width: 48%;
-    min-width: 10em;
-    height: 8em;
-    /* margin-right: 3%; */
-    /* margin-top: 1.5%; */
+    min-height: fit-content;
     margin-bottom: 5%;
     line-height: 100px;
     color: white;
-    /* font-weight: bold; */
     font-size: 2em;
     text-align: center;
     background: linear-gradient(180deg, #867ffb 0%, #6861ca 100%);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 9px;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+
   }
 
+  .entry-flex-item .header {
+    height: fit-content;
+    font-size: 1em;
+    height: 1.5em;
+    display: flex;
+    margin: 0;
+  }
+
+  .entry-flex-item .header p {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+  }
+
+  .entry-flex-item .header img {
+    height: 1em;
+    width: auto;
+  }
+  
   .entry-flex-item .entry-value {
     position: relative;
     top: 0.4rem;
@@ -313,25 +344,50 @@ body {
     font-size: 71%;
     width: 100%;
     text-align: left;
-    padding-left: 2em;
+    padding-left: .25em;
     line-height: 100%;
     font-weight: bold;
     margin-bottom: 3vh;
   }
 
   .entry-flex-item .entry-comment {
-    width: 76%;
-    margin-inline: auto;
-    position: relative;
-    top: 0.7rem;
+    width: 100%;
+    font-size: .5em;
+    line-height: .35em;
+    text-align: left;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
   }
 
   .entry-flex-item textarea {
-    resize: none;
-    width: 96%;
+    width: 100%;
+    height: fit-content;
+    min-height: 5em;
     border-radius: 6px;
     border: none;
     padding: 5px;
+  }
+
+  .entry-flex-item .input-entry-button {
+    height: fit-content;
+    padding: 0em;
+    margin: 1.5em 0em 0em 0em;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .entry-flex-item .input-entry-button button {
+    padding: .5em 1em;
+    font-size: .75em;
+  }
+
+  #overlay-input-box {
+    width: 90%;
+    height: 10em;
+    padding: 1em;
   }
 
   #overlay-input-box #value-field {
