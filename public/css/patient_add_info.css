@@ -283,14 +283,15 @@ body {
     box-sizing: border-box;
   }
 
-  .flex-entry-container{
+  .flex-entry-container {
     display: flex;
     flex-direction: column;
   }
 
   .flex-entry-container .entry-flex-item {
-    padding: .5em;
-  height: fit-content;}
+    padding: 0.5em;
+    height: fit-content;
+  }
 
   .entry-flex-item {
     width: 48%;
@@ -305,7 +306,6 @@ body {
     border-radius: 1em;
     display: flex;
     flex-direction: column;
-
   }
 
   .entry-flex-item .header {
@@ -317,17 +317,17 @@ body {
   }
 
   .entry-flex-item .header p {
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      margin: 0;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
   }
 
   .entry-flex-item .header img {
     height: 1em;
     width: auto;
   }
-  
+
   .entry-flex-item .entry-value {
     position: relative;
     top: 0.4rem;
@@ -344,7 +344,7 @@ body {
     font-size: 71%;
     width: 100%;
     text-align: left;
-    padding-left: .25em;
+    padding-left: 0.25em;
     line-height: 100%;
     font-weight: bold;
     margin-bottom: 3vh;
@@ -352,8 +352,8 @@ body {
 
   .entry-flex-item .entry-comment {
     width: 100%;
-    font-size: .5em;
-    line-height: .35em;
+    font-size: 0.5em;
+    line-height: 0.35em;
     text-align: left;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -380,31 +380,77 @@ body {
   }
 
   .entry-flex-item .input-entry-button button {
-    padding: .5em 1em;
-    font-size: .75em;
+    padding: 0.5em 1em;
+    font-size: 0.75em;
   }
 
   #overlay-input-box {
     width: 90%;
-    height: 10em;
+    min-height: 10em;
+    height: fit-content;
     padding: 1em;
+    display: flex;
+    flex-direction: column;
   }
 
-  #overlay-input-box #value-field {
-    position: relative;
-    top: 1vh;
-    margin: auto;
-    width: 89%;
+  #overlay-input-box .header {
+    height: fit-content;
+    font-size: 1.75em;
+  }
+
+  #overlay-input-box .header p {
+    font-size: 0.45em;
+  }
+
+  #overlay-input-box #entry-flex-item #value-field {
+    width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     flex-direction: row;
     border-radius: 6px;
     border: none;
   }
 
-  #textarea-field {
-    position: relative;
-    top: -4vh;
+  #overlay-input-box #value-field {
+    margin: 0.25em 0em;
+  }
+
+  #overlay-input-box #value-field #value-field-anchor {
+    width: 100%;
+    height: fit-content;
+    font-size: 0.5em;
+    line-height: 1em;
+    margin: 0.5em 0em;
+    text-align: left;
+  }
+
+  #overlay-input-box #value-field #overlay-number-input {
+    width: 100%;
+    height: 1em;
+    font-size: 0.5em;
+    margin: 0;
+    border-radius: 0.75em;
+  }
+
+  #overlay-input-box #textarea-field {
+    height: fit-content;
+    width: 100%;
+  }
+
+  #overlay-input-box #textarea-field #textarea-anchor {
+    width: 100%;
+    height: fit-content;
+    font-size: 0.5em;
+    line-height: 1em;
+    margin: 0.5em 0em;
+    text-align: left;
+  }
+
+  #overlay-input-box #textarea-field textarea {
+    border-radius: 1em;
+    font-size: .5em;
+    height: 10em;
   }
 
   #overlay-input-box #overlay-buttons {
@@ -412,7 +458,13 @@ body {
     justify-content: space-evenly;
     width: 100%;
     margin: auto;
-    top: -1vh;
     position: relative;
+    padding: 0em;
+  }
+  #overlay-input-box #overlay-buttons input {
+    font-size: 1em;
+    width: fit-content;
+    padding: 0 1em;
+    font-size: .9em;
   }
 }
