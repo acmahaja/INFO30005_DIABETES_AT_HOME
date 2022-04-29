@@ -19,6 +19,7 @@ const db = mongoose.connection.on('error', err => {
     process.exit(1)
 })
 
+// clear all patient data
 const deletePatients = async () => {
     const entries = await PatientSchema.find({})
     entries.forEach(
@@ -27,6 +28,7 @@ const deletePatients = async () => {
     console.log("cleared patient db")
 }
 
+// create patient pat
 const createPat = async () => {
     const findChris = await ClinicianSchema.findOne({"username": "chrispatt"})
     const entry = await PatientSchema({

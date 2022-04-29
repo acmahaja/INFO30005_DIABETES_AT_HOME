@@ -22,6 +22,7 @@ const db = mongoose.connection.on("error", (err) => {
   process.exit(1);
 });
 
+// clear all data thresholds
 const deleteThresholds = async () => {
   const entries = await patientThresholdsSchema.find({});
   entries.forEach(
@@ -30,6 +31,7 @@ const deleteThresholds = async () => {
   console.log("cleared patient thresholds db");
 };
 
+// create pat thresholds
 const createPatThresholds = async () => {
   const findPat = await PatientSchema.findOne({ username: "patstuart" });
   const entry = await patientThresholdsSchema({

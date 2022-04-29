@@ -24,6 +24,8 @@ const db = mongoose.connection.on('error', err => {
     process.exit(1)
 })
 
+
+// clear clincians database
 const deleteClinician = async () => {
     const entries = await ClincianSchema.find({})
 
@@ -33,6 +35,8 @@ const deleteClinician = async () => {
     console.log("cleared clinician db")
 }
 
+
+// create chris user
 const createChris = async () => {
     const entry = await ClincianSchema({
         "username": "chrispatt",

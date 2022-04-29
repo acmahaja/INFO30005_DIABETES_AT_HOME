@@ -17,11 +17,14 @@ mongoose
   )
   .then(() => console.log(`Mongo connected to port ${db.host}:${db.port}`));
 
+
 const db = mongoose.connection.on("error", (err) => {
   console.error(err);
   process.exit(1);
 });
 
+
+// create patient pat
 const createPatPatientSettings = async () => {
   const patient = await PatientSchema.findOne({
     username: "patstuart",
@@ -36,6 +39,8 @@ const createPatPatientSettings = async () => {
   await new_data.save().then(()=> {console.log("saved pats settings");});
 };
 
+
+// delete all patient data settings
 const deletePatientSettings = async () => {
   const entries = await patientSettingsSchema.find({});
   entries.forEach(
@@ -43,12 +48,15 @@ const deletePatientSettings = async () => {
   );
 };
 
+// remove all patient data settings
 deletePatientSettings()
   .then(() => {
     console.log("cleared patient settings db");
   })
   .then(() => createPatPatientSettings());
 // .then(() => createHealthData().then(()=> {console.log("generated data");}));
+
+
 
 module.exports = {
   deletePatientSettings,

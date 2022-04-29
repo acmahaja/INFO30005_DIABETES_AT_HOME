@@ -39,13 +39,16 @@ const createHealthData = async () => {
 
 }
 
+// function to clear all health data
 const deleteHealth = async () => {
     const entries = await healthDataSchema.find({})
-//    entries.forEach(
-//        async (entry) => await healthDataSchema.findByIdAndRemove(entry.id)
-//        )
+   entries.forEach(
+       async (entry) => await healthDataSchema.findByIdAndRemove(entry.id)
+       )
 }
 
+
+// function to create health data script
 const createPatHealthData = async () => {
     const findPat = await PatientSchema.findOne({ username: "patstuart" });
     const entry = await healthDataSchema({
