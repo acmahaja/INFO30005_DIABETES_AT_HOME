@@ -20,6 +20,7 @@ const entryTypes = {
   weight: WEIGHT_ENUM_TYPE,
 };
 
+//Add new health data entry to MongoDB
 const postAddHealthData = async (req, res) => {
   var this_user = req.body["user_id"];
   var health_type = req.body["health_type"];
@@ -43,14 +44,18 @@ const postAddHealthData = async (req, res) => {
     .catch((err) => {
       console.log(err);
     });
+
+  //for testing, remove in future
   newEntry = await HealthDataEntry.findOne(
     { this_patient: this_user, health_type: health_type },
     {},
     { sort: { created: -1 } }
   );
+
   res.redirect("/patient/dataentry");
 };
 
+// middleware, check patient session info
 const isLoggedIn = (req, res, next) => {
   if (
     req.session.loggedIn &&
@@ -63,6 +68,7 @@ const isLoggedIn = (req, res, next) => {
   }
 };
 
+//handles patient login
 const patientLogin = async (req, res) => {
   if (req.session.loggedIn === true) {
     res.redirect("/");
@@ -80,11 +86,13 @@ const patientLogin = async (req, res) => {
   }
 };
 
+//handles patient logout
 const patientLogout = (req, res) => {
   req.session.destroy();
   res.redirect("/patient/login");
 };
 
+//render data entry page, gets patient settings, daily health entries from mongodb
 const getDataEntryPage = async (req, res) => {
   req.session.username = "patstuart";
   const this_patient = await PatientSchema.findOne({
@@ -105,12 +113,14 @@ const getDataEntryPage = async (req, res) => {
   });
 };
 
+//update daily health entries
 const postUpdateHealthData = async (req, res) => {
   var this_user = req.session;
   var health_type = req.body["health_type"];
   var value = req.body["data_input"];
   var comment = req.body["text_input"];
 
+  //update only relevant field
   if (value != "" || comment != "") {
     var filter = {
       to_patient: this_user,
@@ -140,18 +150,20 @@ const postUpdateHealthData = async (req, res) => {
 
     await HealthDataEntry.findOneAndUpdate(filter, update, options)
       .then((res) => {
+        //console logs
         console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
-
+    //console logs
     updatedEntry = await HealthDataEntry.findOne(filter, {}, options).lean();
   }
   //res.redirect('back')
   res.redirect("/patient/dataentry");
 };
 
+//render dashboard, gets patient settings, thresholds, entry data from mongodb
 const loadDashboard = async (req, res) => {
   req.session.username = "patstuart";
   var patient = await PatientSchema.findOne({ username: req.session.username });
