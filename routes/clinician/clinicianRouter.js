@@ -1,12 +1,15 @@
-const express = require("express")
+const express = require("express");
 
 const clinicianRouter = express.Router();
 
-const clinicianController = require('../../controller/clinicianController')
-const {isLoggedIn} = require('../../controller/clinicianController')
+const clinicianController = require("../../controller/clinicianController");
+const { isLoggedIn } = require("../../controller/clinicianController");
 
-
-clinicianRouter.get('/trends/:patientID', isLoggedIn, clinicianController.loadGlucosePage)
+clinicianRouter.get(
+  "/comments",
+  // isLoggedIn,
+  clinicianController.clincianComments
+);
 
 clinicianRouter.get(
   "/dashboard",
@@ -14,12 +17,12 @@ clinicianRouter.get(
   clinicianController.loadDashboard
 );
 
-clinicianRouter.get('/logout', clinicianController.clincianLogout)
+clinicianRouter.get("/logout", clinicianController.clincianLogout);
 
-clinicianRouter.post('/login', clinicianController.clincianLogin)
+clinicianRouter.post("/login", clinicianController.clincianLogin);
 
-clinicianRouter.get('/login', (req,res)=> {
-    res.render('clincian/login.hbs')
-})
+clinicianRouter.get("/login", (req, res) => {
+  res.render("clincian/login.hbs");
+});
 
 module.exports = clinicianRouter;

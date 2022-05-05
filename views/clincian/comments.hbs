@@ -1,0 +1,100 @@
+<title>Clinician Dashboard</title>
+<link rel="stylesheet" href="../css/clinican_dashboard.css" />
+<link rel='stylesheet' href='../css/clinican_sidebar.css' />
+
+
+<body>
+  {{> sidebarClinician this }}
+  <main>
+    <header>
+      <h1>Patient Trends</h1>
+      <div class="day"> <div id="week_day"></div> <div id="date"></div> </div>
+    </header>
+    <section>
+      <div class="search-bar">
+        <img src="../icons/search.svg" alt="" class="icon">
+        <input type="text" id="search-box" placeholder="Search Bar">
+      </div>
+      <div class="patients">
+      <div class="patient">
+        <div class="patient-name"></div>
+        <div class="patient-data"><img src="../icons/blood-glucose.svg" alt="" class="unit-icon"></div>
+        <div class="patient-data"><img src="../icons/weight.svg" alt="" class="unit-icon"></div>
+        <div class="patient-data"><img src="../icons/insulin.svg" alt="" class="unit-icon"></div>
+        <div class="patient-data"><img src="../icons/steps.svg" alt="" class="unit-icon"></div>
+      </div>
+      {{#each patients as | patient |}}
+          {{#with patient}}
+            <div class="patient">
+                <div class="patient-name">
+                  <img src="https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg" alt="patient-pic" class="patient-pic">
+                      <a href="#"
+                      >
+                        {{firstname}} {{lastname}}
+                      </a>
+                </div>
+                {{#with thresholds}}
+                  <div class="patient-data">
+                    {{#with blood_result}}
+                        {{#if this}}
+                          {{patient.patient_data.glucose.comments}}
+                        {{else}}
+                          --
+                        {{/if}}
+                    {{/with}}
+                  </div>
+                  <div class="patient-data">
+                    {{#with weight}}
+                        {{#if this}}
+                          {{patient.patient_data.steps.comments}}
+                        {{else}}
+                          --
+                        {{/if}}
+                    {{/with}}
+                  </div>
+                  <div class="patient-data">
+                    {{#with insulin}}
+                        {{#if this}}
+                          {{patient.patient_data.insulin.comments}}
+                        {{else}}
+                          --
+                        {{/if}}
+                    {{/with}}
+                  </div>
+                  <div class="patient-data">
+                    {{#with steps}}
+                        {{#if this}}
+                          {{patient.patient_data.weight.comments}}
+                        {{else}}
+                          --
+                        {{/if}}
+                    {{/with}}
+                  </div>
+                {{/with}}
+            </div>
+          {{/with}}
+      {{/each}}
+      </div>
+
+    </section>
+
+
+
+
+
+
+<script>
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  date =  new Date();
+  week_day = days[date.getDay()];
+  day = date.getDate();
+  month = months[date.getMonth()];
+  year = date.getFullYear();
+
+  document.getElementById("week_day").innerHTML = week_day + ",";
+  document.getElementById("date").innerHTML = day + " " + month + " " + year;
+
+
+
+</script>
