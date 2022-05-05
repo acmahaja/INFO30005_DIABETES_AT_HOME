@@ -1,0 +1,73 @@
+:root {
+    --dashboard-width: 15vw;
+}
+
+
+body{
+    background-color: #F6F7FB;
+}
+.clinician-sidebar {
+    background: #5F3A9B;
+}
+
+
+main {
+    width: calc(100vw - var(--dashboard-width));
+    height: 100%;
+    padding: 0.5em 2em;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    height: fit-content;
+    font-family: 'Raleway';
+    font-style: normal;
+}
+
+header * {
+    width: fit-content;
+    height: fit-content;
+    line-height: 2em;
+}
+
+header h1 {
+    font-weight: 700;
+    font-size: 1.5em;
+    line-height: 1em;
+    color: #4C4C4C;
+}
+
+.day {
+    display: flex;
+    flex-direction: row;
+    margin: 1em 0em .25em 0em;
+
+}
+#week_day { 
+    color: #665FC7;
+    margin-right: .25em;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+}
+
+#date { 
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    
+    color: #8D8E94;
+}
+
+section {
+    width: 100%;
+    height: calc(100% - 7.5em);
+}
+

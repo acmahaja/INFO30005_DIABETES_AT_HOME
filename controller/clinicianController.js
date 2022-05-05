@@ -8,6 +8,11 @@ const {
   get_patient_data,
 } = require("../utils/utils");
 
+
+const renderRenderPatient = (req,res)=> {
+  res.render("clincian/patientRegister.hbs");
+}
+
 const isLoggedIn = (req, res, next) => {
   console.log(
     req.session.loggedIn &&
@@ -103,4 +108,5 @@ module.exports = {
   loadDashboard,
   loadGlucosePage,
   clincianComments,
+  renderRenderPatient,
 };

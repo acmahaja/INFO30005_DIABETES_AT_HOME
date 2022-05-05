@@ -5,6 +5,13 @@ const clinicianRouter = express.Router();
 const clinicianController = require("../../controller/clinicianController");
 const { isLoggedIn } = require("../../controller/clinicianController");
 
+
+clinicianRouter.get(
+  "/register",
+  // isLoggedIn,
+  clinicianController.renderRenderPatient
+);
+
 clinicianRouter.get(
   "/comments",
   // isLoggedIn,

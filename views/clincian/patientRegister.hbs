@@ -1,0 +1,36 @@
+<title>Clinician Dashboard</title>
+<link rel="stylesheet" href="../css/clinican_register_patient.css" />
+<link rel='stylesheet' href='../css/clinican_sidebar.css' />
+
+
+<body>
+  {{> sidebarClinician this }}
+  <main>
+    <header>
+      <h1>Register New Patient</h1>
+      <div class="day"> <div id="week_day"></div> <div id="date"></div> </div>
+    </header>
+    <section>
+      <div class="patient-details"></div>
+    </section>
+
+
+
+
+
+
+<script>
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  date =  new Date();
+  week_day = days[date.getDay()];
+  day = date.getDate();
+  month = months[date.getMonth()];
+  year = date.getFullYear();
+
+  document.getElementById("week_day").innerHTML = week_day + ",";
+  document.getElementById("date").innerHTML = day + " " + month + " " + year;
+
+
+
+</script>
