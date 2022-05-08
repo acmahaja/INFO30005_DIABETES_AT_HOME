@@ -8,25 +8,25 @@ const { isLoggedIn } = require("../../controller/clinicianController");
 
 clinicianRouter.post(
   "/register",
-  // isLoggedIn,
+  isLoggedIn,
   clinicianController.registerPatient
 );
 
 clinicianRouter.get(
   "/register",
-  // isLoggedIn,
+  isLoggedIn,
   clinicianController.renderRegisterPatient
 );
 
 clinicianRouter.get(
   "/comments",
-  // isLoggedIn,
+  isLoggedIn,
   clinicianController.clincianComments
 );
 
 clinicianRouter.get(
   "/dashboard",
-  // isLoggedIn,
+  isLoggedIn,
   clinicianController.loadDashboard
 );
 
