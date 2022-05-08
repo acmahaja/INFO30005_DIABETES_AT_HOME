@@ -9,8 +9,18 @@ const {
   get_patient_data_type,
 } = require("../utils/utils");
 
-const registerPatient = (req, res) => {
-  console.log("hallo");
+const registerPatient = async (req, res) => {
+    req.session.username = "chrispatt";
+
+  let get_clinician = await get_clinician_id(req.session.username);
+  console.log(get_clinician);
+  const new_patient = new Patient({
+    ...req.body,
+    date_joined: Date.now(),
+    assigned_clincian: get_clinician._id,
+  });
+  await new_patient.save()
+  res.send(new_patient)
 };
 
 

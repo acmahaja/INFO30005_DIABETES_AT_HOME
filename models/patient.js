@@ -43,6 +43,7 @@ const PatientSchema = new mongoose.Schema({
   assigned_clincian: {
     type: Schema.Types.ObjectID,
     ref: "Clincian",
+    required: [true, "email can't be blank"],
   },
 });
 

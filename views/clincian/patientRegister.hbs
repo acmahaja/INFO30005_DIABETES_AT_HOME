@@ -11,7 +11,7 @@
       <div class="day"> <div id="week_day"></div> <div id="date"></div> </div>
     </header>
     <section>
-      <form action="/register" method="POST">
+      <form action="/clinician/register" method="POST">
         <div class="personal-info">
           <div class="personal">
             <div class="fullname">
@@ -57,7 +57,7 @@
         <div class="form-element">
           
           <label for="assigned_clincian">Clinician name:</label>
-          <input type="text" name="assigned_clincian" id="assigned_clincian" value="{{this.clinician.firstname}} {{this.clinician.lastname}}" disabled>
+          <input type="input" name="assigned_clincian" id="assigned_clincian" value="{{this.clinician.firstname}} {{this.clinician.lastname}}" disabled>
         </div>
         
         <div class="form-element">
