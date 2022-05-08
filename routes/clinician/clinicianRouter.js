@@ -6,7 +6,7 @@ const clinicianController = require("../../controller/clinicianController");
 const { isLoggedIn } = require("../../controller/clinicianController");
 
 
-clinicianRouter.get(
+clinicianRouter.post(
   "/register",
   // isLoggedIn,
   clinicianController.registerPatient

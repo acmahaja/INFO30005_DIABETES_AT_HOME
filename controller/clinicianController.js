@@ -15,9 +15,11 @@ const registerPatient = (req, res) => {
 
 
 const renderRegisterPatient = async (req,res)=> {
+  req.session.username = "chrispatt"
   let get_clinician = await get_clinician_id(req.session.username);
-
-  res.render("clincian/patientRegister.hbs", {get_clinician});
+  res.render("clincian/patientRegister.hbs", {
+    clinician: get_clinician.toJSON(),
+  });
 }
 
 const isLoggedIn = (req, res, next) => {

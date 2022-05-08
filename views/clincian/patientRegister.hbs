@@ -55,15 +55,11 @@
           <input type="password" name="password" id="password" required>
         </div>
         <div class="form-element">
+          
           <label for="assigned_clincian">Clinician name:</label>
-          <input type="assigned_clincian" name="assigned_clincian" id="assigned_clincian" disabled>
+          <input type="text" name="assigned_clincian" id="assigned_clincian" value="{{this.clinician.firstname}} {{this.clinician.lastname}}" disabled>
         </div>
         
-        <div class="form-element">
-          <label for="date_joined">Joined By:</label>
-          <input type="date_joined" name="date_joined" id="date_joined" disabled>
-        </div>
-
         <div class="form-element">
           <label for="bio">Bio:</label>
           <textarea name="bio" id="bio" rows="4" cols="50"></textarea>
