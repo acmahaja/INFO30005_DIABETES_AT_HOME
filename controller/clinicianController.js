@@ -1,33 +1,55 @@
 const clincian = require("../models/clincian");
-const patient = require("../models/patient");
+const Patient = require("../models/patient");
 const { clinician_authorization } = require("../utils/authorization");
 const {
   get_patient_list,
   get_clinician_id,
   get_threshold,
   get_patient_data,
+  get_patient_data_type,
 } = require("../utils/utils");
 
+const registerPatient = async (req, res) => {
+    req.session.username = "chrispatt";
+
+  let get_clinician = await get_clinician_id(req.session.username);
+  const new_patient = new Patient({
+    ...req.body,
+    date_joined: Date.now(),
+    assigned_clincian: get_clinician._id,
+  });
+  await new_patient.save()
+  res.send(new_patient)
+};
+
+
+const renderRegisterPatient = async (req,res)=> {
+  req.session.username = "chrispatt"
+  let get_clinician = await get_clinician_id(req.session.username);
+  res.render("clincian/patientRegister.hbs", {
+    clinician: get_clinician.toJSON(),
+  });
+}
+
 const isLoggedIn = (req, res, next) => {
-  console.log(
-    req.session.loggedIn &&
-      req.session.username != null &&
-      req.session.isClinician
-  );
-  if (
-    req.session.loggedIn &&
-    req.session.username != null &&
-    req.session.isClinician
-  ) {
-    next();
-  } else {
-    res.redirect("/clincian/logout");
-  }
+  req.session.username = "chrispatt"
+  next()
+  // next()
+  // if (
+  //   req.session.loggedIn &&
+  //   req.session.username != null &&
+  //   req.session.isClinician
+  // ) {
+  //   next();
+  // } else {
+  //   res.redirect("/clincian/logout");
+  // }
 };
 
 const loadGlucosePage = async (req, res) => {
-  const get_clinician = await get_clinician_id(req.session.username);
-  res.render("clincian/glucose.hbs", { clinician: get_clinician.toJSON() });
+  const patient = await Patient.findById(req.params.patientID);
+  const glucose_data = await get_patient_data_type(patient, "blood_glucose");
+  res.render("clincian/glucose.hbs", {patient: patient, data: glucose_data});
 };
 
 const clincianComments = async (req, res) => {
@@ -56,9 +78,10 @@ const clincianComments = async (req, res) => {
 const loadDashboard = async (req, res) => {
   let get_clinician = await get_clinician_id(req.session.username);
   let patient_list = await get_patient_list(get_clinician);
-
+  var patient_info = [];
   for (let i = 0; i < patient_list.length; i++) {
     var patient = patient_list[i];
+    
     const result = await get_threshold(patient_list[i].id);
     var thresholds = result;
     const patient_data = await get_patient_data(
@@ -66,11 +89,11 @@ const loadDashboard = async (req, res) => {
       new Date(Date.now())
     );
     patient = { ...patient._doc, patient_data, thresholds };
+    patient_info.push(patient);
   }
-
   res.render("clincian/dashboard.hbs", {
     clinician: get_clinician.toJSON(),
-    patients: { patient },
+    patients: { patient_info },
   });
 };
 
@@ -103,4 +126,6 @@ module.exports = {
   loadDashboard,
   loadGlucosePage,
   clincianComments,
+  renderRegisterPatient,
+  registerPatient,
 };
