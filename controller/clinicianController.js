@@ -1,24 +1,26 @@
 const clincian = require("../models/clincian");
-const patient = require("../models/patient");
+const Patient = require("../models/patient");
 const { clinician_authorization } = require("../utils/authorization");
 const {
   get_patient_list,
   get_clinician_id,
   get_threshold,
   get_patient_data,
+  get_patient_data_type,
 } = require("../utils/utils");
 
+const registerPatient = (req, res) => {
+  console.log("hallo");
+};
 
-const renderRenderPatient = (req,res)=> {
-  res.render("clincian/patientRegister.hbs");
+
+const renderRegisterPatient = async (req,res)=> {
+  let get_clinician = await get_clinician_id(req.session.username);
+
+  res.render("clincian/patientRegister.hbs", {get_clinician});
 }
 
 const isLoggedIn = (req, res, next) => {
-  console.log(
-    req.session.loggedIn &&
-      req.session.username != null &&
-      req.session.isClinician
-  );
   if (
     req.session.loggedIn &&
     req.session.username != null &&
@@ -31,8 +33,9 @@ const isLoggedIn = (req, res, next) => {
 };
 
 const loadGlucosePage = async (req, res) => {
-  const get_clinician = await get_clinician_id(req.session.username);
-  res.render("clincian/glucose.hbs", { clinician: get_clinician.toJSON() });
+  const patient = await Patient.findById(req.params.patientID);
+  const glucose_data = await get_patient_data_type(patient, "blood_glucose");
+  res.render("clincian/glucose.hbs", {patient: patient, data: glucose_data});
 };
 
 const clincianComments = async (req, res) => {
@@ -108,5 +111,6 @@ module.exports = {
   loadDashboard,
   loadGlucosePage,
   clincianComments,
-  renderRenderPatient,
+  renderRegisterPatient,
+  registerPatient,
 };

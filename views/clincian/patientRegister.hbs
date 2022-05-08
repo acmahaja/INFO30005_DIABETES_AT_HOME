@@ -1,6 +1,6 @@
 <title>Clinician Dashboard</title>
-<link rel="stylesheet" href="../css/clinican_register_patient.css" />
-<link rel='stylesheet' href='../css/clinican_sidebar.css' />
+<link rel="stylesheet" href="/css/clinican_register_patient.css" />
+<link rel='stylesheet' href='/css/clinican_sidebar.css' />
 
 
 <body>
@@ -11,7 +11,68 @@
       <div class="day"> <div id="week_day"></div> <div id="date"></div> </div>
     </header>
     <section>
-      <div class="patient-details"></div>
+      <form action="/register" method="POST">
+        <div class="personal-info">
+          <div class="personal">
+            <div class="fullname">
+              <div class="form-element">
+                  <label for="firstname">First Name:</label>
+                  <input type="text" name="firstname" id="firstname" required>
+              </div>
+              <div class="form-element">
+                <label for="middlename">Middle Name:</label>
+                <input type="text" name="middlename" id="middlename">
+              </div>
+              <div class="form-element">
+                <label for="lastname">Last Name:</label>
+                <input type="text" name="lastname" id="lastname" required>
+              </div>
+            
+            </div>
+            <div class="form-element">
+              <label for="username">Username:</label>
+              <input type="text" name="username" id="username" required>
+            </div>
+            <div class="form-element">
+              <label for="dob">Date of Birth:</label>
+              <input type="date" name="dob" id="dob" required>
+            </div>
+          </div>
+          <div class="image">
+              <img src="/images/default.png" alt="" id="avatar">
+              <label class="custom-file-upload">
+                <input type="file" id="image" name="image" accept="image/*">
+                Upload Avatar
+              </label>
+          </div>
+        </div>
+        <div class="form-element">
+          <label for="email">Email:</label>
+          <input type="email" name="email" id="email" required>
+        </div>
+        <div class="form-element">
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password" required>
+        </div>
+        <div class="form-element">
+          <label for="assigned_clincian">Clinician name:</label>
+          <input type="assigned_clincian" name="assigned_clincian" id="assigned_clincian" disabled>
+        </div>
+        
+        <div class="form-element">
+          <label for="date_joined">Joined By:</label>
+          <input type="date_joined" name="date_joined" id="date_joined" disabled>
+        </div>
+
+        <div class="form-element">
+          <label for="bio">Bio:</label>
+          <textarea name="bio" id="bio" rows="4" cols="50"></textarea>
+        </div>
+
+        <div class="form-button">
+          <button type="submit">Register</button>
+        </div>
+      </form>
     </section>
 
 
@@ -31,6 +92,16 @@
   document.getElementById("week_day").innerHTML = week_day + ",";
   document.getElementById("date").innerHTML = day + " " + month + " " + year;
 
-
-
+  const image_input = document.getElementById("image")
+  image_input.addEventListener('change', () => {
+    var reader = new FileReader();
+    reader.readAsDataURL(image_input.files[0]);
+    reader.onload = function (e) {
+      var image = new Image();
+      image.src = e.target.result;
+      image.onload = function () {
+        document.getElementById("avatar").src = image.src;
+      };
+    }
+  })
 </script>

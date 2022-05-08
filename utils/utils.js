@@ -63,6 +63,14 @@ async function get_threshold(username) {
   return { blood_result, weight_result, insulin_result, steps_result };
 }
 
+async function get_patient_data_type(patient, type){
+  const result = await HealthDataEntry.find({
+    health_type: type,
+    patient_id: patient._id,
+  }).sort({ created: "desc" });
+  return result;
+}
+
 async function get_patient_data(patient, start_date) {
     
     const glucose_result = await HealthDataEntry.find({
@@ -171,4 +179,5 @@ module.exports = {
   get_threshold,
   get_patient_data,
   getDailyHealthData,
+  get_patient_data_type,
 };

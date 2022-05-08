@@ -9,7 +9,13 @@ const { isLoggedIn } = require("../../controller/clinicianController");
 clinicianRouter.get(
   "/register",
   // isLoggedIn,
-  clinicianController.renderRenderPatient
+  clinicianController.registerPatient
+);
+
+clinicianRouter.get(
+  "/register",
+  // isLoggedIn,
+  clinicianController.renderRegisterPatient
 );
 
 clinicianRouter.get(
@@ -20,7 +26,7 @@ clinicianRouter.get(
 
 clinicianRouter.get(
   "/dashboard",
-  isLoggedIn,
+  // isLoggedIn,
   clinicianController.loadDashboard
 );
 
