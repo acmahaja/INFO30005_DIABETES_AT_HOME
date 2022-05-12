@@ -3,8 +3,42 @@ const express = require("express");
 const clinicianRouter = express.Router();
 
 const clinicianController = require("../../controller/clinicianController");
+const clinicianControllerData = require("../../controller/clinicianControllerData");
+const clinicianControllerMessages = require("../../controller/clinicianControllerMessages");
+
 const { isLoggedIn } = require("../../controller/clinicianController");
 
+
+clinicianRouter.get(
+  "/:PatientID/glucose/",
+  isLoggedIn,
+  clinicianControllerData.loadGlucosePage
+);
+
+clinicianRouter.get(
+  "/:PatientID/glucose/",
+  isLoggedIn,
+  clinicianControllerData.loadGlucosePage
+);
+
+clinicianRouter.get(
+  "/:PatientID/glucose",
+  isLoggedIn,
+  clinicianControllerData.loadGlucosePage
+);
+
+clinicianRouter.get(
+  "/:PatientID/info",
+  isLoggedIn,
+  clinicianController.renderPatientInfo
+);
+
+
+clinicianRouter.get(
+  "/:PatientID/info",
+  isLoggedIn,
+  clinicianController.renderPatientInfo
+);
 
 clinicianRouter.post(
   "/register",

@@ -66,7 +66,7 @@ const generateClinician = async () => {
            "dob": (1980 + Math.floor(Math.random() * 42)) + "-" + Math.floor(Math.random() * 12) + "-" + Math.floor(Math.random() * 28),
            "email": first_names[firstnameIndex].toLowerCase() + "." + last_names[lastnameIndex].toLowerCase() + "@email.com",
            "date_joined": '2021-04-11',
-           "assigned_clincian": allClinicians[Math.floor(Math.random()*allClinicians.length)]._id
+           "assigned_clincian": allClinicians[Math.floor(Math.random()*allClinicians.length)]._id 
        })
         try {
            await entry.save()
