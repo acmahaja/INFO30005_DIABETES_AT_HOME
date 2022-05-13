@@ -9,6 +9,14 @@ const clinicianControllerMessages = require("../../controller/clinicianControlle
 const { isLoggedIn } = require("../../controller/clinicianController");
 
 
+
+
+clinicianRouter.get(
+  "/:PatientID/notes/",
+  isLoggedIn,
+  clinicianControllerMessages.loadPatientNotes
+);
+
 clinicianRouter.get(
   "/:PatientID/glucose/",
   isLoggedIn,

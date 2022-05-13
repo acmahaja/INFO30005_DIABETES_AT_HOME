@@ -8,3 +8,12 @@ const {
   get_patient_data_type,
 } = require("../utils/utils");
 
+
+const loadPatientNotes = (req,res)=>{
+    console.log("allo");
+}
+
+
+module.exports = {
+  loadPatientNotes,
+};
