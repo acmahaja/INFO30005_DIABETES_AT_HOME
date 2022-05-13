@@ -1,0 +1,93 @@
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay form {
+  background: #5f3a9b;
+  border-radius: 30px;
+  width: 50vw;
+  height: 62vh;
+  border: none;
+  padding: 25px 50px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.overlay form h1 {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 42px;
+
+  color: #ffffff;
+}
+
+.overlay form .buttons {
+  width: 100%;
+  height: 63.13px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 1em 0em;
+}
+
+.buttons .button {
+  width: 178.6px;
+  height: 62.64px;
+
+  background: #20c5c2;
+  border-radius: 26px;
+  border: none;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #ffffff;
+
+  margin: 0em 1em;
+}
+
+.buttons .button:last-child {
+  background: #1baba8;
+  display: flex;
+}
+
+.overlay form textarea {
+  width: 100%;
+  height: 70%;
+  border-radius: 15px;
+  padding: 1em;
+  font-size: 20px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.buttons .button a {
+  text-decoration: none;
+  color: white;
+  border: none;
+}

@@ -4,17 +4,33 @@ const clinicianRouter = express.Router();
 
 const clinicianController = require("../../controller/clinicianController");
 const clinicianControllerData = require("../../controller/clinicianControllerData");
-const clinicianControllerMessages = require("../../controller/clinicianControllerMessages");
+const clinicianControllerNotes = require("../../controller/clinicianControllerNotes");
 
 const { isLoggedIn } = require("../../controller/clinicianController");
 
+clinicianRouter.get(
+  "/:PatientID/notes/:NoteID",
+  isLoggedIn,
+  clinicianControllerNotes.showPatientNote
+);
 
 
+clinicianRouter.post(
+  "/:PatientID/notes/new",
+  isLoggedIn,
+  clinicianControllerNotes.savePatientNotesForm
+);
+
+clinicianRouter.get(
+  "/:PatientID/notes/new",
+  isLoggedIn,
+  clinicianControllerNotes.loadPatientNotesForm
+);
 
 clinicianRouter.get(
   "/:PatientID/notes/",
   isLoggedIn,
-  clinicianControllerMessages.loadPatientNotes
+  clinicianControllerNotes.loadPatientNotes
 );
 
 clinicianRouter.get(
