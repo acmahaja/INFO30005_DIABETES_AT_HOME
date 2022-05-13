@@ -29,17 +29,43 @@ const createHealthData = async () => {
   const all_patients = await PatientSchema.find({});
   all_patients.forEach(async (patient) => {
     for (let i = 0; i < 100; i++) {
-      if (Math.round(Math.random())) continue;
-      const new_data = new healthDataSchema({
+      const new_data_blood_glucose = new healthDataSchema({
         patient_id: patient._id,
         health_type: "blood_glucose",
         value: Math.floor(Math.random() * 50 + 120),
-        created: Date.now() - (1000*60*60*24*i),
+        created: Date.now() - 1000 * 60 * 60 * 24 * i,
+        comments: "random",
+      });
+
+      const new_data_steps = new healthDataSchema({
+        patient_id: patient._id,
+        health_type: "steps",
+        value: Math.floor(Math.random() * 8000 + 1000),
+        created: Date.now() - 1000 * 60 * 60 * 24 * i,
+        comments: "random",
+      });
+
+      const new_data_weight = new healthDataSchema({
+        patient_id: patient._id,
+        health_type: "weight",
+        value: Math.floor(Math.random() * 40 + 50),
+        created: Date.now() - 1000 * 60 * 60 * 24 * i,
+        comments: "random",
+      });
+
+      const new_data_insulin = new healthDataSchema({
+        patient_id: patient._id,
+        health_type: "insulin",
+        value: Math.floor(Math.random() * 4),
+        created: Date.now() - 1000 * 60 * 60 * 24 * i,
         comments: "random",
       });
 
       try {
-        await new_data.save()
+        if (Math.round(Math.random()+.45)) await new_data_blood_glucose.save();
+        if (Math.round(Math.random() + 0.45)) await new_data_steps.save();
+        if (Math.round(Math.random() + 0.45)) await new_data_weight.save();
+        if (Math.round(Math.random() + 0.45)) await new_data_insulin.save();
       } catch (error) {
         console.log("Something Broke");
         console.log(error);
@@ -76,13 +102,9 @@ deleteHealth()
   .then(() => {
     console.log("cleared patient db");
   })
-  .then(() => createPatHealthData())
-  .then(() => {
-    console.log("Added Patt data");
-  })
   .then(() =>
     createHealthData().then(() => {
       console.log("generated data");
     })
-  )
+  );
 //   .then(() => process.exit(1));

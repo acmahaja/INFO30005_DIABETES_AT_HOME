@@ -2,11 +2,10 @@
 <link rel='stylesheet' href='/css/clinican_sidebar.css' />
 <link rel="stylesheet" href="/css/clinican_dashboard.css" />
 <link rel="stylesheet" href="/css/clinican_patient_data.css" />
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 
 <body>
   {{> sidebarClinician this }}
-  {{log this}}
   <main>
     <header>
       <div class="return">
@@ -24,21 +23,121 @@
           <div class="tab">Notes</div>
           <div class="tab">Info</div>
         </div>
-        <div class="content"></div>
+        <div class="content">
+          <table>
+            <tr>
+              <th></th>
+              <th><img src="/icons/blood-glucose.svg" alt="" srcset=""></th>
+              <th><img src="/icons/weight.svg" alt="" srcset=""></th>
+              <th><img src="/icons/insulin.svg" alt="" srcset=""></th>
+              <th><img src="/icons/steps.svg" alt="" srcset=""></th>
+            </r>
+            {{!-- {{log this}} --}}
+          {{#each data as |data|}}
+            <tr>
+              <td>{{formatDate this.date}}</td>
+              <td>
+                {{#if ../patient_settings.requires_glucose}}
+                  {{#if data.glucose_data}}
+                    {{#if (check_range data.glucose_data.value ../patient_thresholds.blood_result.min_value ../patient_thresholds.blood_result.max_value)}}
+                      {{data.glucose_data.value}} mmol/L
+                    {{else}}
+                      <div class="danger">
+                      <img src="/icons/danger.svg" alt="">
+                        {{data.glucose_data.value}} mmol/L
+                      </div>
+
+                    {{/if }}
+                  {{else}}
+                    <img src="/icons/warn.svg" alt="">
+                  {{/if }}
+                {{/if }}
+
+              </td>
+              
+              <td>
+                {{#if ../patient_settings.requires_weight}}
+                  {{#if data.weight_data}}
+                    {{#if (check_range data.weight_data.value ../patient_thresholds.weight_result.min_value ../patient_thresholds.weight_result.max_value)}}
+                      {{data.weight_data.value}} kg
+                    {{else}}
+                      <div class="danger">
+                      <img src="/icons/danger.svg" alt="">
+                        {{data.weight_data.value}} kg
+                      </div>
+
+                    {{/if }}
+                  {{else}}
+                    <img src="/icons/warn.svg" alt="">
+                  {{/if }}
+                {{/if }}
+
+              </td>
+              
+              <td>
+                {{#if ../patient_settings.requires_insulin}}
+                  {{#if data.insulin_data}}
+                    {{#if (check_range data.insulin_data.value ../patient_thresholds.insulin_result.min_value ../patient_thresholds.insulin_result.max_value)}}
+                      {{data.insulin_data.value}}
+                    {{else}}
+                      <div class="danger">
+                      <img src="/icons/danger.svg" alt="">
+                        {{data.insulin_data.value}}
+                      </div>
+
+                    {{/if }}
+                  {{else}}
+                    <img src="/icons/warn.svg" alt="">
+                  {{/if }}
+                {{/if }}
+
+              </td>
+
+              <td>
+                {{#if ../patient_settings.requires_steps}}
+                  {{#if data.steps_data}}
+                    {{#if (check_range data.steps_data.value ../patient_thresholds.steps_result.min_value ../patient_thresholds.steps_result.max_value)}}
+                      {{data.steps_data.value}} steps
+                    {{else}}
+                      <div class="danger">
+                      <img src="/icons/danger.svg" alt="">
+                        {{data.steps_data.value}} steps
+                      </div>
+
+                    {{/if }}
+                  {{else}}
+                    <img src="/icons/warn.svg" alt="">
+                  {{/if }}
+                {{/if }}
+
+              </td>
+            </tr>
+          {{/each}}
+          </table>
+        </div>
       </div>
 
       <div class="nav">
         <div class="tabs">
-          <div class="tab selected">Glucose</div>
+          {{#if patient_settings.requires_glucose}}
+            <div class="tab selected white">Glucose</div>
+          {{/if}}
+          {{#if patient_settings.requires_insulin}}
           <div class="tab">Insulin</div>
+          {{/if}}
+          {{#if patient_settings.requires_weight}}
           <div class="tab">Weight</div>
+          {{/if}}
+          {{#if patient_settings.requires_steps}}
           <div class="tab">Steps</div>
+          {{/if}}
         </div>
-        <div class="content"></div>
+        <div class="content white">
+          <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
       </div>
 
     </section>
-
 
 
 <script>
@@ -54,6 +153,22 @@
   document.getElementById("date").innerHTML = day + " " + month + " " + year;
 
   document.getElementsByClassName("name")
+
+  const healthdata = {{{this.health}}};
+
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: healthdata.map((data)=> data.created).slice(-31,-1),
+         datasets: [{
+          data: healthdata.map((data)=> data.value).slice(-31,-1),
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+       }
+});
 
 </script>
 

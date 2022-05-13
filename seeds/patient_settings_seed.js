@@ -8,7 +8,9 @@ console.warn("Dev Environment: " + process.env.NODE_ENV);
 
 mongoose
   .connect(
-    "mongodb+srv://admin:healthy@cluster0.fz5ya.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    process.env.NODE_ENV === "production"
+      ? process.env.MONGO_URL
+      : "mongodb://localhost:27017/diabetes-at-home",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -29,9 +31,9 @@ const createPatPatientSettings = async () => {
   const new_data = new patientSettingsSchema({
     for_patient: patient._id,
     requires_glucose: true,
-    requires_steps: false,
-    requires_weight: false,
-    requires_insulin: false,
+    requires_steps: true,
+    requires_weight: true,
+    requires_insulin: true,
   });
   await new_data.save().then(()=> {console.log("saved pats settings");});
 };
