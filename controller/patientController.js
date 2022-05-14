@@ -7,6 +7,10 @@ const {
   getDailyHealthData,
   get_threshold,
   get_patient_data,
+  calc_engagement_rate,
+  get_top5_leaderboard,
+  update_clinician_message,
+  get_clinician_message,
 } = require("../utils/utils");
 
 const GLUCOSE_ENUM_TYPE = "blood_glucose";
@@ -28,7 +32,7 @@ const postAddHealthData = async (req, res) => {
 
 
   const newHealthData = new HealthDataEntry({
-    to_patient: this_user,
+    patient_id: this_user,
     health_type: health_type,
     value: value,
     comments: comment,
@@ -113,7 +117,7 @@ const postUpdateHealthData = async (req, res) => {
 
   if (value != "" || comment != "") {
     var filter = {
-      to_patient: this_user,
+      patient_id: this_user,
       health_type: health_type,
     };
 
@@ -146,7 +150,7 @@ const postUpdateHealthData = async (req, res) => {
         console.log(err);
       });
 
-    updatedEntry = await HealthDataEntry.findOne(filter, {}, options).lean();
+    //updatedEntry = await HealthDataEntry.findOne(filter, {}, options).lean();
   }
   //res.redirect('back')
   res.redirect("/patient/dataentry");
@@ -156,10 +160,13 @@ const loadDashboard = async (req, res) => {
   req.session.username = "patstuart";
   var patient = await PatientSchema.findOne({ username: req.session.username });
   var patient_threshold = await get_threshold(patient.id);
-  var patient_data = await get_patient_data(patient.id, new Date(Date.now()));
+  var now = new Date();
+  var patient_data = await get_patient_data(patient.id, new Date(now.getFullYear(), now.getMonth(), now.getDate()));
 
   patient_data = { ...patient._doc, patient_threshold, patient_data };
-  // console.log(patient_data);
+  // console.log(patient_data); //DEBUG
+  await update_clinician_message(patient, "hi pat");
+  console.log(await get_clinician_message(patient));
   res.render("patient/dashboard", {
     patient: patient_data,
   });

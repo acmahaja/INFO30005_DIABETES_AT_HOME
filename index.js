@@ -23,8 +23,9 @@ require('dotenv').config()
 console.warn("Dev Environment: " + process.env.NODE_ENV);
 
 mongoose.connect(
-	process.env.NODE_ENV==='production' ? process.env.MONGO_URL : 'mongodb://localhost:27017/diabetes-at-home', 
-	{
+	//process.env.NODE_ENV==='production' ? process.env.MONGO_URL : 'mongodb://localhost:27017/diabetes-at-home', 
+	"mongodb+srv://admin:healthy@cluster0.fz5ya.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		dbName: 'diabetes-at-home'
@@ -57,7 +58,8 @@ app.use(
   session({
     resave: false, // don't save session if unmodified
     saveUninitialized: false, // don't create session until something stored
-    secret: process.env.SESSION_SECRET,
+    //secret: process.env.SESSION_SECRET,
+    secret: 'banana',
     cookie: { maxAge: 1000 * 60 * 60 * 24 }
   })
 );

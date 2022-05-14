@@ -1,8 +1,11 @@
+const mongoose = require("mongoose");
+
 const PatientSchema = require("../models/patient");
 const ClincianSchema = require("../models/clincian");
 const patientThresholdsSchema = require("../models/patient_thresholds");
 const PatientSettings = require("../models/patient_settings");
 const HealthDataEntry = require("../models/health_data");
+const ClinicianPatientMessage = require("../models/clinician_patient_message");
 
 const GLUCOSE_ENUM_TYPE = "blood_glucose";
 const WEIGHT_ENUM_TYPE = "weight";
@@ -80,23 +83,18 @@ async function get_patient_settings(patient) {
   return patient_settings;
 }
 
-async function get_patient_data(patient, start_date) {
+async function get_patient_data(patient_id, start_date) {
   const glucose_result = await HealthDataEntry.find({
     health_type: "blood_glucose",
-    patient_id: patient._id,
+    patient_id: patient_id,
     created: {
-      $gte:
-        start_date.getFullYear() +
-        "-" +
-        start_date.getMonth() +
-        "-" +
-        start_date.getDate(),
+      $gte: start_date
     },
   }).sort({ created: "desc" });
 
   const weight_result = await HealthDataEntry.find({
     health_type: "weight",
-    patient_id: patient,
+    patient_id: patient_id,
     created: {
       $gte:
         start_date.getFullYear() +
@@ -109,7 +107,7 @@ async function get_patient_data(patient, start_date) {
 
   const insulin_result = await HealthDataEntry.find({
     health_type: "insulin",
-    patient_id: patient,
+    patient_id: patient_id,
     created: {
       $gte:
         start_date.getFullYear() +
@@ -122,7 +120,7 @@ async function get_patient_data(patient, start_date) {
 
   const steps_result = await HealthDataEntry.find({
     health_type: "steps",
-    patient_id: patient._id,
+    patient_id: patient_id,
     created: {
       $gte:
         start_date.getFullYear() +
@@ -253,6 +251,87 @@ const get_patient_all_data = async (patient) => {
   return result.reverse();
 };
 
+const calc_engagement_rate = async (patient) => {
+  daysWithEntries = await HealthDataEntry.aggregate([
+    {
+      $match: {
+        patient_id: mongoose.Types.ObjectId(patient.id)
+      }
+    },
+    {
+      $group : {
+        "_id": {
+          date: "$created"
+        }
+      }
+    }
+  ]);
+  numEntryDays = daysWithEntries.length;
+  dateJoined = patient.date_joined;
+  now = new Date();
+  today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  const timeJoined = Math.abs(today - dateJoined);
+  const daysJoined = Math.ceil(timeJoined / (1000 * 60 * 60 * 24)); 
+  // console.log(daysWithEntries);  //DEBUG
+  // console.log(numEntryDays);   //DEBUG
+  // console.log(daysJoined);     //DEBUG
+  return Math.round(numEntryDays / daysJoined * 100) / 100
+}
+
+const show_badge = async (patient) => {
+  return await calc_engagement_rate(patient) >= 0.8
+}
+
+const get_top5_leaderboard = async () => {
+
+  function compare( b, a ) {
+    if ( a['engagement_rate'] < b['engagement_rate']  ){
+      return -1;
+    }
+    if ( a['engagement_rate']  > b['engagement_rate']  ){
+      return 1;
+    }
+    return 0;
+  }
+
+  allPatientIds = await PatientSchema.find().distinct('_id');
+  allPatientEng = [];
+  for (const patient_id of allPatientIds)
+  {
+    engEntry = {}
+    p = await PatientSchema.findOne({_id: patient_id})
+    engEntry['username'] = p.username;
+    engEntry['engagement_rate'] = await calc_engagement_rate(p);
+    allPatientEng.push(engEntry)
+  }
+
+  allPatientEng.sort(compare);
+  console.log(allPatientEng) //DEBUG
+  return allPatientEng.slice(0,5);
+}
+
+const get_clinician_message = async (patient) => {
+  message = await ClinicianPatientMessage.find({
+    for_patient: patient.id
+  }).lean();
+  return message;
+}
+
+const update_clinician_message = async (patient, newMessage) => {
+  await ClinicianPatientMessage.updateOne(
+    {
+      for_patient: patient.id
+    },
+    {
+      for_patient: patient.id,
+      message: newMessage
+    },
+    {
+      upsert: true
+    }
+  )
+}
+
 module.exports = {
   get_patient_list,
   get_clinician_id,
@@ -263,4 +342,8 @@ module.exports = {
   get_patient_data_type,
   get_patient_settings,
   get_patient_all_data,
+  calc_engagement_rate,
+  get_top5_leaderboard,
+  get_clinician_message,
+  update_clinician_message
 };
