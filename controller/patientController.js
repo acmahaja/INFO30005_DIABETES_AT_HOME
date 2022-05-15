@@ -10,7 +10,11 @@ const {
   calc_engagement_rate,
   get_top5_leaderboard,
   update_clinician_message,
+  show_badge,
   get_clinician_message,
+  get_patient_settings,
+  get_patient_all_data,
+  getHistoricalData
 } = require("../utils/utils");
 
 const GLUCOSE_ENUM_TYPE = "blood_glucose";
@@ -162,13 +166,22 @@ const loadDashboard = async (req, res) => {
   var patient_threshold = await get_threshold(patient.id);
   var now = new Date();
   var patient_data = await get_patient_data(patient.id, new Date(now.getFullYear(), now.getMonth(), now.getDate()));
-
-  patient_data = { ...patient._doc, patient_threshold, patient_data };
-  // console.log(patient_data); //DEBUG
-  await update_clinician_message(patient, "hi pat");
-  console.log(await get_clinician_message(patient));
-  res.render("patient/dashboard", {
+  var patient_settings = await get_patient_settings(patient);
+  patient_data = { ...patient._doc, patient_threshold, patient_data, patient_settings };
+  var message = await get_clinician_message(patient);
+  var engagement_rate = await calc_engagement_rate(patient);
+  var badge = await show_badge(patient);
+  //var timeseries = await get_patient_all_data(patient);
+  var timeseries = await getHistoricalData(patient,10);
+  var leaderboard = await get_top5_leaderboard();
+  res.render("patient/patientDashboard", {
     patient: patient_data,
+    clinicianmessage: message,
+    engagement: engagement_rate,
+    showBadge: badge,
+    historicaldata: timeseries,
+    leaderboard: leaderboard
+
   });
 };
 

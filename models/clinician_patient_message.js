@@ -9,6 +9,10 @@ const clinicianPatientMessageSchema = new mongoose.Schema({
     message: {
         type: String,
         default: ""
+    },
+    date: {
+        type: Date,
+        default: Date.now()
     }
 })
 

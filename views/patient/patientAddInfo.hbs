@@ -12,14 +12,14 @@
         <p class="title">New Entry</p>
         <p class="subheading"><div class="day"> <div id="week_day"></div> <div id="date"></div> </div></p>
         <section>
+            <div class="flex-entry-container wrap">
             {{#if patientsettings.requires_glucose}}
-                <div class="flex-entry-container wrap">
-                    <div class="entry-flex-item">
-                        <div class="header">
-                            <img class="entry-img" src="/icons/blood-glucose.svg" alt="">
-                            <p class="entry-name">Blood Glucose</p>
-                        </div>
                         {{#if entry.glucose}}
+                        <div class="entry-flex-item" onclick="alert('Daily entry already added!')">
+                            <div class="header">
+                                <img class="entry-img" src="/icons/blood-glucose.svg" alt="">
+                                <p class="entry-name">Blood Glucose</p>
+                            </div>
                             <p class="entry-value">{{entry.glucose.value}} nmo/L</p>
                             <div class="entry-comment">
                                 <p>Daily comment:</p>
@@ -29,13 +29,16 @@
                                     <textarea name="text_input" readonly="true" rows="3"></textarea>
                                 {{/if}}
                             </div>
-                                    <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
-                                    <input id="data-field" type="hidden" name="health_type" value={{entrytypes.glucose}}>
                             <div class="input-entry-button">
-                                <button class="" onclick="overlayOn('update', '{{patient._id}}', '{{entrytypes.glucose}}')">Update Entry</button>
+                                <button>Entry Added</button>
                             </div>
-
+                        </div>
                         {{else}}
+                        <div class="entry-flex-item" onclick="overlayOn('add', '{{patient._id}}', '{{entrytypes.glucose}}')">
+                            <div class="header">
+                                <img class="entry-img" src="/icons/blood-glucose.svg" alt="">
+                                <p class="entry-name">Blood Glucose</p>
+                            </div>
                             <p class="entry-value">---</p>
                             <div class="entry-comment">
                                 <p>Daily comment:</p>
@@ -46,8 +49,128 @@
                                 <div class="input-entry-button">
                                     <button onclick="overlayOn('add', '{{patient._id}}', '{{entrytypes.glucose}}')">Add Entry</button>
                                 </div>
+                            </div>
                         {{/if}}
+            {{/if}}
+
+            {{#if patientsettings.requires_insulin}}
+                        {{#if entry.insulin}}
+                        <div class="entry-flex-item" onclick="alert('Daily entry already added!')">
+                            <div class="header">
+                                <img class="entry-img" src="/icons/insulin.svg" alt="">
+                                <p class="entry-name">Insulin</p>
+                            </div>
+                            <p class="entry-value">{{entry.insulin.value}} doses</p>
+                            <div class="entry-comment">
+                                <p>Daily comment:</p>
+                                {{#if entry.insulin.comments}}
+                                    <textarea name="text_input" readonly="true" rows="3">{{entry.insulin.comments}}</textarea>
+                                {{else}}
+                                    <textarea name="text_input" readonly="true" rows="3"></textarea>
+                                {{/if}}
+                            </div>
+                            <div class="input-entry-button">
+                                <button>Entry Added</button>
+                            </div>
+                        </div>
+                        {{else}}
+                        <div class="entry-flex-item" onclick="overlayOn('add', '{{patient._id}}', '{{entrytypes.insulin}}')">
+                            <div class="header">
+                                <img class="entry-img" src="/icons/insulin.svg" alt="">
+                                <p class="entry-name">Insulin</p>
+                            </div>
+                            <p class="entry-value">---</p>
+                            <div class="entry-comment">
+                                <p>Daily comment:</p>
+                                <textarea name="text_input" readonly="true" rows="3"></textarea>
+                            </div>
+                                <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
+                                <input id="data-field" type="hidden" name="health_type" value={{entrytypes.insulin}}>
+                                <div class="input-entry-button">
+                                    <button onclick="overlayOn('add', '{{patient._id}}', '{{entrytypes.insulin}}')">Add Entry</button>
+                                </div>
+                            </div>
+                        {{/if}}
+            {{/if}}
+
+            {{#if patientsettings.requires_weight}}
+                {{#if entry.weight}}
+                <div class="entry-flex-item" onclick="alert('Daily entry already added!')">
+                    <div class="header">
+                        <img class="entry-img" src="/icons/weight.svg" alt="">
+                        <p class="entry-name">Weight</p>
+                    </div>
+                    <p class="entry-value">{{entry.weight.value}} kg</p>
+                    <div class="entry-comment">
+                        <p>Daily comment:</p>
+                        {{#if entry.weight.comments}}
+                            <textarea name="text_input" readonly="true" rows="3">{{entry.weight.comments}}</textarea>
+                        {{else}}
+                            <textarea name="text_input" readonly="true" rows="3"></textarea>
+                        {{/if}}
+                    </div>
+                    <div class="input-entry-button">
+                        <button>Entry Added</button>
+                    </div>
                 </div>
+                {{else}}
+                <div class="entry-flex-item" onclick="overlayOn('add', '{{patient._id}}', '{{entrytypes.weight}}')">
+                    <div class="header">
+                        <img class="entry-img" src="/icons/weight.svg" alt="">
+                        <p class="entry-name">Weight</p>
+                    </div>
+                    <p class="entry-value">---</p>
+                    <div class="entry-comment">
+                        <p>Daily comment:</p>
+                        <textarea name="text_input" readonly="true" rows="3"></textarea>
+                    </div>
+                        <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
+                        <input id="data-field" type="hidden" name="health_type" value={{entrytypes.weight}}>
+                        <div class="input-entry-button">
+                            <button onclick="overlayOn('add', '{{patient._id}}', '{{entrytypes.weight}}')">Add Entry</button>
+                        </div>
+                    </div>
+                {{/if}}
+            {{/if}}
+
+            {{#if patientsettings.requires_steps}}
+                {{#if entry.steps}}
+                <div class="entry-flex-item" onclick="alert('Daily entry already added!')">
+                    <div class="header">
+                        <img class="entry-img" src="/icons/steps.svg" alt="">
+                        <p class="entry-name">Steps</p>
+                    </div>
+                    <p class="entry-value">{{entry.steps.value}} steps</p>
+                    <div class="entry-comment">
+                        <p>Daily comment:</p>
+                        {{#if entry.steps.comments}}
+                            <textarea name="text_input" readonly="true" rows="3">{{entry.steps.comments}}</textarea>
+                        {{else}}
+                            <textarea name="text_input" readonly="true" rows="3"></textarea>
+                        {{/if}}
+                    </div>
+                    <div class="input-entry-button">
+                        <button>Entry Added</button>
+                    </div>
+                </div>
+                {{else}}
+                <div class="entry-flex-item" onclick="overlayOn('add', '{{patient._id}}', '{{entrytypes.steps}}')">
+                    <div class="header">
+                        <img class="entry-img" src="/icons/steps.svg" alt="">
+                        <p class="entry-name">Steps</p>
+                    </div>
+                    <p class="entry-value">---</p>
+                    <div class="entry-comment">
+                        <p>Daily comment:</p>
+                        <textarea name="text_input" readonly="true" rows="3"></textarea>
+                    </div>
+                        <input id="data-field" type="hidden" name="user_id" value={{patient._id}}>
+                        <input id="data-field" type="hidden" name="health_type" value={{entrytypes.steps}}>
+                        <div class="input-entry-button">
+                            <button onclick="overlayOn('add', '{{patient._id}}', '{{entrytypes.steps}}')">Add Entry</button>
+                        </div>
+                    </div>
+                {{/if}}
             {{/if}}
 
             </div>
@@ -58,8 +181,8 @@
     <div id="overlay" onclick="overlayOff()">
         <div class="entry-flex-item", id="overlay-input-box">
             <div class="header">
-                <img class="entry-img" src="/icons/blood-glucose.svg" alt="">
-                <p class="entry-name">Blood Glucose</p>
+                <img class="entry-img" id="overlay-entry-img" src="/icons/blood-glucose.svg" alt="">
+                <p class="entry-name" id="overlay-entry-name">Blood Glucose</p>
             </div>
             <form id="input-post-form" method="post" action="">
                 <div id="value-field">
@@ -87,6 +210,7 @@
 
 {{!-- OVERLAY SCRIPT --}}
 <script>
+
     overlayInputBox = document.getElementById("overlay-input-box")
     overlayInputBox.addEventListener("click", function(e) {
         e.stopPropagation();
@@ -95,16 +219,16 @@
     function overlayOn(call, user_id, health_type) {
         document.getElementById("overlay").style.display = "flex";
         formElement = document.getElementById("input-post-form");
-        if(call == "add") {
-            formElement.action = "/patient/dataentry/add/save"
-            document.getElementById("overlay-submit-button").value = "Add Entry"
-            document.getElementById("overlay-operation-info").value = "add"
-        }
-        else {
-            formElement.action = "/patient/dataentry/update/save"
-            document.getElementById("overlay-submit-button").value = "Update Entry"
-            document.getElementById("overlay-operation-info").value = "update"
-        }
+        //if(call == "add") {
+        formElement.action = "/patient/dataentry/add/save";
+        document.getElementById("overlay-submit-button").value = "Add Entry";
+        document.getElementById("overlay-operation-info").value = "add";
+        //}
+        //else {
+        //    formElement.action = "/patient/dataentry/update/save"
+        //    document.getElementById("overlay-submit-button").value = "Update Entry"
+        //    document.getElementById("overlay-operation-info").value = "update"
+        //}
 
         document.getElementById("overlay-data-field-userid").value=user_id;
         document.getElementById("overlay-data-field-healthtype").value=health_type;
@@ -113,18 +237,22 @@
             case "blood_glucose":
                 document.getElementById("overlay-entry-name").innerText = call.charAt(0).toUpperCase() + call.slice(1) + " Blood Glucose"
                 document.getElementById("data-input-unit").innerText = " nmo/L"
+                document.getElementById("overlay-entry-img").src = "/icons/blood-glucose.svg";
                 break;
             case "insulin":
                 document.getElementById("overlay-entry-name").innerText = call.charAt(0).toUpperCase() + call.slice(1) + " Insulin"
                 document.getElementById("data-input-unit").innerText = " doses"
+                document.getElementById("overlay-entry-img").src = "/icons/insulin.svg";
                 break;
             case "weight":
                 document.getElementById("overlay-entry-name").innerText = call.charAt(0).toUpperCase() + call.slice(1) + " Weight"
                 document.getElementById("data-input-unit").innerText = " kg"
+                document.getElementById("overlay-entry-img").src = "/icons/weight.svg";
                 break;
             case "steps":
                 document.getElementById("overlay-entry-name").innerText = call.charAt(0).toUpperCase() + call.slice(1) + " Steps"
                 document.getElementById("data-input-unit").innerText = " steps"
+                document.getElementById("overlay-entry-img").src = "/icons/steps.svg";
                 break;
             default:
                 document.getElementById("data-input-unit").innerText = ""

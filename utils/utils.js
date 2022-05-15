@@ -96,12 +96,7 @@ async function get_patient_data(patient_id, start_date) {
     health_type: "weight",
     patient_id: patient_id,
     created: {
-      $gte:
-        start_date.getFullYear() +
-        "-" +
-        start_date.getMonth() +
-        "-" +
-        start_date.getDate(),
+      $gte: start_date
     },
   }).sort({ created: "desc" });
 
@@ -109,12 +104,7 @@ async function get_patient_data(patient_id, start_date) {
     health_type: "insulin",
     patient_id: patient_id,
     created: {
-      $gte:
-        start_date.getFullYear() +
-        "-" +
-        start_date.getMonth() +
-        "-" +
-        start_date.getDate(),
+      $gte: start_date
     },
   }).sort({ created: "desc" });
 
@@ -122,12 +112,7 @@ async function get_patient_data(patient_id, start_date) {
     health_type: "steps",
     patient_id: patient_id,
     created: {
-      $gte:
-        start_date.getFullYear() +
-        "-" +
-        start_date.getMonth() +
-        "-" +
-        start_date.getDate(),
+      $gte: start_date
     },
   }).sort({ created: "desc" });
 
@@ -229,7 +214,7 @@ const get_patient_all_data = async (patient) => {
           health_type: "insulin",
           created: { $gte: startDate, $lt: nextDate },
         });
-      }
+      } 
 
       if (patient_settings.requires_weight) {
         weight = await HealthDataEntry.findOne({
@@ -275,11 +260,11 @@ const calc_engagement_rate = async (patient) => {
   // console.log(daysWithEntries);  //DEBUG
   // console.log(numEntryDays);   //DEBUG
   // console.log(daysJoined);     //DEBUG
-  return Math.round(numEntryDays / daysJoined * 100) / 100
+  return Math.round(numEntryDays / daysJoined * 100)
 }
 
 const show_badge = async (patient) => {
-  return await calc_engagement_rate(patient) >= 0.8
+  return await calc_engagement_rate(patient) >= 80
 }
 
 const get_top5_leaderboard = async () => {
@@ -306,12 +291,11 @@ const get_top5_leaderboard = async () => {
   }
 
   allPatientEng.sort(compare);
-  console.log(allPatientEng) //DEBUG
   return allPatientEng.slice(0,5);
 }
 
 const get_clinician_message = async (patient) => {
-  message = await ClinicianPatientMessage.find({
+  message = await ClinicianPatientMessage.findOne({
     for_patient: patient.id
   }).lean();
   return message;
@@ -332,6 +316,76 @@ const update_clinician_message = async (patient, newMessage) => {
   )
 }
 
+
+const getHistoricalData = async (thisPatientId, nDays, metricType = "all") => {
+  var now = new Date();
+  var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());  
+  const NUMBER_OF_DAYS = nDays  //set number of days in historical data
+  PastNDays = new Date();
+  PastNDays.setDate(startOfToday.getDate() - NUMBER_OF_DAYS)
+  var historical_data;
+  if (metricType == GLUCOSE_ENUM_TYPE){
+      historical_data = await HealthDataEntry.find({
+          for_patient: thisPatientId,
+          health_type: GLUCOSE_ENUM_TYPE,
+          updated: {$gte: PastNDays}
+      }).lean()
+  }
+  else if (metricType == INSULIN_ENUM_TYPE) {
+      historical_data = await HealthDataEntry.find({
+          for_patient: thisPatientId,
+          health_type: INSULIN_ENUM_TYPE,
+          updated: {$gte: PastNDays}
+      }).lean()
+  }
+  else if (metricType == STEPS_ENUM_TYPE) {
+      historical_data = await HealthDataEntry.find({
+          for_patient: thisPatientId,
+          health_type: STEPS_ENUM_TYPE,
+          updated: {$gte: PastNDays}
+      }).lean()
+  }
+  else if (metricType == WEIGHT_ENUM_TYPE) {
+      historical_data = await HealthDataEntry.find({
+          for_patient: thisPatientId,
+          health_type: WEIGHT_ENUM_TYPE,
+          updated: {$gte: PastNDays}
+      }).lean()
+  }
+  else {
+      historical_data = await HealthDataEntry.find({
+          for_patient: thisPatientId,
+          updated: {$gte: PastNDays}
+      }).lean()
+  }
+  // console.log(historical_data)
+  
+  healthEntryTS = {}
+  for (var i=0; i<NUMBER_OF_DAYS; i++){
+      d = new Date()
+      d.setDate(startOfToday.getDate() - i)
+      healthEntryTS[d.toDateString()] = {index: i, date: d.toDateString()}
+      // console.log(d.toDateString())
+  }
+  for (const e of historical_data){
+      // console.log(e.updated)
+      // console.log(e.health_type)
+      // console.log(e.value)
+      d = e.updated.toDateString()
+      if (d in healthEntryTS)
+          healthEntryTS[d][e.health_type] = {value: e.value, comment: e.comment}
+          // healthEntryTS[d][e.health_type] = e.value
+  }
+
+  healthEntryArray = Object.values(healthEntryTS)
+  return healthEntryArray
+}
+
+const get_current_date = () => {
+  var now = new Date();
+  return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+}
+
 module.exports = {
   get_patient_list,
   get_clinician_id,
@@ -345,5 +399,8 @@ module.exports = {
   calc_engagement_rate,
   get_top5_leaderboard,
   get_clinician_message,
-  update_clinician_message
+  show_badge,
+  update_clinician_message,
+  getHistoricalData,
+  get_current_date
 };

@@ -76,7 +76,8 @@ body {
 .flex-entry-container .entry-flex-item {
   width: 45%;
   height: 50%;
-  margin: 0;
+  margin-right: 5%;
+  margin-bottom: 5%;
   border-radius: 1em;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -145,6 +146,7 @@ body {
   font-size: 1.5em;
   color: white;
   border-radius: 5em;
+  cursor: pointer;
 }
 
 #overlay {
@@ -174,6 +176,7 @@ body {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  cursor: auto;
 }
 
 #overlay-input-box .header {
@@ -264,12 +267,23 @@ body {
   color: white;
   background: #20c5c2;
   border-radius: 4em;
+  cursor: pointer;
 }
 
 #input-post-form #overlay-buttons .cancel {
   background: #1baba8;
+  cursor: pointer;
 }
 
+@media screen and (max-width: 1900px) {
+  .wrapper {
+    margin: 0 0 0 0em;
+    padding: 1em;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+}
 @media screen and (max-width: 640px) {
   header {
     display: none;
@@ -285,7 +299,7 @@ body {
 
   .flex-entry-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .flex-entry-container .entry-flex-item {
@@ -307,6 +321,8 @@ body {
     border-radius: 1em;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
+    margin-right: 0;
   }
 
   .entry-flex-item .header {
@@ -392,6 +408,7 @@ body {
     padding: 1em;
     display: flex;
     flex-direction: column;
+    cursor: auto;
   }
 
   #overlay .entry-flex-item {

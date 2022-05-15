@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Dashboard</title>
+    <link rel="stylesheet" href="/css/test/style.css" />
+    <link rel="stylesheet" href="/css/patient_dashboard.css" />
+    <link rel="stylesheet" href="/css/patient_sidebar.css" />
+</head>
+
+<body>
+  {{> sidebarPatient firstname=patient.firstname lastname=patient.lastname profile-img="https://assets.website-files.com/5746d4c4a3e009bb4d9ac858/5a2ef695e43cca0001193a33_Profile.jpg"}}
+
+    <div class="hpwrapper">
+        <div class="header">
+            <h1>My Dashboard</h1>
+            <h2 class="date">Sunday, 18 March 2022</h2>
+
+            <div class="welcome-banner">
+                <h1>Welcome {{patient.firstname}}</h1>
+                <p>View your data below</p>
+            </div>
+        </div>
+        <br class="tablet-linebreak">
+
+        <section class="trends">
+            <h3>Trends</h3>
+            <div class="trends-wrapper">
+
+                {{#if patient.patient_settings.requires_glucose}}
+                    <div class="data-box">
+                        {{#if patient.patient_data.glucose}}
+                            <img class="tick-cross" src="/images/Vector.svg" alt="">
+                            {{!-- ADD CROSS TICK ELSE STATEMENT --}}
+                            <p class="data-type">Blood Glucose</p>
+                            <img class="symbol" src="/images/blood-glucose-icon.svg" alt="">
+                            {{#if (check_range patient.patient_data.glucose.value patient.patient_threshold.blood_result.min_value patient.patient_threshold.blood_result.max_value)}} 
+                                <p class="value">{{patient.patient_data.glucose.value}} nmo/L</p>
+                            {{else}}
+                                <div class="danger">
+                                    <img src="/icons/danger.svg">
+                                    {{patient.patient_data.glucose.value}} nmo/L
+                                </div>
+                            {{/if}}
+                        {{else}}
+                            <img class="tick-cross" src="/images/Vector.svg" alt="">
+                            <p class="data-type">Blood Glucose</p>
+                            <img class="symbol" src="/images/blood-glucose-icon.svg" alt="">
+                            <p class="value">--- nmo/L</p>
+                            <div class="warn">
+                                <img src="/icons/warn.svg">
+                            </div>
+                        {{/if}}
+                    </div>
+                {{/if}}
+
+                {{#if patient.patient_settings.requires_insulin}}
+                    <div class="data-box">
+                        {{#if patient.patient_data.insulin}}
+                            <img class="tick-cross" src="/images/Vector.svg" alt="">
+                            {{!-- ADD CROSS TICK ELSE STATEMENT --}}
+                            <p class="data-type">Insulin</p>
+                            <img class="symbol" src="/images/insulin-icon.svg" alt="">
+                            {{#if (check_range patient.patient_data.insulin.value patient.patient_threshold.insulin_result.min_value patient.patient_threshold.insulin_result.max_value)}} 
+                                <p class="value">{{patient.patient_data.insulin.value}} doses</p>
+                            {{else}}
+                                <div class="danger">
+                                    <img src="/icons/danger.svg">
+                                    {{patient.patient_data.insulin.value}} doses
+                                </div>
+                            {{/if}}
+                        {{else}}
+                            <img class="tick-cross" src="/images/Vector.svg" alt="">
+                            <p class="data-type">Insulin</p>
+                            <img class="symbol" src="/images/insulin-icon.svg" alt="">
+                            <p class="value">--- doses</p>
+                            <div class="warn">
+                                <img src="/icons/warn.svg">
+                            </div>
+                        {{/if}}
+                    </div>
+                {{/if}}
+
+                {{#if patient.patient_settings.requires_weight}}
+                    <div class="data-box">
+                        {{#if patient.patient_data.weight}}
+                            <img class="tick-cross" src="/images/Vector.svg" alt="">
+                            {{!-- ADD CROSS TICK ELSE STATEMENT --}}
+                            <p class="data-type">Weight</p>
+                            <img class="symbol" src="/images/weight-icon.svg" alt="">
+                            {{#if (check_range patient.patient_data.weight.value patient.patient_threshold.weight_result.min_value patient.patient_threshold.weight_result.max_value)}} 
+                                <p class="value">{{patient.patient_data.weight.value}} kg</p>
+                            {{else}}
+                                <div class="danger">
+                                    <img src="/icons/danger.svg">
+                                    {{patient.patient_data.weight.value}} kg
+                                </div>
+                            {{/if}}
+                        {{else}}
+                            <img class="tick-cross" src="/images/Vector.svg" alt="">
+                            <p class="data-type">Weight</p>
+                            <img class="symbol" src="/images/weight-icon.svg" alt="">
+                            <p class="value">--- kg</p>
+                            <div class="warn">
+                                <img src="/icons/warn.svg">
+                            </div>
+                        {{/if}}
+                    </div>
+                {{/if}}
+
+
+                {{#if patient.patient_settings.requires_steps}}
+                    <div class="data-box">
+                        {{#if patient.patient_data.steps}}
+                            <img class="tick-cross" src="/images/Vector.svg" alt="">
+                            {{!-- ADD CROSS TICK ELSE STATEMENT --}}
+                            <p class="data-type">Steps</p>
+                            <img class="symbol" src="/images/steps-icon.svg" alt="">
+                            {{#if (check_range patient.patient_data.steps.value patient.patient_threshold.steps_result.min_value patient.patient_threshold.steps_result.max_value)}} 
+                                <p class="value">{{patient.patient_data.steps.value}} nmo/L</p>
+                            {{else}}
+                                <div class="danger">
+                                    <img src="/icons/danger.svg">
+                                    {{patient.patient_data.steps.value}} steps
+                                </div>
+                            {{/if}}
+                        {{else}}
+                            <img class="tick-cross" src="/images/Vector.svg" alt="">
+                            <p class="data-type">Steps</p>
+                            <img class="symbol" src="/images/steps-icon.svg" alt="">
+                            <p class="value">--- steps</p>
+                            <div class="warn">
+                                <img src="/icons/warn.svg">
+                            </div>
+                        {{/if}}
+                    </div>
+                {{/if}}
+            </div>
+        </section>
+        <br>
+        <br class="tablet-linebreak">
+        <div class="msg-htrends">
+            <section class="latest-message">
+                <h3>Latest Message</h3>
+                <div class="message-box">
+                    <div class="header">
+                        <img src="/images/pdashboard/message-icon.png" alt="">
+                        <h2>Latest Support Message</h2>
+                    </div>
+
+
+                    <!-- start of 1 message -->
+                    <div class="clinician-message">
+                        <p class="message">{{clinicianmessage.message}}</p>
+                        {{!-- <img src="/images/pdashboard/message-doctor-icon.svg" alt=""> --}}
+                        <p></p>
+                        <p class="date">{{clinicianmessage.date}}</p>
+                    </div>
+                    <!-- end of 1 message -->
+
+
+                </div>
+            </section>
+
+            <br class="mobile linebreak">
+
+            <section class="historical-trends">
+                <h3>Historical Trends</h3>
+                <div class="table">
+                    <tr>
+                    <th>Date</th>
+                        <th><a href="/patient/glucosedata">Glucose (nmo/l)</a></th>
+                        <th><a href="/patient/insulindata">Insulin (doses)</a></th>
+                        <th><a href="/patient/weightdata">Weight (kg)</a></th>
+                        <th><a href="/patient/stepsdata">Steps (count)</a></th>
+                    </tr>
+                    {{!-- <img class="icon" src="/images/pdashboard/blood-glucose-icon.svg" alt="">
+                    <img class="icon" src="/images/pdashboard/blood-glucose-icon.svg" alt="">
+                    <img class="icon" src="/images/pdashboard/blood-glucose-icon.svg" alt="">
+                    <img class="icon" src="/images/pdashboard/blood-glucose-icon.svg" alt=""> --}}
+                    <hr>
+                    <!-- start of 1 record -->
+                    {{#each historicaldata}}
+                        <p id="date">{{this.date}}</p>
+                        <p id="val">{{this.blood_glucose.value}}</p>
+                        <p id="val">{{this.insulin.value}}</p>
+                        <p id="val">{{this.weight.value}}</p>
+                        <p id="val">{{this.steps.value}}</p>
+                        <hr>
+                    {{/each}}
+                    <!-- end of 1 record -->
+                </div>
+            </section>
+        </div>
+
+        <section class="social">
+            <h1>Social</h1>
+            <div class="social">
+                <br class="mobile-linebreak">
+                <section class="badge-section">
+                    <h3>Your Badges</h3>
+                    <div class="badges">
+                        {{!-- <div class="badge">
+                            <img src="/images/pdashboard/badge1.svg" alt="">
+                            <p>3k King</p>
+                        </div> --}}
+                        {{#if showBadge}}
+                        <div class="badge">
+                            <img src="/images/pdashboard/badge2.svg" alt="">
+                            <p>Health Champ</p>
+                        </div>
+                        {{/if}}
+                    </div>
+                </section>
+                <br class="mobile-linebreak">
+                <section class="engagement-section">
+                    <h3>Engagement</h3>
+                    <div class="engagements">
+                        <div class="data-box">
+                            <p>My Engagements Score:</p>
+                            <p>{{engagement}}%</p>
+                        </div>
+                        {{!-- <div class="data-box">
+                            <p>Current Streak:</p>
+                            <p>23 days</p>
+                        </div> --}}
+
+                    </div>
+                </section>
+                <br class="mobile-linebreak">
+                <section class="league-section">
+                    <h3>Your League</h3>
+                    <div class="league">
+                        <p class="header">User</p>
+                        <p class="header">Engagement Rate</p>
+                        <hr>
+
+                        <!-- start of 1 record -->
+                        {{#each leaderboard}}
+                        {{!-- <img src="/images/pdashboard/user-icon.svg" alt=""> --}}
+                        <img src="#" alt="">
+                        <p>{{this.username}}</p>
+                        <p class="engagement-val">{{this.engagement_rate}}%</p>
+                        <hr>
+                        {{/each}}
+                        <!-- end of 1 record -->
+                    </div>
+                </section>
+            </div>
+        </section>
+    </div>
+    <br>
+</body>
+
+</html>
