@@ -47,13 +47,6 @@ clinicianRouter.get(
   clinicianControllerMessages.loadPatientMessage
 );
 
-//
-
-clinicianRouter.get(
-  "/:PatientID/notes/:NoteID",
-  isLoggedIn,
-  clinicianControllerNotes.showPatientNote
-);
 
 clinicianRouter.post(
   "/:PatientID/notes/new",
@@ -65,6 +58,12 @@ clinicianRouter.get(
   "/:PatientID/notes/new",
   isLoggedIn,
   clinicianControllerNotes.loadPatientNotesForm
+);
+
+clinicianRouter.get(
+  "/:PatientID/notes/:NoteID",
+  isLoggedIn,
+  clinicianControllerNotes.showPatientNote
 );
 
 clinicianRouter.get(
