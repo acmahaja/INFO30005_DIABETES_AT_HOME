@@ -17,6 +17,11 @@
         var pwForm = document.getElementById("change-pw-form");
         pwForm.classList.toggle("show");
       }
+
+      function showChangeSNameForm() {
+        var sNameForm = document.getElementById("change-screenname-form");
+        sNameForm.classList.toggle("show");
+      }
     </script>
   </head>
 
@@ -55,7 +60,7 @@
       <div class="info-el">
         <p class="info-el__label">Screen Name:</p>
         <div class="info-el__value">Patient's Screen Name</div>
-        <button class="edit-btn" onclick="showChangePWForm()">Edit</button>
+        <button class="edit-btn" onclick="showChangeSNameForm()">Edit</button>
       </div>
       <div class="info-el">
         <p class="info-el__label">Date of Birth:</p>
@@ -68,7 +73,7 @@
       <div class="info-el">
         <p class="info-el__label">Password:</p>
         <div class="info-el__value">PW</div>
-        <button class="edit-btn">Edit</button>
+        <button class="edit-btn" onclick="showChangePWForm()">Edit</button>
       </div>
       <div class="info-el">
         <p class="info-el__label">Clinician Name:</p>
@@ -76,22 +81,48 @@
       </div>
     </div>
 
+    <!-- Change Screen Name Popup Box -->
+    <div id="change-screenname-form" class="popup">
+      <form class="edit-form">
+        <h3 class="edit-form__title">Change Screen Name</h3>
+        <label class="edit-form__label" for="new-sname">New Screen Name</label>
+        <input class="edit-form__input" type="text" id="new-sname
+        name="new-sname" />
+        <div class="edit-form__btns">
+          <input
+            class="edit-form__btn btn-update"
+            type="submit"
+            id="update"
+            value="Update"
+          />
+          <input
+            class="edit-form__btn btn-cancel"
+            type="button"
+            id="cancel"
+            value="Cancel"
+            onclick="showChangeSNameForm()"
+          />
+        </div>
+      </form>
+    </div>
+
     <!-- Change Password Popup Box -->
     <div id="change-pw-form" class="popup">
       <form class="edit-form">
         <h3 class="edit-form__title">Change Password</h3>
         <label class="edit-form__label" for="old-pw">Old Password</label>
+        <input class="edit-form__input" type="text" id="old-pw" name="old-pw" />
+        <label class="edit-form__label" for="new-pw">New Password</label>
+        <input class="edit-form__input" type="text" id="new-pw" name="old-pw" />
+        <label class="edit-form__label" for="confirm-pw"
+          >Confirm Password</label
+        >
         <input
           class="edit-form__input"
           type="text"
-          id="old-pw"
+          id="confirm-pw"
           name="old-pw"
-          value="qweuriop"
         />
-        <label class="edit-form__label" for="old-pw">New Password</label>
-        <input class="edit-form__input" type="text" id="old-pw" name="old-pw" />
-        <label class="edit-form__label" for="old-pw">Confirm Password</label>
-        <input class="edit-form__input" type="text" id="old-pw" name="old-pw" />
         <div class="edit-form__btns">
           <input
             class="edit-form__btn btn-update"
