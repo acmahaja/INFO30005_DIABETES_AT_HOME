@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UserInfo</title>
+    <link rel="stylesheet" href="../../public/css/style.css" />
+    <link rel="stylesheet" href="../../public/css/patient_userInfo.css" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../../public/images/favicon.png"
+    />
+  </head>
+
+  <body>
+    <div class="nav">
+      <div class="nav-item">
+        <img
+          class="nav-icon"
+          src="../../public/images/userInfo/hamburgerIcon.jpg"
+          alt=""
+        />
+        <p class="nav-text">User Info</p>
+      </div>
+      <img
+        class="nav-profileimg"
+        src="../../public/images/userInfo/profile.jpg"
+        alt=""
+      />
+    </div>
+
+    <!-- Main Profile Photo -->
+    <div>
+      <img
+        class="profilePhoto"
+        src="../../public/images/userInfo/profile.jpg"
+        alt=""
+      />
+    </div>
+
+    <!-- User Information Box -->
+    <div class="user-info">
+      <div class="info-el">
+        <p class="info-el__label">Full Name:</p>
+        <div class="info-el__value">Patient's Full Name</div>
+      </div>
+      <div class="info-el">
+        <p class="info-el__label">Screen Name:</p>
+        <div class="info-el__value">Patient's Screen Name</div>
+        <button class="edit-btn">Edit</button>
+      </div>
+      <div class="info-el">
+        <p class="info-el__label">Date of Birth:</p>
+        <div class="info-el__value">DOB</div>
+      </div>
+      <div class="info-el">
+        <p class="info-el__label">Email:</p>
+        <div class="info-el__value">Patient email</div>
+      </div>
+      <div class="info-el">
+        <p class="info-el__label">Password:</p>
+        <div class="info-el__value">PW</div>
+        <button class="edit-btn">Edit</button>
+      </div>
+      <div class="info-el">
+        <p class="info-el__label">Clinician Name:</p>
+        <div class="info-el__value">Patient's clinician Name</div>
+      </div>
+    </div>
+
+    <!-- Edit Password pop up box -->
+    <div class="popup" onclick="showChangePWForm">
+      <h3 class="popup-title">Change Password</h3>
+      <form class="edit-form">
+        <label class="edit-form__label" for="old-pw">Old Password</label>
+        <input class="edit-form__input" type="text" id="old-pw" name="old-pw" />
+        <br />
+        <input
+          class="edit-form__btn"
+          type="submit"
+          id="update"
+          value="Update"
+        />
+        <input
+          class="edit-form__btn"
+          type="button"
+          id="cancel"
+          value="Cancel"
+        />
+      </form>
+    </div>
+  </body>
+</html>
