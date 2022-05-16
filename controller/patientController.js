@@ -181,9 +181,17 @@ const loadDashboard = async (req, res) => {
     showBadge: badge,
     historicaldata: timeseries,
     leaderboard: leaderboard
-
   });
 };
+
+const loadPatientInfoPage = async (req, res) => {
+  req.session.username = "patstuart";
+  var patient_info = await PatientSchema.findOne({ username: req.session.username}).populate("assigned_clincian").lean();
+  patient_info.dob = patient_info.dob.toDateString();
+  res.render("patient/patientUserInfo", {
+    patient: patient_info
+  });
+}
 
 module.exports = {
   patientLogin,
@@ -193,4 +201,5 @@ module.exports = {
   postAddHealthData,
   postUpdateHealthData,
   loadDashboard,
+  loadPatientInfoPage
 };
