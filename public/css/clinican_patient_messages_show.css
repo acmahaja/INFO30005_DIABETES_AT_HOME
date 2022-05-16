@@ -1,0 +1,52 @@
+.patient-notes {
+  padding: 10px 30px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.patient-notes #date {
+  line-height: 50px;
+}
+
+.patient-notes .note {
+  width: 100%;
+  height: fit-content;
+  color: white;
+  max-height: calc(100% - 100px);
+  background: #442774;
+  border-radius: 10px;
+  padding: 2em;
+  overflow-y: scroll;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.patient-notes .note .button-section {
+  width: 100%;
+  height: 40px;
+  padding-top: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.patient-notes .note .button-section .button {
+  width: 138px;
+  height: 40px;
+  background: #20c5c2;
+  border-radius: 26px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.patient-notes .note .button-section .button a {
+  text-decoration: none;
+  color: white;
+  font-size: 22px;
+}

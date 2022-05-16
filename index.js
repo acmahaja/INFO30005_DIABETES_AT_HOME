@@ -3,7 +3,6 @@ const app = express();
 
 const path = require("path")
 
-const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
 const Handlebars = require("handlebars");
 
@@ -17,8 +16,13 @@ const session = require("express-session")
 
 const mongoose = require("mongoose");
 
+var morgan = require("morgan");
+app.use(morgan('tiny'))
 
 require('dotenv').config()
+
+const bodyParser = require("body-parser")
+
 
 console.warn("Dev Environment: " + process.env.NODE_ENV);
 
@@ -63,6 +67,11 @@ app.use(
 );
 
 app.use(bodyParser.urlencoded({extended:true}));
+
+const methodOverride = require("method-override");
+app.use(methodOverride("_method"));
+
+
 app.use(express.static('public'))
 
 const clinicianRouter = require("./routes/clinician/clinicianRouter")

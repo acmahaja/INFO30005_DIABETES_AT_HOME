@@ -5,15 +5,55 @@ const clinicianRouter = express.Router();
 const clinicianController = require("../../controller/clinicianController");
 const clinicianControllerData = require("../../controller/clinicianControllerData");
 const clinicianControllerNotes = require("../../controller/clinicianControllerNotes");
+const clinicianControllerMessages = require("../../controller/clinicianControllerMessage");
 
 const { isLoggedIn } = require("../../controller/clinicianController");
+
+
+clinicianRouter.get(
+  "/:PatientID/messages/new",
+  isLoggedIn,
+  clinicianControllerMessages.loadPatientMessageForm
+);
+
+clinicianRouter.post(
+  "/:PatientID/messages/new",
+  isLoggedIn,
+  clinicianControllerMessages.savePatientMessageForm
+);
+
+clinicianRouter.put(
+  "/:PatientID/messages/:MessageID/edit",
+  isLoggedIn,
+  clinicianControllerMessages.updatePatientMessageForm
+);
+
+clinicianRouter.get(
+  "/:PatientID/messages/:MessageID/edit",
+  isLoggedIn,
+  clinicianControllerMessages.editPatientMessageForm
+);
+
+
+clinicianRouter.get(
+  "/:PatientID/messages/:MessageID",
+  isLoggedIn,
+  clinicianControllerMessages.showPatientMessage
+);
+
+clinicianRouter.get(
+  "/:PatientID/messages/",
+  isLoggedIn,
+  clinicianControllerMessages.loadPatientMessage
+);
+
+//
 
 clinicianRouter.get(
   "/:PatientID/notes/:NoteID",
   isLoggedIn,
   clinicianControllerNotes.showPatientNote
 );
-
 
 clinicianRouter.post(
   "/:PatientID/notes/new",
