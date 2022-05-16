@@ -5,7 +5,8 @@
 }
 
 body {
-  margin-top: 10%;
+  padding: 11% 0;
+  position: relative;
 }
 
 /* NAVIGATION BAR */
@@ -43,12 +44,15 @@ body {
 }
 
 /* USER INFORMATION */
+.profilePhoto-box {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5%;
+}
+
 .profilePhoto {
-  text-align: center;
   width: 146px;
   height: 146px;
-  margin-left: 29%;
-  margin-bottom: 5%;
 }
 
 .user-info {
@@ -110,4 +114,87 @@ body {
   color: #ffffff;
   background-color: rgba(83, 83, 83, 0.417);
   border-radius: 10px;
+}
+
+/* POP UP FORMS */
+.popup {
+  background-color: rgba(255, 0, 0, 0.296);
+  position: absolute;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.show {
+  visibility: visible;
+}
+
+.edit-form {
+  margin-left: 5.9%;
+  margin-right: 5.9%;
+  background-color: #8a82ff;
+  color: #fff;
+  border-radius: 30px;
+  padding: 4.5% 4%;
+  width: 100%;
+
+  font-family: "Gill Sans";
+  font-style: normal;
+  font-size: 18px;
+}
+
+.edit-form__title {
+  font-weight: bold;
+  margin-bottom: 5%;
+}
+
+.edit-form__label {
+  display: block;
+}
+
+.edit-form__input {
+  display: block;
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #fff;
+  margin-bottom: 2%;
+  padding: 3% 5%;
+  font-size: 18px;
+}
+
+.edit-form__btns {
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.edit-form__btn {
+  border: none;
+  border-radius: 26px;
+  padding: 4px 10px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.edit-form__btn:hover {
+  cursor: pointer;
+  border: 3px solid #01f93f;
+}
+
+.btn-update {
+  background-color: #20c5c2;
+  border: 3px solid #20c5c2;
+}
+
+.btn-cancel {
+  background-color: #1baba8;
+  border: 3px solid #1baba8;
 }
