@@ -6,8 +6,22 @@ const clinicianController = require("../../controller/clinicianController");
 const clinicianControllerData = require("../../controller/clinicianControllerData");
 const clinicianControllerNotes = require("../../controller/clinicianControllerNotes");
 const clinicianControllerMessages = require("../../controller/clinicianControllerMessage");
+const clinicianControllerInfo = require("../../controller/clinicianControllerInfo");
 
 const { isLoggedIn } = require("../../controller/clinicianController");
+
+clinicianRouter.put(
+  "/:PatientID/info/settings",
+  isLoggedIn,
+  clinicianControllerInfo.updatePatientInfo
+);
+
+
+clinicianRouter.get(
+  "/:PatientID/info/",
+  isLoggedIn,
+  clinicianControllerInfo.loadPatientInfo
+);
 
 
 clinicianRouter.get(

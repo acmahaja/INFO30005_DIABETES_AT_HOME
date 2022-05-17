@@ -17,7 +17,7 @@ const session = require("express-session")
 const mongoose = require("mongoose");
 
 var morgan = require("morgan");
-app.use(morgan('tiny'))
+// app.use(morgan('tiny'))
 
 require('dotenv').config()
 
@@ -43,10 +43,13 @@ const db = mongoose.connection.on('error', err => {
 app.engine(
   "hbs",
   exphbs.engine({
-    defaultlayout: "main",
+    defaultlayout: "layout/main",
     extname: ".hbs",
     helpers: require('./utils/handlebars-helpers'),
-
+    partialsDir  : [
+        //  path to your partials
+        path.join(__dirname, 'views/partials'),
+    ],
     handlebars: allowInsecurePrototypeAccess(Handlebars),
   })
 );
@@ -67,6 +70,7 @@ app.use(
 );
 
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 
 const methodOverride = require("method-override");
 app.use(methodOverride("_method"));
