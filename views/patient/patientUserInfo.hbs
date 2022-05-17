@@ -17,26 +17,14 @@
 
   <body>
     {{> sidebarPatient firstname=patient.firstname lastname=patient.lastname profile-img="https://assets.website-files.com/5746d4c4a3e009bb4d9ac858/5a2ef695e43cca0001193a33_Profile.jpg"}}
-    <div class="wrap">
+    {{!-- <div class="wrap"> --}}
     <div class="nav">
       <div class="nav-item">
           <div class="header">
             <h1>User Info</h1>
             <h2 class="date">{{currentDate}}</h2>
         </div>
-        {{!-- <img
-          class="nav-icon"
-          src="#"
-          alt=""
-        />
-        <h1>User Info</h1> --}}
-        {{!-- <h2 class="date">{{currentDate}}</h2> --}}
       </div>
-      {{!-- <img
-        class="nav-profileimg"
-        src="../../public/images/userInfo/profile.jpg"
-        alt=""
-      /> --}}
     </div>
 
     {{!-- <!-- Main Profile Photo -->
@@ -49,7 +37,7 @@
     </div> --}}
 
     <!-- User Information Box -->
-    <div class="user-info">
+    {{!-- <div class="user-info">
       <div class="info-el">
         <p class="info-el__label">Full Name:</p>
         <div class="info-el__value">{{patient.firstname}} {{patient.lastname}}</div>
@@ -76,7 +64,51 @@
         <p class="info-el__label">Clinician Name:</p>
         <div class="info-el__value">{{patient.assigned_clincian.firstname}} {{patient.assigned_clincian.lastname}}</div>
       </div>
-    </div>
+    </div> --}}
+
+        <!-- User Information Box -->
+    <div class="user-info">
+      <div class="upperhalf-wrapper">
+        <div class="upperhalf-info">
+          <div class="info-el info-el__upperhalf">
+            <p class="info-el__label">Full Name:</p>
+            <div class="info-el__value">{{patient.firstname}} {{patient.lastname}}</div>
+          </div>
+          <div class="info-el info-el__upperhalf">
+            <p class="info-el__label">Screen Name:</p>
+            <div class="info-el__value">{{patient.username}}</div>
+            <button class="edit-btn" onclick="showChangeSNameForm()">
+              Edit
+            </button>
+          </div>
+          <div class="info-el info-el__upperhalf">
+            <p class="info-el__label">Date of Birth:</p>
+            <div class="info-el__value">{{patient.dob}}</div>
+          </div>
+          <div class="info-el info-el__upperhalf">
+            <p class="info-el__label">Email:</p>
+            <div class="info-el__value">{{patient.email}}</div>
+          </div>
+          <div class="info-el">
+          <p class="info-el__label">Password:</p>
+          <div class="info-el__value">{{patient.password}}</div>
+          <button class="edit-btn" onclick="showChangePWForm()">Edit</button>
+        </div>
+        <div class="info-el">
+          <p class="info-el__label">Clinician Name:</p>
+          <div class="info-el__value">{{patient.assigned_clincian.firstname}} {{patient.assigned_clincian.lastname}}</div>
+        </div>
+      </div>
+        </div>
+        {{!-- <div class="avater-section">
+          <img class="avatar" src="../../public/images/userInfo/profile.jpg" />
+          <div class="flex-center">
+            <button id="avatar-btn" class="edit-form__btn btn-update">
+              Update Avatar
+            </button>
+          </div>
+        </div> --}}
+      </div>
 
     <!-- Change Screen Name Popup Box -->
     <div id="change-screenname-form" class="popup" onclick="showChangeSNameForm()">
@@ -158,6 +190,6 @@
       }
     </script>
 
-    </div>
+    {{!-- </div> --}}
   </body>
 </html>

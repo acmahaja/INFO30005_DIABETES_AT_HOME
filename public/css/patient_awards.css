@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Raleway";
+}
+
+/* HEADER */
+header {
+  background-color: yellow;
+}
+
+/* BADGES */
+.badges {
+  margin-left: 5%;
+  margin-right: 5%;
+  padding: 10% 10%;
+  border-radius: 17px;
+  background-color: gray;
+}
+
+.badge {
+  background-color: aqua;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8%;
+  margin-bottom: 10%;
+}
+
+.badge-img {
+  width: 150px;
+  height: auto;
+}
+
+.badge-txt {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+}
+
+/* LEAGUES */
+.league {
+  background-color: aquamarine;
+}

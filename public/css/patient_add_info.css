@@ -41,7 +41,7 @@ body {
 
 .wrapper {
   width: calc(100vw - 17.5em);
-  margin: 0px 0 0 19em;
+  margin: 0px 0 4em 19em;
   padding: 5em 2em;
 }
 
