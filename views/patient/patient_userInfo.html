@@ -37,23 +37,38 @@
 
     <!-- User Information Box -->
     <div class="user-info">
-      <div class="info-el">
-        <p class="info-el__label">Full Name:</p>
-        <div class="info-el__value">Patient's Full Name</div>
+      <div class="upperhalf-wrapper">
+        <div class="upperhalf-info">
+          <div class="info-el info-el__upperhalf">
+            <p class="info-el__label">Full Name:</p>
+            <div class="info-el__value">Patient's Full Name</div>
+          </div>
+          <div class="info-el info-el__upperhalf">
+            <p class="info-el__label">Screen Name:</p>
+            <div class="info-el__value">Patient's Screen Name</div>
+            <button class="edit-btn" onclick="showChangeSNameForm()">
+              Edit
+            </button>
+          </div>
+          <div class="info-el info-el__upperhalf">
+            <p class="info-el__label">Date of Birth:</p>
+            <div class="info-el__value">DOB</div>
+          </div>
+          <div class="info-el info-el__upperhalf">
+            <p class="info-el__label">Email:</p>
+            <div class="info-el__value">Patient email</div>
+          </div>
+        </div>
+        <div class="avater-section">
+          <img class="avatar" src="../../public/images/userInfo/profile.jpg" />
+          <div class="flex-center">
+            <button id="avatar-btn" class="edit-form__btn btn-update">
+              Update Avatar
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="info-el">
-        <p class="info-el__label">Screen Name:</p>
-        <div class="info-el__value">Patient's Screen Name</div>
-        <button class="edit-btn" onclick="showChangeSNameForm()">Edit</button>
-      </div>
-      <div class="info-el">
-        <p class="info-el__label">Date of Birth:</p>
-        <div class="info-el__value">DOB</div>
-      </div>
-      <div class="info-el">
-        <p class="info-el__label">Email:</p>
-        <div class="info-el__value">Patient email</div>
-      </div>
+
       <div class="info-el">
         <p class="info-el__label">Password:</p>
         <div class="info-el__value">PW</div>
