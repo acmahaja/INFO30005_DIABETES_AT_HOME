@@ -50,6 +50,89 @@
               </div>
 
             </form>
+
+            <div class="patient-thresholds">
+              <h2>Saftey Thresholds</h2>
+            {{#if settings.requires_glucose}}
+              <div class="thresholds">
+                <h3>Blood Glucose</h3>
+                <div class="data">
+                  <div class="value">
+                    <div class="for">Min Threshold:</div>
+                    <div class="for num">{{this.thresholds.blood_result.min_value}}</div>
+                  </div>
+                  <div class="value">
+                    <div class="for">Max Threshold:</div>
+                    <div class="for num">{{this.thresholds.blood_result.max_value}}</div>
+                  </div>
+                  <div class="button">
+                    <a href="/clinician/{{this.patient._id}}/info/blood_glucose">Edit</a>
+                  </div>
+                </div>
+              </div>
+            {{/if }}
+
+            {{#if settings.requires_insulin}}
+              <div class="thresholds">
+                <h3>Insulin</h3>
+                <div class="data">
+                  <div class="value">
+                    <div class="for">Min Threshold:</div>
+                    <div class="for num">{{this.thresholds.insulin_result.min_value}}</div>
+                  </div>
+                  <div class="value">
+                    <div class="for">Max Threshold:</div>
+                    <div class="for num">{{this.thresholds.insulin_result.max_value}}</div>
+                  </div>
+                  <div class="button">
+                    <a href="/clinician/{{this.patient._id}}/info/insulin">Edit</a>
+                  </div>
+                </div>
+              </div>
+            {{/if }}
+
+{{#if settings.requires_weight}}
+              <div class="thresholds">
+                <h3>Weight</h3>
+                <div class="data">
+                  <div class="value">
+                    <div class="for">Min Threshold:</div>
+                    <div class="for num">{{this.thresholds.weight_result.min_value}}</div>
+                  </div>
+                  <div class="value">
+                    <div class="for">Max Threshold:</div>
+                    <div class="for num">{{this.thresholds.weight_result.max_value}}</div>
+                  </div>
+                  <div class="button">
+                    <a href="/clinician/{{this.patient._id}}/info/weight">Edit</a>
+                  </div>
+                </div>
+              </div>
+            {{/if }}
+
+            {{#if settings.requires_steps}}
+              <div class="thresholds">
+                <h3>Steps</h3>
+                <div class="data">
+                  <div class="value">
+                    <div class="for">Min Threshold:</div>
+                    <div class="for num">{{this.thresholds.steps_result.min_value}}</div>
+                  </div>
+                  <div class="value">
+                    <div class="for">Max Threshold:</div>
+                    <div class="for num">{{this.thresholds.steps_result.max_value}}</div>
+                  </div>
+                  <div class="button">
+                    <a href="/clinician/{{this.patient._id}}/info/steps">Edit</a>
+                  </div>
+                </div>
+              </div>
+            {{/if }}
+
+
+            </div>
+
+            
           </div>
           <div class="patient-details"></div>
         </div>

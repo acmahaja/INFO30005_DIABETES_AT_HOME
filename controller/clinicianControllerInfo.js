@@ -93,6 +93,8 @@ const updatePatientInfo = async (req, res) => {
   res.redirect(`/clinician/${req.params.PatientID}/info`);
 };
 
+const editPatientThreshold = async (req,res)=>{}
+
 const loadPatientInfo = async (req, res) => {
   const patient = await Patient.findById(req.params.PatientID);
   const get_clinician = await get_clinician_id(req.session.username);
@@ -111,4 +113,5 @@ const loadPatientInfo = async (req, res) => {
 module.exports = {
   loadPatientInfo,
   updatePatientInfo,
+  editPatientThreshold,
 };
