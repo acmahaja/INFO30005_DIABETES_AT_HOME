@@ -59,7 +59,7 @@ body {
   margin-right: 5.9%;
   background-color: #8a82ff;
   border-radius: 30px;
-  padding: 4.5% 0;
+  padding: 30px 0;
 
   font-family: "Gill Sans";
   font-style: normal;
@@ -91,6 +91,11 @@ body {
   background-color: #fff;
   padding: 10px 20px;
   font-size: 18px;
+  text-transform: capitalize;
+}
+
+.no-cap {
+  text-transform: none;
 }
 
 /* EDIT BUTTON */
@@ -150,7 +155,7 @@ body {
 
 .edit-form__title {
   font-weight: bold;
-  margin-bottom: 5%;
+  margin-bottom: 20px;
 }
 
 .edit-form__label {
@@ -163,13 +168,13 @@ body {
   height: 40px;
   border-radius: 10px;
   background-color: #fff;
-  margin-bottom: 2%;
+  margin-bottom: 20px;
   padding: 10px 20px;
   font-size: 18px;
 }
 
 .edit-form__btns {
-  margin-top: 5%;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   gap: 10px;
