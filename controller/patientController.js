@@ -14,7 +14,8 @@ const {
   get_clinician_message,
   get_patient_settings,
   get_patient_all_data,
-  getHistoricalData
+  getHistoricalData,
+  get_current_date,
 } = require("../utils/utils");
 
 const GLUCOSE_ENUM_TYPE = "blood_glucose";
@@ -174,13 +175,15 @@ const loadDashboard = async (req, res) => {
   //var timeseries = await get_patient_all_data(patient);
   var timeseries = await getHistoricalData(patient,10);
   var leaderboard = await get_top5_leaderboard();
+  var dateString = get_current_date().toDateString();
   res.render("patient/patientDashboard", {
     patient: patient_data,
     clinicianmessage: message,
     engagement: engagement_rate,
     showBadge: badge,
     historicaldata: timeseries,
-    leaderboard: leaderboard
+    leaderboard: leaderboard,
+    currentDate: dateString
   });
 };
 
@@ -188,8 +191,10 @@ const loadPatientInfoPage = async (req, res) => {
   req.session.username = "patstuart";
   var patient_info = await PatientSchema.findOne({ username: req.session.username}).populate("assigned_clincian").lean();
   patient_info.dob = patient_info.dob.toDateString();
+  currentDate = get_current_date().toDateString();
   res.render("patient/patientUserInfo", {
-    patient: patient_info
+    patient: patient_info,
+    currentDate: currentDate
   });
 }
 

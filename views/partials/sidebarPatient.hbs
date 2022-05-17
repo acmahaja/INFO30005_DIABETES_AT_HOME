@@ -19,7 +19,6 @@
     alt=""
     onclick="sidebarOn()"
   />
-  
 </div>
 
 <div id="sidebar" class="patient-sidebar">
@@ -36,7 +35,7 @@
     {{! <a href="/patient/info"> }}
     <img
       class="patient-photo"
-      src={{profile-img}}
+      src="/images/favicon.png"
       alt="profile-pic"
     />
     {{! </a> }}
@@ -93,15 +92,31 @@
   </div>
   <div
     class="nav-link"
-    onclick="location.href='/patient/awards';"
+    onclick="location.href='/patient/info';"
     style="cursor: pointer;"
   >
     <img src="/icons/awards.svg" alt="" />
-    <p>Awards</p>
+    <p>User Info</p>
+  </div>
+    <div
+    class="nav-link"
+    onclick="location.href='/patient/info';"
+    style="cursor: pointer;"
+  >
+    <img src="/icons/awards.svg" alt="" />
+    <p>About Diabetes</p>
+  </div>
+    <div
+    class="nav-link"
+    onclick="location.href='/diabetes';"
+    style="cursor: pointer;"
+  >
+    <img src="/icons/awards.svg" alt="" />
+    <p>Diabetes@HOME</p>
   </div>
   <div
     class="nav-link"
-    onclick="location.href='/patient/logout';"
+    onclick="location.href='/';"
     style="cursor: pointer;"
   >
     <img src="/icons/logout.svg" alt="" />

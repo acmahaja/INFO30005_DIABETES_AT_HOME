@@ -8,6 +8,23 @@ body {
   position: relative;
 }
 
+.wrap {
+  padding: 11% 0;
+}
+
+
+h1 {
+  font-size: 34px;
+  color: #4c4c4c;
+  font-weight: 700
+}
+
+h2 {
+  font-size: 22px;
+  color: #8d8e94;
+  font-weight: 400
+}
+
 /* NAVIGATION BAR */
 .nav {
   display: flex;

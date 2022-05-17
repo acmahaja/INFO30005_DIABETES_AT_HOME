@@ -22,7 +22,7 @@ header {
 }
 
 .patient-profile {
-    margin: 0 0 24px;
+    margin: 0 0 18px;
 }
 
 .patient-profile a {
@@ -43,7 +43,7 @@ p.patient-name:hover {
 
 .patient-sidebar .nav-link {
     display: flex;
-    height: 4em;
+    height: 3.5em;
     padding: 0em 1em;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -74,16 +74,15 @@ p.patient-name:hover {
 }
 
 img.patient-photo {
-    border: 5px solid #313162;
-    margin-left: 28%;
-    display: block;
-    border-radius: 4px;
-    width: 8em;
-    height: 8em;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-
+	border: 5px solid #8a82ff;
+	margin-left: 28%;
+	display: block;
+	border-radius: 4px;
+	width: 8em;
+	height: 8em;
+	/* border-radius: 50%; */
+	object-fit: contain;
+	margin-bottom: 10px;
 }
 
 /* img.patient-photo:hover{
