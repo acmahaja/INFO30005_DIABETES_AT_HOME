@@ -120,6 +120,9 @@ header {
   justify-content: space-evenly;
   align-items: center;
   padding: 20px;
+    box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
 }
 
 .patient-settings .check-boxes {

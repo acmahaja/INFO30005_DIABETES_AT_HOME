@@ -29,19 +29,19 @@
               <h2>Patient Settings</h2>
               <div class="check-boxes">
                 <div class="check-box">
-                  <input type="checkbox" name="requires_glucose" id="requires_glucose" checked>
+                  <input type="checkbox" name="requires_glucose" id="requires_glucose" {{tickbox settings.requires_glucose}} >
                   <label for="requires_glucose">Blood Glucose</label>
                 </div>
                 <div class="check-box">
-                  <input type="checkbox" name="requires_weight" id="requires_weight">
+                  <input type="checkbox" name="requires_weight" id="requires_weight" {{tickbox settings.requires_weight}}>
                   <label for="requires_weight">Weight</label>
                 </div>
                 <div class="check-box">
-                  <input type="checkbox" name="requires_insulin" id="requires_insulin">
+                  <input type="checkbox" name="requires_insulin" id="requires_insulin" {{tickbox settings.requires_insulin}}>
                   <label for="requires_insulin">Insulin Doses</label>
                 </div>
                 <div class="check-box">
-                  <input type="checkbox" name="requires_steps" id="requires_steps">
+                  <input type="checkbox" name="requires_steps" id="requires_steps" {{tickbox settings.requires_steps}}>
                   <label for="steps">Steps</label>
                 </div>
               </div>

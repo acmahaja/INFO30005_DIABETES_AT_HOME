@@ -1,3 +1,7 @@
+const tickbox = function (value) {
+  return value ? "checked" : null
+}
+
 var check_range =  function (value, min, max) {
   return min <= value && value <= max;
 };
@@ -64,4 +68,4 @@ const formatDate = function (dateString) {
   return  date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear()
 };
 
-module.exports = { check_range, formatDate, formatDateTime, getWeekDay };
+module.exports = {tickbox, check_range, formatDate, formatDateTime, getWeekDay };

@@ -43,8 +43,9 @@ const db = mongoose.connection.on('error', err => {
 app.engine(
   "hbs",
   exphbs.engine({
-    defaultlayout: "layout/main",
+    defaultlayout: "main",
     extname: ".hbs",
+    layoutsDir: "views/layouts/",
     helpers: require('./utils/handlebars-helpers'),
     partialsDir  : [
         //  path to your partials

@@ -10,12 +10,12 @@ const clinicianControllerInfo = require("../../controller/clinicianControllerInf
 
 const { isLoggedIn } = require("../../controller/clinicianController");
 
+
 clinicianRouter.put(
   "/:PatientID/info/settings",
   isLoggedIn,
   clinicianControllerInfo.updatePatientInfo
 );
-
 
 clinicianRouter.get(
   "/:PatientID/info/",
