@@ -52,7 +52,7 @@
       <div class="info-el">
         <p class="info-el__label">Screen Name:</p>
         <div class="info-el__value">{{patient.username}}</div>
-        <button class="edit-btn">Edit</button>
+        <button class="edit-btn" onclick="showChangeSNameForm()">Edit</button>
       </div>
       <div class="info-el">
         <p class="info-el__label">Date of Birth</p>
@@ -65,7 +65,7 @@
       <div class="info-el">
         <p class="info-el__label">Password:</p>
         <div class="info-el__value">{{patient.password}}</div>
-        <button class="edit-btn" onclick="overlayOn()">Edit</button>
+        <button class="edit-btn" onclick="showChangePWForm()">Edit</button>
       </div>
       <div class="info-el">
         <p class="info-el__label">Clinician Name:</p>
@@ -73,9 +73,69 @@
       </div>
     </div>
 
+    <!-- Change Screen Name Popup Box -->
+    <div id="change-screenname-form" class="popup" onclick="showChangeSNameForm()">
+      <form class="edit-form" id="edit-form-id">
+        <h3 class="edit-form__title">Change Screen Name</h3>
+        <label class="edit-form__label" for="new-sname">New Screen Name</label>
+        <input class="edit-form__input" type="text" id="new-sname"
+        name="new-sname" />
+        <div class="edit-form__btns">
+          <input
+            class="edit-form__btn btn-update"
+            type="submit"
+            id="update"
+            value="Update"
+          />
+          <input
+            class="edit-form__btn btn-cancel"
+            type="button"
+            id="cancel"
+            value="Cancel"
+            onclick="showChangeSNameForm()"
+          />
+        </div>
+      </form>
+    </div>
+
+    <!-- Change Password Popup Box -->
+    <div id="change-pw-form" class="popup" onclick="showChangePWForm()">
+      <form class="edit-form" id="edit-form-id">
+        <h3 class="edit-form__title">Change Password</h3>
+        <label class="edit-form__label" for="old-pw">Old Password</label>
+        <input class="edit-form__input" type="text" id="old-pw" name="old-pw" />
+        <label class="edit-form__label" for="new-pw">New Password</label>
+        <input class="edit-form__input" type="text" id="new-pw" name="new-pw" />
+        <label class="edit-form__label" for="confirm-pw"
+          >Confirm Password</label
+        >
+        <input
+          class="edit-form__input"
+          type="text"
+          id="confirm-pw"
+          name="confirm-pw"
+        />
+        <div class="edit-form__btns">
+          <input
+            class="edit-form__btn btn-update"
+            type="submit"
+            id="update"
+            value="Update"
+          />
+          <input
+            class="edit-form__btn btn-cancel"
+            type="button"
+            id="cancel"
+            value="Cancel"
+            onclick="showChangePWForm()"
+          />
+        </div>
+      </form>
+    </div>
+
 
     {{!-- OVERLAY --}}
-    <div id="overlay" onclick="overlayOff()">
+    {{!-- <div id="overlay" onclick="overlayOff()">
         <div class="entry-flex-item", id="overlay-input-box">
             <div class="header">
                 <p class="entry-name" id="overlay-entry-name">Change Password</p>
@@ -96,24 +156,45 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> --}}
+    <script>
+
+      editForm = document.getElementById("edit-form-id")
+      editForm.addEventListener("click", function(e) {
+          e.stopPropagation();
+      });
+
+      function showChangePWForm() {
+        var pwForm = document.getElementById("change-pw-form");
+        pwForm.classList.toggle("show");
+      }
+
+      function showChangeSNameForm() {
+        var sNameForm = document.getElementById("change-screenname-form");
+        sNameForm.classList.toggle("show");
+      }
+    </script>
+
+    
 
     <script>
-    
-    function overlayOn() {
-        document.getElementById("overlay").style.display = "flex";
-    }
-    
-    function overlayOff() {
-        document.getElementById("overlay").style.display = "none";
-    }
 
-    function checkValueInput() {
-        if (document.getElementById("overlay-operation-info").value=="add" 
-                && document.getElementById("overlay-number-input").value == ""){
-            alert("Please input a value to record a new data entry!")
-        }
-    }
+    //function overlayOn() {
+     //   document.getElementById("overlay").style.display = "flex";
+    //}
+    
+   // function overlayOff() {
+    //    document.getElementById("overlay").style.display = "none";
+    //}
+
+    //function checkValueInput() {
+     //   if (document.getElementById("overlay-operation-info").value=="add" 
+      //          && document.getElementById("overlay-number-input").value == ""){
+       //     alert("Please input a value to record a new data entry!")
+    //    }
+   // }
+
+  
     </script>
 
     {{!-- <!-- Edit Password pop up box -->
