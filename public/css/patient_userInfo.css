@@ -5,22 +5,25 @@
 }
 
 body {
+  padding-top: 40px;
+  padding-bottom: 11%;
   position: relative;
+}
+
+@media screen and (min-width: 1600px) {
+  body {
+    background-color: green;
+  }
 }
 
 /* NAVIGATION BAR */
 .nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 4.4%;
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
+  justify-content: flex-start;
   gap: 14px;
   margin-left: 8.6%;
+  margin-bottom: 40px;
 }
 
 .nav-icon {
@@ -33,27 +36,9 @@ body {
   font-weight: 700;
   color: #4c4c4c;
   font-size: 20px;
-  line-height: 23.48px;
-}
-
-.nav-profileimg {
-  width: 51px;
-  height: 51px;
-  margin-right: 5%;
 }
 
 /* USER INFORMATION */
-.profilePhoto-box {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 5%;
-}
-
-.profilePhoto {
-  width: 146px;
-  height: 146px;
-}
-
 .user-info {
   margin-left: 5.9%;
   margin-right: 5.9%;
@@ -67,9 +52,9 @@ body {
 }
 
 .info-el {
-  margin-left: 4%;
+  margin-left: 20px;
+  margin-right: 20px;
   margin-bottom: 10px;
-  margin-right: 4%;
   position: relative;
 }
 
@@ -145,7 +130,7 @@ body {
   background-color: #8a82ff;
   color: #fff;
   border-radius: 30px;
-  padding: 4.5% 4%;
+  padding: 30px 20px;
   width: 100%;
 
   font-family: "Gill Sans";
@@ -160,6 +145,7 @@ body {
 
 .edit-form__label {
   display: block;
+  margin-bottom: 5px;
 }
 
 .edit-form__input {
@@ -168,7 +154,7 @@ body {
   height: 40px;
   border-radius: 10px;
   background-color: #fff;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding: 10px 20px;
   font-size: 18px;
 }
