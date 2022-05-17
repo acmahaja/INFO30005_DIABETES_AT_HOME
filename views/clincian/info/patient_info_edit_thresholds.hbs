@@ -1,8 +1,33 @@
-<title>Patient Messages</title>
+<title>Patient Info</title>
 <link rel='stylesheet' href='/css/clinican_sidebar.css' />
 <link rel="stylesheet" href="/css/clinican_patient_info.css" />
+<link rel="stylesheet" href="/css/clinican_patient_info_edit.css" />
 <link rel="stylesheet" href="/css/clinican_dashboard.css" />
 
+
+<div class="overlay">
+  <form action="/clinician/{{patient._id}}/info/{{this.type}}/edit?_method=PUT" method="POST">
+    <h1>{{threshold_title this.type}}</h1>
+    <div class="values">
+      <div>
+        <label for="min">Min Threshold</label>
+        <input type="text" name="min" id="min" value="{{type_data.min_value}}">
+      </div>
+      <div>
+        <label for="max">Max Threshold</label>
+        <input type="text" name="max" id="max" value="{{type_data.max_value}}">
+      </div>
+    </div>
+    <div class="buttons">
+      <button class="button">Update</button>
+      <div class="button">
+        <a href="/clinician/{{patient._id}}/info/">
+          Cancel
+        </a>
+        </div>
+    </div>
+  </form>
+</div>
 
 <body>
   {{> sidebarClinician this }}
@@ -18,10 +43,10 @@
     <section class="content">
       <div class="nav patient-options">
         <div class="tabs">
-          <div class="tab" id="data">Data</div>
-          <div class="tab" id="messages">Messages</div>
-          <div class="tab" id="notes">Notes</div>
-          <div class="tab selected" id="info">Info</div>
+          <div class="tab">Data</div>
+          <div class="tab">Messages</div>
+          <div class="tab">Notes</div>
+          <div class="tab selected">Info</div>
         </div>
         <div class="content">
           <div class="settings">
@@ -59,11 +84,11 @@
                 <div class="data">
                   <div class="value">
                     <div class="for">Min Threshold:</div>
-                    <div class="for num">{{this.thresholds.blood_glucose_result.min_value}}</div>
+                    <div class="for num">{{this.thresholds.blood_result.min_value}}</div>
                   </div>
                   <div class="value">
                     <div class="for">Max Threshold:</div>
-                    <div class="for num">{{this.thresholds.blood_glucose_result.max_value}}</div>
+                    <div class="for num">{{this.thresholds.blood_result.max_value}}</div>
                   </div>
                   <div class="button">
                     <a href="/clinician/{{this.patient._id}}/info/blood_glucose">Edit</a>
@@ -91,7 +116,7 @@
               </div>
             {{/if }}
 
-            {{#if settings.requires_weight}}
+{{#if settings.requires_weight}}
               <div class="thresholds">
                 <h3>Weight</h3>
                 <div class="data">
@@ -128,55 +153,13 @@
                 </div>
               </div>
             {{/if }}
+
+
             </div>
-          </div>
-          {{log this}}
-          <div class="patient-details">  
-            <div class="personal-info">
-              <div class="personal">
-                <div class="fullname">
-                  <div class="form-element">
-                      <label for="firstname">First Name:</label>
-                      <input type="text" name="firstname" id="firstname" disabled value="{{patient.firstname}}" >
-                  </div>
-                  <div class="form-element">
-                    <label for="middlename">Middle Name:</label>
-                    <input type="text" name="middlename" id="middlename" disabled value="{{patient.middlename}}">
-                  </div>
-                  <div class="form-element">
-                    <label for="lastname">Last Name:</label>
-                    <input type="text" name="lastname" id="lastname" disabled value="{{patient.lastname}}" >
-                  </div>
-                
-                </div>
-                <div class="form-element">
-                  <label for="username">Username:</label>
-                  <input type="text" name="username" id="username" disabled value="{{patient.username}}">
-                </div>
-                <div class="form-element">
-                  <label for="dob">Date of Birth:</label>
-                  <input type="date" name="dob" id="dob" disabled value="{{patient.dob}}">
-                </div>
-              </div>
-            </div>
-            <div class="form-element">
-              <label for="email">Email:</label>
-              <input type="email" name="email" id="email" disabled value="{{patient.email}}">
-            </div>
-            <div class="form-element">
-              <label for="password">Password:</label>
-              <input type="password" name="password" id="password" disabled value="{{patient.password}}">
-            </div>
-            <div class="form-element">
-              <label for="assigned_clincian">Clinician name:</label>
-              <input type="input" name="assigned_clincian" id="assigned_clincian" value="{{this.clinician.firstname}} {{this.clinician.lastname}}" disabled>
-            </div>
+
             
-            <div class="form-element">
-              <label for="bio">Bio:</label>
-              <textarea name="bio" id="bio" rows="4" cols="50" disabled>{{patient.bio}}</textarea>
-            </div>
           </div>
+          <div class="patient-details"></div>
         </div>
       </div>
     </section>
@@ -184,7 +167,6 @@
 
 
 <script>
-  console.log({{{this}}})
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   const date =  new Date();

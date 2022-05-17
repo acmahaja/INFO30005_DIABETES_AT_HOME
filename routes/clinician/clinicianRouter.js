@@ -10,11 +10,23 @@ const clinicianControllerInfo = require("../../controller/clinicianControllerInf
 
 const { isLoggedIn } = require("../../controller/clinicianController");
 
-
 clinicianRouter.put(
   "/:PatientID/info/settings",
   isLoggedIn,
   clinicianControllerInfo.updatePatientInfo
+);
+
+clinicianRouter.put(
+  "/:PatientID/info/:Type/edit",
+  isLoggedIn,
+  clinicianControllerInfo.updatePatientThreshold
+);
+
+
+clinicianRouter.get(
+  "/:PatientID/info/:Type",
+  isLoggedIn,
+  clinicianControllerInfo.editPatientThreshold
 );
 
 clinicianRouter.get(
@@ -87,35 +99,11 @@ clinicianRouter.get(
 );
 
 clinicianRouter.get(
-  "/:PatientID/glucose/",
+  "/:PatientID/data/:Type",
   isLoggedIn,
   clinicianControllerData.loadGlucosePage
 );
 
-clinicianRouter.get(
-  "/:PatientID/glucose/",
-  isLoggedIn,
-  clinicianControllerData.loadGlucosePage
-);
-
-clinicianRouter.get(
-  "/:PatientID/glucose",
-  isLoggedIn,
-  clinicianControllerData.loadGlucosePage
-);
-
-clinicianRouter.get(
-  "/:PatientID/info",
-  isLoggedIn,
-  clinicianController.renderPatientInfo
-);
-
-
-clinicianRouter.get(
-  "/:PatientID/info",
-  isLoggedIn,
-  clinicianController.renderPatientInfo
-);
 
 clinicianRouter.post(
   "/register",

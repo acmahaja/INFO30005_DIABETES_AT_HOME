@@ -45,7 +45,7 @@ function generate_random_date(start, end) {
 }
 
 async function get_threshold(patient_id) {
-  const blood_result = await patientThresholdsSchema.findOne({
+  const blood_glucose_result = await patientThresholdsSchema.findOne({
     for_patient: patient_id,
     health_type: "blood_glucose",
   });
@@ -62,7 +62,7 @@ async function get_threshold(patient_id) {
     health_type: "steps",
   });
 
-  return { blood_result, weight_result, insulin_result, steps_result };
+  return { blood_glucose_result, weight_result, insulin_result, steps_result };
 }
 
 async function get_patient_data_type(patient, type) {

@@ -24,8 +24,7 @@ const updatePatientInfo = async (req, res) => {
     }
   );
 
-
-    if (
+  if (
     data.requires_glucose === "on" &&
     (await patientThresholdsSchema.findOne({
       for_patient: req.params.PatientID,
@@ -93,7 +92,54 @@ const updatePatientInfo = async (req, res) => {
   res.redirect(`/clinician/${req.params.PatientID}/info`);
 };
 
-const editPatientThreshold = async (req,res)=>{}
+const editPatientThreshold = async (req, res) => {
+  if (
+    !(
+      req.params.Type === "blood_glucose" ||
+      req.params.Type === "steps" ||
+      req.params.Type === "weight" ||
+      req.params.Type === "insulin"
+    )
+  ) {
+    res.redirect(`/clinician/${req.params.PatientID}/info`);
+  }
+
+  const patient = await Patient.findById(req.params.PatientID);
+  const get_clinician = await get_clinician_id(req.session.username);
+  const settings = await PatientSettings.findOne({
+    for_patient: req.params.PatientID,
+  });
+
+  const thresholds = await get_threshold(req.params.PatientID);
+  res.render("clincian/info/patient_info_edit_thresholds.hbs", {
+    clinician: get_clinician.toJSON(),
+    patient: patient,
+    settings: settings,
+    type: req.params.Type,
+    type_data: thresholds[`${req.params.Type}_result`],
+    thresholds: thresholds,
+  });
+};
+
+const updatePatientThreshold = async (req,res)=>{
+  const min = parseInt(req.body.min);
+  const max = req.body.max
+  console.log(req.body);
+  await patientThresholdsSchema.findOneAndUpdate(
+    {
+      for_patient: req.params.PatientID,
+      health_type: req.params.Type,
+    },
+    {
+      for_patient: req.params.PatientID,
+      health_type: req.params.health_type,
+      min_value: parseInt(min),
+      max_value: parseInt(max),
+    }
+  );
+    
+  res.redirect(`/clinician/${req.params.PatientID}/info`);
+}
 
 const loadPatientInfo = async (req, res) => {
   const patient = await Patient.findById(req.params.PatientID);
@@ -114,4 +160,5 @@ module.exports = {
   loadPatientInfo,
   updatePatientInfo,
   editPatientThreshold,
+  updatePatientThreshold,
 };
