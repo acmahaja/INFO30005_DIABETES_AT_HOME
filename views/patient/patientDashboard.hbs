@@ -33,20 +33,19 @@
                 {{#if patient.patient_settings.requires_glucose}}
                     <div class="data-box">
                         {{#if patient.patient_data.glucose}}
-                            <img class="tick-cross" src="/images/Vector.svg" alt="">
                             {{!-- ADD CROSS TICK ELSE STATEMENT --}}
                             <p class="data-type">Blood Glucose</p>
                             <img class="symbol" src="/images/blood-glucose-icon.svg" alt="">
                             {{#if (check_range patient.patient_data.glucose.value patient.patient_threshold.blood_result.min_value patient.patient_threshold.blood_result.max_value)}} 
                                 <p class="value">{{patient.patient_data.glucose.value}} nmo/L</p>
+                                <img class="tick-cross" src="/images/Vector.svg" alt="">
                             {{else}}
+                            <p class="value">{{patient.patient_data.glucose.value}} nmo/L</p>
                                 <div class="danger">
                                     <img src="/icons/danger.svg">
-                                    {{patient.patient_data.glucose.value}} nmo/L
                                 </div>
                             {{/if}}
                         {{else}}
-                            <img class="tick-cross" src="/images/Vector.svg" alt="">
                             <p class="data-type">Blood Glucose</p>
                             <img class="symbol" src="/images/blood-glucose-icon.svg" alt="">
                             <p class="value">--- nmo/L</p>
@@ -54,26 +53,26 @@
                                 <img src="/icons/warn.svg">
                             </div>
                         {{/if}}
+                        <p class="time">14:46</p>
                     </div>
                 {{/if}}
 
                 {{#if patient.patient_settings.requires_insulin}}
                     <div class="data-box">
                         {{#if patient.patient_data.insulin}}
-                            <img class="tick-cross" src="/images/Vector.svg" alt="">
                             {{!-- ADD CROSS TICK ELSE STATEMENT --}}
                             <p class="data-type">Insulin</p>
                             <img class="symbol" src="/images/insulin-icon.svg" alt="">
                             {{#if (check_range patient.patient_data.insulin.value patient.patient_threshold.insulin_result.min_value patient.patient_threshold.insulin_result.max_value)}} 
                                 <p class="value">{{patient.patient_data.insulin.value}} doses</p>
+                                <img class="tick-cross" src="/images/Vector.svg" alt="">
                             {{else}}
+                            <p class="value">{{patient.patient_data.insulin.value}} doses</p>
                                 <div class="danger">
                                     <img src="/icons/danger.svg">
-                                    {{patient.patient_data.insulin.value}} doses
                                 </div>
                             {{/if}}
                         {{else}}
-                            <img class="tick-cross" src="/images/Vector.svg" alt="">
                             <p class="data-type">Insulin</p>
                             <img class="symbol" src="/images/insulin-icon.svg" alt="">
                             <p class="value">--- doses</p>
@@ -81,26 +80,26 @@
                                 <img src="/icons/warn.svg">
                             </div>
                         {{/if}}
+                        <p class="time">14:46</p>
                     </div>
                 {{/if}}
 
                 {{#if patient.patient_settings.requires_weight}}
                     <div class="data-box">
                         {{#if patient.patient_data.weight}}
-                            <img class="tick-cross" src="/images/Vector.svg" alt="">
                             {{!-- ADD CROSS TICK ELSE STATEMENT --}}
                             <p class="data-type">Weight</p>
                             <img class="symbol" src="/images/weight-icon.svg" alt="">
                             {{#if (check_range patient.patient_data.weight.value patient.patient_threshold.weight_result.min_value patient.patient_threshold.weight_result.max_value)}} 
                                 <p class="value">{{patient.patient_data.weight.value}} kg</p>
+                                <img class="tick-cross" src="/images/Vector.svg" alt="">
                             {{else}}
+                                <p class="value">{{patient.patient_data.weight.value}} kg</p
                                 <div class="danger">
                                     <img src="/icons/danger.svg">
-                                    {{patient.patient_data.weight.value}} kg
                                 </div>
                             {{/if}}
                         {{else}}
-                            <img class="tick-cross" src="/images/Vector.svg" alt="">
                             <p class="data-type">Weight</p>
                             <img class="symbol" src="/images/weight-icon.svg" alt="">
                             <p class="value">--- kg</p>
@@ -108,6 +107,7 @@
                                 <img src="/icons/warn.svg">
                             </div>
                         {{/if}}
+                        <p class="time">14:46</p>
                     </div>
                 {{/if}}
 
@@ -115,20 +115,19 @@
                 {{#if patient.patient_settings.requires_steps}}
                     <div class="data-box">
                         {{#if patient.patient_data.steps}}
-                            <img class="tick-cross" src="/images/Vector.svg" alt="">
                             {{!-- ADD CROSS TICK ELSE STATEMENT --}}
                             <p class="data-type">Steps</p>
                             <img class="symbol" src="/images/steps-icon.svg" alt="">
-                            {{#if (check_range patient.patient_data.steps.value patient.patient_threshold.steps_result.min_value patient.patient_threshold.steps_result.max_value)}} 
+                            {{#if (check_range patient.patient_data.steps.value patient.patient_threshold.steps_result.min_value patient.patient_threshold.steps_result.max_value)}}   
                                 <p class="value">{{patient.patient_data.steps.value}} nmo/L</p>
+                                <img class="tick-cross" src="/images/Vector.svg" alt="">
                             {{else}}
+                                <p class="value">{{patient.patient_data.steps.value}} steps</p>
                                 <div class="danger">
                                     <img src="/icons/danger.svg">
-                                    {{patient.patient_data.steps.value}} steps
                                 </div>
                             {{/if}}
                         {{else}}
-                            <img class="tick-cross" src="/images/Vector.svg" alt="">
                             <p class="data-type">Steps</p>
                             <img class="symbol" src="/images/steps-icon.svg" alt="">
                             <p class="value">--- steps</p>
@@ -136,6 +135,7 @@
                                 <img src="/icons/warn.svg">
                             </div>
                         {{/if}}
+                        <p class="time">14:46</p>
                     </div>
                 {{/if}}
             </div>
@@ -151,16 +151,13 @@
                         <h2>Latest Support Message</h2>
                     </div>
 
-
                     <!-- start of 1 message -->
                     <div class="clinician-message">
                         <p class="message">{{clinicianmessage.message}}</p>
                         {{!-- <img src="/images/pdashboard/message-doctor-icon.svg" alt=""> --}}
-                        <p></p>
-                        <p class="date">{{clinicianmessage.date}}</p>
+                        <p class="date">{{clinicianmessage.date}}Tues 15th Mar, 2022</p>
                     </div>
                     <!-- end of 1 message -->
-
 
                 </div>
             </section>
@@ -195,6 +192,8 @@
                 </div>
             </section>
         </div>
+
+        <br class="mobile linebreak">
 
         <section class="social">
             <h1>Social</h1>
