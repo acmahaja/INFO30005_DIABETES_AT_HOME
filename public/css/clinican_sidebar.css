@@ -66,8 +66,9 @@
     margin-right: .65em;
 }
 
-#sidebar .links li.selected {
+#sidebar .links li:hover {
     background: #54259F;
+    border: none
 }
 
 #sidebar .profile .name {

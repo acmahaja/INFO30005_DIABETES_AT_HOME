@@ -98,12 +98,16 @@ const loadDashboard = async (req, res) => {
     const result = await get_threshold(patient_list[i].id);
     var thresholds = result;
     const patient_data = await get_patient_data(
-      patient_list[i].id,
+      patient_list[i]._id,
       new Date(Date.now())
     );
-    patient = { ...patient._doc, patient_data, thresholds };
+    const patient_settings = await PatientSettings.findOne(
+      {for_patient: patient_list[i]._id}    
+    );
+    patient = { ...patient._doc, patient_data, thresholds, patient_settings };
     patient_info.push(patient);
   }
+
   res.render("clincian/dashboard.hbs", {
     clinician: get_clinician.toJSON(),
     patients: { patient_info },

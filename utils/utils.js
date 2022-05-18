@@ -69,7 +69,7 @@ async function get_patient_data_type(patient, type) {
   const result = await HealthDataEntry.find({
     health_type: type,
     patient_id: patient._id,
-  }).sort({ created: "desc" });
+  }).sort({ created: "-1" });
   return result;
 }
 
@@ -92,7 +92,7 @@ async function get_patient_data(patient, start_date) {
         "-" +
         start_date.getDate(),
     },
-  }).sort({ created: "desc" });
+  }).sort({ created: "-1" });
 
   const weight_result = await HealthDataEntry.find({
     health_type: "weight",
@@ -105,7 +105,7 @@ async function get_patient_data(patient, start_date) {
         "-" +
         start_date.getDate(),
     },
-  }).sort({ created: "desc" });
+  }).sort({ created: "-1" });
 
   const insulin_result = await HealthDataEntry.find({
     health_type: "insulin",
@@ -118,7 +118,7 @@ async function get_patient_data(patient, start_date) {
         "-" +
         start_date.getDate(),
     },
-  }).sort({ created: "desc" });
+  }).sort({ created: "-1" });
 
   const steps_result = await HealthDataEntry.find({
     health_type: "steps",
@@ -131,7 +131,7 @@ async function get_patient_data(patient, start_date) {
         "-" +
         start_date.getDate(),
     },
-  }).sort({ created: "desc" });
+  }).sort({ created: "-1" });
 
   return {
     glucose: glucose_result[0],

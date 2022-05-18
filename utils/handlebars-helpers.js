@@ -94,6 +94,10 @@ const formatDate = function (dateString) {
   );
 };
 
+const is_defined = function(value) {
+    return value !== undefined && value !== "" && value !== [] && value !== null;
+}
+
 module.exports = {
   tickbox,
   check_range,
@@ -102,4 +106,5 @@ module.exports = {
   getWeekDay,
   threshold_title,
   data_title,
+  is_defined,
 };

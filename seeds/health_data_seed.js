@@ -5,7 +5,6 @@ const { generate_random_date } = require("../utils/utils");
 const mongoose = require("mongoose");
 const { all } = require("express/lib/application");
 
-console.warn("Dev Environment: " + process.env.NODE_ENV);
 
 mongoose
   .connect(
@@ -28,7 +27,8 @@ const db = mongoose.connection.on("error", (err) => {
 const createHealthData = async () => {
   const all_patients = await PatientSchema.find({});
   all_patients.forEach(async (patient) => {
-    for (let i = 0; i < 100; i++) {
+    console.log(patient.username);
+    for (let i = 0; i < 50; i++) {
       const new_data_blood_glucose = new healthDataSchema({
         patient_id: patient._id,
         health_type: "blood_glucose",
@@ -62,10 +62,14 @@ const createHealthData = async () => {
       });
 
       try {
-        if (Math.round(Math.random()+.45)) await new_data_blood_glucose.save();
-        if (Math.round(Math.random() + 0.45)) await new_data_steps.save();
-        if (Math.round(Math.random() + 0.45)) await new_data_weight.save();
-        if (Math.round(Math.random() + 0.45)) await new_data_insulin.save();
+        if (i ===0 || Math.round(Math.random()+.45)) 
+          await new_data_blood_glucose.save().then((result)=>console.log(result));
+        if (i === 0 || Math.round(Math.random() + 0.45))
+          await new_data_steps.save().then((result) => console.log(result));;
+        if (i === 0 || Math.round(Math.random() + 0.45))
+          await new_data_weight.save().then((result) => console.log(result));;
+        if (i === 0 || Math.round(Math.random() + 0.45))
+          await new_data_insulin.save().then((result) => console.log(result));;
       } catch (error) {
         console.log("Something Broke");
         console.log(error);
@@ -107,4 +111,3 @@ deleteHealth()
       console.log("generated data");
     })
   );
-//   .then(() => process.exit(1));
