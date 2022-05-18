@@ -36,6 +36,7 @@ const registerPatient = async (req, res) => {
     date_joined: Date.now(),
     secret: "INFO30005",
     assigned_clincian: get_clinician._id,
+    
   });
 
   const new_patient_settings = new PatientSettings({
