@@ -370,7 +370,6 @@ const getHistoricalData = async (thisPatientId, nDays, metricType = "all") => {
       if (d in healthEntryTS)
           healthEntryTS[d][e.health_type]  = {value: e.value, comment: e.comments}
   }
-  // console.log(healthEntryTS)
   healthEntryArray = Object.values(healthEntryTS);
   return healthEntryArray
 }
@@ -390,7 +389,6 @@ const convert_timeseries_to_graph = (timeseries, metric_enum) => {
     newT.index = t.index;
     newT.date = t.date;
     newT.datetime = t.datetime;
-    // console.log(newT);
     if (t[metric_enum] == undefined){
       newT[metric_enum] = {value: 0}
     } else {
@@ -398,8 +396,6 @@ const convert_timeseries_to_graph = (timeseries, metric_enum) => {
     }
     newTS.push(newT)
   } 
-  // console.log(timeseries)
-  // console.log(newTS)
   return newTS
 }
 
