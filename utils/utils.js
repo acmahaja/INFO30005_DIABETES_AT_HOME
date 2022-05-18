@@ -363,7 +363,7 @@ const getHistoricalData = async (thisPatientId, nDays, metricType = "all") => {
   for (var i=0; i<NUMBER_OF_DAYS; i++){
       d = new Date()
       d.setDate(startOfToday.getDate() - i)
-      healthEntryTS[d.toDateString()] = {index: i, date: d.toDateString()}
+      healthEntryTS[d.toDateString()] = {index: i, date: d.toDateString(), datetime: d}
   }
   for (const e of historical_data){
       d = e.updated.toDateString()
@@ -375,9 +375,32 @@ const getHistoricalData = async (thisPatientId, nDays, metricType = "all") => {
   return healthEntryArray
 }
 
+
 const get_current_date = () => {
   var now = new Date();
   return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+}
+
+//add function to add 0 if data.blood_glucose undefined
+
+const convert_timeseries_to_graph = (timeseries, metric_enum) => {
+  newTS = [];
+  for (const t of timeseries) {
+    var newT = {}
+    newT.index = t.index;
+    newT.date = t.date;
+    newT.datetime = t.datetime;
+    // console.log(newT);
+    if (t[metric_enum] == undefined){
+      newT[metric_enum] = {value: 0}
+    } else {
+      newT[metric_enum] = t[metric_enum]
+    }
+    newTS.push(newT)
+  } 
+  // console.log(timeseries)
+  // console.log(newTS)
+  return newTS
 }
 
 module.exports = {
@@ -396,5 +419,6 @@ module.exports = {
   show_badge,
   update_clinician_message,
   getHistoricalData,
-  get_current_date
+  get_current_date,
+  convert_timeseries_to_graph
 }

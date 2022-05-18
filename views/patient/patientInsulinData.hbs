@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/patientDataPage.css" />
     <link rel="stylesheet" href="/css/patient_sidebar.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 
 </head>
 
@@ -24,14 +25,14 @@
     <div class="data-wrapper">
         <div class="header">
             <h1>Insulin</h1>
-            <h2 class="date">Sunday, 18 March 2022</h2>
+            <h2 class="date">{{currentDate}}</h2>
         </div>
         <section class="middle-section">
             <section class="historical-trends">
                 <h3>Historical Data</h3>
 
                 <div class="dropdown">
-                    <button class="dropbtn">Upload Date</button>
+                    <button class="dropbtn">Select time period</button>
                     <div class="dropdown-content">
                         {{!-- <a href="#">Today</a>
                         <a href="#">This week</a> --}}
@@ -51,9 +52,9 @@
                     <hr>
                     <!-- start of 1 record -->
                     {{#each historicaldata}}
-                        <p>{{this.date}}</p>
-                        <p>{{this.insulin.value}} nmo/L</p>
-                        <p>{{this.insulin.comment}}</p>
+                        <p class="value-p">{{this.date}}</p>
+                        <p class="value-p">{{this.insulin.value}} doses</p>
+                        <p class="comment-p">{{this.insulin.comment}}</p>
                         <hr>
                     {{/each}}
                     <!-- end of 1 record -->
@@ -62,13 +63,63 @@
             </section>
             <br class="mobile-break">
             <section class="graph">
-                <h3>Graph</h3>
-            <img src="/images/fake-graph.svg" alt="">
+                <h3>Trend</h3>
+                <div class="content white">
+                    <canvas id="myChart" width="400" height="400"></canvas>
+                </div>
             </section>
         </section>
     </div>
     </div>
     <br>
 </body>
+
+<script>
+  var healthdata = {{{graphdata}}};
+  console.log(healthdata);
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    options: {
+        plugins: {
+            legend: {
+                display: false
+            },
+            labels: {
+              fontSize: 20
+            }
+          
+        },
+          scales: {
+            y: {
+               ticks: {
+                 font:  {
+                        size: 20,
+                    }
+               }
+            },
+            x: {
+               ticks: {
+                 font:  {
+                        size: 20
+                    }
+               }
+            }
+        } 
+    },
+    data: {
+        labels: healthdata.map((data)=> `${new Date(data.datetime).getDate()+1}/${new Date(data.datetime).getMonth()+1}`),
+         fontColor: ['rgba(255, 255, 255, 30)'],
+         datasets: [{
+          data: healthdata.map((data)=> data.insulin.value),
+          fill: false,
+          tension: 0.1,
+          backgroundColor: [
+            'rgba(255, 255, 255, 0.7)',
+          ],
+        }]
+       }
+});
+</script>
 
 </html>

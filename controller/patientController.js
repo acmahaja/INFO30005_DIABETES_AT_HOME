@@ -16,6 +16,7 @@ const {
   get_patient_all_data,
   getHistoricalData,
   get_current_date,
+  convert_timeseries_to_graph
 } = require("../utils/utils");
 const { version } = require("prettier");
 
@@ -216,9 +217,11 @@ const loadDataPage = async (req, res, render_path, enum_type, history="month") =
   }
   var timeseries = await getHistoricalData(patient, days, enum_type);
   var currentDate = get_current_date().toDateString();
+  graphTS = convert_timeseries_to_graph(timeseries, enum_type);
   res.render(render_path, {
     historicaldata: timeseries,
-    currentDate: currentDate
+    currentDate: currentDate,
+    graphdata: JSON.stringify(graphTS)
   });
 }
 
