@@ -18,10 +18,10 @@
     <section class="content">
       <div class="nav patient-options">
         <div class="tabs">
-          <div class="tab" id="data">Data</div>
-          <div class="tab" id="messages">Messages</div>
-          <div class="tab" id="notes">Notes</div>
-          <div class="tab selected" id="info">Info</div>
+          <div class="tab"><a href="/clinician/{{patient._id}}/data">Data</a></div>
+          <div class="tab"><a href="/clinician/{{patient._id}}/messages">Messages</a></div>
+          <div class="tab"><a href="/clinician/{{patient._id}}/notes">Notes</a></div>
+          <div class="tab selected"><a href="/clinician/{{patient._id}}/info">Info</a></div>
         </div>
         <div class="content">
           <div class="settings">
@@ -184,7 +184,6 @@
 
 
 <script>
-  console.log({{{this}}})
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   const date =  new Date();

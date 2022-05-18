@@ -32,13 +32,9 @@ const showPatientNote = async (req, res) => {
   var all_notes = await ClinicianPatientNote.find({
     for_clincian: get_clinician._id,
     for_patient: patient._id,
-  }).sort({ created: 1 });
+  }).sort({ created: -1 });
 
-  var note = await ClinicianPatientNote.findOne({
-    for_clincian: get_clinician._id,
-    for_patient: patient._id,
-    id: req.params.NoteID,
-  });
+  var note = await ClinicianPatientNote.findById(req.params.NoteID);
 
 
   res.render("clincian/notes/patient_notes_show.hbs", {
@@ -56,7 +52,8 @@ const loadPatientNotesForm = async (req, res) => {
   var all_notes = await ClinicianPatientNote.find({
     for_clincian: get_clinician._id,
     for_patient: patient._id,
-  }).sort({ created: 1 });
+  }).sort({ created: -1 });
+
 
   res.render("clincian/notes/patient_notes_new.hbs", {
     clinician: get_clinician.toJSON(),
@@ -73,7 +70,7 @@ const loadPatientNotes = async (req, res) => {
     for_clincian: get_clinician._id,
     for_patient: req.params.PatientID,
   })
-  .sort({ created: 1 });
+  .sort({ created: -1 });
 
   res.render("clincian/notes/patient_notes.hbs", {
     clinician: get_clinician.toJSON(),
