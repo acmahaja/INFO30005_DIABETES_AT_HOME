@@ -326,8 +326,7 @@ h3 {
         grid-column: 2;
         justify-self: center
     }
-    .trends-wrapper .data-box :nth-child(4),
-    .trends-wrapper .data-box :nth-child(5) {
+    .trends-wrapper .data-box :nth-child(4) {
         margin-top: 40px;
     }
     .msg-htrends {
