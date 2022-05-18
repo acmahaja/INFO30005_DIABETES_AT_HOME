@@ -54,7 +54,7 @@ const postAddHealthData = async (req, res) => {
 const isLoggedIn = (req, res, next) => {
   if (
     req.session.loggedIn &&
-    req.session.username != null &&
+    req.user.username != null &&
     !req.session.isClinician
   ) {
     next();
@@ -71,7 +71,7 @@ const patientLogin = async (req, res) => {
   const has_user = await patient_authorization(username, password);
   if (has_user) {
     req.session.loggedIn = true;
-    req.session.username = username;
+    req.user.username = username;
     req.session.isClinician = false;
     res.redirect("/patient/dashboard");
   } else {
@@ -86,7 +86,6 @@ const patientLogout = (req, res) => {
 };
 
 const getDataEntryPage = async (req, res) => {
-  req.session.username = "patstuart";
   const this_patient = await PatientSchema.findOne({
     username: req.session.username,
   });

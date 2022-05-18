@@ -105,14 +105,14 @@ const editPatientThreshold = async (req, res) => {
   }
 
   const patient = await Patient.findById(req.params.PatientID);
-  const get_clinician = await get_clinician_id(req.session.username);
+  const get_clinician = await get_clinician_id(req.user.username);
   const settings = await PatientSettings.findOne({
     for_patient: req.params.PatientID,
   });
 
   const thresholds = await get_threshold(req.params.PatientID);
   res.render("clincian/info/patient_info_edit_thresholds.hbs", {
-    clinician: get_clinician.toJSON(),
+    clinician: get_clinician,
     patient: patient,
     settings: settings,
     type: req.params.Type,
@@ -124,7 +124,6 @@ const editPatientThreshold = async (req, res) => {
 const updatePatientThreshold = async (req,res)=>{
   const min = parseInt(req.body.min);
   const max = req.body.max
-  console.log(req.body);
   await patientThresholdsSchema.findOneAndUpdate(
     {
       for_patient: req.params.PatientID,
@@ -143,13 +142,13 @@ const updatePatientThreshold = async (req,res)=>{
 
 const loadPatientInfo = async (req, res) => {
   const patient = await Patient.findById(req.params.PatientID);
-  const get_clinician = await get_clinician_id(req.session.username);
+  const get_clinician = await get_clinician_id(req.user.username);
   const settings = await PatientSettings.findOne({
     for_patient: req.params.PatientID,
   });
   const thresholds = await get_threshold(req.params.PatientID);
   res.render("clincian/info/patient_info.hbs", {
-    clinician: get_clinician.toJSON(),
+    clinician: get_clinician,
     patient: patient,
     settings: settings,
     thresholds: thresholds,

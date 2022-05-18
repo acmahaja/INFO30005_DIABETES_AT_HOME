@@ -94,14 +94,14 @@
                       {{/if}}
                   </div>
                   <div class="patient-data">
-                    {{#if patient_settings.requires_glucose}} 
-                        {{#if (is_defined patient.patient_data.glucose.value)}} 
-                          {{#if (check_range patient.patient_data.glucose.value thresholds.blood_glucose_result.min_value thresholds.blood_glucose_result.max_value)}} 
-                            {{patient.patient_data.glucose.value}} nmo/L
+                    {{#if patient_settings.requires_steps}} 
+                        {{#if (is_defined patient.patient_data.steps.value)}} 
+                          {{#if (check_range patient.patient_data.steps.value thresholds.steps_result.min_value thresholds.steps_result.max_value)}} 
+                            {{patient.patient_data.steps.value}} steps
                           {{else}}
                             <div class="danger">
                               <img src="/icons/danger.svg">
-                              {{patient.patient_data.glucose.value}} nmo/L
+                              {{patient.patient_data.steps.value}} steps
                             </div>
                           {{/if}}
                         {{else}}

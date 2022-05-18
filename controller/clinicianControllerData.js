@@ -24,13 +24,13 @@ const loadSpecificData = async (req,res)=>{
 
   const patient = await Patient.findById(req.params.PatientID);
   const data = await get_patient_all_data(patient);
-  const get_clinician = await get_clinician_id(req.session.username);
+  const get_clinician = await get_clinician_id(req.user.username);
   const patient_settings = await get_patient_settings(patient)
   const patient_thresholds = await get_threshold(patient._id)
   const glucose_data = await get_patient_data_type(patient, req.params.Type)
   
   res.render("clincian/data/data.hbs", {
-    clinician: get_clinician.toJSON(),
+    clinician: get_clinician,
     patient: patient,
     patient_settings: patient_settings,
     patient_thresholds: patient_thresholds,
@@ -71,12 +71,12 @@ const loadDataPage = async (req, res) => {
       }
   }
   const data = await get_patient_all_data(patient);
-  const get_clinician = await get_clinician_id(req.session.username);
+  const get_clinician = await get_clinician_id(req.user.username);
   const patient_thresholds = await get_threshold(patient._id);
   const glucose_data = await get_patient_data_type(patient, req.params.Type);
 
   res.render("clincian/data/data.hbs", {
-    clinician: get_clinician.toJSON(),
+    clinician: get_clinician,
     patient: patient,
     patient_settings: patient_settings,
     patient_thresholds: patient_thresholds,

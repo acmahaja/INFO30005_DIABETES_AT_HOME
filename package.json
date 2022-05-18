@@ -22,17 +22,22 @@
   "homepage": "https://github.com/ACmahaja/INFO30005_DIABETES_AT_HOME#readme",
   "dependencies": {
     "@handlebars/allow-prototype-access": "^1.0.5",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "express-flash": "^0.0.2",
     "express-handlebars": "^6.0.3",
     "express-mongo-sanitize": "^2.2.0",
-    "express-session": "^1.17.2",
+    "express-session": "^1.17.3",
+    "faker": "^5.5.3",
     "helmet": "^5.0.2",
     "method-override": "^3.0.0",
     "mongoose": "^6.2.10",
     "morgan": "^1.10.0",
+    "passport": "^0.5.3",
+    "passport-local": "^1.0.0",
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {

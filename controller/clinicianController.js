@@ -12,7 +12,7 @@ const {
 
 const renderPatientInfo = async (req, res) => {
   const { PatientID } = req.params;
-  let get_clinician = await get_clinician_id(req.session.username);
+  let get_clinician = await get_clinician_id(req.user.username);
 
   let patient = await Patient.findById(PatientID);
   let patient_settings = await PatientSettings.findOne({
@@ -20,59 +20,42 @@ const renderPatientInfo = async (req, res) => {
   });
   var thresholds = await get_threshold(PatientID);
 
-
   res.render("clincian/info", {
-    assigned_clincian: get_clinician.toJSON(),
-    patient_settings: patient_settings.toJSON(),
-    patient: patient.toJSON(),
+    assigned_clincian: get_clinician ,
+    patient_settings: patient_settings,
+    patient: patient ,
     thresholds: thresholds,
   });
 };
 
 const registerPatient = async (req, res) => {
-  req.session.username = "chrispatt";
 
-  let get_clinician = await get_clinician_id(req.session.username);
+  let get_clinician = await get_clinician_id(req.user.username);
   const new_patient = new Patient({
     ...req.body,
     date_joined: Date.now(),
+    secret: "INFO30005",
     assigned_clincian: get_clinician._id,
   });
 
   const new_patient_settings = new PatientSettings({
-    for_patient: new_patient._id
-  })
+    for_patient: new_patient._id,
+  });
 
   await new_patient.save();
-  new_patient_settings.save()
-  res.redirect(`/clinician/${new_patient._id}/info`)
+  new_patient_settings.save();
+  res.redirect(`/clinician/${new_patient._id}/info`);
 };
 
 const renderRegisterPatient = async (req, res) => {
-  req.session.username = "chrispatt";
-  let get_clinician = await get_clinician_id(req.session.username);
+  let get_clinician = await get_clinician_id(req.user.username);
   res.render("clincian/patientRegister.hbs", {
-    clinician: get_clinician.toJSON(),
+    clinician: get_clinician ,
   });
 };
 
-const isLoggedIn = (req, res, next) => {
-  req.session.username = "chrispatt";
-  next();
-  // next()
-  // if (
-  //   req.session.loggedIn &&
-  //   req.session.username != null &&
-  //   req.session.isClinician
-  // ) {
-  //   next();
-  // } else {
-  //   res.redirect("/clincian/logout");
-  // }
-};
-
 const clincianComments = async (req, res) => {
-  let get_clinician = await get_clinician_id(req.session.username);
+  let get_clinician = await get_clinician_id(req.user.username);
   let patient_list = await get_patient_list(get_clinician);
   var patient_info = [];
   for (let i = 0; i < patient_list.length; i++) {
@@ -92,15 +75,14 @@ const clincianComments = async (req, res) => {
   }
 
   res.render("clincian/comments.hbs", {
-    clinician: get_clinician.toJSON(),
+    clinician: get_clinician ,
     patients: { patient_info },
   });
 };
 
 const loadDashboard = async (req, res) => {
-  let get_clinician = await get_clinician_id(req.session.username);
+  let get_clinician = await get_clinician_id(req.user.username);
   let patient_list = await get_patient_list(get_clinician);
-  console.log(patient_list);
   var patients = [];
   for (let i = 0; i < patient_list.length; i++) {
     var patient = patient_list[i];
@@ -111,45 +93,29 @@ const loadDashboard = async (req, res) => {
       patient_list[i]._id,
       new Date(Date.now())
     );
-    const patient_settings = await PatientSettings.findOne(
-      {for_patient: patient_list[i]._id}    
-    );
+    const patient_settings = await PatientSettings.findOne({
+      for_patient: patient_list[i]._id,
+    });
     patient = { ...patient._doc, patient_data, thresholds, patient_settings };
     patients.push(patient);
   }
 
   res.render("clincian/dashboard.hbs", {
-    clinician: get_clinician.toJSON(),
+    clinician: get_clinician,
     patients: { patient_info: patients },
   });
 };
 
-const clincianLogin = async (req, res) => {
-  if (req.session.loggedIn === true) {
-    res.redirect("/");
-  }
-  const { username, password } = req.body;
-  const has_user = await clinician_authorization(username, password);
-  if (has_user) {
-    req.session.loggedIn = true;
-    req.session.username = username;
-    req.session.isClinician = true;
-    res.redirect("/clinician/dashboard");
-  } else {
-    req.session.destroy();
-    res.redirect("/clinician/login");
-  }
-};
+
 
 const clincianLogout = (req, res) => {
   req.session.destroy();
+  req.logout();
   res.redirect("/clinician/login");
 };
 
 module.exports = {
-  clincianLogin,
   clincianLogout,
-  isLoggedIn,
   loadDashboard,
   clincianComments,
   renderRegisterPatient,
