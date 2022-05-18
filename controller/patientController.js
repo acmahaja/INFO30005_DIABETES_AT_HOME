@@ -233,7 +233,31 @@ const loadPatientGlucoseDataPageAll = async (req, res) => {
 }
 
 // insulin data
+const loadPatientInsulinDataPageMonth = async (req, res) => {
+  await loadDataPage(req, res, "patient/patientInsulinData", INSULIN_ENUM_TYPE, "month");
+}
 
+const loadPatientInsulinDataPageAll = async (req, res) => {
+  await loadDataPage(req, res, "patient/patientInsulinData", INSULIN_ENUM_TYPE, "all");
+}
+
+// weight data
+const loadPatientWeightDataPageMonth = async (req, res) => {
+  await loadDataPage(req, res, "patient/patientWeightData", WEIGHT_ENUM_TYPE, "month");
+}
+
+const loadPatientWeightDataPageAll = async (req, res) => {
+  await loadDataPage(req, res, "patient/patientWeightData", WEIGHT_ENUM_TYPE, "all");
+}
+
+// steps data
+const loadPatientStepsDataPageMonth = async (req, res) => {
+  await loadDataPage(req, res, "patient/patientStepsData", STEPS_ENUM_TYPE, "month");
+}
+
+const loadPatientStepsDataPageAll = async (req, res) => {
+  await loadDataPage(req, res, "patient/patientStepsData", STEPS_ENUM_TYPE, "all");
+}
 
 
 module.exports = {
@@ -246,5 +270,11 @@ module.exports = {
   loadDashboard,
   loadPatientInfoPage,
   loadPatientGlucoseDataPageMonth,
-  loadPatientGlucoseDataPageAll
+  loadPatientGlucoseDataPageAll,
+  loadPatientInsulinDataPageMonth,
+  loadPatientInsulinDataPageAll,
+  loadPatientStepsDataPageMonth,
+  loadPatientStepsDataPageAll,
+  loadPatientWeightDataPageMonth,
+  loadPatientWeightDataPageAll
 };
