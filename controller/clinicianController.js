@@ -38,8 +38,14 @@ const registerPatient = async (req, res) => {
     date_joined: Date.now(),
     assigned_clincian: get_clinician._id,
   });
+
+  const new_patient_settings = new PatientSettings({
+    for_patient: new_patient._id
+  })
+
   await new_patient.save();
-  res.send(new_patient);
+  new_patient_settings.save()
+  res.redirect(`/clinician/${new_patient._id}/info`)
 };
 
 const renderRegisterPatient = async (req, res) => {
@@ -66,32 +72,36 @@ const isLoggedIn = (req, res, next) => {
 };
 
 const clincianComments = async (req, res) => {
-  req.session.username = "chrispatt";
-
   let get_clinician = await get_clinician_id(req.session.username);
   let patient_list = await get_patient_list(get_clinician);
-
+  var patient_info = [];
   for (let i = 0; i < patient_list.length; i++) {
     var patient = patient_list[i];
+
+    const result = await get_threshold(patient_list[i].id);
+    var thresholds = result;
     const patient_data = await get_patient_data(
-      patient_list[i].id,
+      patient_list[i]._id,
       new Date(Date.now())
     );
-    var thresholds = await get_threshold(patient_list[i].id);
-
-    patient = { ...patient._doc, patient_data, thresholds };
+    const patient_settings = await PatientSettings.findOne({
+      for_patient: patient_list[i]._id,
+    });
+    patient = { ...patient._doc, patient_data, thresholds, patient_settings };
+    patient_info.push(patient);
   }
 
   res.render("clincian/comments.hbs", {
     clinician: get_clinician.toJSON(),
-    patients: { patient },
+    patients: { patient_info },
   });
 };
 
 const loadDashboard = async (req, res) => {
   let get_clinician = await get_clinician_id(req.session.username);
   let patient_list = await get_patient_list(get_clinician);
-  var patient_info = [];
+  console.log(patient_list);
+  var patients = [];
   for (let i = 0; i < patient_list.length; i++) {
     var patient = patient_list[i];
 
@@ -105,12 +115,12 @@ const loadDashboard = async (req, res) => {
       {for_patient: patient_list[i]._id}    
     );
     patient = { ...patient._doc, patient_data, thresholds, patient_settings };
-    patient_info.push(patient);
+    patients.push(patient);
   }
 
   res.render("clincian/dashboard.hbs", {
     clinician: get_clinician.toJSON(),
-    patients: { patient_info },
+    patients: { patient_info: patients },
   });
 };
 
