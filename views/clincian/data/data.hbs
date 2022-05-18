@@ -1,7 +1,7 @@
 <title>Patient Trends Glucose</title>
 <link rel='stylesheet' href='/css/clinican_sidebar.css' />
-<link rel="stylesheet" href="/css/clinican_patient_data.css" />
 <link rel="stylesheet" href="/css/clinican_dashboard.css" />
+<link rel="stylesheet" href="/css/clinican_patient_data.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 
 <body>
@@ -18,10 +18,10 @@
     <section class="content">
       <div class="nav patient-options">
         <div class="tabs">
-          <div class="tab selected">Data</div>
-          <div class="tab">Messages</div>
-          <div class="tab">Notes</div>
-          <div class="tab">Info</div>
+          <div class="tab selected"><a href="/clinician/{{patient._id}}/data">Data</a></div>
+          <div class="tab"><a href="/clinician/{{patient._id}}/messages">Messages</a></div>
+          <div class="tab"><a href="/clinician/{{patient._id}}/notes">Notes</a></div>
+          <div class="tab"><a href="/clinician/{{patient._id}}/info">Info</a></div>
         </div>
         <div class="content">
           <table>
@@ -120,16 +120,23 @@
       <div class="nav">
         <div class="tabs">
           {{#if patient_settings.requires_glucose}}
-            <div class="tab selected white">Glucose</div>
+            <div class="tab {{data_title "blood_glucose" type}}">  
+              <a href="/clinician/{{patient._id}}/data/blood_glucose">Glucose</a></div>
           {{/if}}
           {{#if patient_settings.requires_insulin}}
-          <div class="tab">Insulin</div>
+          <div class="tab {{data_title "insulin" type}}">
+            <a href="/clinician/{{patient._id}}/data/insulin">Insulin</a>
+          </div>
           {{/if}}
           {{#if patient_settings.requires_weight}}
-          <div class="tab">Weight</div>
+          <div class="tab {{data_title "weight" type}}">
+            <a href="/clinician/{{patient._id}}/data/weight">Weight</a>
+          </div>
           {{/if}}
           {{#if patient_settings.requires_steps}}
-          <div class="tab">Steps</div>
+          <div class="tab {{data_title "steps" type}}">
+            <a href="/clinician/{{patient._id}}/data/steps">Steps</a>
+          </div>
           {{/if}}
         </div>
         <div class="content white">
@@ -158,14 +165,44 @@
   const healthdata = {{{this.health}}};
   var ctx = document.getElementById('myChart').getContext('2d');
   var myChart = new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
+    options: {
+        plugins: {
+            legend: {
+                display: false
+            },
+            labels: {
+              fontSize: 20
+            }
+          
+        },
+          scales: {
+            y: {
+               ticks: {
+                 font:  {
+                        size: 20,
+                    }
+               }
+            },
+            x: {
+               ticks: {
+                 font:  {
+                        size: 20
+                    }
+               }
+            }
+        } 
+    },
     data: {
-        labels: healthdata.map((data)=> data.created).slice(-31,-1),
+        labels: healthdata.map((data)=> `${new Date(data.created).getDate()+1}/${new Date(data.created).getMonth()+1}`).slice(0,21),
+         fontColor: ['rgba(255, 255, 255, 30)'],
          datasets: [{
-          data: healthdata.map((data)=> data.value).slice(-31,-1),
+          data: healthdata.map((data)=> data.value).slice(0,21),
           fill: false,
-          borderColor: 'rgb(75, 192, 192)',
-          tension: 0.1
+          tension: 0.1,
+          backgroundColor: [
+            'rgba(255, 255, 255, 0.5)',
+          ],
         }]
        }
 });

@@ -1,3 +1,9 @@
+const data_title = function(currType, type){
+    var result = "";
+    if (currType === type) result = "selected white";
+    return result;
+}
+
 const threshold_title = function (value) {
   var type = ""
   if (value === "blood_glucose") 
@@ -95,4 +101,5 @@ module.exports = {
   formatDateTime,
   getWeekDay,
   threshold_title,
+  data_title,
 };

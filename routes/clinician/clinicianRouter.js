@@ -101,7 +101,13 @@ clinicianRouter.get(
 clinicianRouter.get(
   "/:PatientID/data/:Type",
   isLoggedIn,
-  clinicianControllerData.loadGlucosePage
+  clinicianControllerData.loadSpecificData
+);
+
+clinicianRouter.get(
+  "/:PatientID/data",
+  isLoggedIn,
+  clinicianControllerData.loadDataPage
 );
 
 
