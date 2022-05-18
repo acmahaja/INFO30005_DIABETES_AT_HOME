@@ -17,6 +17,7 @@ const {
   getHistoricalData,
   get_current_date,
 } = require("../utils/utils");
+const { version } = require("prettier");
 
 const GLUCOSE_ENUM_TYPE = "blood_glucose";
 const WEIGHT_ENUM_TYPE = "weight";
@@ -198,6 +199,43 @@ const loadPatientInfoPage = async (req, res) => {
   });
 }
 
+// glucose data
+
+const loadDataPage = async (req, res, render_path, enum_type, history="month") => {
+  req.session.username = "patstuart";
+  var patient = await PatientSchema.findOne({ username: req.session.username });
+  var days = 0;
+  if (history != "month"){
+    dateJoined = patient.date_joined;
+    now = new Date();
+    today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+    const timeJoined = Math.abs(today - dateJoined);
+    days = Math.ceil(timeJoined / (1000 * 60 * 60 * 24)); 
+  } else {
+    days = 30;
+  }
+  var timeseries = await getHistoricalData(patient, days, enum_type);
+  var currentDate = get_current_date().toDateString();
+  res.render(render_path, {
+    historicaldata: timeseries,
+    currentDate: currentDate
+  });
+}
+
+
+// glucose data
+const loadPatientGlucoseDataPageMonth = async (req, res) => {
+  await loadDataPage(req, res, "patient/patientGlucoseData", GLUCOSE_ENUM_TYPE, "month");
+}
+
+const loadPatientGlucoseDataPageAll = async (req, res) => {
+  await loadDataPage(req, res, "patient/patientGlucoseData", GLUCOSE_ENUM_TYPE, "all");
+}
+
+// insulin data
+
+
+
 module.exports = {
   patientLogin,
   patientLogout,
@@ -206,5 +244,7 @@ module.exports = {
   postAddHealthData,
   postUpdateHealthData,
   loadDashboard,
-  loadPatientInfoPage
+  loadPatientInfoPage,
+  loadPatientGlucoseDataPageMonth,
+  loadPatientGlucoseDataPageAll
 };

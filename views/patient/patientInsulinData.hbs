@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Info</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/patientDataPage.css" />
+    <link rel="stylesheet" href="/css/patient_sidebar.css" />
+
+</head>
+
+<body>
+    {{> sidebarPatient firstname=patient.firstname lastname=patient.lastname profile-img="https://assets.website-files.com/5746d4c4a3e009bb4d9ac858/5a2ef695e43cca0001193a33_Profile.jpg"}}
+
+    {{!-- <img class="tablet-menu-icon" src="/images/hamburger-menu-icon.svg" alt=""> --}}
+    <div class="data-navbar">
+        <img src="/images/arrow.svg" alt="">
+        <p>Insulin</p>
+    </div>
+
+    <div class="data-wrapper">
+        <div class="header">
+            <h1>Insulin</h1>
+            <h2 class="date">Sunday, 18 March 2022</h2>
+        </div>
+        <section class="middle-section">
+            <section class="historical-trends">
+                <h3>Historical Data</h3>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Upload Date</button>
+                    <div class="dropdown-content">
+                        {{!-- <a href="#">Today</a>
+                        <a href="#">This week</a> --}}
+                        <a href="month">30 days</a>
+                        <a href="all">All time</a>
+                    </div>
+                </div>
+                <div class="table">
+                    <img class="icon" src="/images/calendar.svg" alt="">
+                    <img id="type-icon-1" class="icon" src="/icons/insulin.svg" alt="">
+                    <img class="icon" src="/images/notepad.svg" alt="">
+
+                    <p class="heading">Date</p>
+                    <img id="type-icon-2" class="heading" src="/icons/insulin.svg"></img>
+                    <p class="heading">Comments</p>
+
+                    <hr>
+                    <!-- start of 1 record -->
+                    {{#each historicaldata}}
+                        <p>{{this.date}}</p>
+                        <p>{{this.insulin.value}} nmo/L</p>
+                        <p>{{this.insulin.comment}}</p>
+                        <hr>
+                    {{/each}}
+                    <!-- end of 1 record -->
+
+                </div>
+            </section>
+            <br class="mobile-break">
+            <section class="graph">
+                <h3>Graph</h3>
+            <img src="/images/fake-graph.svg" alt="">
+            </section>
+        </section>
+    </div>
+    </div>
+    <br>
+</body>
+
+</html>

@@ -358,26 +358,20 @@ const getHistoricalData = async (thisPatientId, nDays, metricType = "all") => {
           updated: {$gte: PastNDays}
       }).lean()
   }
-  // console.log(historical_data)
   
   healthEntryTS = {}
   for (var i=0; i<NUMBER_OF_DAYS; i++){
       d = new Date()
       d.setDate(startOfToday.getDate() - i)
       healthEntryTS[d.toDateString()] = {index: i, date: d.toDateString()}
-      // console.log(d.toDateString())
   }
   for (const e of historical_data){
-      // console.log(e.updated)
-      // console.log(e.health_type)
-      // console.log(e.value)
       d = e.updated.toDateString()
       if (d in healthEntryTS)
-          healthEntryTS[d][e.health_type] = {value: e.value, comment: e.comment}
-          // healthEntryTS[d][e.health_type] = e.value
+          healthEntryTS[d][e.health_type]  = {value: e.value, comment: e.comments}
   }
-
-  healthEntryArray = Object.values(healthEntryTS)
+  // console.log(healthEntryTS)
+  healthEntryArray = Object.values(healthEntryTS);
   return healthEntryArray
 }
 
@@ -403,4 +397,4 @@ module.exports = {
   update_clinician_message,
   getHistoricalData,
   get_current_date
-};
+}

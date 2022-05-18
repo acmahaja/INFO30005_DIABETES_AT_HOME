@@ -4,11 +4,11 @@
     font-family: 'Raleway'
 }
 
-.wrapper {
+.data-wrapper {
     margin: 20px 23px 20px 23px
 }
 
-.wrapper .header {
+.data-wrapper .header {
     display: none
 }
 
@@ -24,7 +24,7 @@
     display: none;
 }
 
-.navbar {
+.data-navbar {
     width: 100%;
     height: 78px;
     box-shadow: 5px 5px #00000025;
@@ -32,12 +32,12 @@
     align-items: center
 }
 
-.navbar img {
+.data-navbar img {
     width: 25px;
     margin: 0 10px 0 20px
 }
 
-.navbar p {
+.data-navbar p {
     color: #686868;
     font-weight: 700;
     font-size: 18px
@@ -111,6 +111,14 @@ h3 {
     width: 100%
 }
 
+#type-icon-1 {
+    height: 1.75rem;
+}
+
+#type-icon-2 {
+    height: 1.75rem;
+}
+
 @media only screen and (min-width:1000px) {
     .wrapper {
         margin: 52px 36px 0 100px;
@@ -121,10 +129,10 @@ h3 {
         margin: 57px 0 0 23px;
         float: left;
     }
-    .navbar {
+    .data-navbar {
         display: none;
     }
-    .wrapper .header {
+    .data-wrapper .header {
         display: block
     }
     .welcome-banner {
@@ -233,7 +241,7 @@ h3 {
     .middle-section {
         grid-template-rows: 747px;
     }
-    .wrapper {
+    .data-wrapper {
         margin-left: 309px;
     }
     .tablet-menu-icon {
