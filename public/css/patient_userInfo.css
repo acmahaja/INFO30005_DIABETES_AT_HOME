@@ -7,6 +7,7 @@
 body {
   /* padding-top: 40px; */
   padding-bottom: 50px;
+  height: 80%;
   position: relative;
   flex-direction: column;
 }
@@ -15,11 +16,10 @@ body {
   padding: 11% 0;
 }
 
-
 h1 {
   font-size: 34px;
   color: #4c4c4c;
-  font-weight: 700
+  font-weight: 700;
 }
 
 h2 {
@@ -34,7 +34,7 @@ h2 {
   justify-content: center;
 }
 
-@media screen and (min-width: 1600px) {
+@media screen and (min-width: 1900px) {
   /* body {
     background-color: green;
   } */
@@ -237,7 +237,7 @@ h2 {
   }
 }
 
-@media screen and (max-width: 1600px) {
+@media screen and (max-width: 1900px) {
   /* NAVIGATION BAR */
   .nav {
     display: flex;
