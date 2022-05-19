@@ -21,7 +21,7 @@ const {
   update_username,
   update_password
 } = require("../utils/utils");
-const { version } = require("prettier");
+//const { version } = require("prettier");
 
 const GLUCOSE_ENUM_TYPE = "blood_glucose";
 const WEIGHT_ENUM_TYPE = "weight";
