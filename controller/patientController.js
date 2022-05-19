@@ -9,9 +9,9 @@ const {
   get_patient_data,
   calc_engagement_rate,
   get_top5_leaderboard,
-  update_clinician_message,
+  // update_clinician_message,
   show_badge,
-  get_clinician_message,
+  // get_clinician_message,
   get_patient_settings,
   get_patient_all_data,
   getHistoricalData,
@@ -60,7 +60,7 @@ const postAddHealthData = async (req, res) => {
 const isLoggedIn = (req, res, next) => {
   if (
     req.session.loggedIn &&
-    req.session.username != null &&
+    req.user.username != null &&
     !req.session.isClinician
   ) {
     next();
@@ -77,7 +77,7 @@ const patientLogin = async (req, res) => {
   const has_user = await patient_authorization(username, password);
   if (has_user) {
     req.session.loggedIn = true;
-    req.session.username = username;
+    req.user.username = username;
     req.session.isClinician = false;
     res.redirect("/patient/dashboard");
   } else {
@@ -92,7 +92,6 @@ const patientLogout = (req, res) => {
 };
 
 const getDataEntryPage = async (req, res) => {
-  req.session.username = "patstuart";
   const this_patient = await PatientSchema.findOne({
     username: req.session.username,
   });
@@ -166,7 +165,7 @@ const loadDashboard = async (req, res) => {
   var patient_data = await get_patient_data(patient, new Date(now.getFullYear(), now.getMonth(), now.getDate()));
   var patient_settings = await get_patient_settings(patient);
   patient_data = { ...patient._doc, patient_threshold, patient_data, patient_settings };
-  var message = await get_clinician_message(patient);
+  // var message = await get_clinician_message(patient);
   var engagement_rate = await calc_engagement_rate(patient);
   var badge = await show_badge(patient);
   //var timeseries = await get_patient_all_data(patient);
@@ -175,7 +174,7 @@ const loadDashboard = async (req, res) => {
   var dateString = get_current_date().toDateString();
   res.render("patient/patientDashboard", {
     patient: patient_data,
-    clinicianmessage: message,
+    clinicianmessage: "aaaa", //temp
     engagement: engagement_rate,
     showBadge: badge,
     historicaldata: timeseries,

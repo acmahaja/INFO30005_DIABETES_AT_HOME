@@ -1,12 +1,11 @@
 <title>Patient Trends Glucose</title>
 <link rel='stylesheet' href='/css/clinican_sidebar.css' />
-<link rel="stylesheet" href="/css/clinican_dashboard.css" />
 <link rel="stylesheet" href="/css/clinican_patient_notes.css" />
+<link rel="stylesheet" href="/css/clinican_dashboard.css" />
 
 
 <body>
   {{> sidebarClinician this }}
-  {{log this}}
   <main>
     <header>
       <div class="return">
@@ -19,10 +18,10 @@
     <section class="content">
       <div class="nav patient-options">
         <div class="tabs">
-          <div class="tab">Data</div>
-          <div class="tab">Messages</div>
-          <div class="tab selected">Notes</div>
-          <div class="tab">Info</div>
+          <div class="tab"><a href="/clinician/{{patient._id}}/data">Data</a></div>
+          <div class="tab"><a href="/clinician/{{patient._id}}/messages">Messages</a></div>
+          <div class="tab selected"><a href="/clinician/{{patient._id}}/notes">Notes</a></div>
+          <div class="tab"><a href="/clinician/{{patient._id}}/info">Info</a></div>
         </div>
         <div class="content">
           <div class="notes" >

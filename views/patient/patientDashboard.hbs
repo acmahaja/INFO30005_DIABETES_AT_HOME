@@ -33,7 +33,7 @@
                 {{#if patient.patient_settings.requires_glucose}}
                     <div class="data-box">
                         <p class="data-type">Blood Glucose</p>
-                        <img class="symbol" src="/images/blood-glucose-icon.svg" alt="">
+                        <img class="symbol" src="/images/blood-glucos e-icon.svg" alt="">
                         {{#if patient.patient_data.glucose}}
                             {{!-- ADD CROSS TICK ELSE STATEMENT --}}
                             <p class="value">{{patient.patient_data.glucose.value}} nmo/L</p>
@@ -77,9 +77,9 @@
                             <p class="value">{{patient.patient_data.weight.value}} kg</p>
                             <img class="tick-cross" src="/images/Vector.svg" alt="">
                             {{!-- ADD CROSS TICK ELSE STATEMENT --}}
-                            {{#if (check_range patient.patient_data.weight.value patient.patient_threshold.weight_result.min_value patient.patient_threshold.weight_result.max_value)}}  
+                            {{#unless (check_range patient.patient_data.weight.value patient.patient_threshold.weight_result.min_value patient.patient_threshold.weight_result.max_value)}}  
                                 <img class="danger" src="/icons/danger.svg">
-                            {{/if}}
+                            {{/unless}}
                         {{else}}
                             <p class="value">--- kg</p>
                             <img class="warn" src="/icons/warn.svg">
@@ -97,9 +97,9 @@
                             {{!-- ADD CROSS TICK ELSE STATEMENT --}}
                             <p class="value">{{patient.patient_data.steps.value}} nmo/L</p>
                             <img class="tick-cross" src="/images/Vector.svg" alt="">
-                            {{#if (check_range patient.patient_data.steps.value patient.patient_threshold.steps_result.min_value patient.patient_threshold.steps_result.max_value)}}   
+                            {{#unless (check_range patient.patient_data.steps.value patient.patient_threshold.steps_result.min_value patient.patient_threshold.steps_result.max_value)}}   
                                 <img class="danger" src="/icons/danger.svg">
-                            {{/if}}
+                            {{/unless}}
                         {{else}}
                             <p class="value">--- steps</p>
                             <img class="tick-cross" />

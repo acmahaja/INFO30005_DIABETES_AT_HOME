@@ -2,17 +2,19 @@ const mongoose = require("mongoose");
 const {Schema} = mongoose;
 
 const clinicianPatientMessageSchema = new mongoose.Schema({
+    for_clincian : {
+        type: Schema.Types.ObjectID,
+        ref: 'Clinician'
+    },
     for_patient : {
         type: Schema.Types.ObjectID,
         ref: 'Patient'
     },
-    message: {
-        type: String,
-        default: ""
+    created: {
+        type: Date
     },
-    date: {
-        type: Date,
-        default: Date.now()
+    message: {
+        type: String
     }
 })
 

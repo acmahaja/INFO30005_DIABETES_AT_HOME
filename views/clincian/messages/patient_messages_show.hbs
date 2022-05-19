@@ -1,7 +1,7 @@
-<title>Patient Trends Glucose</title>
+<title>Patient Messages</title>
 <link rel='stylesheet' href='/css/clinican_sidebar.css' />
-<link rel="stylesheet" href="/css/clinican_patient_notes.css" />
-<link rel="stylesheet" href="/css/clinican_patient_notes_show.css" />
+<link rel="stylesheet" href="/css/clinican_patient_messages.css" />
+<link rel="stylesheet" href="/css/clinican_patient_messages_show.css" />
 <link rel="stylesheet" href="/css/clinican_dashboard.css" />
 
 
@@ -20,21 +20,20 @@
       <div class="nav patient-options">
         <div class="tabs">
           <div class="tab"><a href="/clinician/{{patient._id}}/data">Data</a></div>
-          <div class="tab"><a href="/clinician/{{patient._id}}/messages">Messages</a></div>
-          <div class="tab selected"><a href="/clinician/{{patient._id}}/notes">Notes</a></div>
+          <div class="tab selected"><a href="/clinician/{{patient._id}}/messages">Messages</a></div>
+          <div class="tab"><a href="/clinician/{{patient._id}}/notes">Notes</a></div>
           <div class="tab"><a href="/clinician/{{patient._id}}/info">Info</a></div>
-
         </div>
         <div class="content">
           <div class="notes" >
             <div class="header">
-                <h3>Note Date:</h3>
-                <a href="/clinician/{{patient._id}}/notes/new"><img src="/icons/add_button.svg" alt=""></a>
+                <h3>Message Date:</h3>
+                <a href="/clinician/{{patient._id}}/messages/new"><img src="/icons/add_button.svg" alt=""></a>
             </div>
-            {{#each all_notes as |note|}}
+            {{#each all_messages as |messages|}}
               <div class="note">
-                <a href="/clinician/{{../patient._id}}/notes/{{note._id}}">
-                  {{formatDateTime note.created}}
+                <a href="/clinician/{{../patient._id}}/messages/{{messages._id}}">
+                  {{formatDateTime messages.created}}
 
                 </a>
               </div>
@@ -42,10 +41,18 @@
 
           </div>
           <div class="patient-notes">
-              <div class="day"> <div id="week_day">{{getWeekDay note.created}}</div> <div id="date">{{formatDateTime note.created}}</div> </div>
+              <div class="day"> <div id="week_day">{{getWeekDay message.created}}</div> <div id="date">{{formatDateTime message.created}}</div> </div>
               <div class="note">
-                {{note.note}}
+                {{formatDateTime message.created}}
+                <br>
+                <br>
+                {{message.message}}
+              <div class="button-section">
+                <div class="button">
+                  <a href="/clinician/{{patient._id}}/messages/{{message._id}}/edit">Edit</a>
+                </div>
               </div>
+            </div>
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ const ClincianSchema = require("../models/clincian");
 const patientThresholdsSchema = require("../models/patient_thresholds");
 const PatientSettings = require("../models/patient_settings");
 const HealthDataEntry = require("../models/health_data");
-const ClinicianPatientMessage = require("../models/clinician_patient_message");
+// const ClinicianPatientMessage = require("../models/clinician_patient_message");
 
 const GLUCOSE_ENUM_TYPE = "blood_glucose";
 const WEIGHT_ENUM_TYPE = "weight";
@@ -26,7 +26,7 @@ async function get_patient_list(clincian) {
     );
   } else {
     result = await PatientSchema.find({
-      assigned_clincian: String(clincian._id),
+      assigned_clincian: clincian._id,
     }).select(
       "username firstname middlename lastname dob email date_joined bio image"
     );
@@ -48,7 +48,7 @@ function generate_random_date(start, end) {
 }
 
 async function get_threshold(patient_id) {
-  const blood_result = await patientThresholdsSchema.findOne({
+  const blood_glucose_result = await patientThresholdsSchema.findOne({
     for_patient: patient_id,
     health_type: "blood_glucose",
   });
@@ -65,14 +65,14 @@ async function get_threshold(patient_id) {
     health_type: "steps",
   });
 
-  return { blood_result, weight_result, insulin_result, steps_result };
+  return { blood_glucose_result, weight_result, insulin_result, steps_result };
 }
 
 async function get_patient_data_type(patient, type) {
   const result = await HealthDataEntry.find({
     health_type: type,
     patient_id: patient._id,
-  }).sort({ created: "desc" });
+  }).sort({ created: "-1" });
   return result;
 }
 
@@ -90,7 +90,7 @@ async function get_patient_data(patient, start_date) {
     created: {
       $gte: start_date
     },
-  }).sort({ created: "desc" });
+  }).sort({ created: "-1" });
 
   const weight_result = await HealthDataEntry.find({
     health_type: "weight",
@@ -98,7 +98,7 @@ async function get_patient_data(patient, start_date) {
     created: {
       $gte: start_date
     },
-  }).sort({ created: "desc" });
+  }).sort({ created: "-1" });
 
   const insulin_result = await HealthDataEntry.find({
     health_type: "insulin",
@@ -106,7 +106,7 @@ async function get_patient_data(patient, start_date) {
     created: {
       $gte: start_date
     },
-  }).sort({ created: "desc" });
+  }).sort({ created: "-1" });
 
   const steps_result = await HealthDataEntry.find({
     health_type: "steps",
@@ -114,7 +114,7 @@ async function get_patient_data(patient, start_date) {
     created: {
       $gte: start_date
     },
-  }).sort({ created: "desc" });
+  }).sort({ created: "-1" });
 
   return {
     glucose: glucose_result[0],
@@ -293,27 +293,27 @@ const get_top5_leaderboard = async () => {
   return allPatientEng.slice(0,5);
 }
 
-const get_clinician_message = async (patient) => {
-  message = await ClinicianPatientMessage.findOne({
-    for_patient: patient._id
-  }).lean();
-  return message;
-}
+// const get_clinician_message = async (patient) => {
+//   message = await ClinicianPatientMessage.findOne({
+//     for_patient: patient._id
+//   }).lean();
+//   return message;
+// }
 
-const update_clinician_message = async (patient, newMessage) => {
-  await ClinicianPatientMessage.updateOne(
-    {
-      for_patient: patient._id
-    },
-    {
-      for_patient: patient._id,
-      message: newMessage
-    },
-    {
-      upsert: true
-    }
-  )
-}
+// const update_clinician_message = async (patient, newMessage) => {
+//   await ClinicianPatientMessage.updateOne(
+//     {
+//       for_patient: patient._id
+//     },
+//     {
+//       for_patient: patient._id,
+//       message: newMessage
+//     },
+//     {
+//       upsert: true
+//     }
+//   )
+// }
 
 
 const getHistoricalData = async (thisPatientId, nDays, metricType = "all") => {
@@ -409,9 +409,9 @@ module.exports = {
   get_patient_all_data,
   calc_engagement_rate,
   get_top5_leaderboard,
-  get_clinician_message,
+  // get_clinician_message,
   show_badge,
-  update_clinician_message,
+  // update_clinician_message,
   getHistoricalData,
   get_current_date,
   convert_timeseries_to_graph

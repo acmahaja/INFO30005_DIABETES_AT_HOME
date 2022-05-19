@@ -10,41 +10,35 @@ const {
 } = require("../utils/utils");
 
 
-
-
 const savePatientNotesForm = async (req, res) => {
   const { note } = req.body;
   const patient = await Patient.findById(req.params.PatientID);
-  const get_clinician = await get_clinician_id(req.session.username);
+  const get_clinician = await get_clinician_id(req.user.username);
 
   const new_note = new ClinicianPatientNote({
     for_clincian: get_clinician._id,
-    for_patient: patient._id,
+    for_patient: req.params.PatientID,
     created: new Date(),
     note: note,
   });
   await new_note.save();
-  res.redirect("/clinician/627e023eff8ff37c2f921f34/notes");
+  res.redirect(`/clinician/${req.params.PatientID}/notes/${new_note._id}`);
 };
 
 const showPatientNote = async (req, res) => {
   const patient = await Patient.findById(req.params.PatientID);
-  const get_clinician = await get_clinician_id(req.session.username);
+  const get_clinician = await get_clinician_id(req.user.username);
 
   var all_notes = await ClinicianPatientNote.find({
     for_clincian: get_clinician._id,
     for_patient: patient._id,
-  }).sort({ created: 1 });
+  }).sort({ created: -1 });
 
-  var note = await ClinicianPatientNote.findOne({
-    for_clincian: get_clinician._id,
-    for_patient: patient._id,
-    id: req.params.NoteID,
-  });
+  var note = await ClinicianPatientNote.findById(req.params.NoteID);
 
 
   res.render("clincian/notes/patient_notes_show.hbs", {
-    clinician: get_clinician.toJSON(),
+    clinician: get_clinician,
     patient: patient,
     all_notes: all_notes,
     note: note,
@@ -53,15 +47,16 @@ const showPatientNote = async (req, res) => {
 
 const loadPatientNotesForm = async (req, res) => {
   const patient = await Patient.findById(req.params.PatientID);
-  const get_clinician = await get_clinician_id(req.session.username);
+  const get_clinician = await get_clinician_id(req.user.username);
 
   var all_notes = await ClinicianPatientNote.find({
     for_clincian: get_clinician._id,
     for_patient: patient._id,
-  }).sort({ created: 1 });
+  }).sort({ created: -1 });
+
 
   res.render("clincian/notes/patient_notes_new.hbs", {
-    clinician: get_clinician.toJSON(),
+    clinician: get_clinician,
     patient: patient,
     all_notes: all_notes,
   });
@@ -69,17 +64,15 @@ const loadPatientNotesForm = async (req, res) => {
 
 const loadPatientNotes = async (req, res) => {
   const patient = await Patient.findById(req.params.PatientID);
-  const get_clinician = await get_clinician_id(req.session.username);
-
+  const get_clinician = await get_clinician_id(req.user.username);
   const all_notes = await ClinicianPatientNote.find({
     for_clincian: get_clinician._id,
-    for_patient: patient._id,
+    for_patient: req.params.PatientID,
   })
-  .sort({ created: 1 });
+  .sort({ created: -1 });
 
-  console.log(loadPatientNotes);
   res.render("clincian/notes/patient_notes.hbs", {
-    clinician: get_clinician.toJSON(),
+    clinician: get_clinician,
     patient: patient,
     all_notes: all_notes,
   });

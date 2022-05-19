@@ -1,96 +1,144 @@
+const passport = require("passport");
 const express = require("express");
-
 const clinicianRouter = express.Router();
 
 const clinicianController = require("../../controller/clinicianController");
 const clinicianControllerData = require("../../controller/clinicianControllerData");
 const clinicianControllerNotes = require("../../controller/clinicianControllerNotes");
+const clinicianControllerMessages = require("../../controller/clinicianControllerMessage");
+const clinicianControllerInfo = require("../../controller/clinicianControllerInfo");
 
-const { isLoggedIn } = require("../../controller/clinicianController");
+const { isAuthenticatedClinician } = require("../auth");
 
-clinicianRouter.get(
-  "/:PatientID/notes/:NoteID",
-  isLoggedIn,
-  clinicianControllerNotes.showPatientNote
+clinicianRouter.put(
+  "/:PatientID/info/settings",
+  isAuthenticatedClinician,
+  clinicianControllerInfo.updatePatientInfo
 );
 
+clinicianRouter.put(
+  "/:PatientID/info/:Type/edit",
+  isAuthenticatedClinician,
+  clinicianControllerInfo.updatePatientThreshold
+);
+
+clinicianRouter.get(
+  "/:PatientID/info/:Type",
+  isAuthenticatedClinician,
+  clinicianControllerInfo.editPatientThreshold
+);
+
+clinicianRouter.get(
+  "/:PatientID/info/",
+  isAuthenticatedClinician,
+  clinicianControllerInfo.loadPatientInfo
+);
+
+clinicianRouter.get(
+  "/:PatientID/messages/new",
+  isAuthenticatedClinician,
+  clinicianControllerMessages.loadPatientMessageForm
+);
+
+clinicianRouter.post(
+  "/:PatientID/messages/new",
+  isAuthenticatedClinician,
+  clinicianControllerMessages.savePatientMessageForm
+);
+
+clinicianRouter.put(
+  "/:PatientID/messages/:MessageID/edit",
+  isAuthenticatedClinician,
+  clinicianControllerMessages.updatePatientMessageForm
+);
+
+clinicianRouter.get(
+  "/:PatientID/messages/:MessageID/edit",
+  isAuthenticatedClinician,
+  clinicianControllerMessages.editPatientMessageForm
+);
+
+clinicianRouter.get(
+  "/:PatientID/messages/:MessageID",
+  isAuthenticatedClinician,
+  clinicianControllerMessages.showPatientMessage
+);
+
+clinicianRouter.get(
+  "/:PatientID/messages/",
+  isAuthenticatedClinician,
+  clinicianControllerMessages.loadPatientMessage
+);
 
 clinicianRouter.post(
   "/:PatientID/notes/new",
-  isLoggedIn,
+  isAuthenticatedClinician,
   clinicianControllerNotes.savePatientNotesForm
 );
 
 clinicianRouter.get(
   "/:PatientID/notes/new",
-  isLoggedIn,
+  isAuthenticatedClinician,
   clinicianControllerNotes.loadPatientNotesForm
 );
 
 clinicianRouter.get(
+  "/:PatientID/notes/:NoteID",
+  isAuthenticatedClinician,
+  clinicianControllerNotes.showPatientNote
+);
+
+clinicianRouter.get(
   "/:PatientID/notes/",
-  isLoggedIn,
+  isAuthenticatedClinician,
   clinicianControllerNotes.loadPatientNotes
 );
 
 clinicianRouter.get(
-  "/:PatientID/glucose/",
-  isLoggedIn,
-  clinicianControllerData.loadGlucosePage
+  "/:PatientID/data/:Type",
+  isAuthenticatedClinician,
+  clinicianControllerData.loadSpecificData
 );
 
 clinicianRouter.get(
-  "/:PatientID/glucose/",
-  isLoggedIn,
-  clinicianControllerData.loadGlucosePage
-);
-
-clinicianRouter.get(
-  "/:PatientID/glucose",
-  isLoggedIn,
-  clinicianControllerData.loadGlucosePage
-);
-
-clinicianRouter.get(
-  "/:PatientID/info",
-  isLoggedIn,
-  clinicianController.renderPatientInfo
-);
-
-
-clinicianRouter.get(
-  "/:PatientID/info",
-  isLoggedIn,
-  clinicianController.renderPatientInfo
+  "/:PatientID/data",
+  isAuthenticatedClinician,
+  clinicianControllerData.loadDataPage
 );
 
 clinicianRouter.post(
   "/register",
-  isLoggedIn,
+  isAuthenticatedClinician,
   clinicianController.registerPatient
 );
 
 clinicianRouter.get(
   "/register",
-  isLoggedIn,
+  isAuthenticatedClinician,
   clinicianController.renderRegisterPatient
 );
 
 clinicianRouter.get(
   "/comments",
-  isLoggedIn,
+  isAuthenticatedClinician,
   clinicianController.clincianComments
 );
 
 clinicianRouter.get(
   "/dashboard",
-  isLoggedIn,
+  isAuthenticatedClinician,
   clinicianController.loadDashboard
 );
 
 clinicianRouter.get("/logout", clinicianController.clincianLogout);
 
-clinicianRouter.post("/login", clinicianController.clincianLogin);
+clinicianRouter.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/clinician/dashboard",
+    failureRedirect: "/clinician/login",
+  })
+);
 
 clinicianRouter.get("/login", (req, res) => {
   res.render("clincian/login.hbs");

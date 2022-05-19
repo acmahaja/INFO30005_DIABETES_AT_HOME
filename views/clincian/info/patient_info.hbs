@@ -1,0 +1,203 @@
+<title>Patient Messages</title>
+<link rel='stylesheet' href='/css/clinican_sidebar.css' />
+<link rel="stylesheet" href="/css/clinican_patient_info.css" />
+<link rel="stylesheet" href="/css/clinican_dashboard.css" />
+
+
+<body>
+  {{> sidebarClinician this }}
+  <main>
+    <header>
+      <div class="return">
+        <img src="/icons/back-icon.svg" alt=""> Back
+      </div>
+      <h1>Patient Messages</h1>
+      <div class="day"> <div id="week_day"></div> <div id="date"></div> </div>
+    </header>
+
+    <section class="content">
+      <div class="nav patient-options">
+        <div class="tabs">
+          <div class="tab"><a href="/clinician/{{patient._id}}/data">Data</a></div>
+          <div class="tab"><a href="/clinician/{{patient._id}}/messages">Messages</a></div>
+          <div class="tab"><a href="/clinician/{{patient._id}}/notes">Notes</a></div>
+          <div class="tab selected"><a href="/clinician/{{patient._id}}/info">Info</a></div>
+        </div>
+        <div class="content">
+          <div class="settings">
+            <form class="patient-settings" action="/clinician/{{patient._id}}/info/settings?_method=PUT" method="POST">
+              <h2>Patient Settings</h2>
+              <div class="check-boxes">
+                <div class="check-box">
+                  <input type="checkbox" name="requires_glucose" id="requires_glucose" {{tickbox settings.requires_glucose}} >
+                  <label for="requires_glucose">Blood Glucose</label>
+                </div>
+                <div class="check-box">
+                  <input type="checkbox" name="requires_weight" id="requires_weight" {{tickbox settings.requires_weight}}>
+                  <label for="requires_weight">Weight</label>
+                </div>
+                <div class="check-box">
+                  <input type="checkbox" name="requires_insulin" id="requires_insulin" {{tickbox settings.requires_insulin}}>
+                  <label for="requires_insulin">Insulin Doses</label>
+                </div>
+                <div class="check-box">
+                  <input type="checkbox" name="requires_steps" id="requires_steps" {{tickbox settings.requires_steps}}>
+                  <label for="steps">Steps</label>
+                </div>
+              </div>
+              <div class="button">
+                <button type="submit">Update</button>
+              </div>
+
+            </form>
+
+            <div class="patient-thresholds">
+              <h2>Saftey Thresholds</h2>
+            {{#if settings.requires_glucose}}
+              <div class="thresholds">
+                <h3>Blood Glucose</h3>
+                <div class="data">
+                  <div class="value">
+                    <div class="for">Min Threshold:</div>
+                    <div class="for num">{{this.thresholds.blood_glucose_result.min_value}}</div>
+                  </div>
+                  <div class="value">
+                    <div class="for">Max Threshold:</div>
+                    <div class="for num">{{this.thresholds.blood_glucose_result.max_value}}</div>
+                  </div>
+                  <div class="button">
+                    <a href="/clinician/{{this.patient._id}}/info/blood_glucose">Edit</a>
+                  </div>
+                </div>
+              </div>
+            {{/if }}
+
+            {{#if settings.requires_insulin}}
+              <div class="thresholds">
+                <h3>Insulin</h3>
+                <div class="data">
+                  <div class="value">
+                    <div class="for">Min Threshold:</div>
+                    <div class="for num">{{this.thresholds.insulin_result.min_value}}</div>
+                  </div>
+                  <div class="value">
+                    <div class="for">Max Threshold:</div>
+                    <div class="for num">{{this.thresholds.insulin_result.max_value}}</div>
+                  </div>
+                  <div class="button">
+                    <a href="/clinician/{{this.patient._id}}/info/insulin">Edit</a>
+                  </div>
+                </div>
+              </div>
+            {{/if }}
+
+            {{#if settings.requires_weight}}
+              <div class="thresholds">
+                <h3>Weight</h3>
+                <div class="data">
+                  <div class="value">
+                    <div class="for">Min Threshold:</div>
+                    <div class="for num">{{this.thresholds.weight_result.min_value}}</div>
+                  </div>
+                  <div class="value">
+                    <div class="for">Max Threshold:</div>
+                    <div class="for num">{{this.thresholds.weight_result.max_value}}</div>
+                  </div>
+                  <div class="button">
+                    <a href="/clinician/{{this.patient._id}}/info/weight">Edit</a>
+                  </div>
+                </div>
+              </div>
+            {{/if }}
+
+            {{#if settings.requires_steps}}
+              <div class="thresholds">
+                <h3>Steps</h3>
+                <div class="data">
+                  <div class="value">
+                    <div class="for">Min Threshold:</div>
+                    <div class="for num">{{this.thresholds.steps_result.min_value}}</div>
+                  </div>
+                  <div class="value">
+                    <div class="for">Max Threshold:</div>
+                    <div class="for num">{{this.thresholds.steps_result.max_value}}</div>
+                  </div>
+                  <div class="button">
+                    <a href="/clinician/{{this.patient._id}}/info/steps">Edit</a>
+                  </div>
+                </div>
+              </div>
+            {{/if }}
+            </div>
+          </div>
+          <div class="patient-details">  
+            <div class="personal-info">
+              <div class="personal">
+                <div class="fullname">
+                  <div class="form-element">
+                      <label for="firstname">First Name:</label>
+                      <input type="text" name="firstname" id="firstname" disabled value="{{patient.firstname}}" >
+                  </div>
+                  <div class="form-element">
+                    <label for="middlename">Middle Name:</label>
+                    <input type="text" name="middlename" id="middlename" disabled value="{{patient.middlename}}">
+                  </div>
+                  <div class="form-element">
+                    <label for="lastname">Last Name:</label>
+                    <input type="text" name="lastname" id="lastname" disabled value="{{patient.lastname}}" >
+                  </div>
+                
+                </div>
+                <div class="form-element">
+                  <label for="username">Username:</label>
+                  <input type="text" name="username" id="username" disabled value="{{patient.username}}">
+                </div>
+                <div class="form-element">
+                  <label for="dob">Date of Birth:</label>
+                  <input type="date" name="dob" id="dob" disabled value="{{patient.dob}}">
+                </div>
+              </div>
+            </div>
+            <div class="form-element">
+              <label for="email">Email:</label>
+              <input type="email" name="email" id="email" disabled value="{{patient.email}}">
+            </div>
+            <div class="form-element">
+              <label for="password">Password:</label>
+              <input type="password" name="password" id="password" disabled value="{{patient.password}}">
+            </div>
+            <div class="form-element">
+              <label for="assigned_clincian">Clinician name:</label>
+              <input type="input" name="assigned_clincian" id="assigned_clincian" value="{{this.clinician.firstname}} {{this.clinician.lastname}}" disabled>
+            </div>
+            
+            <div class="form-element">
+              <label for="bio">Bio:</label>
+              <textarea name="bio" id="bio" rows="4" cols="50" disabled>{{patient.bio}}</textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+<script>
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  const date =  new Date();
+  const week_day = days[date.getDay()];
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+
+  document.getElementById("week_day").innerHTML = week_day + ",";
+  document.getElementById("date").innerHTML = day + " " + month + " " + year;
+
+  document.getElementsByClassName("name")
+
+</script>
+
+
+
+
