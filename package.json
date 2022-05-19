@@ -4,7 +4,7 @@
   "description": "Diabetes at Home application to help patients and clinicians manage diabetes",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "start:prod": "NODE_ENV=production node index.js",
     "debug": "sudo ndb index",
     "test": "echo \"Error: no test specified\" && exit 1"
