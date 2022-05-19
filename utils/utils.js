@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const PatientSchema = require("../models/patient");
 const ClincianSchema = require("../models/clincian");
@@ -6,6 +7,8 @@ const patientThresholdsSchema = require("../models/patient_thresholds");
 const PatientSettings = require("../models/patient_settings");
 const HealthDataEntry = require("../models/health_data");
 // const ClinicianPatientMessage = require("../models/clinician_patient_message");
+const ClinicianPatientMessageSchema = require("../models/clinician_patient_messages");
+const patient = require("../models/patient");
 
 const GLUCOSE_ENUM_TYPE = "blood_glucose";
 const WEIGHT_ENUM_TYPE = "weight";
@@ -84,6 +87,7 @@ async function get_patient_settings(patient) {
 }
 
 async function get_patient_data(patient, start_date) {
+
   const glucose_result = await HealthDataEntry.find({
     health_type: "blood_glucose",
     patient_id: patient._id,
@@ -115,13 +119,44 @@ async function get_patient_data(patient, start_date) {
       $gte: start_date
     },
   }).sort({ created: "-1" });
-
+    
   return {
     glucose: glucose_result[0],
     steps: steps_result[0],
     insulin: insulin_result[0],
     weight: weight_result[0],
   };
+}
+
+const get_patient_data_times = (patient_result) => {
+  times = {
+    glucose: {hr: "--", mins: "--"},
+    insulin: {hr: "--", mins: "--"},
+    weight: {hr: "--", mins: "--"},
+    steps: {hr: "--", mins: "--"}
+  }
+
+  if (patient_result.glucose != undefined)
+  {
+    times.glucose.hr = patient_result.glucose.created.getHours();
+    times.glucose.mins = patient_result.glucose.created.getMinutes();
+  }
+  if (patient_result.insulin != undefined)
+  {
+    times.insulin.hr = patient_result.insulin.created.getHours();
+    times.insulin.mins = patient_result.insulin.created.getMinutes();
+  }
+  if (patient_result.weight != undefined)
+  {
+    times.weight.hr = patient_result.weight.created.getHours();
+    times.weight.mins = patient_result.weight.created.getMinutes();
+  }
+  if (patient_result.glucose != undefined)
+  {
+    times.steps.hr = patient_result.steps.created.getHours();
+    times.steps.mins = patient_result.steps.created.getMinutes();
+  }
+  return times;
 }
 
 const getDailyHealthData = async (patientId) => {
@@ -293,6 +328,28 @@ const get_top5_leaderboard = async () => {
   return allPatientEng.slice(0,5);
 }
 
+const get_clinician_message = async (patient) => {
+
+  var all_messages = await ClinicianPatientMessageSchema
+    .find({
+      for_patient: patient._id,
+    })
+    .sort({ created: -1 });
+  var message = all_messages[0];
+  if (message == undefined){
+    var returnObj = {
+      message: "",
+      date: ""
+    }
+  } else {
+    var returnObj = {
+      message: message.message,
+      date: message.created.toDateString()
+    }
+  }
+  return returnObj;
+};
+
 // const get_clinician_message = async (patient) => {
 //   message = await ClinicianPatientMessage.findOne({
 //     for_patient: patient._id
@@ -397,22 +454,60 @@ const convert_timeseries_to_graph = (timeseries, metric_enum) => {
   return newTS
 }
 
+const update_username = async (res, patient, new_username) => {
+  var allUsernames = await PatientSchema.find().distinct('username');
+  console.log(allUsernames);
+  if (!allUsernames.includes(new_username)){
+    console.log('not existing username')
+    await PatientSchema.updateOne({
+      _id: patient._id
+    },
+    {
+      username: new_username
+    });
+    return res;
+  }
+  throw Error("Invalid username");
+}
+
+
+
+const update_password = async (patient, new_password) => {
+  if (new_password.length > 0){
+    var enc_password = await bcrypt.hash(new_password, 10);
+
+    var filter = {
+      _id: patient._id
+    }
+    var update = {
+      password: enc_password
+    }
+
+    await PatientSchema.findOneAndUpdate(filter, update);
+  }
+  return;
+}
+
+
 module.exports = {
   get_patient_list,
   get_clinician_id,
   generate_random_date,
   get_threshold,
   get_patient_data,
+  get_patient_data_times,
   getDailyHealthData,
   get_patient_data_type,
   get_patient_settings,
   get_patient_all_data,
   calc_engagement_rate,
   get_top5_leaderboard,
-  // get_clinician_message,
+  get_clinician_message,
   show_badge,
   // update_clinician_message,
   getHistoricalData,
   get_current_date,
-  convert_timeseries_to_graph
+  convert_timeseries_to_graph,
+  update_username,
+  update_password
 }

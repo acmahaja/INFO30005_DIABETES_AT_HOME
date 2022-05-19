@@ -33,12 +33,12 @@
                 {{#if patient.patient_settings.requires_glucose}}
                     <div class="data-box">
                         <p class="data-type">Blood Glucose</p>
-                        <img class="symbol" src="/images/blood-glucos e-icon.svg" alt="">
+                        <img class="symbol" src="/images/blood-glucose-icon.svg" alt="">
                         {{#if patient.patient_data.glucose}}
                             {{!-- ADD CROSS TICK ELSE STATEMENT --}}
                             <p class="value">{{patient.patient_data.glucose.value}} nmo/L</p>
                             <img class="tick-cross" src="/images/Vector.svg" alt="">
-                            {{#unless (check_range patient.patient_data.glucose.value patient.patient_threshold.blood_result.min_value patient.patient_threshold.blood_result.max_value)}} 
+                            {{#unless (check_range patient.patient_data.glucose.value patient.patient_threshold.blood_glucose_result.min_value patient.patient_threshold.blood_glucose_result.max_value)}} 
                                 <img class="danger" src="/icons/danger.svg">
                             {{/unless}}
                         {{else}}
@@ -46,7 +46,7 @@
                             <img/>
                             <img class="warn" src="/icons/warn.svg">
                         {{/if}}
-                        <p class="time">14:46</p>
+                        <p class="time">{{datatimes.glucose.hr}}:{{datatimes.glucose.mins}}</p>
                     </div>
                 {{/if}}
 
@@ -65,7 +65,7 @@
                             <p class="value">--- doses</p>
                             <img class="warn" src="/icons/warn.svg">
                         {{/if}}
-                        <p class="time">14:46</p>
+                        <p class="time">{{datatimes.insulin.hr}}:{{datatimes.insulin.mins}}</p>
                     </div>
                 {{/if}}
 
@@ -84,7 +84,7 @@
                             <p class="value">--- kg</p>
                             <img class="warn" src="/icons/warn.svg">
                         {{/if}}
-                        <p class="time">14:46</p>
+                        <p class="time">{{datatimes.weight.hr}}:{{datatimes.weight.mins}}</p>
                     </div>
                 {{/if}}
 
@@ -105,7 +105,7 @@
                             <img class="tick-cross" />
                             <img class="warn" src="/icons/warn.svg">
                         {{/if}}
-                        <p class="time">14:46</p>
+                        <p class="time">{{datatimes.steps.hr}}:{{datatimes.steps.mins}}</p>
                     </div>
                 {{/if}}
             </div>
@@ -125,7 +125,7 @@
                     <div class="clinician-message">
                         <p class="message">{{clinicianmessage.message}}</p>
                         {{!-- <img src="/images/pdashboard/message-doctor-icon.svg" alt=""> --}}
-                        <p class="date">{{clinicianmessage.date}}Tues 15th Mar, 2022</p>
+                        <p class="date">{{clinicianmessage.date}}</p>
                     </div>
                     <!-- end of 1 message -->
 

@@ -8,7 +8,10 @@ const clinicianControllerNotes = require("../../controller/clinicianControllerNo
 const clinicianControllerMessages = require("../../controller/clinicianControllerMessage");
 const clinicianControllerInfo = require("../../controller/clinicianControllerInfo");
 
-const { isAuthenticatedClinician } = require("../auth");
+const { 
+  isAuthenticatedClinician,
+  isAuthenticatedPatient
+       } = require("../auth");
 
 clinicianRouter.put(
   "/:PatientID/info/settings",
@@ -134,7 +137,7 @@ clinicianRouter.get("/logout", clinicianController.clincianLogout);
 
 clinicianRouter.post(
   "/login",
-  passport.authenticate("local", {
+  passport.authenticate("clinician-local", {
     successRedirect: "/clinician/dashboard",
     failureRedirect: "/clinician/login",
   })

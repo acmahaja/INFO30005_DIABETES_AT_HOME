@@ -33,6 +33,13 @@ h2 {
   justify-content: center;
 }
 
+.password-text {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border: hidden;
+}
+
 @media screen and (min-width: 1900px) {
   /* body {
     background-color: green;

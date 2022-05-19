@@ -7,16 +7,19 @@ const {
   getDailyHealthData,
   get_threshold,
   get_patient_data,
+  get_patient_data_times,
   calc_engagement_rate,
   get_top5_leaderboard,
   // update_clinician_message,
   show_badge,
-  // get_clinician_message,
+  get_clinician_message,
   get_patient_settings,
   get_patient_all_data,
   getHistoricalData,
   get_current_date,
-  convert_timeseries_to_graph
+  convert_timeseries_to_graph,
+  update_username,
+  update_password
 } = require("../utils/utils");
 const { version } = require("prettier");
 
@@ -32,7 +35,8 @@ const entryTypes = {
 };
 
 const postAddHealthData = async (req, res) => {
-  var this_user = req.body["user_id"];
+  //var this_user = req.body["user_id"];
+  var this_user = req.user._id;
   var health_type = req.body["health_type"];
   var value = req.body["data_input"];
   var comment = req.body["text_input"];
@@ -46,16 +50,40 @@ const postAddHealthData = async (req, res) => {
     created: Date.now()
   });
 
-
   await newHealthData
     .save()
-
     .catch((err) => {
       console.log(err);
     });
 
   res.redirect("/patient/dataentry");
 };
+
+const postUpdateUserInfo = async (req, res) => {
+  var operation = req.body['operation'];
+  if (operation == 'username'){
+    var new_username = req.body["new-sname"];
+    update_username(res, req.user, new_username)
+      .then((res) => {
+        res.redirect("/patient/info");
+      })
+      .catch((err) => {
+        console.log(err.message);
+        res.redirect("/patient/info");
+      });
+    }
+  else if (operation == 'password'){
+    var new_password = req.body["new-pw"];
+    var confirm_password = req.body["confirm-pw"];
+    if (new_password == confirm_password){
+      await update_password(req.user, new_password);
+    }
+    res.redirect("/patient/info");
+  }
+  else
+    res.redirect("/patient/info");
+}
+
 
 const isLoggedIn = (req, res, next) => {
   if (
@@ -93,7 +121,7 @@ const patientLogout = (req, res) => {
 
 const getDataEntryPage = async (req, res) => {
   const this_patient = await PatientSchema.findOne({
-    username: req.session.username,
+    username: req.user.username,
   });
 
   const patientsettings = await patientSettingsSchema.findOne({
@@ -111,7 +139,7 @@ const getDataEntryPage = async (req, res) => {
 };
 
 const postUpdateHealthData = async (req, res) => {
-  var this_user = req.session;
+  var this_user = req.user;
   var health_type = req.body["health_type"];
   var value = req.body["data_input"];
   var comment = req.body["text_input"];
@@ -158,23 +186,27 @@ const postUpdateHealthData = async (req, res) => {
 };
 
 const loadDashboard = async (req, res) => {
-  req.session.username = "patstuart";
-  var patient = await PatientSchema.findOne({ username: req.session.username });
+
+  var patient = await PatientSchema.findOne({ username: req.user.username });
   var patient_threshold = await get_threshold(patient._id);
   var now = new Date();
   var patient_data = await get_patient_data(patient, new Date(now.getFullYear(), now.getMonth(), now.getDate()));
+  var result_times = get_patient_data_times(patient_data);
   var patient_settings = await get_patient_settings(patient);
   patient_data = { ...patient._doc, patient_threshold, patient_data, patient_settings };
-  // var message = await get_clinician_message(patient);
+  var clinicianmessage = await get_clinician_message(patient);
   var engagement_rate = await calc_engagement_rate(patient);
   var badge = await show_badge(patient);
   //var timeseries = await get_patient_all_data(patient);
   var timeseries = await getHistoricalData(patient._id,10);
   var leaderboard = await get_top5_leaderboard();
   var dateString = get_current_date().toDateString();
+
+
   res.render("patient/patientDashboard", {
     patient: patient_data,
-    clinicianmessage: "aaaa", //temp
+    datatimes: result_times,
+    clinicianmessage: clinicianmessage,
     engagement: engagement_rate,
     showBadge: badge,
     historicaldata: timeseries,
@@ -184,8 +216,7 @@ const loadDashboard = async (req, res) => {
 };
 
 const loadPatientInfoPage = async (req, res) => {
-  req.session.username = "patstuart";
-  var patient_info = await PatientSchema.findOne({ username: req.session.username}).populate("assigned_clincian").lean();
+  var patient_info = await PatientSchema.findOne({ _id: req.user._id}).populate("assigned_clincian").lean();
   patient_info.dob = patient_info.dob.toDateString();
   currentDate = get_current_date().toDateString();
   res.render("patient/patientUserInfo", {
@@ -197,8 +228,8 @@ const loadPatientInfoPage = async (req, res) => {
 // glucose data
 
 const loadDataPage = async (req, res, render_path, enum_type, history="month") => {
-  req.session.username = "patstuart";
-  var patient = await PatientSchema.findOne({ username: req.session.username });
+  req.user.username = "patstuart";
+  var patient = await PatientSchema.findOne({ username: req.user.username });
   var days = 0;
   if (history != "month"){
     dateJoined = patient.date_joined;
@@ -273,5 +304,6 @@ module.exports = {
   loadPatientStepsDataPageMonth,
   loadPatientStepsDataPageAll,
   loadPatientWeightDataPageMonth,
-  loadPatientWeightDataPageAll
+  loadPatientWeightDataPageAll,
+  postUpdateUserInfo,
 };

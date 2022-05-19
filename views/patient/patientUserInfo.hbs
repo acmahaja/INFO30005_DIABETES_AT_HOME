@@ -91,7 +91,9 @@
           </div>
           <div class="info-el">
           <p class="info-el__label">Password:</p>
-          <div class="info-el__value">{{patient.password}}</div>
+          <div class="info-el__value" id="password-value">{{patient.password}}
+           {{!-- <input class="password-text" type="password" value={{patient.password}}> --}}
+          </div>
           <button class="edit-btn" onclick="showChangePWForm()">Edit</button>
         </div>
         <div class="info-el">
@@ -112,9 +114,10 @@
 
     <!-- Change Screen Name Popup Box -->
     <div id="change-screenname-form" class="popup" onclick="showChangeSNameForm()">
-      <form class="edit-form" id="edit-form-id1">
+      <form class="edit-form" id="edit-form-id1" method="post" action="">       
         <h3 class="edit-form__title">Change Screen Name</h3>
         <label class="edit-form__label" for="new-sname">New Screen Name</label>
+        <input class="edit-form__input" type="hidden" name="operation" value="username">
         <input class="edit-form__input" type="text" id="new-sname"
         name="new-sname" />
         <div class="edit-form__btns">
@@ -137,10 +140,11 @@
 
     <!-- Change Password Popup Box -->
     <div id="change-pw-form" class="popup" onclick="showChangePWForm()">
-      <form class="edit-form" id="edit-form-id2">
+      <form class="edit-form" id="edit-form-id2" method="post" action="">
         <h3 class="edit-form__title">Change Password</h3>
-        <label class="edit-form__label" for="old-pw">Old Password</label>
-        <input class="edit-form__input" type="text" id="old-pw" name="old-pw" />
+        <input class="edit-form__input" type="hidden" name="operation" value="password">
+        {{!-- <label class="edit-form__label" for="old-pw">Old Password</label>
+        <input class="edit-form__input" type="text" id="old-pw" name="old-pw" /> --}}
         <label class="edit-form__label" for="new-pw">New Password</label>
         <input class="edit-form__input" type="text" id="new-pw" name="new-pw" />
         <label class="edit-form__label" for="confirm-pw">Confirm Password</label>

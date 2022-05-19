@@ -63,9 +63,10 @@ const clincianComments = async (req, res) => {
 
     const result = await get_threshold(patient_list[i].id);
     var thresholds = result;
+    var now = new Date();
     const patient_data = await get_patient_data(
       patient_list[i]._id,
-      new Date(Date.now())
+      new Date(now.getFullYear(), now.getMonth(), now.getDate())
     );
     const patient_settings = await PatientSettings.findOne({
       for_patient: patient_list[i]._id,
@@ -89,9 +90,10 @@ const loadDashboard = async (req, res) => {
 
     const result = await get_threshold(patient_list[i].id);
     var thresholds = result;
+    var now = new Date();
     const patient_data = await get_patient_data(
       patient_list[i]._id,
-      new Date(Date.now())
+      new Date(now.getFullYear(), now.getMonth(), now.getDate())
     );
     const patient_settings = await PatientSettings.findOne({
       for_patient: patient_list[i]._id,
