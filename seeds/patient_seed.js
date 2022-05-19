@@ -20,7 +20,7 @@ const createPat = async (findChris) => {
     lastname: "stuart",
     dob: "2000-03-28",
     email: "pat.stuart@email.com",
-    date_joined: "2021-11-11",
+    date_joined: "2022-05-01",
     secret: "INFO30005",
     assigned_clincian: findChris._id,
   });
@@ -61,7 +61,7 @@ const generatePatient = async (clinician) => {
       "." +
       last_names[lastnameIndex].toLowerCase() +
       "@email.com",
-    date_joined: new Date(faker.date.recent(20)),
+    date_joined: new Date(faker.date.recent(10)),
     secret: "INFO30005",
     assigned_clincian: clinician._id,
   });
