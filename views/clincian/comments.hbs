@@ -34,29 +34,29 @@
                       </a>
                 </div>
                   <div class="patient-data">
-                      {{#if patient_settings.requires_glucose}} 
+                      {{#if (isSelected patient_settings.requires_glucose)}}
                             {{patient.patient_data.glucose.comments}}
                       {{else}}
                           -
                       {{/if}}
                   </div>
                   <div class="patient-data">
-                    {{#if patient_settings.requires_weight}} 
+          {{#if (isSelected patient_settings.requires_weight)}}
                             {{patient.patient_data.weight.comments}} 
                       {{else}}
                           -
                       {{/if}}
                   </div>
                   <div class="patient-data">
-                    {{#if patient_settings.requires_insulin}} 
+          {{#if (isSelected patient_settings.requires_insulin)}}
                             {{patient.patient_data.insulin.comments}}
                       {{else}}
                           -
                       {{/if}}
                   </div>
                   <div class="patient-data">
-                    {{#if patient_settings.requires_glucose}} 
-                        {{patient.patient_data.glucose.comments}}
+          {{#if (isSelected patient_settings.requires_steps)}}
+                        {{patient.patient_data.steps.comments}}
                       {{else}}
                           -
                       {{/if}}
