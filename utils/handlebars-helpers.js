@@ -98,6 +98,10 @@ const is_defined = function(value) {
     return value !== undefined && value !== "" && value !== [] && value !== null;
 }
 
+const isSelected = function (value) {
+  return value === true
+}
+
 module.exports = {
   tickbox,
   check_range,
@@ -107,4 +111,5 @@ module.exports = {
   threshold_title,
   data_title,
   is_defined,
+  isSelected,
 };
