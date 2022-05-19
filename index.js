@@ -25,8 +25,9 @@ const bodyParser = require("body-parser");
 
 mongoose
   .connect(
-    //process.env.MONGO_URL:
-     "mongodb://localhost:27017/diabetes-at-home",
+    process.env.MONGO_URL,
+    // :
+    //  "mongodb://localhost:27017/diabetes-at-home",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -36,8 +37,8 @@ mongoose
   .then(() => {
     // clear database on restart
     // purely for demo purposes
-    console.log(`Mongo connected to port ${db.host}:${db.port}`)}
-  );
+    console.log(`Mongo connected to port ${db.host}:${db.port}`);
+  });
 
 const db = mongoose.connection.on("error", (err) => {
   console.error(err);
@@ -99,10 +100,16 @@ app.use(express.static("public"));
 const clinicianRouter = require("./routes/clinician/clinicianRouter");
 const patientRouter = require("./routes/patient/patientRouter");
 
-const {populateDB} = require("./seeds/populateDB");
-db.dropDatabase().then(()=> {
-  populateDB()
-})
+const { populateDB } = require("./seeds/populateDB");
+
+const collections = mongoose.connection.collections;
+
+Promise.all(
+  Object.values(collections).map(async (collection) => {
+    await collection.deleteMany({}); // an empty mongodb selector object ({}) must be passed as the filter argument
+  })
+).then(() => populateDB());
+
 
 app.use("/patient", patientRouter);
 app.use("/clinician", clinicianRouter);
