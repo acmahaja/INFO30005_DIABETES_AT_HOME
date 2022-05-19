@@ -115,7 +115,6 @@
 
       <div class="nav">
         <div class="tabs">
-          {{log (isSelected patient_settings.requires_steps)}}
           {{#if (isSelected patient_settings.requires_glucose)}}
             <div class="tab {{data_title "blood_glucose" type}}">  
               <a href="/clinician/{{patient._id}}/data/blood_glucose">Glucose</a></div>
