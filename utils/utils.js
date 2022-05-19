@@ -78,15 +78,15 @@ async function get_patient_data_type(patient, type) {
 
 async function get_patient_settings(patient) {
   const patient_settings = await PatientSettings.findOne({
-    patient_id: patient._id,
+    for_patient: patient._id,
   });
   return patient_settings;
 }
 
-async function get_patient_data(patient_id, start_date) {
+async function get_patient_data(patient, start_date) {
   const glucose_result = await HealthDataEntry.find({
     health_type: "blood_glucose",
-    patient_id: patient_id,
+    patient_id: patient._id,
     created: {
       $gte: start_date
     },
@@ -94,7 +94,7 @@ async function get_patient_data(patient_id, start_date) {
 
   const weight_result = await HealthDataEntry.find({
     health_type: "weight",
-    patient_id: patient_id,
+    patient_id: patient._id,
     created: {
       $gte: start_date
     },
@@ -102,7 +102,7 @@ async function get_patient_data(patient_id, start_date) {
 
   const insulin_result = await HealthDataEntry.find({
     health_type: "insulin",
-    patient_id: patient_id,
+    patient_id: patient._id,
     created: {
       $gte: start_date
     },
@@ -110,7 +110,7 @@ async function get_patient_data(patient_id, start_date) {
 
   const steps_result = await HealthDataEntry.find({
     health_type: "steps",
-    patient_id: patient_id,
+    patient_id: patient._id,
     created: {
       $gte: start_date
     },
@@ -129,25 +129,25 @@ const getDailyHealthData = async (patientId) => {
   var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
   var glucoseData = await HealthDataEntry.findOne({
-    for_patient: patientId,
+    patient_id: patientId,
     health_type: GLUCOSE_ENUM_TYPE,
     created: { $gte: startOfToday },
   }).lean();
 
   var insulinData = await HealthDataEntry.findOne({
-    for_patient: patientId,
+    patient_id: patientId,
     health_type: INSULIN_ENUM_TYPE,
     created: { $gte: startOfToday },
   }).lean();
 
   var stepsData = await HealthDataEntry.findOne({
-    for_patient: patientId,
+    patient_id: patientId,
     health_type: STEPS_ENUM_TYPE,
     created: { $gte: startOfToday },
   }).lean();
 
   var weightData = await HealthDataEntry.findOne({
-    for_patient: patientId,
+    patient_id: patientId,
     health_type: WEIGHT_ENUM_TYPE,
     created: { $gte: startOfToday },
   }).lean();
@@ -240,13 +240,14 @@ const calc_engagement_rate = async (patient) => {
   daysWithEntries = await HealthDataEntry.aggregate([
     {
       $match: {
-        patient_id: mongoose.Types.ObjectId(patient.id)
+        patient_id: mongoose.Types.ObjectId(patient._id),
+        created: {$gte: new Date(patient.date_joined)}
       }
     },
     {
       $group : {
         "_id": {
-          date: "$created"
+          date: {$dateToString: { format: "%Y-%m-%d", date: "$created" }}
         }
       }
     }
@@ -254,13 +255,11 @@ const calc_engagement_rate = async (patient) => {
   numEntryDays = daysWithEntries.length;
   dateJoined = patient.date_joined;
   now = new Date();
-  today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  today = now
+  today.setHours(33, 59, 59)
   const timeJoined = Math.abs(today - dateJoined);
   const daysJoined = Math.ceil(timeJoined / (1000 * 60 * 60 * 24)); 
-  // console.log(daysWithEntries);  //DEBUG
-  // console.log(numEntryDays);   //DEBUG
-  // console.log(daysJoined);     //DEBUG
-  return Math.round(numEntryDays / daysJoined * 100)
+  return Math.round(numEntryDays / (daysJoined) * 10000) / 100
 }
 
 const show_badge = async (patient) => {
@@ -296,7 +295,7 @@ const get_top5_leaderboard = async () => {
 
 const get_clinician_message = async (patient) => {
   message = await ClinicianPatientMessage.findOne({
-    for_patient: patient.id
+    for_patient: patient._id
   }).lean();
   return message;
 }
@@ -304,10 +303,10 @@ const get_clinician_message = async (patient) => {
 const update_clinician_message = async (patient, newMessage) => {
   await ClinicianPatientMessage.updateOne(
     {
-      for_patient: patient.id
+      for_patient: patient._id
     },
     {
-      for_patient: patient.id,
+      for_patient: patient._id,
       message: newMessage
     },
     {
@@ -326,39 +325,38 @@ const getHistoricalData = async (thisPatientId, nDays, metricType = "all") => {
   var historical_data;
   if (metricType == GLUCOSE_ENUM_TYPE){
       historical_data = await HealthDataEntry.find({
-          for_patient: thisPatientId,
+          patient_id: thisPatientId,
           health_type: GLUCOSE_ENUM_TYPE,
-          updated: {$gte: PastNDays}
+          created: {$gte: PastNDays}
       }).lean()
   }
   else if (metricType == INSULIN_ENUM_TYPE) {
       historical_data = await HealthDataEntry.find({
-          for_patient: thisPatientId,
+          patient_id: thisPatientId,
           health_type: INSULIN_ENUM_TYPE,
-          updated: {$gte: PastNDays}
+          created: {$gte: PastNDays}
       }).lean()
   }
   else if (metricType == STEPS_ENUM_TYPE) {
       historical_data = await HealthDataEntry.find({
-          for_patient: thisPatientId,
+          patient_id: thisPatientId,
           health_type: STEPS_ENUM_TYPE,
-          updated: {$gte: PastNDays}
+          created: {$gte: PastNDays}
       }).lean()
   }
   else if (metricType == WEIGHT_ENUM_TYPE) {
       historical_data = await HealthDataEntry.find({
-          for_patient: thisPatientId,
+          patient_id: thisPatientId,
           health_type: WEIGHT_ENUM_TYPE,
-          updated: {$gte: PastNDays}
+          created: {$gte: PastNDays}
       }).lean()
   }
   else {
       historical_data = await HealthDataEntry.find({
-          for_patient: thisPatientId,
-          updated: {$gte: PastNDays}
+        patient_id: thisPatientId,
+          created: {$gte: PastNDays}
       }).lean()
   }
-  
   healthEntryTS = {}
   for (var i=0; i<NUMBER_OF_DAYS; i++){
       d = new Date()
@@ -366,10 +364,10 @@ const getHistoricalData = async (thisPatientId, nDays, metricType = "all") => {
       healthEntryTS[d.toDateString()] = {index: i, date: d.toDateString(), datetime: d}
   }
   for (const e of historical_data){
-      d = e.updated.toDateString()
+      d = e.created.toDateString()
       if (d in healthEntryTS)
           healthEntryTS[d][e.health_type]  = {value: e.value, comment: e.comments}
-  }
+  } 
   healthEntryArray = Object.values(healthEntryTS);
   return healthEntryArray
 }

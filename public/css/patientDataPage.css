@@ -250,6 +250,18 @@ canvas#myChart {
     .mobile-break {
         display: none;
     }
+    .content {
+        height: 39.5em;
+    }
+    canvas#myChart {
+        /* max-width: 95%; */
+        max-height: 90%;
+    }
+    
+    .graph {
+        margin-left: 8em; 
+    }
+
 }
 
 @media only screen and (min-width:1900px) {

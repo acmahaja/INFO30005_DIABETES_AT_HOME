@@ -43,8 +43,7 @@ const postAddHealthData = async (req, res) => {
     health_type: health_type,
     value: value,
     comments: comment,
-    created: Date.now(),
-    updated: Date.now(),
+    created: Date.now()
   });
 
 
@@ -54,11 +53,7 @@ const postAddHealthData = async (req, res) => {
     .catch((err) => {
       console.log(err);
     });
-  newEntry = await HealthDataEntry.findOne(
-    { this_patient: this_user, health_type: health_type },
-    {},
-    { sort: { created: -1 } }
-  );
+
   res.redirect("/patient/dataentry");
 };
 
@@ -106,7 +101,7 @@ const getDataEntryPage = async (req, res) => {
     for_patient: this_patient._id,
   });
 
-  entries = await getDailyHealthData(this_patient._id);
+  entries = await getDailyHealthData(this_patient._id);  //debug
 
   res.render("patient/patientAddInfo", {
     patient: this_patient,
@@ -166,16 +161,16 @@ const postUpdateHealthData = async (req, res) => {
 const loadDashboard = async (req, res) => {
   req.session.username = "patstuart";
   var patient = await PatientSchema.findOne({ username: req.session.username });
-  var patient_threshold = await get_threshold(patient.id);
+  var patient_threshold = await get_threshold(patient._id);
   var now = new Date();
-  var patient_data = await get_patient_data(patient.id, new Date(now.getFullYear(), now.getMonth(), now.getDate()));
+  var patient_data = await get_patient_data(patient, new Date(now.getFullYear(), now.getMonth(), now.getDate()));
   var patient_settings = await get_patient_settings(patient);
   patient_data = { ...patient._doc, patient_threshold, patient_data, patient_settings };
   var message = await get_clinician_message(patient);
   var engagement_rate = await calc_engagement_rate(patient);
   var badge = await show_badge(patient);
   //var timeseries = await get_patient_all_data(patient);
-  var timeseries = await getHistoricalData(patient,10);
+  var timeseries = await getHistoricalData(patient._id,10);
   var leaderboard = await get_top5_leaderboard();
   var dateString = get_current_date().toDateString();
   res.render("patient/patientDashboard", {
