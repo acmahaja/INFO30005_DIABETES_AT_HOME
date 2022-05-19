@@ -1,0 +1,289 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Raleway";
+}
+
+.gradient-background {
+  background: linear-gradient(180deg, #665fc7 0%, #665fc7 0.01%, #8880ff 100%);
+}
+
+.day {
+  font-size: 22px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-size: larger;
+  line-height: 26px;
+  display: flex;
+  align-items: center;
+}
+
+.day #week_day {
+  margin-right: 0.5em;
+  font-weight: bold;
+  color: #665fc7;
+}
+
+.title {
+  width: 100%;
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.subheading {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 0px;
+  color: rgba(76, 76, 76, 0.9);
+}
+
+body {
+  background-color: #e5e5e5;
+  height: 100vh;
+}
+
+.wrapper {
+  width: calc(100vw - 17.5em);
+  height: 100%;
+  margin: 0px 0 0 17.5em;
+  display: flex;
+  flex-direction: row;
+}
+.day {
+  display: flex;
+}
+
+.user-data {
+  height: 100%;
+  width: 77%;
+  padding: 2em 2.5em;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.social-data {
+  height: 100%;
+  width: 32%;
+  background-color: white;
+  padding: 2em 2.5em;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.welcome {
+  width: 100%;
+  height: fit-content;
+  padding: 1em 2em;
+  margin: 2em 0em;
+  text-transform: capitalize;
+  color: white;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 1em;
+}
+
+.welcome .welcome-message {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.welcome .sub-message {
+  font-size: 1em;
+  font-weight: 400;
+}
+
+.welcome * {
+  margin: 0.5em 0em;
+}
+
+.social-data h2 {
+  color: rgba(76, 76, 76, 0.9);
+}
+
+.trends {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.trends-data {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 1em 0em;
+}
+
+.trend {
+  width: 23%;
+  height: 12em;
+  border-radius: 1em;
+  padding: 1em;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.trend .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5em;
+  color: white;
+  font-weight: 500;
+  height: 1.5em;
+}
+
+.trend .header img {
+  height: 1.5em;
+}
+
+.trend .data {
+  height: calc(100% - 1.5em);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  color: white;
+  font-weight: 500;
+}
+
+.trend .data img {
+  height: 2.5em;
+  width: auto;
+}
+
+.trend .data .danger {
+  color: red;
+  font-weight: 600;
+}
+
+.trend .data .danger img {
+  height: 2em;
+  width: auto;
+}
+
+.social-data .badges,
+.engagement,
+.league {
+  width: 100%;
+  min-height: 5em;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.badges .badges-list {
+  width: 100%;
+  height: 10em;
+  margin: 1em 0em;
+  border-radius: 1.25em;
+}
+
+.engagement .engagement-list {
+  width: 100%;
+  height: 15em;
+  margin: 1em 0em;
+  border-radius: 1.25em;
+}
+
+.engagement .engagement-list {
+  width: 100%;
+  height: 15em;
+  margin: 1em 0em;
+  border-radius: 1.25em;
+}
+
+.league .league-list {
+  width: 100%;
+  height: 25em;
+  margin: 1em 0em;
+  border-radius: 1.25em;
+}
+
+@media screen and (max-width: 640px) {
+  section.wrapper {
+    position: relative;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+  padding: 0em;}
+
+  .trend {
+    padding: 0em;
+    font-size: .75em;
+    height: fit-content;
+  }
+
+
+  .trend .data {
+    height: fit-content;
+    width: 100%;
+  }
+
+  .trend .data .danger img{
+    width: 1em;
+  }
+
+  .welcome {
+    display: none;
+  }
+
+  .user-data {
+    width: 100vw;
+    height: fit-content;
+    padding: 1em;
+  }
+
+  .trend {
+    width: 49%;
+    min-height: 8.5em;
+    height: fit-content;
+    border-radius: 1em;
+    padding: 1em;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .trend .header {
+    width: 100%;
+    height: fit-content;
+  }
+
+  .trend .data {
+    width: 100%;
+    min-height: 3em;
+    height: fit-content;
+  }
+
+  .trend .data img {
+    width: 100%;
+    height: auto;
+  }
+
+
+  .social-data {
+    width: 100vw;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    padding: 1em;
+  }
+}

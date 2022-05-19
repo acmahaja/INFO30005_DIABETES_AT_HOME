@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UserInfo</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/patient_userInfo.css" />
+    <link rel="stylesheet" href="/css/patient_sidebar.css" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../../public/images/favicon.png"
+    />
+  </head>
+
+  <body>
+    {{> sidebarPatient firstname=patient.firstname lastname=patient.lastname profile-img="https://assets.website-files.com/5746d4c4a3e009bb4d9ac858/5a2ef695e43cca0001193a33_Profile.jpg"}}
+    {{!-- <div class="wrap"> --}}
+    <div class="nav">
+      <div class="nav-item">
+          <div class="header">
+            <h1>User Info</h1>
+            <h2 class="date">{{currentDate}}</h2>
+        </div>
+      </div>
+    </div>
+
+    {{!-- <!-- Main Profile Photo -->
+    <div>
+      <img
+        class="profilePhoto"
+        src="../../public/images/userInfo/profile.jpg"
+        alt=""
+      />
+    </div> --}}
+
+    <!-- User Information Box -->
+    {{!-- <div class="user-info">
+      <div class="info-el">
+        <p class="info-el__label">Full Name:</p>
+        <div class="info-el__value">{{patient.firstname}} {{patient.lastname}}</div>
+      </div>
+      <div class="info-el">
+        <p class="info-el__label">Screen Name:</p>
+        <div class="info-el__value">{{patient.username}}</div>
+        <button class="edit-btn" onclick="showChangeSNameForm()">Edit</button>
+      </div>
+      <div class="info-el">
+        <p class="info-el__label">Date of Birth</p>
+        <div class="info-el__value">{{patient.dob}}</div>
+      </div>
+      <div class="info-el">
+        <p class="info-el__label">Email:</p>
+        <div class="info-el__value">{{patient.email}}</div>
+      </div>
+      <div class="info-el">
+        <p class="info-el__label">Password:</p>
+        <div class="info-el__value">{{patient.password}}</div>
+        <button class="edit-btn" onclick="showChangePWForm()">Edit</button>
+      </div>
+      <div class="info-el">
+        <p class="info-el__label">Clinician Name:</p>
+        <div class="info-el__value">{{patient.assigned_clincian.firstname}} {{patient.assigned_clincian.lastname}}</div>
+      </div>
+    </div> --}}
+
+        <!-- User Information Box -->
+    <div class="user-info">
+      <div class="upperhalf-wrapper">
+        <div class="upperhalf-info">
+          <div class="info-el info-el__upperhalf">
+            <p class="info-el__label">Full Name:</p>
+            <div class="info-el__value">{{patient.firstname}} {{patient.lastname}}</div>
+          </div>
+          <div class="info-el info-el__upperhalf">
+            <p class="info-el__label">Screen Name:</p>
+            <div class="info-el__value">{{patient.username}}</div>
+            <button class="edit-btn" onclick="showChangeSNameForm()">
+              Edit
+            </button>
+          </div>
+          <div class="info-el info-el__upperhalf">
+            <p class="info-el__label">Date of Birth:</p>
+            <div class="info-el__value">{{patient.dob}}</div>
+          </div>
+          <div class="info-el info-el__upperhalf">
+            <p class="info-el__label">Email:</p>
+            <div class="info-el__value">{{patient.email}}</div>
+          </div>
+          <div class="info-el">
+          <p class="info-el__label">Password:</p>
+          <div class="info-el__value" id="password-value">{{patient.password}}
+           {{!-- <input class="password-text" type="password" value={{patient.password}}> --}}
+          </div>
+          <button class="edit-btn" onclick="showChangePWForm()">Edit</button>
+        </div>
+        <div class="info-el">
+          <p class="info-el__label">Clinician Name:</p>
+          <div class="info-el__value">{{patient.assigned_clincian.firstname}} {{patient.assigned_clincian.lastname}}</div>
+        </div>
+      </div>
+        </div>
+        {{!-- <div class="avater-section">
+          <img class="avatar" src="../../public/images/userInfo/profile.jpg" />
+          <div class="flex-center">
+            <button id="avatar-btn" class="edit-form__btn btn-update">
+              Update Avatar
+            </button>
+          </div>
+        </div> --}}
+      </div>
+
+    <!-- Change Screen Name Popup Box -->
+    <div id="change-screenname-form" class="popup" onclick="showChangeSNameForm()">
+      <form class="edit-form" id="edit-form-id1" method="post" action="">       
+        <h3 class="edit-form__title">Change Screen Name</h3>
+        <label class="edit-form__label" for="new-sname">New Screen Name</label>
+        <input class="edit-form__input" type="hidden" name="operation" value="username">
+        <input class="edit-form__input" type="text" id="new-sname"
+        name="new-sname" />
+        <div class="edit-form__btns">
+          <input
+            class="edit-form__btn btn-update"
+            type="submit"
+            id="update"
+            value="Update"
+          />
+          <input
+            class="edit-form__btn btn-cancel"
+            type="button"
+            id="cancel"
+            value="Cancel"
+            onclick="showChangeSNameForm()"
+          />
+        </div>
+      </form>
+    </div>
+
+    <!-- Change Password Popup Box -->
+    <div id="change-pw-form" class="popup" onclick="showChangePWForm()">
+      <form class="edit-form" id="edit-form-id2" method="post" action="">
+        <h3 class="edit-form__title">Change Password</h3>
+        <input class="edit-form__input" type="hidden" name="operation" value="password">
+        {{!-- <label class="edit-form__label" for="old-pw">Old Password</label>
+        <input class="edit-form__input" type="text" id="old-pw" name="old-pw" /> --}}
+        <label class="edit-form__label" for="new-pw">New Password</label>
+        <input class="edit-form__input" type="text" id="new-pw" name="new-pw" />
+        <label class="edit-form__label" for="confirm-pw">Confirm Password</label>
+        <input
+          class="edit-form__input"
+          type="text"
+          id="confirm-pw"
+          name="confirm-pw"
+        />
+        <div class="edit-form__btns">
+          <input
+            class="edit-form__btn btn-update"
+            type="submit"
+            id="update"
+            value="Update"
+          />
+          <input
+            class="edit-form__btn btn-cancel"
+            type="button"
+            id="cancel"
+            value="Cancel"
+            onclick="showChangePWForm()"
+          />
+        </div>
+      </form>
+    </div>
+
+    <script>
+
+      editForm = document.getElementById("edit-form-id1")
+      editForm.addEventListener("click", function(e) {
+          e.stopPropagation();
+      });
+      editForm = document.getElementById("edit-form-id2")
+      editForm.addEventListener("click", function(e) {
+          e.stopPropagation();
+      });
+
+      function showChangePWForm() {
+        var pwForm = document.getElementById("change-pw-form");
+        pwForm.classList.toggle("show");
+      }
+
+      function showChangeSNameForm() {
+        var sNameForm = document.getElementById("change-screenname-form");
+        sNameForm.classList.toggle("show");
+      }
+    </script>
+
+    {{!-- </div> --}}
+  </body>
+</html>

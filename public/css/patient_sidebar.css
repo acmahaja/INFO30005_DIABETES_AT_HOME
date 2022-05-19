@@ -1,0 +1,162 @@
+* {
+    font-family: "Raleway";
+}
+
+header {
+    height: 5.5vh;
+}
+
+.sidebar-icon {
+    display: none;
+}
+
+.patient-sidebar {
+    height: 100vh;
+    width: 17.5em;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding-top: 6vh;
+    background-color: #8A82FF;
+    z-index: 2;
+}
+
+.patient-profile {
+    margin: 0 0 18px;
+}
+
+.patient-profile a {
+    text-decoration: none;
+}
+
+p.patient-name {
+    font-size: 1.5em;
+    color: #fff;
+    text-align: center;
+    text-transform: capitalize;
+    line-height: 1em;
+}
+
+p.patient-name:hover {
+    cursor: pointer;
+}
+
+.patient-sidebar .nav-link {
+    display: flex;
+    height: 3.5em;
+    padding: 0em 1em;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.patient-sidebar .nav-link img {
+    height: 100%;
+}
+
+.patient-sidebar .nav-link:hover {
+    background-color: #665FC7;
+}
+
+
+
+
+.patient-sidebar .nav-link p {
+    font-size: 1.25em;
+    color: #fff;
+    margin: auto 0 auto 1em
+}
+
+
+.patient-sidebar .nav-link img {
+    max-width: 18px;
+    margin-left: 24px;
+}
+
+img.patient-photo {
+	border: 5px solid #8a82ff;
+	margin-left: 28%;
+	display: block;
+	border-radius: 4px;
+	width: 8em;
+	height: 8em;
+	/* border-radius: 50%; */
+	object-fit: contain;
+	margin-bottom: 10px;
+}
+
+/* img.patient-photo:hover{
+    cursor: pointer;
+} */
+
+
+@media screen and (max-width: 1900px) {
+
+    body {
+        display: flex;
+        flex-direction: column
+
+    };
+
+    .sidebar-icon {
+        position: fixed;
+        top: 0vh;
+        height: 45px;
+        margin: 15px;
+    }
+
+    /* .patient-sidebar {
+        display: none;
+    } */
+
+    .sidebar-icon-div {
+        position: relative;
+        top: 0;
+        width: 100%;
+        height: 2em;
+        padding: 1em;
+    }
+
+    .sidebar-icon-div img {
+        height: 2em;
+        width: 2em;
+    }
+
+    #sidebar-icon-color {
+        display: block;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+    }
+
+    #sidebar-icon-white {
+        display: none;
+        z-index: 4;
+        cursor: pointer;
+        position: absolute;
+        left: 1em;
+        top: 1em;
+        height: 2em;
+        width: 2em;
+    }
+
+    #sidebar-overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 17.2rem;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, .25);
+        z-index: 1.5;
+        cursor: pointer;
+        align-items: center;
+    }
+    .wrapper {
+        padding: 0em;
+        width: 100vw;
+        height: 100vh;
+    padding: 1em;}
+}
+

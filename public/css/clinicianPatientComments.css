@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Raleway"
+}
+
+body {
+    background-color: #e5e5e5
+}
+
+.wrapper {
+    margin: 45px 0 0 335px
+}
+
+.title {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 10px
+}
+
+.data-box {
+    width: 1431px;
+    height: 829px;
+    background: #5f3a9b;
+    background-image: linear-gradient(45deg, #5f3a9b, #44207e);
+    border-radius: 17px;
+    display: grid;
+    grid-auto-rows: 57px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    padding: 25px 70px 25px 70px;
+    overflow-y: scroll
+}
+
+.data-box * {
+    font-size: 15px;
+    color: #fff;
+    justify-self: center;
+    align-self: center;
+    row-gap: 3px
+}
+
+.data-box :nth-child(1) {
+    grid-column: 2
+}
+
+.user-profile {
+    display: flex
+}
+
+.user-profile .user-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px
+}
+
+.user-profile p {
+    font-size: 24px
+}
+
+hr {
+    grid-column: 1/-1;
+    width: 100%;
+    background-color: #5f3a9b;
+    height: 5px;
+    border: none
+}

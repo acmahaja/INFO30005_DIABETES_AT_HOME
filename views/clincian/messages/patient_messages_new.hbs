@@ -1,0 +1,82 @@
+<title>Patient Messages</title>
+<link rel='stylesheet' href='/css/clinican_sidebar.css' />
+<link rel="stylesheet" href="/css/clinican_patient_messages.css" />
+<link rel="stylesheet" href="/css/clinican_patient_messages_new.css" />
+<link rel="stylesheet" href="/css/clinican_dashboard.css" />
+
+<div class="overlay">
+  <form action="/clinician/{{patient._id}}/messages/new" method="POST">
+    <h1>Send Message</h1>
+    <textarea name="message" id="message" cols="30" rows="10"></textarea>
+    <div class="buttons">
+      <button class="button">Send</button>
+      <div class="button">
+        <a href="/clinician/{{patient._id}}/messages/">
+          Cancel
+        </a>
+        </div>
+    </div>
+  </form>
+</div>
+
+<body>
+  {{> sidebarClinician this }}
+  <main>
+    <header>
+      <div class="return">
+        <img src="/icons/back-icon.svg" alt=""> Back
+      </div>
+      <h1>Patient Data</h1>
+      <div class="day"> <div id="week_day"></div> <div id="date"></div> </div>
+    </header>
+
+
+    <section class="content">
+      <div class="nav patient-options">
+        <div class="tabs">
+          <div class="tab"><a href="/clinician/{{patient._id}}/data">Data</a></div>
+          <div class="tab selected"><a href="/clinician/{{patient._id}}/messages">Messages</a></div>
+          <div class="tab"><a href="/clinician/{{patient._id}}/notes">Notes</a></div>
+          <div class="tab"><a href="/clinician/{{patient._id}}/info">Info</a></div>
+        </div>
+        <div class="content">
+          <div class="notes" >
+            <div class="header">
+                <h3>Message Date:</h3>
+                <a href="/clinician/{{patient._id}}/messages/new"><img src="/icons/add_button.svg" alt=""></a>
+            </div>
+            {{#each all_messages as |messages|}}
+              <div class="note">
+                <a href="/clinician/{{patient._id}}/messages/{{note._id}}/">
+                  {{formatDateTime note.created}}
+                </a>
+              </div>
+            {{/each }}
+
+          </div>
+          <div class="patient-message"></div>
+        </div>
+      </div>
+    </section>
+
+
+
+<script>
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  const date =  new Date();
+  const week_day = days[date.getDay()];
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+
+  document.getElementById("week_day").innerHTML = week_day + ",";
+  document.getElementById("date").innerHTML = day + " " + month + " " + year;
+
+  document.getElementsByClassName("name")
+
+</script>
+
+
+
+

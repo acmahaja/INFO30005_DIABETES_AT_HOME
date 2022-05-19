@@ -1,0 +1,140 @@
+{{! <link rel="stylesheet" href="/css/patientSidebar.css" />
+ <link rel="stylesheet" href="/css/style.css" /> }}
+
+<style>
+  #sidebar { display: block; } .sidebar-icon-div { display: none; }
+</style>
+
+<style id="sidebar-style">
+  @media screen and (max-width: 1900px) { #sidebar { display: none; }
+  .sidebar-icon-div { display: block; } #sidebar-icon-color { display: block; }
+  #sidebar-icon-white { display: none; } }
+</style>
+
+<div class="sidebar-icon-div">
+  <img
+    id="sidebar-icon-color"
+    class="sidebar-icon"
+    src="/icons/sidebar-icon-color.svg"
+    alt=""
+    onclick="sidebarOn()"
+  />
+</div>
+
+<div id="sidebar" class="patient-sidebar">
+  <div id="sidebar-overlay" onclick="sidebarOff()">
+  </div>
+      <img
+    id="sidebar-icon-white"
+    class="sidebar-icon"
+    src="/icons/sidebar-icon-white.svg"
+    alt=""
+    onclick="sidebarOff()"
+  />
+  <div class="patient-profile">
+    {{! <a href="/patient/info"> }}
+    <img
+      class="patient-photo"
+      src="/images/favicon.png"
+      alt="profile-pic"
+    />
+    {{! </a> }}
+    <a href="/patient/info"><p class="patient-name">{{firstname}}
+        {{lastname}}</p></a>
+  </div>
+  <div
+    class="nav-link"
+    onclick="location.href='/patient/dashboard';"
+    style="cursor: pointer;"
+  >
+    <img src="/icons/home.svg" alt="" />
+    <p>Home</p>
+  </div>
+  <div
+    class="nav-link nav-link-selected"
+    onclick="location.href='/patient/dataentry';"
+    style="cursor: pointer;"
+  >
+    <img src="/icons/add.svg" alt="" />
+    <p>New Entry</p>
+  </div>
+  <div
+    class="nav-link"
+    onclick="location.href='/patient/glucose/month';"
+    style="cursor: pointer;"
+  >
+    <img src="/icons/blood.svg" alt="" />
+    <p>Blood Glucose</p>
+  </div>
+  <div
+    class="nav-link"
+    onclick="location.href='/patient/insulin/month';"
+    style="cursor: pointer;"
+  >
+    <img src="/icons/insulin-icon.svg" alt="" />
+    <p>Insulin Dose</p>
+  </div>
+  <div
+    class="nav-link"
+    onclick="location.href='/patient/weight/month';"
+    style="cursor: pointer;"
+  >
+    <img src="/icons/weight-icon.svg" alt="" />
+    <p>Weight</p>
+  </div>
+  <div
+    class="nav-link"
+    onclick="location.href='/patient/steps/month';"
+    style="cursor: pointer;"
+  >
+    <img src="/icons/steps-icon.svg" alt="" />
+    <p>Steps</p>
+  </div>
+  <div
+    class="nav-link"
+    onclick="location.href='/patient/info';"
+    style="cursor: pointer;"
+  >
+    <img src="/icons/awards.svg" alt="" />
+    <p>User Info</p>
+  </div>
+    <div
+    class="nav-link"
+    onclick="location.href='/patient/info';"
+    style="cursor: pointer;"
+  >
+    <img src="/icons/awards.svg" alt="" />
+    <p>About Diabetes</p>
+  </div>
+    <div
+    class="nav-link"
+    onclick="location.href='/diabetes';"
+    style="cursor: pointer;"
+  >
+    <img src="/icons/awards.svg" alt="" />
+    <p>Diabetes@HOME</p>
+  </div>
+  <div
+    class="nav-link"
+    onclick="location.href='/';"
+    style="cursor: pointer;"
+  >
+    <img src="/icons/logout.svg" alt="" />
+    <p>Log Out</p>
+  </div>
+</div>
+
+<script>
+  function sidebarOn() {
+            var sidebarStyle = document.getElementById('sidebar-style');
+                        sidebarStyle.innerHTML = sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar[\S\s]+display:\s)(\S+)(;[\S\s]+\.sidebar[\S\s]+)/,'$1block$3');
+            sidebarStyle.innerHTML = sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar-icon-white[\S\s]+display:\s)(\S+)(;[\S\s]+)/,'$1block$3');
+
+  }
+
+  function sidebarOff() {
+    var sidebarStyle = document.getElementById('sidebar-style');
+    sidebarStyle.innerHTML = sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar[\S\s]+display:\s)(\S+)(;[\S\s]+\.sidebar[\S\s]+)/,'$1none$3');
+    sidebarStyle.innerHTML = sidebarStyle.innerHTML.replace(/([\S\s]+#sidebar-icon-white[\S\s]+display:\s)(\S+)(;[\S\s]+)/,'$1none$3');
+  }
+</script>
