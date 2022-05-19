@@ -27,7 +27,8 @@ const { createHealthData, deleteHealth } = require("./seeds/health_data_seed");
 const mongoose = require("mongoose");
 mongoose
   .connect(
-    process.env.MONGO_URL,
+    // process.env.MONGO_URL,
+    'mongodb+srv://admin:healthy@cluster0.fz5ya.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
     //  "mongodb://localhost:27017/diabetes-at-home",
     {
       useNewUrlParser: true,

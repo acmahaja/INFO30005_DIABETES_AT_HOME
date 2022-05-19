@@ -2,7 +2,7 @@ const healthDataSchema = require("../models/health_data");
 var randomSentence = require("random-sentence");
 
 const createHealthData = async (patient) => {
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 15; i++) {
     const new_data_blood_glucose = new healthDataSchema({
       patient_id: patient._id,
       health_type: "blood_glucose",
@@ -57,6 +57,8 @@ const deleteHealth = async () => {
     async (entry) => await healthDataSchema.findByIdAndRemove(entry.id)
   );
 };
+
+
 
 module.exports = {
   createHealthData,
