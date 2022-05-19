@@ -119,25 +119,26 @@
 
       <div class="nav">
         <div class="tabs">
-          {{#if patient_settings.requires_glucose}}
-            <div class="tab {{data_title "blood_glucose" type}}">  
-              <a href="/clinician/{{patient._id}}/data/blood_glucose">Glucose</a></div>
-          {{/if}}
-          {{#if patient_settings.requires_insulin}}
-          <div class="tab {{data_title "insulin" type}}">
-            <a href="/clinician/{{patient._id}}/data/insulin">Insulin</a>
-          </div>
-          {{/if}}
-          {{#if patient_settings.requires_weight}}
-          <div class="tab {{data_title "weight" type}}">
-            <a href="/clinician/{{patient._id}}/data/weight">Weight</a>
-          </div>
-          {{/if}}
-          {{#if patient_settings.requires_steps}}
-          <div class="tab {{data_title "steps" type}}">
-            <a href="/clinician/{{patient._id}}/data/steps">Steps</a>
-          </div>
-          {{/if}}
+            {{#if this.patient_settings.requires_glucose}}
+              <div class="tab {{data_title "blood_glucose" type}}">  
+                <a href="/clinician/{{patient._id}}/data/blood_glucose">Glucose</a></div>
+            {{/if}}
+            {{#if this.patient_settings.requires_glucose}}
+            <div class="tab {{data_title "insulin" type}}">
+              <a href="/clinician/{{patient._id}}/data/insulin">Insulin</a>
+            </div>
+            {{/if}}
+            {{#if this.patient_settings.requires_glucose}}
+            <div class="tab {{data_title "weight" type}}">
+              <a href="/clinician/{{patient._id}}/data/weight">Weight</a>
+            </div>
+            {{/if}}
+            {{#if this.patient_settings.requires_steps}}
+            <div class="tab {{data_title "steps" type}}">
+              <a href="/clinician/{{patient._id}}/data/steps">Steps</a>
+            </div>
+            {{/if}}
+
         </div>
         <div class="content white">
           <canvas id="myChart" width="400" height="400"></canvas>
@@ -162,7 +163,7 @@
   document.getElementsByClassName("name")
 
   ///
-  const healthdata = {{{this.health}}};
+  let healthdata = {{{this.health}}};
   var ctx = document.getElementById('myChart').getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'bar',

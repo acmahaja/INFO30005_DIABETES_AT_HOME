@@ -33,6 +33,7 @@
                         {{firstname}} {{lastname}}
                       </a>
                 </div>
+                {{log this}}
                   <div class="patient-data">
                       {{#if patient_settings.requires_glucose}} 
                         {{#if (is_defined patient.patient_data.glucose.value)}} 

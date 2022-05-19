@@ -1,4 +1,5 @@
 const healthDataSchema = require("../models/health_data");
+var randomSentence = require("random-sentence");
 
 const createHealthData = async (patient) => {
   for (let i = 0; i < 50; i++) {
@@ -7,7 +8,7 @@ const createHealthData = async (patient) => {
       health_type: "blood_glucose",
       value: Math.floor(Math.random() * 50 + 120),
       created: Date.now() - 1000 * 60 * 60 * 24 * i,
-      comments: "random",
+      comments: randomSentence({min: 4, max: 9}),
     });
 
     const new_data_steps = new healthDataSchema({
@@ -15,7 +16,7 @@ const createHealthData = async (patient) => {
       health_type: "steps",
       value: Math.floor(Math.random() * 8000 + 1000),
       created: Date.now() - 1000 * 60 * 60 * 24 * i,
-      comments: "random",
+      comments: randomSentence({min: 4, max: 9}),
     });
 
     const new_data_weight = new healthDataSchema({
@@ -23,7 +24,7 @@ const createHealthData = async (patient) => {
       health_type: "weight",
       value: Math.floor(Math.random() * 40 + 50),
       created: Date.now() - 1000 * 60 * 60 * 24 * i,
-      comments: "random",
+      comments: randomSentence({min: 4, max: 9}),
     });
 
     const new_data_insulin = new healthDataSchema({
@@ -31,7 +32,7 @@ const createHealthData = async (patient) => {
       health_type: "insulin",
       value: Math.floor(Math.random() * 4),
       created: Date.now() - 1000 * 60 * 60 * 24 * i,
-      comments: "random",
+      comments: randomSentence({min: 4, max: 9}),
     });
 
     try {

@@ -22,7 +22,7 @@ async function add_patient(username, password) {
     password,
   });
 
-  await new_patient.save().then(() => console.log("data saved"));
+  await new_patient.save();
 }
 
 module.exports = { patient_authorization, clinician_authorization };

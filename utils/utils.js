@@ -17,7 +17,6 @@ const entryTypes = {
 };
 
 async function get_patient_list(clincian) {
-  console.log(clincian);
   if (clincian == null) {
     result = await PatientSchema.find({}).select(
       "username firstname middlename lastname dob email date_joined bio image"

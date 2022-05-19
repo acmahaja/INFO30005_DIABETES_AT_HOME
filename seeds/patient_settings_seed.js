@@ -1,6 +1,8 @@
 const PatientSchema = require("../models/patient");
 const patientSettingsSchema = require("../models/patient_settings");
 
+const faker = require("faker")
+
 const deletePatientSettings = async () => {
   const entries = await patientSettingsSchema.find({});
   entries.forEach(
@@ -22,10 +24,10 @@ const createPatPatientSettings = async (patient) => {
 const generatePatientSettings = async (patient) => {
   const new_data = new patientSettingsSchema({
     for_patient: patient._id,
-    requires_glucose: (Math.floor(Math.random() + 0.45) > 0.5),
-    requires_steps: (Math.floor(Math.random() + 0.45) > 0.5),
-    requires_weight: (Math.floor(Math.random() + 0.45) > 0.5),
-    requires_insulin: (Math.floor(Math.random() + 0.45) > 0.5),
+    requires_glucose: faker.datatype.boolean(),
+    requires_steps: faker.datatype.boolean(),
+    requires_weight: faker.datatype.boolean(),
+    requires_insulin: faker.datatype.boolean(),
   });
   try {
     await new_data.save()

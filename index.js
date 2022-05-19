@@ -23,13 +23,10 @@ require("dotenv").config();
 
 const bodyParser = require("body-parser");
 
-console.warn("Dev Environment: " + process.env.NODE_ENV);
-
 mongoose
   .connect(
-    process.env.NODE_ENV === "production"
-      ? process.env.MONGO_URL
-      : "mongodb://localhost:27017/diabetes-at-home",
+    //process.env.MONGO_URL:
+     "mongodb://localhost:27017/diabetes-at-home",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -119,5 +116,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log("Listening on port 3000");
+  console.log("Listening on port " + process.env.PORT);
 });
