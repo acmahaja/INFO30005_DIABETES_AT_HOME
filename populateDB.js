@@ -2,33 +2,32 @@ const {
   generateClinician,
   createChris,
   deleteClinician,
-} = require("./clinician_seed");
+} = require("./seeds/clinician_seed");
 
 const {
   deletePatients,
   createPat,
   generatePatient,
-} = require("./patient_seed");
+} = require("./seeds/patient_seed");
 
 const {
   deletePatientSettings,
   createPatPatientSettings,
   generatePatientSettings,
-} = require("./patient_settings_seed");
+} = require("./seeds/patient_settings_seed");
 
 const {
   deleteThresholds,
   createPatThresholds,
   createPatientThresholds,
-} = require("./patient_thresholds");
+} = require("./seeds/patient_thresholds");
 
-const { createHealthData, deleteHealth } = require("./health_data_seed");
+const { createHealthData, deleteHealth } = require("./seeds/health_data_seed");
 
 const mongoose = require("mongoose");
 mongoose
   .connect(
-    // process.env.MONGO_URL,
-    'mongodb+srv://admin:healthy@cluster0.fz5ya.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+    process.env.MONGO_URL,
     //  "mongodb://localhost:27017/diabetes-at-home",
     {
       useNewUrlParser: true,

@@ -100,17 +100,6 @@ app.use(express.static("public"));
 const clinicianRouter = require("./routes/clinician/clinicianRouter");
 const patientRouter = require("./routes/patient/patientRouter");
 
-const { populateDB } = require("./seeds/populateDB");
-
-const collections = mongoose.connection.collections;
-
-Promise.all(
-  Object.values(collections).map(async (collection) => {
-    await collection.deleteMany({}); // an empty mongodb selector object ({}) must be passed as the filter argument
-  })
-).then(() => populateDB());
-
-
 app.use("/patient", patientRouter);
 app.use("/clinician", clinicianRouter);
 
