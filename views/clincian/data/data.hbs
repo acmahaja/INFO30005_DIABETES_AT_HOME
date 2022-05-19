@@ -107,26 +107,6 @@
                   -
                 {{/if}}
               </td>
-              {{!--
-              <td>
-                {{#if ../patient_settings.requires_steps}}
-                  {{#if data.steps_data}}
-                    {{#if (check_range data.steps_data.value ../patient_thresholds.steps_result.min_value ../patient_thresholds.steps_result.max_value)}}
-                      {{data.steps_data.value}} steps
-                    {{else}}
-                      <div class="danger">
-                      <img src="/icons/danger.svg" alt="">
-                        {{data.steps_data.value}} steps
-                      </div>
-
-                    {{/if }}
-                  {{else}}
-                    <img src="/icons/warn.svg" alt="">
-                  {{/if }}
-                {{/if }}
-              </td> 
-              --}}
-
             </tr>
           {{/each}}
           </table>
@@ -135,6 +115,7 @@
 
       <div class="nav">
         <div class="tabs">
+          {{log (isSelected patient_settings.requires_steps)}}
           {{#if (isSelected patient_settings.requires_glucose)}}
             <div class="tab {{data_title "blood_glucose" type}}">  
               <a href="/clinician/{{patient._id}}/data/blood_glucose">Glucose</a></div>

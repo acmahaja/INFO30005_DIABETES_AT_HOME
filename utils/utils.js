@@ -75,7 +75,7 @@ async function get_patient_data_type(patient, type) {
 
 async function get_patient_settings(patient) {
   const patient_settings = await PatientSettings.findOne({
-    patient_id: patient._id,
+    for_patient: patient._id,
   });
   return patient_settings;
 }
