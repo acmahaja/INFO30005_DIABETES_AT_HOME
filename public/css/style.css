@@ -16,8 +16,8 @@ body {
 @media only screen and (min-width: 1900px) {
   .section {
     padding: 3em;
-    /* height: calc(100vh - 6em);
-  width: calc(100vw - 6em); */
+    height: auto;
+    width: calc(100vw - 6em);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -114,7 +114,14 @@ body {
   }
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (min-width: 750px) and (max-width: 1900px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   .navbar {
     justify-content: space-between;
   }
@@ -129,8 +136,9 @@ body {
 
   .section {
     padding: 2em;
-    /* height: calc(100vh - 6em);
-  width: calc(100vw - 6em); */
+    height: auto;
+    width: calc(100vw - 6em);
+    width: 750px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -235,14 +243,7 @@ body {
   }
 }
 
-@media only screen and (min-width: 750px) and (max-width: 1900px) {
-  main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
+@media only screen and (max-width: 750px) {
   .navbar {
     justify-content: space-between;
   }
@@ -257,9 +258,8 @@ body {
 
   .section {
     padding: 2em;
-    /* height: calc(100vh - 6em);
-  width: calc(100vw - 6em); */
-    width: 750px;
+    height: auto;
+    width: calc(100vw - 6em);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -281,8 +281,8 @@ body {
     background-image: url("../images/Double\ Arrow.svg");
     background-repeat: no-repeat;
     background-size: cover;
-    height: 3.1em;
-    width: 3.2em;
+    height: 3.6em;
+    width: 3.8em;
   }
 
   .section .content {
