@@ -75,6 +75,7 @@
   }
   .section .text .link {
       font-size: 18px;
+      z-index: 3;
   }
   #welcome img.support {
       height: 15em;
