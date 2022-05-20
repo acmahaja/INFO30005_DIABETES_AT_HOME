@@ -2,6 +2,11 @@
     --dashboard-width: 15vw;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+  }
+
 #sidebar {
     min-width: var(--dashboard-width);
     height: 100%;

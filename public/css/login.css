@@ -104,20 +104,21 @@ body {
     width: 176px;
     height: 40px;
     font-size: 22px;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 420px) {
     .wrapper {
         margin: 30px auto;
     }
-
+/* 
     .navbar .logo {
         display: none;
     }
 
     .navbar .links {
         display: none;
-    }
+    } */
 
     .navbar .hamburger-menu {
         display: block
@@ -132,22 +133,19 @@ body {
         border-radius: 24px;
     }
 
-    .login-box .input-area {
+    /* .login-box .input-area {
         display: block;
         padding-left: 20px;
-    }
+    } */
 
     .login-box .input-area>*:first-child {
         margin-bottom: 10px;
     }
 
-    .login-box .input {
-        width: 90%;
-    }
 
-    .login-box .input-box {
-        height: 40px;
-        width: 105%;
+    .login-box .input-area .input input {
+        font-size: 18px;
+        height: 2.5em;
     }
 
     .input label {
@@ -166,5 +164,19 @@ body {
 
     .login-box {
         width: 85%;
+    }
+
+    .login-box .input-area {
+        flex-direction: column;
+        padding-left: 0px;
+    }
+
+    .input-area .input {
+        width: 90%;
+        margin: auto;
+    }
+
+    .input-area .input .input-box{
+        margin: auto;
     }
 }

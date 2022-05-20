@@ -3,7 +3,6 @@ const isAuthenticatedClinician = (req, res, next) => {
     if (!req.isAuthenticated()) {
     return res.redirect("/clinician/login");
   }
-  console.log('clinician Auth')
   return next();
 };
 

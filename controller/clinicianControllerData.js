@@ -43,7 +43,6 @@ const loadSpecificData = async (req,res)=>{
 const loadDataPage = async (req, res) => {
   const patient = await Patient.findById(req.params.PatientID);
   const patient_settings = await get_patient_settings(patient);
-  console.log(patient_settings);
   if (req.params.Type === undefined) {
     if (patient_settings.requires_glucose) {
       return res.redirect(`/clinician/${req.params.PatientID}/data/blood_glucose`);
