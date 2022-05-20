@@ -32,80 +32,125 @@
 
                 {{#if patient.patient_settings.requires_glucose}}
                     <div class="data-box">
-                        <p class="data-type">Blood Glucose</p>
-                        <img class="symbol" src="/images/blood-glucose-icon.svg" alt="">
-                        {{#if patient.patient_data.glucose}}
-                            {{!-- ADD CROSS TICK ELSE STATEMENT --}}
-                            <p class="value">{{patient.patient_data.glucose.value}} nmo/L</p>
-                            <img class="tick-cross" src="/images/Vector.svg" alt="">
-                            {{#unless (check_range patient.patient_data.glucose.value patient.patient_threshold.blood_glucose_result.min_value patient.patient_threshold.blood_glucose_result.max_value)}} 
-                                <img class="danger" src="/icons/danger.svg">
-                            {{/unless}}
-                        {{else}}
-                            <p class="value">--- nmo/L</p>
-                            <img/>
-                            <img class="warn" src="/icons/warn.svg">
-                        {{/if}}
-                        <p class="time">{{datatimes.glucose.hr}}:{{datatimes.glucose.mins}}</p>
+                        <div class="data-row-1">
+                            <p class="data-type">Blood Glucose</p>
+                            <img class="symbol" src="/images/blood-glucose-icon.svg" alt="">
+                        </div> 
+                        <div class="data-row-2">
+                            {{#if patient.patient_data.glucose}}
+                                <div class="data-r2-r1">
+                                    {{!-- ADD CROSS TICK ELSE STATEMENT --}}
+                                    <p class="value">{{patient.patient_data.glucose.value}} nmo/L</p>
+                                </div>
+                                <div class="data-r2-r1">
+                                    <img class="tick-cross" src="/images/Vector.svg" alt="">
+                                {{#unless (check_range patient.patient_data.glucose.value patient.patient_threshold.blood_glucose_result.min_value patient.patient_threshold.blood_glucose_result.max_value)}} 
+                                    <img class="danger" src="/icons/danger.svg">
+                                {{/unless}}
+                            {{else}}
+                                <div class="data-r2-r1">
+                                    <p class="value">--- nmo/L</p>
+                                </div>
+                                <img/>
+                                <div class="data-r2-r1">
+                                    <img class="warn" src="/icons/warn.svg">
+                            {{/if}}
+                                    <p class="time">{{datatimes.glucose.hr}}:{{datatimes.glucose.mins}}</p>
+                            </div>
+                        </div>
                     </div>
                 {{/if}}
 
                 {{#if patient.patient_settings.requires_insulin}}
                     <div class="data-box">
-                        <p class="data-type">Insulin</p>
-                        <img class="symbol" src="/images/insulin-icon.svg" alt="">
+                        <div class="data-row-1">
+                            <p class="data-type">Insulin</p>
+                            <img class="symbol" src="/images/insulin-icon.svg" alt="">
+                        </div> 
+                        <div class="data-row-2">
                         {{#if patient.patient_data.insulin}}
-                            {{!-- ADD CROSS TICK ELSE STATEMENT --}}
-                            <p class="value">{{patient.patient_data.insulin.value}} doses</p>
-                            <img class="tick-cross" src="/images/Vector.svg" alt="">
-                            {{#unless (check_range patient.patient_data.insulin.value patient.patient_threshold.insulin_result.min_value patient.patient_threshold.insulin_result.max_value)}} 
-                                <img class="danger" src="/icons/danger.svg">
-                            {{/unless}}
+                            <div class="data-r2-r1">
+                                {{!-- ADD CROSS TICK ELSE STATEMENT --}}
+                                    <p class="value">{{patient.patient_data.insulin.value}} doses</p>
+                                </div>
+                                <div class="data-r2-r1">
+                                <img class="tick-cross" src="/images/Vector.svg" alt="">
+                                {{#unless (check_range patient.patient_data.insulin.value patient.patient_threshold.insulin_result.min_value patient.patient_threshold.insulin_result.max_value)}} 
+                                    <img class="danger" src="/icons/danger.svg">
+                                {{/unless}}
                         {{else}}
-                            <p class="value">--- doses</p>
-                            <img class="warn" src="/icons/warn.svg">
+                            <div class="data-r2-r1">
+                                <p class="value">--- doses</p>
+                            </div> 
+                            <img/>
+                            <div class="data-r2-r1">
+                                <img class="warn" src="/icons/warn.svg">
                         {{/if}}
-                        <p class="time">{{datatimes.insulin.hr}}:{{datatimes.insulin.mins}}</p>
+                            <p class="time">{{datatimes.insulin.hr}}:{{datatimes.insulin.mins}}</p>
+                        </div>
+                        </div>
                     </div>
                 {{/if}}
 
                 {{#if patient.patient_settings.requires_weight}}
                     <div class="data-box">
-                        <p class="data-type">Weight</p>
-                        <img class="symbol" src="/images/weight-icon.svg" alt="">
-                        {{#if patient.patient_data.weight}}
-                            <p class="value">{{patient.patient_data.weight.value}} kg</p>
-                            <img class="tick-cross" src="/images/Vector.svg" alt="">
-                            {{!-- ADD CROSS TICK ELSE STATEMENT --}}
-                            {{#unless (check_range patient.patient_data.weight.value patient.patient_threshold.weight_result.min_value patient.patient_threshold.weight_result.max_value)}}  
-                                <img class="danger" src="/icons/danger.svg">
-                            {{/unless}}
-                        {{else}}
-                            <p class="value">--- kg</p>
-                            <img class="warn" src="/icons/warn.svg">
-                        {{/if}}
-                        <p class="time">{{datatimes.weight.hr}}:{{datatimes.weight.mins}}</p>
+                        <div class="data-row-1">
+                            <p class="data-type">Weight</p>
+                            <img class="symbol" src="/images/weight-icon.svg" alt="">
+                        </div>
+                        <div class="data-row-2">
+                            {{#if patient.patient_data.weight}}
+                                <div class="data-r2-r1">
+                                    <p class="value">{{patient.patient_data.weight.value}} kg</p>
+                                </div>
+                                <div class="data-r2-r1">
+                                    <img class="tick-cross" src="/images/Vector.svg" alt="">
+                                    {{!-- ADD CROSS TICK ELSE STATEMENT --}}
+                                {{#unless (check_range patient.patient_data.weight.value patient.patient_threshold.weight_result.min_value patient.patient_threshold.weight_result.max_value)}}  
+                                    <img class="danger" src="/icons/danger.svg">
+                                {{/unless}}
+                            {{else}}
+                                <div class="data-r2-r1">
+                                    <p class="value">--- kg</p>
+                                </div>
+                                <img/>
+                                <div class="data-r2-r1">
+                                    <img class="warn" src="/icons/warn.svg">
+                            {{/if}}
+                            <p class="time">{{datatimes.weight.hr}}:{{datatimes.weight.mins}}</p>
+                            </div>
+                        </div>
                     </div>
                 {{/if}}
 
 
                 {{#if patient.patient_settings.requires_steps}}
                     <div class="data-box">
-                        <p class="data-type">Steps</p>
-                        <img class="symbol" src="/images/steps-icon.svg" alt="">
-                        {{#if patient.patient_data.steps}}
-                            {{!-- ADD CROSS TICK ELSE STATEMENT --}}
-                            <p class="value">{{patient.patient_data.steps.value}} nmo/L</p>
-                            <img class="tick-cross" src="/images/Vector.svg" alt="">
-                            {{#unless (check_range patient.patient_data.steps.value patient.patient_threshold.steps_result.min_value patient.patient_threshold.steps_result.max_value)}}   
-                                <img class="danger" src="/icons/danger.svg">
-                            {{/unless}}
-                        {{else}}
-                            <p class="value">--- steps</p>
-                            <img class="tick-cross" />
-                            <img class="warn" src="/icons/warn.svg">
-                        {{/if}}
-                        <p class="time">{{datatimes.steps.hr}}:{{datatimes.steps.mins}}</p>
+                        <div class="data-row-1">
+                            <p class="data-type">Steps</p>
+                            <img class="symbol" src="/images/steps-icon.svg" alt="">
+                        </div>
+                        <div class="data-row-2">
+                            {{#if patient.patient_data.steps}}
+                                <div class="data-r2-r1">
+                                    {{!-- ADD CROSS TICK ELSE STATEMENT --}}
+                                    <p class="value">{{patient.patient_data.steps.value}} nmo/L</p>
+                                </div>
+                                    <img class="tick-cross" src="/images/Vector.svg" alt="">
+                                {{#unless (check_range patient.patient_data.steps.value patient.patient_threshold.steps_result.min_value patient.patient_threshold.steps_result.max_value)}}   
+                                    <img class="danger" src="/icons/danger.svg">
+                                {{/unless}}
+                            {{else}}
+                                <div class="data-r2-r1">
+                                    <p class="value">--- steps</p>
+                                </div>
+                                <img/>
+                                <div class="data-r2-r1">                               
+                                    <img class="warn" src="/icons/warn.svg">
+                            {{/if}}
+                                <p class="time">{{datatimes.steps.hr}}:{{datatimes.steps.mins}}</p>
+                            </div>
+                        </div>
                     </div>
                 {{/if}}
             </div>
