@@ -228,7 +228,6 @@ const loadPatientInfoPage = async (req, res) => {
 // glucose data
 
 const loadDataPage = async (req, res, render_path, enum_type, history="month") => {
-  req.user.username = "patstuart";
   var patient = await PatientSchema.findOne({ username: req.user.username });
   var days = 0;
   if (history != "month"){
