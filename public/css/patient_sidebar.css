@@ -89,6 +89,14 @@ img.patient-photo {
     cursor: pointer;
 } */
 
+#star-icon {
+    object-fit: contain;
+}
+
+#info-icon {
+    object-fit: contain;
+}
+
 
 @media screen and (max-width: 1900px) {
 
