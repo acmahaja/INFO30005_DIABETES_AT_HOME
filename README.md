@@ -6,14 +6,14 @@ Local Setup Instructions
 
 > npm i // install missing libraries
 
-—---------------
+-----------------
 #if need to repopulate database (database should be already populated
 #this WILL delete the entire database content and repopulate it
 
 > node populateDB.js // populate mongodb atlas db
                    // let script execute for a 5-7 minutes to clear and 
                    // populate remote database
-—---------------
+-----------------
 
 > node index.js // run app
 
