@@ -43,5 +43,7 @@ origin  https://github.com/acmahaja/INFO30005_DIABETES_AT_HOME.git (push)
 
 // commit and deploy to heroku
 > git add .
+
 > git commit -m "make it better"
+
 > git push heroku main
