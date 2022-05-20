@@ -112,6 +112,10 @@ app.get("/", (req, res) => {
   res.render("about.hbs");
 });
 
+app.get("/about", (req, res) => {
+  res.render("about.hbs");
+});
+
 app.listen(process.env.PORT || 3000, () => {
   console.log("Listening on port " + process.env.PORT);
 });
